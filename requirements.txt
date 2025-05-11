@@ -1,0 +1,15 @@
+fastapi
+uvicorn[standard]  # для запуска сервера
+httpx  # для асинхронных запросов к Hugging Face API
+python-dotenv  # удобно для хранения API-ключей в .env
+# auth
+python-jose[cryptography]  # JWT-токены, если будет авторизация
+passlib[bcrypt]  # хэширование паролей
+# test
+pytest
+httpx[http2]
+# db
+sqlalchemy
+alembic
+databases  # если хочешь работать асинхронно
+asyncpg    # если используешь PostgreSQL
