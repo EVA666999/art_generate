@@ -1,0 +1,44 @@
+{
+    "enabled": true,
+    "models": {
+        "detail_tweaker": {
+            "name": "add_detail.safetensors",
+            "weight": 1,
+            "prompt_template": "<lora:detail_tweaker:-0.5>",
+            "model_type": "SD 1.5",
+            "description": "Улучшение деталей изображения"
+        },
+        "face_helper": {
+            "name": "face_xl_v0_1.safetensors",
+            "weight": 0.95,
+            "prompt_template": "<lora:face_helper:0.95>",
+            "model_type": "SDXL",
+            "description": "Улучшение качества лиц",
+            "recommended_weights": {
+                "face": {
+                    "min": 0.9,
+                    "max": 1.0,
+                    "default": 0.95
+                }
+            }
+        },
+        "round_ass": {
+            "name": "roundassv1.safetensors",
+            "weight": 0.85,
+            "prompt_template": "<lora:round_ass:0.85>",
+            "model_type": "SD 1.5",
+            "description": "Улучшение качества ягодиц",
+            "recommended_weights": {
+                "ass": {
+                    "min": 0.7,
+                    "max": 1.0,
+                    "default": 0.85
+                }
+            }
+        }
+    },
+    "default_settings": {
+        "model_type": "SD 1.5",
+        "base_model": "Realistic Vision V6.0 B1"
+    }
+} 

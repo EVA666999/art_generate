@@ -1,0 +1,345 @@
+{
+  "total_generations": 8,
+  "total_time": {
+    "formatted": "0:05:41",
+    "total_seconds": 341.00376892089844
+  },
+  "average_time": {
+    "formatted": "0:00:42",
+    "total_seconds": 42.625471115112305
+  },
+  "by_sampler": {
+    "DPM++ SDE": {
+      "count": 8,
+      "total_time": {
+        "formatted": "0:05:41",
+        "total_seconds": 341.00376892089844
+      },
+      "avg_time": {
+        "formatted": "0:00:42",
+        "total_seconds": 42.625471115112305
+      }
+    }
+  },
+  "by_steps": {
+    "35": {
+      "count": 8,
+      "total_time": {
+        "formatted": "0:05:41",
+        "total_seconds": 341.00376892089844
+      },
+      "avg_time": {
+        "formatted": "0:00:42",
+        "total_seconds": 42.625471115112305
+      }
+    }
+  },
+  "by_resolution": {
+    "512x512": {
+      "count": 8,
+      "total_time": {
+        "formatted": "0:05:41",
+        "total_seconds": 341.00376892089844
+      },
+      "avg_time": {
+        "formatted": "0:00:42",
+        "total_seconds": 42.625471115112305
+      }
+    }
+  },
+  "by_cfg_scale": {
+    "8.0": {
+      "count": 8,
+      "total_time": {
+        "formatted": "0:05:41",
+        "total_seconds": 341.00376892089844
+      },
+      "avg_time": {
+        "formatted": "0:00:42",
+        "total_seconds": 42.625471115112305
+      }
+    }
+  },
+  "recent_generations": [
+    {
+      "timestamp": "2025-06-12T18:09:08.001735",
+      "params": {
+        "prompt": "girl with big tits and big ass in ripped shorts looks at camera and touches her breasts, photorealistic, hyperrealistic, ultra-detailed, masterpiece, best quality, 8K, high resolution, DSLR photo, analog photo, portrait photography, professional lighting, soft lighting, cinematic lighting, volumetric lighting, sharp focus, bokeh, realistic skin, realistic eyes, symmetrical face, perfect body, natural pose, beautiful model, seductive, sensual, erotic, sexy, lingerie, nude, NSFW",
+        "negative_prompt": "lowres, blurry, worst quality, low quality, text, watermark, signature, duplicate, cropped, out of frame, error, jpeg artifacts, bad anatomy, bad proportions, mutated hands, fused fingers, extra limbs, missing limbs, disfigured, deformed, poorly drawn face, poorly drawn hands, cartoon, anime, CGI, 3D, render, sketch, drawing, doll, stupid, ugly, oversaturated, monochrome",
+        "use_default_prompts": true,
+        "seed": -1,
+        "steps": 35,
+        "width": 512,
+        "height": 512,
+        "cfg_scale": 8.0,
+        "sampler_name": "DPM++ SDE",
+        "scheduler": "Karras",
+        "enable_hr": true,
+        "hr_scale": 1.9,
+        "hr_upscaler": "4x-UltraSharp",
+        "hr_second_pass_steps": 10,
+        "denoising_strength": 0.4,
+        "restore_faces": false,
+        "batch_size": 1,
+        "n_iter": 1,
+        "clip_skip": 1,
+        "adetailer": {
+          "enabled": true,
+          "model": "face_yolov8n.pt",
+          "steps": 101,
+          "cfg_scale": 5,
+          "denoising_strength": 0.4
+        }
+      },
+      "execution_time": {
+        "formatted": "0:00:47",
+        "total_seconds": 47.42379379272461
+      }
+    },
+    {
+      "timestamp": "2025-06-12T18:10:41.839246",
+      "params": {
+        "prompt": "girl with big tits and big ass in ripped shorts looks at camera and touches her breasts, photorealistic, hyperrealistic, ultra-detailed, masterpiece, best quality, 8K, high resolution, DSLR photo, analog photo, portrait photography, professional lighting, soft lighting, cinematic lighting, volumetric lighting, sharp focus, bokeh, realistic skin, realistic eyes, symmetrical face, perfect body, natural pose, beautiful model, seductive, sensual, erotic, sexy, lingerie, nude, NSFW",
+        "negative_prompt": "lowres, blurry, worst quality, low quality, text, watermark, signature, duplicate, cropped, out of frame, error, jpeg artifacts, bad anatomy, bad proportions, mutated hands, fused fingers, extra limbs, missing limbs, disfigured, deformed, poorly drawn face, poorly drawn hands, cartoon, anime, CGI, 3D, render, sketch, drawing, doll, stupid, ugly, oversaturated, monochrome",
+        "use_default_prompts": true,
+        "seed": -1,
+        "steps": 35,
+        "width": 512,
+        "height": 512,
+        "cfg_scale": 8.0,
+        "sampler_name": "DPM++ SDE",
+        "scheduler": "Karras",
+        "enable_hr": true,
+        "hr_scale": 1.9,
+        "hr_upscaler": "4x-UltraSharp",
+        "hr_second_pass_steps": 10,
+        "denoising_strength": 0.4,
+        "restore_faces": false,
+        "batch_size": 1,
+        "n_iter": 1,
+        "clip_skip": 1,
+        "adetailer": {
+          "enabled": true,
+          "model": "face_yolov8n.pt",
+          "steps": 101,
+          "cfg_scale": 5,
+          "denoising_strength": 0.4
+        }
+      },
+      "execution_time": {
+        "formatted": "0:00:41",
+        "total_seconds": 41.98151183128357
+      }
+    },
+    {
+      "timestamp": "2025-06-12T18:12:56.261049",
+      "params": {
+        "prompt": "girl with big tits and big ass in ripped shorts looks at camera and touches her breasts, photorealistic, hyperrealistic, ultra-detailed, masterpiece, best quality, 8K, high resolution, DSLR photo, analog photo, portrait photography, professional lighting, soft lighting, cinematic lighting, volumetric lighting, sharp focus, bokeh, realistic skin, realistic eyes, symmetrical face, perfect body, natural pose, beautiful model, seductive, sensual, erotic, sexy, lingerie, nude, NSFW",
+        "negative_prompt": "lowres, blurry, worst quality, low quality, text, watermark, signature, duplicate, cropped, out of frame, error, jpeg artifacts, bad anatomy, bad proportions, mutated hands, fused fingers, extra limbs, missing limbs, disfigured, deformed, poorly drawn face, poorly drawn hands, cartoon, anime, CGI, 3D, render, sketch, drawing, doll, stupid, ugly, oversaturated, monochrome",
+        "use_default_prompts": true,
+        "seed": -1,
+        "steps": 35,
+        "width": 512,
+        "height": 512,
+        "cfg_scale": 8.0,
+        "sampler_name": "DPM++ SDE",
+        "scheduler": "Karras",
+        "enable_hr": true,
+        "hr_scale": 1.9,
+        "hr_upscaler": "4x-UltraSharp",
+        "hr_second_pass_steps": 10,
+        "denoising_strength": 0.4,
+        "restore_faces": false,
+        "batch_size": 1,
+        "n_iter": 1,
+        "clip_skip": 1,
+        "adetailer": {
+          "enabled": true,
+          "model": "face_yolov8n.pt",
+          "steps": 101,
+          "cfg_scale": 5,
+          "denoising_strength": 0.4
+        }
+      },
+      "execution_time": {
+        "formatted": "0:00:41",
+        "total_seconds": 41.17296528816223
+      }
+    },
+    {
+      "timestamp": "2025-06-12T18:14:04.687813",
+      "params": {
+        "prompt": "girl with big tits and big ass in ripped shorts looks at camera and touches her breasts, photorealistic, hyperrealistic, ultra-detailed, masterpiece, best quality, 8K, high resolution, DSLR photo, analog photo, portrait photography, professional lighting, soft lighting, cinematic lighting, volumetric lighting, sharp focus, bokeh, realistic skin, realistic eyes, symmetrical face, perfect body, natural pose, beautiful model, seductive, sensual, erotic, sexy, lingerie, nude, NSFW",
+        "negative_prompt": "lowres, blurry, worst quality, low quality, text, watermark, signature, duplicate, cropped, out of frame, error, jpeg artifacts, bad anatomy, bad proportions, mutated hands, fused fingers, extra limbs, missing limbs, disfigured, deformed, poorly drawn face, poorly drawn hands, cartoon, anime, CGI, 3D, render, sketch, drawing, doll, stupid, ugly, oversaturated, monochrome",
+        "use_default_prompts": true,
+        "seed": -1,
+        "steps": 35,
+        "width": 512,
+        "height": 512,
+        "cfg_scale": 8.0,
+        "sampler_name": "DPM++ SDE",
+        "scheduler": "Karras",
+        "enable_hr": true,
+        "hr_scale": 1.9,
+        "hr_upscaler": "4x-UltraSharp",
+        "hr_second_pass_steps": 10,
+        "denoising_strength": 0.4,
+        "restore_faces": false,
+        "batch_size": 1,
+        "n_iter": 1,
+        "clip_skip": 1,
+        "adetailer": {
+          "enabled": true,
+          "model": "face_yolov8n.pt",
+          "steps": 101,
+          "cfg_scale": 5,
+          "denoising_strength": 0.4
+        }
+      },
+      "execution_time": {
+        "formatted": "0:00:40",
+        "total_seconds": 40.93193483352661
+      }
+    },
+    {
+      "timestamp": "2025-06-12T18:15:08.438717",
+      "params": {
+        "prompt": "girl with big tits and big ass in ripped shorts looks at camera and touches her breasts, photorealistic, hyperrealistic, ultra-detailed, masterpiece, best quality, 8K, high resolution, DSLR photo, analog photo, portrait photography, professional lighting, soft lighting, cinematic lighting, volumetric lighting, sharp focus, bokeh, realistic skin, realistic eyes, symmetrical face, perfect body, natural pose, beautiful model, seductive, sensual, erotic, sexy, lingerie, nude, NSFW",
+        "negative_prompt": "lowres, blurry, worst quality, low quality, text, watermark, signature, duplicate, cropped, out of frame, error, jpeg artifacts, bad anatomy, bad proportions, mutated hands, fused fingers, extra limbs, missing limbs, disfigured, deformed, poorly drawn face, poorly drawn hands, cartoon, anime, CGI, 3D, render, sketch, drawing, doll, stupid, ugly, oversaturated, monochrome",
+        "use_default_prompts": true,
+        "seed": -1,
+        "steps": 35,
+        "width": 512,
+        "height": 512,
+        "cfg_scale": 8.0,
+        "sampler_name": "DPM++ SDE",
+        "scheduler": "Karras",
+        "enable_hr": true,
+        "hr_scale": 1.9,
+        "hr_upscaler": "4x-UltraSharp",
+        "hr_second_pass_steps": 10,
+        "denoising_strength": 0.4,
+        "restore_faces": false,
+        "batch_size": 1,
+        "n_iter": 1,
+        "clip_skip": 1,
+        "adetailer": {
+          "enabled": true,
+          "model": "face_yolov8n.pt",
+          "steps": 101,
+          "cfg_scale": 5,
+          "denoising_strength": 0.4
+        }
+      },
+      "execution_time": {
+        "formatted": "0:00:41",
+        "total_seconds": 41.20829129219055
+      }
+    },
+    {
+      "timestamp": "2025-06-12T18:16:42.887923",
+      "params": {
+        "prompt": "girl with big tits and big ass in ripped shorts looks at camera and touches her breasts, photorealistic, hyperrealistic, ultra-detailed, masterpiece, best quality, 8K, high resolution, DSLR photo, analog photo, portrait photography, professional lighting, soft lighting, cinematic lighting, volumetric lighting, sharp focus, bokeh, realistic skin, realistic eyes, symmetrical face, perfect body, natural pose, beautiful model, seductive, sensual, erotic, sexy, lingerie, nude, NSFW",
+        "negative_prompt": "lowres, blurry, worst quality, low quality, text, watermark, signature, duplicate, cropped, out of frame, error, jpeg artifacts, bad anatomy, bad proportions, mutated hands, fused fingers, extra limbs, missing limbs, disfigured, deformed, poorly drawn face, poorly drawn hands, cartoon, anime, CGI, 3D, render, sketch, drawing, doll, stupid, ugly, oversaturated, monochrome",
+        "use_default_prompts": true,
+        "seed": -1,
+        "steps": 35,
+        "width": 512,
+        "height": 512,
+        "cfg_scale": 8.0,
+        "sampler_name": "DPM++ SDE",
+        "scheduler": "Karras",
+        "enable_hr": true,
+        "hr_scale": 1.9,
+        "hr_upscaler": "4x-UltraSharp",
+        "hr_second_pass_steps": 10,
+        "denoising_strength": 0.4,
+        "restore_faces": false,
+        "batch_size": 1,
+        "n_iter": 1,
+        "clip_skip": 1,
+        "adetailer": {
+          "enabled": true,
+          "model": "face_yolov8n.pt",
+          "steps": 101,
+          "cfg_scale": 5,
+          "denoising_strength": 0.4
+        }
+      },
+      "execution_time": {
+        "formatted": "0:00:42",
+        "total_seconds": 42.7340772151947
+      }
+    },
+    {
+      "timestamp": "2025-06-12T18:18:39.236206",
+      "params": {
+        "prompt": "girl with big tits and big ass in ripped shorts looks at camera and touches her breasts, photorealistic, hyperrealistic, ultra-detailed, masterpiece, best quality, 8K, high resolution, DSLR photo, analog photo, portrait photography, soft lighting, sharp focus, bokeh, realistic skin, realistic eyes, symmetrical face, perfect body, natural pose, beautiful model, seductive, sensual, erotic, sexy, lingerie, nude, NSFW",
+        "negative_prompt": "lowres, blurry, worst quality, low quality, text, watermark, signature, duplicate, cropped, out of frame, error, jpeg artifacts, bad anatomy, bad proportions, mutated hands, fused fingers, extra limbs, missing limbs, disfigured, deformed, poorly drawn face, poorly drawn hands, cartoon, anime, CGI, 3D, render, sketch, drawing, doll, stupid, ugly, oversaturated, monochrome",
+        "use_default_prompts": true,
+        "seed": -1,
+        "steps": 35,
+        "width": 512,
+        "height": 512,
+        "cfg_scale": 8.0,
+        "sampler_name": "DPM++ SDE",
+        "scheduler": "Karras",
+        "enable_hr": true,
+        "hr_scale": 1.9,
+        "hr_upscaler": "4x-UltraSharp",
+        "hr_second_pass_steps": 10,
+        "denoising_strength": 0.4,
+        "restore_faces": false,
+        "batch_size": 1,
+        "n_iter": 1,
+        "clip_skip": 1,
+        "adetailer": {
+          "enabled": true,
+          "model": "face_yolov8n.pt",
+          "steps": 101,
+          "cfg_scale": 5,
+          "denoising_strength": 0.4
+        }
+      },
+      "execution_time": {
+        "formatted": "0:00:43",
+        "total_seconds": 43.145628452301025
+      }
+    },
+    {
+      "timestamp": "2025-06-12T18:20:54.067873",
+      "params": {
+        "prompt": "girl with big tits and big ass in ripped shorts looks at camera and touches her breasts, photorealistic, hyperrealistic, ultra-detailed, masterpiece, best quality, 8K, high resolution, DSLR photo, analog photo, portrait photography, soft lighting, sharp focus, realistic skin, realistic eyes, symmetrical face, perfect face, close-up face, face in frame, frontal face, looking at viewer, eye contact, natural pose, beautiful model, seductive, sensual, erotic, sexy, lingerie, nude, NSFW",
+        "negative_prompt": "lowres, blurry, worst quality, low quality, text, watermark, signature, duplicate, cropped, out of frame, partial face, face obscured, looking away, back view, from behind, error, jpeg artifacts, bad anatomy, bad proportions, mutated hands, fused fingers, extra limbs, missing limbs, disfigured, deformed, poorly drawn face, cartoon, anime, CGI, 3D, render, sketch, drawing, doll, stupid, ugly, oversaturated, monochrome",
+        "use_default_prompts": true,
+        "seed": -1,
+        "steps": 35,
+        "width": 512,
+        "height": 512,
+        "cfg_scale": 8.0,
+        "sampler_name": "DPM++ SDE",
+        "scheduler": "Karras",
+        "enable_hr": true,
+        "hr_scale": 1.9,
+        "hr_upscaler": "4x-UltraSharp",
+        "hr_second_pass_steps": 10,
+        "denoising_strength": 0.4,
+        "restore_faces": false,
+        "batch_size": 1,
+        "n_iter": 1,
+        "clip_skip": 1,
+        "adetailer": {
+          "enabled": true,
+          "model": "face_yolov8n.pt",
+          "steps": 101,
+          "cfg_scale": 5,
+          "denoising_strength": 0.4
+        }
+      },
+      "execution_time": {
+        "formatted": "0:00:42",
+        "total_seconds": 42.40556621551514
+      }
+    }
+  ]
+}

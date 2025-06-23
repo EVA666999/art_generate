@@ -1,9 +1,105 @@
+# Environment and virtual environments
 .env
 .venv
-.vscode
-vscode
-vscode/
 env/
 venv/
-*.pyc
+env_for_you
+
+# IDE and editor files
+.vscode/
+vscode/
+.cursor/
+*.swp
+*.swo
+*~
+
+# Python cache and compiled files
 __pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+*.egg
+*.egg-info/
+sd_monitor.egg-info/
+
+# Logs and temporary files
+logs/
+*.log
+debug_*.log
+temp/
+
+# Generated images and outputs
+outputs/
+images/
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.bmp
+*.tiff
+*.webp
+
+# Models and large files (can be downloaded separately)
+models/
+cache/
+*.safetensors
+*.ckpt
+*.pt
+*.pth
+*.bin
+*.gguf
+*.ggml
+
+# External repositories (can be added as submodules)
+llama.cpp/
+stable-diffusion-webui/
+llama-cpp-python-cuBLAS-wheels/
+
+# Build and distribution files
+build/
+dist/
+*.tar.gz
+*.zip
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pytest
+.pytest_cache/
+.coverage
+htmlcov/
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# Pyre type checker
+.pyre/
+
+# Temporary files
+=0.2.72
+=0.25.2
+=2.11.3

@@ -1,45 +1,18 @@
-"""
-Registration module - API для регистрации новых пользователей в системе.
-"""
-from typing import Annotated, Dict
-
-from fastapi import APIRouter, Depends, Request, status
-from fastapi_limiter.depends import RateLimiter
-from passlib.context import CryptContext
-from sqlalchemy import insert
+from fastapi import APIRouter, Depends, status
 from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy import insert
+import bcrypt
 
 from app.database.db_depends import get_db
-from app.users.models import Users
-from app.schemas import CreateUser
+from app.users.models.users import Users
+from app.schemas.schemas import CreateUser
+
+router = APIRouter(prefix="/register", tags=["auth"])
 
 
-router = APIRouter(prefix="/register", tags=["authentication"])
-bcrypt_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-
-
-@router.post(
-    "/",
-    status_code=status.HTTP_201_CREATED,
-    dependencies=[Depends(RateLimiter(times=5, seconds=60))],
-    summary="Регистрация нового пользователя"
-)
-async def create_user(
-    request: Request,
-    db: Annotated[AsyncSession, Depends(get_db)],
-    create_user: CreateUser,
-) -> Dict[str, str]:
-    """
-    Регистрирует нового пользователя в системе.
-    
-    Хэширует пароль пользователя перед сохранением в базу данных.
-    Ограничивает создание аккаунтов до 5 запросов в минуту.
-    """
-    await db.execute(
-        insert(Users).values(
-            email=create_user.email,
-            password=bcrypt_context.hash(create_user.password),
-        )
-    )
+@router.post("/", status_code=status.HTTP_201_CREATED)
+async def register(user: CreateUser, db: AsyncSession = Depends(get_db)):
+    hashed = bcrypt.hashpw(user.password.encode('utf-8'), bcrypt.gensalt())
+    await db.execute(insert(Users).values(email=user.email, username=user.username, password=hashed.decode('utf-8')))
     await db.commit()
-    return {"status_code": status.HTTP_201_CREATED, "transaction": "Successful"}
+    return {"message": "registered"}

@@ -1,10 +1,19 @@
+import sys
+from pathlib import Path
+
+# Добавляем корень проекта в sys.path
+root_dir = Path(__file__).resolve().parents[2]
+sys.path.append(str(root_dir))
+
 from logging.config import fileConfig
 
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
-from database.db import Base
+from app.database.db import Base
 from alembic import context
-from users.models import Users
+from app.users.models.users import Users
+from app.users.models.users import Base as UsersBase
+from app.chat_bot.models.character import Base as CharacterBase
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
@@ -18,7 +27,6 @@ if config.config_file_name is not None:
 # add your model's MetaData object here
 # for 'autogenerate' support
 # from myapp import mymodel
-# target_metadata = mymodel.Base.metadata
 target_metadata = Base.metadata
 
 # other values from the config, defined by the needs of env.py,

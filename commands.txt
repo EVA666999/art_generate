@@ -1,0 +1,3 @@
+ $ ./webui-user.bat
+
+pip install --extra-index-url https://jllllll.github.io/llama-cpp-python-cuBLAS-wheels/AVX2/cu121 llama-cpp-python==0.2.26+cu121
