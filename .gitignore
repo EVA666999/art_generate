@@ -4,6 +4,11 @@
 env/
 venv/
 env_for_you
+venv_py310/
+venv_py310_correct/
+stable-diffusion-webui/venv_py310/
+text-generation-webui/venv/
+telegram_monitor_bot/venv/
 
 # IDE and editor files
 .vscode/
@@ -44,6 +49,9 @@ images/
 # Models and large files (can be downloaded separately)
 models/
 cache/
+data/
+test_outputs/
+temp/
 *.safetensors
 *.ckpt
 *.pt
@@ -54,8 +62,19 @@ cache/
 
 # External repositories (can be added as submodules)
 llama.cpp/
-stable-diffusion-webui/
 llama-cpp-python-cuBLAS-wheels/
+
+# Large external projects (can be downloaded separately)
+stable-diffusion-webui/
+text-generation-webui/
+telegram_monitor_bot/
+
+# Python packages and libraries
+**/Lib/site-packages/
+**/Include/
+**/Scripts/
+**/share/
+**/pyvenv.cfg
 
 # Build and distribution files
 build/
