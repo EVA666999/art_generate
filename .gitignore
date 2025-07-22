@@ -84,6 +84,7 @@ Thumbs.db
 .pytest_cache/
 .coverage
 htmlcov/
+venv_py310_correct/
 
 # mypy
 .mypy_cache/

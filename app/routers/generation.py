@@ -16,6 +16,13 @@ from app.schemas.generation import GenerationRequest, GenerationResponse, Genera
 from app.config.default_prompts import get_default_negative_prompts
 from app.config.logging_config import logger
 from app.config.settings import settings
+import sys
+from pathlib import Path
+
+# Добавляем корень проекта в путь для импорта
+project_root = Path(__file__).parent.parent.parent
+sys.path.insert(0, str(project_root))
+
 from app.config.generation_defaults import DEFAULT_GENERATION_PARAMS
 from app.utils.lora_utils import lora_manager
 from app.utils.controlnet_utils import controlnet_manager
@@ -23,13 +30,15 @@ from app.utils.generation_stats import generation_stats
 from app.services.face_refinement import FaceRefinementService
 from app.core.dependencies import get_face_refinement_service
 
-router = APIRouter(prefix="/api/v1/generation", tags=["generation"])
+router = APIRouter(prefix="/api/generation", tags=["generation"])
 service = FaceRefinementService(settings.SD_API_URL)
 
 @router.get("/stats")
 async def get_generation_stats():
     """Получить статистику генерации изображений"""
     return generation_stats.get_stats_summary()
+
+
 
 @router.post("/generate")
 async def generate_image(settings: GenerationSettings):

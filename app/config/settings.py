@@ -63,6 +63,14 @@ class Settings(BaseSettings):
     # Performance
     MAX_WORKERS: int = 4
     
+    # Text Generation WebUI настройки
+    text_generation_webui_path: str = str(BASE_DIR / "text-generation-webui")
+    text_generation_webui_host: str = "127.0.0.1"
+    text_generation_webui_port: int = 7861
+    text_generation_webui_model: str = "Llama-3.1-128k-Dark-Planet-Uncensored-8B-Q4_k_s.gguf"
+    text_generation_webui_loader: str = "llama.cpp"
+    text_generation_webui_model_dir: str = str(BASE_DIR / "text-generation-webui" / "models" / "main_model")
+    
     model_config = {
         "env_file": ".env",
         "env_file_encoding": "utf-8",
@@ -75,4 +83,14 @@ class Settings(BaseSettings):
 def get_settings():
     return Settings()
 
-settings = get_settings() 
+settings = get_settings()
+
+def generate_bat():
+    """Генерирует start_webui_with_api.bat с актуальным именем модели из настроек."""
+    with open("start_webui_with_api.bat", "w", encoding="utf-8") as f:
+        f.write(f"""@echo off
+cd /D "%~dp0"
+cd text-generation-webui
+python server.py --api --api-port 5000 --listen --listen-port 7861 --model {settings.text_generation_webui_model} --loader llama.cpp --model-dir models/main_model
+pause
+""") 

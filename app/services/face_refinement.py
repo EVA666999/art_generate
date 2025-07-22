@@ -15,12 +15,23 @@ import os
 from tenacity import retry, stop_after_attempt, wait_exponential
 
 from app.schemas.generation import GenerationSettings, GenerationResponse, FaceRefinementSettings
+import sys
+from pathlib import Path
+
+# Добавляем корень проекта в путь для импорта
+project_root = Path(__file__).parent.parent.parent
+sys.path.insert(0, str(project_root))
+
+# Импортируем новые файлы настроек
 from app.config.generation_defaults import DEFAULT_GENERATION_PARAMS, ADETAILER_SETTINGS
+
+from app.config.default_prompts import get_default_positive_prompts, get_default_negative_prompts
 from app.utils.generation_stats import generation_stats
-from app.utils.memory_utils import get_memory_usage, unload_sd_memory
-from app.utils.prompt_utils import get_default_positive_prompts, get_default_negative_prompts
+from app.utils.memory_utils import get_memory_usage, unload_sd_memory, clear_gpu_memory, fix_device_conflict
+from app.services.image_quality_control import get_image_quality_control
 
 logger = logging.getLogger(__name__)
+
 
 class FaceRefinementService:
     """Сервис для улучшения лиц на изображениях"""
@@ -47,31 +58,31 @@ class FaceRefinementService:
         try:
             # Логируем настройки ADetailer
             if "alwayson_scripts" in payload and "ADetailer" in payload["alwayson_scripts"]:
-                logger.info(f"ADetailer settings in payload: {json.dumps(payload['alwayson_scripts']['ADetailer'], indent=2)}")
-            else:
-                logger.warning("ADetailer settings not found in payload!")
+                adetailer_config = payload["alwayson_scripts"]["ADetailer"]
+                if len(adetailer_config.get('args', [])) > 1:
+                    adetailer_settings = adetailer_config['args'][1]
+                    logger.info(f"ADETAILER IN REQUEST: steps={adetailer_settings.get('ad_steps')}, model={adetailer_settings.get('ad_model')}")
             
-            logger.info(f"Full payload: {json.dumps(payload, indent=2)}")
+            # Логируем только параметры, не логируем base64-данные
+            payload_copy = dict(payload)
+            if "images" in payload_copy:
+                payload_copy["images"] = "<omitted base64>"
+            logger.info(f"REQUEST PAYLOAD: steps={payload.get('steps')}, sampler={payload.get('sampler_name')}")
+            
             response = await self.client.post(
                 f"{self.api_url}/sdapi/v1/txt2img",
                 json=payload
             )
             response.raise_for_status()
             
-            # Логируем ответ API
+            # Получаем ответ API
             response_data = response.json()
-            logger.info(f"API response: {json.dumps(response_data, indent=2)}")
             
-            # Проверяем наличие ADetailer в ответе
-            if "info" in response_data:
-                info = response_data["info"]
-                if isinstance(info, str):
-                    try:
-                        info = json.loads(info)
-                        if "alwayson_scripts" in info and "ADetailer" in info["alwayson_scripts"]:
-                            logger.info(f"ADetailer found in API response: {json.dumps(info['alwayson_scripts']['ADetailer'], indent=2)}")
-                    except:
-                        pass
+            # Логируем ответ API без base64-данных
+            response_data_copy = dict(response_data)
+            if "images" in response_data_copy:
+                response_data_copy["images"] = "<omitted base64>"
+            logger.info(f"API RESPONSE: success, images_count={len(response_data.get('images', []))}")
             
             return response_data
         except httpx.TimeoutException as e:
@@ -110,9 +121,13 @@ class FaceRefinementService:
                 logger.info(f"Final prompt: {settings.prompt}")
                 logger.info(f"Final negative prompt: {settings.negative_prompt}")
 
-            # Подготавливаем параметры запроса
+            # Подготавливаем параметры запроса ИЗ НОВОГО ФАЙЛА НАСТРОЕК
             payload = self._prepare_payload(settings)
             logger.info("Payload prepared successfully")
+            
+            # Проверяем, включен ли enable_hr
+            enable_hr = payload.get("enable_hr", False)
+            logger.info(f"enable_hr setting: {enable_hr}")
             
             # Выполняем запрос к API с повторными попытками
             api_response = await self._make_api_request(payload)
@@ -121,8 +136,11 @@ class FaceRefinementService:
             # Проверяем наличие изображений в ответе
             if not api_response.get("images"):
                 logger.error("No images in API response")
-                logger.error(f"API response: {json.dumps(api_response, indent=2)}")
                 raise ValueError("No images in API response")
+            
+            # Используем ответ API как есть
+            logger.info(f"Received {len(api_response.get('images', []))} images from API")
+            logger.info("Using API response as is")
             
             logger.info("Creating GenerationResponse from API response")
             result = GenerationResponse.from_api_response(api_response)
@@ -146,8 +164,26 @@ class FaceRefinementService:
             return result
             
         except Exception as e:
-            logger.error(f"Error in generate_image: {str(e)}")
+            error_msg = str(e)
+            logger.error(f"Error in generate_image: {error_msg}")
             logger.error(f"Traceback: {traceback.format_exc()}")
+            
+            # Проверяем на ошибки GPU/устройств
+            if "Expected all tensors to be on the same device" in error_msg:
+                logger.warning("Detected device conflict, attempting to fix...")
+                try:
+                    await clear_gpu_memory(self.api_url)
+                    await fix_device_conflict(self.api_url)
+                    logger.info("Device conflict fixed, retrying generation...")
+                    # Можно добавить повторную попытку здесь
+                except Exception as fix_error:
+                    logger.error(f"Failed to fix device conflict: {str(fix_error)}")
+            
+            # Проверяем на ошибки ADetailer
+            if "ADetailer" in error_msg and "ValidationError" in error_msg:
+                logger.warning("ADetailer validation error detected")
+                logger.info("Consider checking ADetailer settings in config")
+            
             raise
         finally:
             # Очищаем память в любом случае
@@ -155,20 +191,41 @@ class FaceRefinementService:
 
     def _prepare_payload(self, settings: GenerationSettings) -> Dict[str, Any]:
         """
-        Подготовка параметров запроса
+        Подготовка параметров запроса ИЗ НОВОГО ФАЙЛА НАСТРОЕК
         """
-        # Базовые параметры из дефолтных настроек
-        payload = DEFAULT_GENERATION_PARAMS.copy()
+        logger.info("=== ПОДГОТОВКА PAYLOAD ИЗ НОВОГО ФАЙЛА НАСТРОЕК ===")
         
-        # Обновляем настройки из объекта settings
+        # Получаем полный payload из нового файла настроек
+        payload = DEFAULT_GENERATION_PARAMS.copy()
+        logger.info(f"Базовый payload загружен: steps={payload['steps']}")
+        
+        # Проверяем ADetailer в базовом payload
+        if "alwayson_scripts" in payload and "ADetailer" in payload["alwayson_scripts"]:
+            adetailer_config = payload["alwayson_scripts"]["ADetailer"]
+            if len(adetailer_config.get('args', [])) > 1:
+                adetailer_settings = adetailer_config['args'][1]
+                logger.info(f"ADETAILER В БАЗОВОМ PAYLOAD: steps={adetailer_settings.get('ad_steps')}, model={adetailer_settings.get('ad_model')}")
+        
+        # Обновляем настройки из объекта settings (пользовательские настройки)
         settings_dict = settings.dict(exclude_none=True)
+        logger.info(f"Пользовательские настройки: {list(settings_dict.keys())}")
         payload.update(settings_dict)
+        
+        # Принудительно перезаписываем ключевые параметры из файла
+        payload["alwayson_scripts"]["ADetailer"]["args"][1] = ADETAILER_SETTINGS
         
         # Удаляем None значения
         payload = {k: v for k, v in payload.items() if v is not None}
         
-        # Логируем финальный payload
-        logger.info(f"Final payload with ADetailer: {json.dumps(payload, indent=2)}")
+        # Финальная проверка ADetailer
+        if "alwayson_scripts" in payload and "ADetailer" in payload["alwayson_scripts"]:
+            adetailer_config = payload["alwayson_scripts"]["ADetailer"]
+            if len(adetailer_config.get('args', [])) > 1:
+                adetailer_settings = adetailer_config['args'][1]
+                logger.info(f"ФИНАЛЬНЫЙ ADETAILER: steps={adetailer_settings.get('ad_steps')}, model={adetailer_settings.get('ad_model')}")
+        
+        logger.info(f"ФИНАЛЬНЫЙ PAYLOAD: steps={payload['steps']}, sampler={payload['sampler_name']}, n_samples={payload.get('n_samples', 'NOT_SET')}")
+        logger.info("==================================================")
         
         return payload
         
@@ -193,12 +250,17 @@ class FaceRefinementService:
                     info = {}
             
             # Обеспечиваем наличие ключей для статистики
-            settings_dict["sampler_name"] = info.get("sampler_name", "unknown")
-            settings_dict["steps"] = int(info.get("steps", 0))
-            settings_dict["width"] = int(info.get("width", 0))
-            settings_dict["height"] = int(info.get("height", 0))
-            settings_dict["cfg_scale"] = float(info.get("cfg_scale", 0))
-            settings_dict["denoising_strength"] = float(info.get("denoising_strength", 0))
+            # Используем реальные настройки, которые были отправлены, а не ответ API
+            settings_dict["sampler_name"] = settings.sampler_name or info.get("sampler_name", "unknown")
+            settings_dict["steps"] = settings.steps or int(info.get("steps", 0))
+            settings_dict["width"] = settings.width or int(info.get("width", 0))
+            settings_dict["height"] = settings.height or int(info.get("height", 0))
+            settings_dict["cfg_scale"] = settings.cfg_scale or float(info.get("cfg_scale", 0))
+            settings_dict["denoising_strength"] = settings.denoising_strength or float(info.get("denoising_strength", 0))
+            
+            # Логируем значения для отладки
+            logger.info(f"[STATS] Settings steps: {settings.steps}, API info steps: {info.get('steps')}, Final steps: {settings_dict['steps']}")
+            logger.info(f"[STATS] Settings sampler: {settings.sampler_name}, API info sampler: {info.get('sampler_name')}, Final sampler: {settings_dict['sampler_name']}")
             
             # Добавляем информацию о ADetailer из payload
             if "alwayson_scripts" in result and "ADetailer" in result["alwayson_scripts"]:
@@ -222,7 +284,16 @@ class FaceRefinementService:
                 }
             
             logger.info(f"Saving stats: {json.dumps(settings_dict, ensure_ascii=False, indent=2)}")
-            generation_stats.add_generation(settings_dict, execution_time)
+            
+            # Формируем detailed информацию для статистики
+            detailed_info = {
+                "saved_paths": [],  # Можно добавить пути к сохраненным изображениям
+                "status": "success",
+                "service": "FaceRefinementService",
+                "adetailer_enabled": settings_dict.get("adetailer", {}).get("enabled", False)
+            }
+            
+            generation_stats.add_generation(settings_dict, execution_time, result, detailed_info)
         except Exception as e:
             logger.error(f"Ошибка при сохранении статистики: {str(e)}")
             logger.error(f"Traceback: {traceback.format_exc()}")

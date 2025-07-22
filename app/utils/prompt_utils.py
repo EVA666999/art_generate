@@ -1,73 +1,64 @@
 """
-Утилиты для работы с промптами.
+Utilities for working with prompts.
 """
-from typing import List, Optional
-from app.config.default_prompts import (
-    DEFAULT_POSITIVE_PROMPTS,
-    DEFAULT_NEGATIVE_PROMPTS
+from typing import Optional
+
+import sys
+from pathlib import Path
+
+# Добавляем корень проекта в путь для импорта
+project_root = Path(__file__).parent.parent.parent
+sys.path.insert(0, str(project_root))
+
+from app.config.shared_prompts import (
+    get_default_positive_prompts,
+    get_default_negative_prompts,
+    get_adetailer_positive_prompts,
+    get_adetailer_negative_prompts
 )
 
-def get_default_positive_prompts() -> str:
+
+def get_default_positive_prompts_str() -> str:
     """
-    Получить строку с дефолтными позитивными промптами.
+    Get a string with default positive prompts.
     
     Returns:
-        str: Строка с дефолтными позитивными промптами, разделенными запятыми
+        str: String with default positive prompts separated by commas
     """
-    return ", ".join(DEFAULT_POSITIVE_PROMPTS)
+    return get_default_positive_prompts()
 
-def get_default_negative_prompts() -> str:
+
+def get_default_negative_prompts_str() -> str:
     """
-    Получить строку с дефолтными негативными промптами.
+    Get a string with default negative prompts.
     
     Returns:
-        str: Строка с дефолтными негативными промптами, разделенными запятыми
+        str: String with default negative prompts separated by commas
     """
-    return ", ".join(DEFAULT_NEGATIVE_PROMPTS)
+    return get_default_negative_prompts()
 
-def combine_prompts(
-    user_prompt: str,
-    default_prompts: Optional[str] = None,
-    weight: float = 1.0
-) -> str:
+
+def combine_prompts(user_prompt: str,
+                   default_positive: Optional[str] = None,
+                   default_negative: Optional[str] = None) -> tuple[str, str]:
     """
-    Комбинирует пользовательский промпт с дефолтными промптами.
+    Combines user prompt with default prompts.
     
     Args:
-        user_prompt: Пользовательский промпт
-        default_prompts: Дефолтные промпты (если None, используются стандартные)
-        weight: Вес дефолтных промптов (1.0 = полный вес)
+        user_prompt: User prompt
+        default_positive: Default positive prompts
+        default_negative: Default negative prompts
         
     Returns:
-        str: Комбинированный промпт
+        tuple: (combined_positive, combined_negative)
     """
-    if not default_prompts:
-        return user_prompt
-        
-    if weight <= 0:
-        return user_prompt
-        
-    if weight >= 1:
-        return f"{user_prompt}, {default_prompts}"
-        
-    # Если вес меньше 1, добавляем дефолтные промпты с меньшим приоритетом
-    return f"{user_prompt}, ({default_prompts}:{weight})"
-
-def format_prompt(prompt: str) -> str:
-    """
-    Форматирует промпт, удаляя лишние пробелы и запятые.
+    if default_positive is None:
+        default_positive = get_default_positive_prompts_str()
     
-    Args:
-        prompt: Исходный промпт
-        
-    Returns:
-        str: Отформатированный промпт
-    """
-    # Разбиваем на части по запятым
-    parts = [p.strip() for p in prompt.split(",")]
+    if default_negative is None:
+        default_negative = get_default_negative_prompts_str()
     
-    # Удаляем пустые части
-    parts = [p for p in parts if p]
+    combined_positive = f"{user_prompt}, {default_positive}"
+    combined_negative = default_negative
     
-    # Собираем обратно
-    return ", ".join(parts) 
+    return combined_positive, combined_negative 

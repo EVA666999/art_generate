@@ -20,6 +20,11 @@ class ChatMessage(BaseModel):
     timestamp: Optional[str] = Field(None, description="Временная метка сообщения")
 
 
+class SimpleChatRequest(BaseModel):
+    """Упрощенный запрос на генерацию ответа в чате - только сообщение пользователя."""
+    message: str = Field(..., description="Сообщение пользователя для бота")
+
+
 class CharacterConfig(BaseModel):
     """Конфигурация характера персонажа."""
     name: str = Field(..., description="Имя персонажа")
@@ -29,6 +34,13 @@ class CharacterConfig(BaseModel):
     interests: Optional[List[str]] = Field(None, description="Интересы персонажа")
     mood: Optional[str] = Field(None, description="Текущее настроение персонажа")
     additional_context: Optional[Dict[str, Any]] = Field(None, description="Дополнительный контекст")
+    age: Optional[str] = Field(None, description="Возраст персонажа")
+    profession: Optional[str] = Field(None, description="Профессия персонажа")
+    behavior: Optional[str] = Field(None, description="Поведение персонажа")
+    appearance: Optional[str] = Field(None, description="Внешность персонажа")
+    voice: Optional[str] = Field(None, description="Голос персонажа")
+    rules: Optional[str] = Field(None, description="Правила поведения персонажа")
+    context: Optional[str] = Field(None, description="Контекст ситуации")
 
     class Config:
         from_attributes = True
@@ -50,6 +62,9 @@ class CharacterInDB(CharacterConfig):
 
     class Config:
         from_attributes = True
+        json_encoders = {
+            str: lambda v: v.encode('utf-8').decode('utf-8')
+        }
 
 
 class ChatRequest(BaseModel):
@@ -69,7 +84,7 @@ class ChatResponse(BaseModel):
     character_name: str = Field(..., description="Имя персонажа")
     tokens_used: Optional[int] = Field(None, description="Количество использованных токенов")
     generation_time: Optional[float] = Field(None, description="Время генерации в секундах")
-    model_info: Optional[Dict[str, Any]] = Field(None, description="Информация о модели")
+    model_data: Optional[Dict[str, Any]] = Field(None, description="Информация о модели")
 
 
 class ChatError(BaseModel):

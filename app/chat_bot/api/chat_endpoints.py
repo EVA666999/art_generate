@@ -3,22 +3,32 @@ API эндпоинты для чат-бота с кастомными персо
 """
 from typing import List, Optional
 from fastapi import APIRouter, HTTPException, Depends
+from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy import select
+from io import BytesIO
 
-from app.chat_bot.schemas.chat import (
+from chat_bot.schemas.chat import (
     ChatMessage, 
     CharacterConfig, 
     MessageRole, 
-    ChatResponse
+    SimpleChatRequest
 )
-from app.chat_bot.services.llama_cpp_chat_service import llama_cpp_chat_service
-from app.chat_bot.services.character_service import character_service
-from app.chat_bot.config import chat_config
-from app.utils.logger import logger
-from app.database.db_depends import get_db
+from chat_bot.models.models import CharacterDB
+from chat_bot.services.textgen_webui_service import (
+    get_textgen_webui_service, 
+    TextGenWebUIService
+)
+from chat_bot.config import chat_config
+from utils.logger import logger
+from database.db_depends import get_db
+from schemas.generation import GenerationSettings
+from services.face_refinement import FaceRefinementService
+from config.settings import settings
 
 router = APIRouter(prefix="/api/v1/chat", tags=["Chat"])
+
 
 class ChatWithCharacterRequest(BaseModel):
     messages: List[ChatMessage]
@@ -28,55 +38,371 @@ class ChatWithCharacterRequest(BaseModel):
     top_k: Optional[int] = None
     repeat_penalty: Optional[float] = None
 
-@router.post("/{character_id}", response_model=ChatResponse)
+
+class ImageGenerationRequest(BaseModel):
+    prompt: str
+    negative_prompt: Optional[str] = None
+    use_default_prompts: bool = True
+    seed: Optional[int] = None
+    steps: Optional[int] = None
+    width: Optional[int] = None
+    height: Optional[int] = None
+    cfg_scale: Optional[float] = None
+    sampler_name: Optional[str] = None
+
+
+async def get_character_from_db(
+    db: AsyncSession, 
+    character_id: int
+) -> Optional[CharacterDB]:
+    """Получает персонажа из БД по ID."""
+    result = await db.execute(
+        select(CharacterDB).where(CharacterDB.id == character_id)
+    )
+    return result.scalar_one_or_none()
+
+
+
+
+@router.get("/status")
+async def get_chat_status(
+    textgen_service: TextGenWebUIService = Depends(get_textgen_webui_service)
+):
+    """Получить статус чат-сервиса (работа через text-generation-webui)."""
+    try:
+        is_connected = await textgen_service.check_connection()
+        model_info = await textgen_service.get_model_info() if is_connected else None
+        
+        return {
+            "connected": is_connected,
+            "cache_enabled": chat_config.ENABLE_CACHE,
+            "max_history_length": chat_config.MAX_HISTORY_LENGTH,
+            "max_message_length": chat_config.MAX_MESSAGE_LENGTH,
+            "model_info": model_info
+        }
+    except Exception as e:
+        logger.error(f"Ошибка получения статуса: {e}")
+        return {
+            "connected": False,
+            "error": str(e)
+        }
+
+@router.get("/models")
+async def get_models(
+    textgen_service: TextGenWebUIService = Depends(get_textgen_webui_service)
+):
+    """Получить список доступных моделей."""
+    try:
+        models = await textgen_service.get_models()
+        return {"models": models}
+    except Exception as e:
+        logger.error(f"Ошибка получения моделей: {e}")
+        raise HTTPException(
+            status_code=500,
+            detail=f"Ошибка получения моделей: {str(e)}"
+        )
+
+@router.post("/generate-image")
+async def generate_image_in_chat(
+    request: ImageGenerationRequest,
+    face_refinement_service: FaceRefinementService = Depends(lambda: FaceRefinementService(settings.SD_API_URL))
+):
+    """
+    Генерация изображения для чата.
+    Пользователь отправляет промпт и получает сгенерированное изображение.
+    """
+    try:
+        logger.info(f"Запрос на генерацию изображения: {request.prompt}")
+        
+        # Создаем настройки генерации
+        generation_settings = GenerationSettings(
+            prompt=request.prompt,
+            negative_prompt=request.negative_prompt,
+            use_default_prompts=request.use_default_prompts,
+            seed=request.seed,
+            steps=request.steps,
+            width=request.width,
+            height=request.height,
+            cfg_scale=request.cfg_scale,
+            sampler_name=request.sampler_name
+        )
+        
+        # Генерируем изображение
+        result = await face_refinement_service.generate_image(generation_settings)
+        
+        if not result.image_data or not result.image_data[0]:
+            raise HTTPException(status_code=500, detail="Не удалось сгенерировать изображение")
+        
+        # Берем первое изображение
+        image_data = result.image_data[0]
+        
+        # Получаем информацию о генерации
+        info_dict = {}
+        try:
+            import json
+            info_dict = json.loads(result.info)
+        except:
+            pass
+        
+        # Возвращаем изображение как поток
+        return StreamingResponse(
+            BytesIO(image_data),
+            media_type="image/png",
+            headers={
+                "X-Prompt": request.prompt,
+                "X-Seed": str(info_dict.get("seed", result.seed)),
+                "X-Steps": str(info_dict.get("steps", request.steps or 40)),
+                "X-CFG-Scale": str(info_dict.get("cfg_scale", request.cfg_scale or 6)),
+                "X-Sampler": info_dict.get("sampler_name", request.sampler_name or "DPM++ SDE Karras"),
+                "X-Width": str(info_dict.get("width", request.width or 768)),
+                "X-Height": str(info_dict.get("height", request.height or 768))
+            }
+        )
+        
+    except Exception as e:
+        logger.error(f"Ошибка генерации изображения: {str(e)}")
+        raise HTTPException(
+            status_code=500,
+            detail=f"Ошибка генерации изображения: {str(e)}"
+        )
+
+@router.post("/generate-image-base64")
+async def generate_image_base64_in_chat(
+    request: ImageGenerationRequest,
+    face_refinement_service: FaceRefinementService = Depends(lambda: FaceRefinementService(settings.SD_API_URL))
+):
+    """
+    Генерация изображения для чата с возвратом в base64 формате.
+    Удобно для встраивания в JSON ответы.
+    """
+    try:
+        logger.info(f"Запрос на генерацию изображения (base64): {request.prompt}")
+        
+        # Создаем настройки генерации
+        generation_settings = GenerationSettings(
+            prompt=request.prompt,
+            negative_prompt=request.negative_prompt,
+            use_default_prompts=request.use_default_prompts,
+            seed=request.seed,
+            steps=request.steps,
+            width=request.width,
+            height=request.height,
+            cfg_scale=request.cfg_scale,
+            sampler_name=request.sampler_name
+        )
+        
+        # Генерируем изображение
+        result = await face_refinement_service.generate_image(generation_settings)
+        
+        if not result.images or not result.images[0]:
+            raise HTTPException(status_code=500, detail="Не удалось сгенерировать изображение")
+        
+        # Берем первое изображение в base64
+        image_base64 = result.images[0]
+        
+        # Получаем информацию о генерации
+        info_dict = {}
+        try:
+            import json
+            info_dict = json.loads(result.info)
+        except:
+            pass
+        
+        # Возвращаем JSON с base64 изображением
+        return {
+            "success": True,
+            "image": image_base64,
+            "metadata": {
+                "prompt": request.prompt,
+                "seed": info_dict.get("seed", result.seed),
+                "steps": info_dict.get("steps", request.steps or 40),
+                "cfg_scale": info_dict.get("cfg_scale", request.cfg_scale or 6),
+                "sampler_name": info_dict.get("sampler_name", request.sampler_name or "DPM++ SDE Karras"),
+                "width": info_dict.get("width", request.width or 768),
+                "height": info_dict.get("height", request.height or 768)
+            }
+        }
+        
+    except Exception as e:
+        logger.error(f"Ошибка генерации изображения (base64): {str(e)}")
+        raise HTTPException(
+            status_code=500,
+            detail=f"Ошибка генерации изображения: {str(e)}"
+        )
+
+@router.post("/models/{model_name}/load")
+async def load_model(
+    model_name: str,
+    textgen_service: TextGenWebUIService = Depends(get_textgen_webui_service)
+):
+    """Загрузить модель в text-generation-webui."""
+    try:
+        success = await textgen_service.load_model(model_name)
+        if success:
+            return {"message": f"Модель {model_name} загружена успешно"}
+        else:
+            raise HTTPException(
+                status_code=500,
+                detail=f"Не удалось загрузить модель {model_name}"
+            )
+    except Exception as e:
+        logger.error(f"Ошибка загрузки модели {model_name}: {e}")
+        raise HTTPException(
+            status_code=500,
+            detail=f"Ошибка загрузки модели: {str(e)}"
+        )
+
+@router.post("/{character_id}")
 async def chat_with_character(
-    character_id: int, 
-    request: ChatWithCharacterRequest,
-    db: AsyncSession = Depends(get_db)
+    character_id: int,
+    request: SimpleChatRequest,
+    db: AsyncSession = Depends(get_db),
+    textgen_service: TextGenWebUIService = Depends(get_textgen_webui_service)
 ):
     """
     Чат с сохраненным в БД персонажем по его ID.
+    Поддерживает обычные сообщения и команды !фото/!photo для генерации изображения.
     """
-    db_character = await character_service.get_character(db, character_id=character_id)
+    db_character = await get_character_from_db(db, character_id)
     if db_character is None:
         raise HTTPException(status_code=404, detail="Персонаж не найден")
 
     character_config = CharacterConfig.from_orm(db_character)
+    message = request.message.strip()
+    
+    # Проверяем команду генерации изображения
+    if message.lower().startswith(("!фото", "!photo")):
+        prompt = message.split(" ", 1)[1] if " " in message else "photo"
+        # Генерация изображения
+        generation_settings = GenerationSettings(
+            prompt=prompt,
+            use_default_prompts=True
+        )
+        service = FaceRefinementService(settings.SD_API_URL)
+        result = await service.generate_image(generation_settings)
+        if not result.images or not result.images[0]:
+            return {"response": "❌ Не удалось сгенерировать изображение."}
+        # Генерируем текст-ответ через LLM с персонажем
+        llm_prompt = (
+            f"Пользователь попросил сгенерировать изображение по запросу: "
+            f"'{prompt}'. Ответь как будто ты отправила это фото собеседнику."
+        )
+        llm_message = ChatMessage(
+            role=MessageRole.USER, 
+            content=llm_prompt, 
+            timestamp=None
+        )
+        try:
+            llm_response, _ = await textgen_service.generate_response(
+                messages=[llm_message],
+                character_config=character_config
+            )
+        except Exception as e:
+            logger.error(f"Ошибка генерации текста LLM: {e}")
+            llm_response = "Фото сгенерировано."
+        return {
+            "response": llm_response,
+            "image": result.images[0]
+        }
+    
+    # Обычная логика чата с персонажем
+    user_message = ChatMessage(
+        role=MessageRole.USER,
+        content=message,
+        timestamp=None
+    )
     
     try:
-        response_text, metadata = await llama_cpp_chat_service.generate_response(
-            messages=request.messages,
-            character_config=character_config,
-            max_tokens=request.max_tokens,
-            temperature=request.temperature,
-            top_p=request.top_p,
-            top_k=request.top_k,
-            repeat_penalty=request.repeat_penalty
+        response_text, metadata = await textgen_service.generate_response(
+            messages=[user_message],
+            character_config=character_config
         )
-        
-        response = ChatResponse(
-            message=response_text,
-            character_name=character_config.name,
-            tokens_used=metadata.get("tokens_used"),
-            generation_time=metadata.get("generation_time"),
-            model_info=metadata.get("model_info")
-        )
-        
-        logger.info(f"Успешно сгенерирован ответ для персонажа: {character_config.name} (ID: {character_id})")
-        
-        return response
-        
+        return {"response": response_text}
     except Exception as e:
         logger.error(f"Ошибка в чате с персонажем ID {character_id}: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Внутренняя ошибка сервера: {str(e)}")
+        raise HTTPException(
+            status_code=500,
+            detail=f"Внутренняя ошибка сервера: {str(e)}"
+        )
 
-@router.get("/status")
-async def get_chat_status():
-    """Получить статус чат-сервиса."""
-    return {
-        "model_loaded": llama_cpp_chat_service.is_loaded,
-        "model_path": chat_config.MODEL_PATH,
-        "cache_enabled": chat_config.ENABLE_CACHE,
-        "max_history_length": chat_config.MAX_HISTORY_LENGTH,
-        "max_message_length": chat_config.MAX_MESSAGE_LENGTH
-    } 
+
+@router.post("/character/{character_name}")
+async def chat_with_character_by_name(
+    character_name: str,
+    request: SimpleChatRequest,
+    db: AsyncSession = Depends(get_db),
+    textgen_service: TextGenWebUIService = Depends(get_textgen_webui_service)
+):
+    """
+    Чат с персонажем по имени.
+    Поддерживает обычные сообщения и команды !фото/!photo для генерации изображения.
+    """
+    from sqlalchemy import select
+    from app.chat_bot.models.models import CharacterDB
+    
+    # Получаем персонажа по имени
+    result = await db.execute(
+        select(CharacterDB).where(CharacterDB.name == character_name)
+    )
+    db_character = result.scalar_one_or_none()
+    
+    if db_character is None:
+        raise HTTPException(status_code=404, detail="Персонаж не найден")
+
+    character_config = CharacterConfig.from_orm(db_character)
+    message = request.message.strip()
+    
+    # Проверяем команду генерации изображения
+    if message.lower().startswith(("!фото", "!photo")):
+        prompt = message.split(" ", 1)[1] if " " in message else "photo"
+        # Генерация изображения
+        generation_settings = GenerationSettings(
+            prompt=prompt,
+            use_default_prompts=True
+        )
+        service = FaceRefinementService(settings.SD_API_URL)
+        result = await service.generate_image(generation_settings)
+        if not result.images or not result.images[0]:
+            return {"response": "❌ Не удалось сгенерировать изображение."}
+        # Генерируем текст-ответ через LLM с персонажем
+        llm_prompt = (
+            f"Пользователь попросил сгенерировать изображение по запросу: "
+            f"'{prompt}'. Ответь как будто ты отправила это фото собеседнику."
+        )
+        llm_message = ChatMessage(
+            role=MessageRole.USER, 
+            content=llm_prompt, 
+            timestamp=None
+        )
+        try:
+            llm_response, _ = await textgen_service.generate_response(
+                messages=[llm_message],
+                character_config=character_config
+            )
+        except Exception as e:
+            logger.error(f"Ошибка генерации текста LLM: {e}")
+            llm_response = "Фото сгенерировано."
+        return {
+            "response": llm_response,
+            "image": result.images[0]
+        }
+    
+    # Обычная логика чата с персонажем
+    user_message = ChatMessage(
+        role=MessageRole.USER,
+        content=message,
+        timestamp=None
+    )
+    
+    try:
+        response_text, metadata = await textgen_service.generate_response(
+            messages=[user_message],
+            character_config=character_config
+        )
+        return {"response": response_text}
+    except Exception as e:
+        logger.error(f"Ошибка в чате с персонажем {character_name}: {str(e)}")
+        raise HTTPException(
+            status_code=500,
+            detail=f"Внутренняя ошибка сервера: {str(e)}"
+        ) 

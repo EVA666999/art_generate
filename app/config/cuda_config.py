@@ -53,9 +53,7 @@ def configure_cuda():
             torch.cuda.memory.set_per_process_memory_fraction(memory_fraction)
             logger.info(f"CUDA успешно настроена. Используется {memory_fraction*100:.1f}% GPU памяти")
             debug_lines.append(f"CUDA успешно настроена. Используется {memory_fraction*100:.1f}% GPU памяти")
-        else:
-            logger.info("CUDA недоступна, используется CPU")
-            debug_lines.append("CUDA недоступна, используется CPU")
+        # logger.info("CUDA недоступна, используется CPU")
             
     except Exception as e:
         logger.error(f"Ошибка при настройке CUDA: {str(e)}")

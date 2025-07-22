@@ -1,10 +1,16 @@
-from pydantic import BaseModel, Field, field_validator, ConfigDict
+from pydantic import BaseModel, Field, validator, ConfigDict
 from typing import Optional, List, Dict, Any, Union
+import sys
+from pathlib import Path
+
+# Добавляем корень проекта в путь для импорта
+project_root = Path(__file__).parent.parent.parent
+sys.path.insert(0, str(project_root))
+
 from app.config.default_prompts import get_default_negative_prompts
 import base64
 from PIL import Image
 from io import BytesIO
-from app.config.generation_defaults import DEFAULT_GENERATION_PARAMS
 
 
 """
@@ -30,29 +36,29 @@ class GenerationSettings(BaseModel):
     prompt: str = Field(..., description="Промпт для генерации")
     negative_prompt: Optional[str] = Field(None, description="Негативный промпт")
     use_default_prompts: bool = Field(True, description="Использовать дефолтные промпты")
-    seed: Optional[int] = Field(DEFAULT_GENERATION_PARAMS["seed"], description="Seed для генерации")
-    steps: Optional[int] = Field(DEFAULT_GENERATION_PARAMS["steps"], description="Количество шагов")
-    width: Optional[int] = Field(DEFAULT_GENERATION_PARAMS["width"], description="Ширина изображения")
-    height: Optional[int] = Field(DEFAULT_GENERATION_PARAMS["height"], description="Высота изображения")
-    cfg_scale: Optional[float] = Field(DEFAULT_GENERATION_PARAMS["cfg_scale"], description="CFG Scale")
-    sampler_name: Optional[str] = Field(DEFAULT_GENERATION_PARAMS["sampler_name"], description="Название сэмплера")
-    scheduler: Optional[str] = Field(DEFAULT_GENERATION_PARAMS["scheduler"], description="Название планировщика")
-    enable_hr: Optional[bool] = Field(DEFAULT_GENERATION_PARAMS["enable_hr"], description="Включить high-res fix")
-    hr_scale: Optional[float] = Field(DEFAULT_GENERATION_PARAMS["hr_scale"], description="Масштаб high-res fix")
-    hr_upscaler: Optional[str] = Field(DEFAULT_GENERATION_PARAMS["hr_upscaler"], description="Апскейлер для high-res fix")
-    hr_second_pass_steps: Optional[int] = Field(DEFAULT_GENERATION_PARAMS["hr_second_pass_steps"], description="Количество шагов для второго прохода")
-    denoising_strength: Optional[float] = Field(DEFAULT_GENERATION_PARAMS["denoising_strength"], description="Сила денойзинга")
-    restore_faces: Optional[bool] = Field(DEFAULT_GENERATION_PARAMS["restore_faces"], description="Восстановление лиц")
-    batch_size: Optional[int] = Field(DEFAULT_GENERATION_PARAMS["batch_size"], description="Размер батча")
-    n_iter: Optional[int] = Field(DEFAULT_GENERATION_PARAMS["n_iter"], description="Количество итераций")
-    clip_skip: Optional[int] = Field(DEFAULT_GENERATION_PARAMS["clip_skip"], description="Clip Skip")
+    seed: Optional[int] = Field(None, description="Seed для генерации")
+    steps: Optional[int] = Field(None, description="Количество шагов")
+    width: Optional[int] = Field(None, description="Ширина изображения")
+    height: Optional[int] = Field(None, description="Высота изображения")
+    cfg_scale: Optional[float] = Field(None, description="CFG Scale")
+    sampler_name: Optional[str] = Field(None, description="Название сэмплера")
+    scheduler: Optional[str] = Field(None, description="Название планировщика")
+    enable_hr: Optional[bool] = Field(None, description="Включить high-res fix")
+    hr_scale: Optional[float] = Field(None, description="Масштаб high-res fix")
+    hr_upscaler: Optional[str] = Field(None, description="Апскейлер для high-res fix")
+    hr_second_pass_steps: Optional[int] = Field(None, description="Количество шагов для второго прохода")
+    denoising_strength: Optional[float] = Field(None, description="Сила денойзинга")
+    restore_faces: Optional[bool] = Field(None, description="Восстановление лиц")
+    batch_size: Optional[int] = Field(None, description="Размер батча")
+    n_iter: Optional[int] = Field(None, description="Количество итераций")
+    clip_skip: Optional[int] = Field(None, description="Clip Skip")
     
     def get_negative_prompt(self) -> str:
         """Получает негативный промпт с дефолтными значениями"""
         if not self.use_default_prompts:
             return self.negative_prompt or ""
             
-        default_negative = "bad quality, worst quality, low quality, normal quality, lowres, low details, oversaturated, undersaturated, overexposed, underexposed, grayscale, bw, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, jpeg artifacts, signature, watermark, username, blurry"
+        default_negative = get_default_negative_prompts()
         if not self.negative_prompt:
             return default_negative
             
@@ -72,7 +78,7 @@ class GenerationOverrideParams(BaseModel):
     hr_upscaler: Optional[str] = Field(default=None, description="Апскейлер для High-Res Fix")
     hr_second_pass_steps: Optional[int] = Field(default=None, ge=0, le=150, description="Шаги второго прохода High-Res Fix")
 
-    @field_validator('width', 'height')
+    @validator('width', 'height')
     @classmethod
     def validate_dimensions(cls, v: Optional[int]) -> Optional[int]:
         if v is not None and v % 8 != 0:

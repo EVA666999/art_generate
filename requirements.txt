@@ -20,7 +20,6 @@ python-telegram-bot>=20.0
 pytest>=7.4.0
 pytest-cov>=4.1.0
 protobuf>=4.25.3
-
 # Основные зависимости для работы с изображениями и системами
 Pillow>=11.2.1
 psutil>=5.9.0
@@ -29,14 +28,11 @@ numpy>=2.2.6
 # Зависимости для машинного обучения и ИИ
 torch>=2.7.1
 
-# llama-cpp-python для работы с GGUF моделями
-# Примечания по установке:
-# 1. Для CUDA поддержки: pip install llama-cpp-python --force-reinstall --index-url https://jllllll.github.io/llama-cpp-python-cuBLAS-wheels/cu121
-# 2. Для CPU только: pip install llama-cpp-python
-# 3. Для Windows: используйте готовый wheel файл llama_cpp_python-0.2.89-cp310-cp310-win_amd64.whl
-# 4. Для автоматической установки используйте скрипт install_llama_cpp.py
+# aiohttp для работы с text-generation-webui API
+aiohttp>=3.9.0
 
-# Временная замена - будет установлена через скрипт или wheel
-# llama-cpp-python==0.2.89
-
+# Удалены зависимости llama-cpp-python, так как теперь используется text-generation-webui
+GPUtil
 psycopg2-binary
+aiohttp
+pytest-asyncio

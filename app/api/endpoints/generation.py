@@ -21,10 +21,17 @@ from app.schemas.generation import (
     GenerationSettings,
     FaceRefinementSettings
 )
-from app.config.default_prompts import get_default_negative_prompts
+from app.config.shared_prompts import get_default_negative_prompts
 from app.config.logging_config import logger
 from app.config.settings import settings
-from app.config.generation_defaults import DEFAULT_GENERATION_PARAMS
+import sys
+from pathlib import Path
+
+# Добавляем корень проекта в путь для импорта
+project_root = Path(__file__).parent.parent.parent.parent
+sys.path.insert(0, str(project_root))
+
+from app.config.shared_config import get_default_generation_params
 from app.utils.lora_utils import lora_manager
 from app.utils.controlnet_utils import controlnet_manager
 from app.utils.generation_stats import generation_stats
@@ -42,6 +49,8 @@ async def get_generation_stats():
     except Exception as e:
         logger.error(f"Error getting generation stats: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
+
+
 
 @router.post("/generate")
 async def generate_image(settings: GenerationSettings) -> StreamingResponse:

@@ -9,11 +9,12 @@ from logging.config import fileConfig
 
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
-from app.database.db import Base
 from alembic import context
+
+# Импортируем все модели для корректной работы autogenerate
+from app.database.db import Base
 from app.users.models.users import Users
-from app.users.models.users import Base as UsersBase
-from app.chat_bot.models.character import Base as CharacterBase
+from app.chat_bot.models.models import CharacterDB
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

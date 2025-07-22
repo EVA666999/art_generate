@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Чат с персонажами</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .chat-container {
+            width: 90%;
+            max-width: 800px;
+            height: 80vh;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .chat-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .character-selector {
+            margin-top: 10px;
+        }
+
+        .character-selector select {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .character-selector select option {
+            background: white;
+            color: #333;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background: #f8f9fa;
+        }
+
+        .message {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .message.user {
+            justify-content: flex-end;
+        }
+
+        .message.assistant {
+            justify-content: flex-start;
+        }
+
+        .message-content {
+            max-width: 70%;
+            padding: 12px 16px;
+            border-radius: 18px;
+            word-wrap: break-word;
+        }
+
+        .message.user .message-content {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .message.assistant .message-content {
+            background: white;
+            color: #333;
+            border: 1px solid #e9ecef;
+        }
+
+        .message-time {
+            font-size: 11px;
+            color: #6c757d;
+            margin-top: 5px;
+        }
+
+        .chat-input {
+            padding: 20px;
+            background: white;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .input-container {
+            display: flex;
+            gap: 10px;
+        }
+
+        .message-input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 2px solid #e9ecef;
+            border-radius: 25px;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .message-input:focus {
+            border-color: #667eea;
+        }
+
+        .send-button {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: transform 0.2s;
+        }
+
+        .send-button:hover {
+            transform: translateY(-2px);
+        }
+
+        .send-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            color: #6c757d;
+        }
+
+        .loading.show {
+            display: block;
+        }
+
+        .typing-indicator {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 12px 16px;
+            background: white;
+            border-radius: 18px;
+            border: 1px solid #e9ecef;
+            max-width: 70%;
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background: #6c757d;
+            border-radius: 50%;
+            animation: typing 1.4s infinite ease-in-out;
+        }
+
+        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+
+        @keyframes typing {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 10px;
+            border-radius: 8px;
+            margin: 10px 0;
+            display: none;
+        }
+
+        /* Стили для генерации изображений */
+        .photo-button {
+            padding: 12px 16px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: transform 0.2s;
+            margin-right: 10px;
+        }
+
+        .photo-button:hover {
+            transform: translateY(-2px);
+        }
+
+        .photo-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Модальное окно */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 15% auto;
+            padding: 20px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .close {
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: #000;
+        }
+
+        .prompt-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 14px;
+            margin-bottom: 15px;
+            outline: none;
+        }
+
+        .prompt-input:focus {
+            border-color: #667eea;
+        }
+
+        .generate-button {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .generate-button:hover {
+            opacity: 0.9;
+        }
+
+        .generate-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        /* Стили для изображений в чате */
+        .message-image {
+            max-width: 100%;
+            max-height: 300px;
+            border-radius: 8px;
+            margin-top: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .image-loading {
+            display: inline-block;
+            padding: 20px;
+            text-align: center;
+            color: #6c757d;
+        }
+
+        .image-error {
+            color: #dc3545;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            <h1>💬 Чат с персонажами</h1>
+            <div class="character-selector">
+                <select id="characterSelect">
+                    <option value="">Выберите персонажа...</option>
+                </select>
+                <div id="characterCount" style="font-size: 12px; color: #666; margin-top: 5px;">
+                    Загрузка персонажей...
+                </div>
+            </div>
+        </div>
+
+        <div class="chat-messages" id="chatMessages">
+            <div class="message assistant">
+                <div class="message-content">
+                    Привет! Выберите персонажа для начала чата.
+                </div>
+            </div>
+        </div>
+
+        <div class="loading" id="loading">
+            <div class="typing-indicator">
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+            </div>
+        </div>
+
+        <div class="error-message" id="errorMessage"></div>
+
+        <div class="chat-input">
+            <div class="input-container">
+                <button id="photoButton" class="photo-button" disabled>
+                    📷 Фото
+                </button>
+                <input 
+                    type="text" 
+                    id="messageInput" 
+                    class="message-input" 
+                    placeholder="Введите сообщение..."
+                    disabled
+                >
+                <button id="sendButton" class="send-button" disabled>
+                    Отправить
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно для генерации изображений -->
+    <div id="imageModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="modal-title">🎨 Генерация изображения</span>
+                <span class="close" id="closeModal">&times;</span>
+            </div>
+            <input 
+                type="text" 
+                id="promptInput" 
+                class="prompt-input" 
+                placeholder="Опишите изображение, которое хотите сгенерировать..."
+            >
+            <button id="generateButton" class="generate-button">
+                Генерировать изображение
+            </button>
+        </div>
+    </div>
+
+    <script>
+        class ChatApp {
+            constructor() {
+                this.currentCharacter = null;
+                this.messages = [];
+                this.isLoading = false;
+                this.isGeneratingImage = false;
+                
+                this.initializeElements();
+                this.loadCharacters();
+                this.bindEvents();
+            }
+
+            initializeElements() {
+                this.characterSelect = document.getElementById('characterSelect');
+                this.characterCount = document.getElementById('characterCount');
+                this.chatMessages = document.getElementById('chatMessages');
+                this.messageInput = document.getElementById('messageInput');
+                this.sendButton = document.getElementById('sendButton');
+                this.photoButton = document.getElementById('photoButton');
+                this.loading = document.getElementById('loading');
+                this.errorMessage = document.getElementById('errorMessage');
+                
+                // Модальное окно
+                this.imageModal = document.getElementById('imageModal');
+                this.promptInput = document.getElementById('promptInput');
+                this.generateButton = document.getElementById('generateButton');
+                this.closeModal = document.getElementById('closeModal');
+            }
+
+            async loadCharacters() {
+                try {
+                    console.log('Загружаем персонажей...');
+                    const response = await fetch('/api/characters/');
+                    if (!response.ok) throw new Error('Ошибка загрузки персонажей');
+                    
+                    const characters = await response.json();
+                    console.log('Получены персонажи:', characters);
+                    
+                    // Очищаем существующие опции
+                    this.characterSelect.innerHTML = '<option value="">Выберите персонажа...</option>';
+                    
+                    characters.forEach(char => {
+                        console.log('Добавляем персонажа:', char.name);
+                        const option = document.createElement('option');
+                        option.value = char.name;
+                        option.textContent = char.name;
+                        this.characterSelect.appendChild(option);
+                    });
+                    
+                    console.log('Всего персонажей в select:', this.characterSelect.options.length);
+                    
+                    // Обновляем счетчик персонажей
+                    this.characterCount.textContent = `Загружено персонажей: ${characters.length}`;
+                } catch (error) {
+                    console.error('Ошибка загрузки персонажей:', error);
+                    this.characterCount.textContent = 'Ошибка загрузки персонажей';
+                    this.showError('Ошибка загрузки персонажей: ' + error.message);
+                }
+            }
+
+            bindEvents() {
+                this.characterSelect.addEventListener('change', (e) => {
+                    this.selectCharacter(e.target.value);
+                });
+
+                this.sendButton.addEventListener('click', () => {
+                    this.sendMessage();
+                });
+
+                this.messageInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter' && !this.isLoading) {
+                        this.sendMessage();
+                    }
+                });
+
+                // События для генерации изображений
+                this.photoButton.addEventListener('click', () => {
+                    this.openImageModal();
+                });
+
+                this.closeModal.addEventListener('click', () => {
+                    this.closeImageModal();
+                });
+
+                this.generateButton.addEventListener('click', () => {
+                    this.generateImage();
+                });
+
+                this.promptInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter' && !this.isGeneratingImage) {
+                        this.generateImage();
+                    }
+                });
+
+                // Закрытие модального окна при клике вне его
+                window.addEventListener('click', (e) => {
+                    if (e.target === this.imageModal) {
+                        this.closeImageModal();
+                    }
+                });
+            }
+
+            selectCharacter(characterName) {
+                if (!characterName) {
+                    this.currentCharacter = null;
+                    this.messageInput.disabled = true;
+                    this.sendButton.disabled = true;
+                    this.photoButton.disabled = true;
+                    return;
+                }
+
+                this.currentCharacter = characterName;
+                this.messageInput.disabled = false;
+                this.sendButton.disabled = false;
+                this.photoButton.disabled = false;
+                
+                this.addMessage('assistant', `Привет! Я ${characterName}. Чем могу помочь?`);
+            }
+
+            openImageModal() {
+                this.imageModal.style.display = 'block';
+                this.promptInput.focus();
+            }
+
+            closeImageModal() {
+                this.imageModal.style.display = 'none';
+                this.promptInput.value = '';
+            }
+
+            async generateImage() {
+                const prompt = this.promptInput.value.trim();
+                if (!prompt || this.isGeneratingImage) return;
+
+                this.isGeneratingImage = true;
+                this.generateButton.disabled = true;
+                this.generateButton.textContent = 'Генерируется...';
+
+                // Добавляем сообщение пользователя
+                this.addMessage('user', `🎨 ${prompt}`);
+
+                try {
+                    const response = await fetch('/api/v1/chat/generate-image-base64', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            prompt: prompt,
+                            use_default_prompts: true
+                        })
+                    });
+
+                    if (!response.ok) throw new Error('Ошибка генерации изображения');
+
+                    const data = await response.json();
+                    
+                    if (data.success && data.image) {
+                        // Добавляем изображение в чат
+                        this.addImageMessage(data.image, data.metadata);
+                    } else {
+                        throw new Error('Не удалось сгенерировать изображение');
+                    }
+                } catch (error) {
+                    this.showError('Ошибка генерации изображения: ' + error.message);
+                    this.addMessage('assistant', '❌ Не удалось сгенерировать изображение. Попробуйте еще раз.');
+                } finally {
+                    this.isGeneratingImage = false;
+                    this.generateButton.disabled = false;
+                    this.generateButton.textContent = 'Генерировать изображение';
+                    this.closeImageModal();
+                }
+            }
+
+            addImageMessage(imageBase64, metadata) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'message assistant';
+                
+                const time = new Date().toLocaleTimeString();
+                
+                messageDiv.innerHTML = `
+                    <div class="message-content">
+                        <img src="data:image/png;base64,${imageBase64}" alt="Сгенерированное изображение" class="message-image">
+                        <div class="message-time">
+                            ${time} | Seed: ${metadata.seed} | Steps: ${metadata.steps}
+                        </div>
+                    </div>
+                `;
+
+                this.chatMessages.appendChild(messageDiv);
+                this.chatMessages.scrollTop = this.chatMessages.scrollHeight;
+            }
+
+            async sendMessage() {
+                if (!this.currentCharacter || this.isLoading) return;
+
+                const message = this.messageInput.value.trim();
+                if (!message) return;
+
+                this.addMessage('user', message);
+                this.messageInput.value = '';
+                this.setLoading(true);
+
+                try {
+                    const response = await fetch(`/api/v1/chat/character/${encodeURIComponent(this.currentCharacter)}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            message: message
+                        })
+                    });
+
+                    if (!response.ok) throw new Error('Ошибка отправки сообщения');
+
+                    const data = await response.json();
+                    if (data.image) {
+                        this.addImageMessage(data.image, { seed: '', steps: '' });
+                        this.addMessage('assistant', data.response);
+                    } else {
+                        this.addMessage('assistant', data.response);
+                    }
+                } catch (error) {
+                    this.showError('Ошибка отправки сообщения: ' + error.message);
+                } finally {
+                    this.setLoading(false);
+                }
+            }
+
+            addMessage(role, content) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `message ${role}`;
+                
+                const time = new Date().toLocaleTimeString();
+                
+                messageDiv.innerHTML = `
+                    <div class="message-content">
+                        ${content}
+                        <div class="message-time">${time}</div>
+                    </div>
+                `;
+
+                this.chatMessages.appendChild(messageDiv);
+                this.chatMessages.scrollTop = this.chatMessages.scrollHeight;
+            }
+
+            setLoading(loading) {
+                this.isLoading = loading;
+                this.sendButton.disabled = loading;
+                this.messageInput.disabled = loading;
+                this.photoButton.disabled = loading;
+                
+                if (loading) {
+                    this.loading.classList.add('show');
+                } else {
+                    this.loading.classList.remove('show');
+                }
+            }
+
+            showError(message) {
+                this.errorMessage.textContent = message;
+                this.errorMessage.style.display = 'block';
+                
+                setTimeout(() => {
+                    this.errorMessage.style.display = 'none';
+                }, 5000);
+            }
+        }
+
+        // Инициализация приложения
+        document.addEventListener('DOMContentLoaded', () => {
+            new ChatApp();
+        });
+    </script>
+</body>
+</html> 
