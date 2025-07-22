@@ -66,8 +66,10 @@ llama-cpp-python-cuBLAS-wheels/
 
 # Large external projects (can be downloaded separately)
 stable-diffusion-webui/
-text-generation-webui/
 telegram_monitor_bot/
+
+# text-generation-webui venv only (keep the project)
+text-generation-webui/venv/
 
 # Python packages and libraries
 **/Lib/site-packages/
