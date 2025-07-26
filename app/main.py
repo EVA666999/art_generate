@@ -153,7 +153,7 @@ except Exception as e:
     logger.error(f"✗ Ошибка подключения роутеров auth/register: {e}")
 
 try:
-    from routers.generation import router as generation_router
+    from app.routers.generation import router as generation_router
     app.include_router(generation_router)
     logger.info("✓ Роутер generation подключен")
 except Exception as e:

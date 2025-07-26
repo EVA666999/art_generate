@@ -52,6 +52,10 @@ class GenerationSettings(BaseModel):
     batch_size: Optional[int] = Field(None, description="Размер батча")
     n_iter: Optional[int] = Field(None, description="Количество итераций")
     clip_skip: Optional[int] = Field(None, description="Clip Skip")
+    use_adetailer: Optional[bool] = Field(None, description="Использовать ADetailer")
+    save_grid: Optional[bool] = Field(None, description="Сохранять сетку изображений")
+    use_vae: Optional[bool] = Field(None, description="Использовать VAE")
+    vae_model: Optional[str] = Field(None, description="Название VAE модели")
     
     def get_negative_prompt(self) -> str:
         """Получает негативный промпт с дефолтными значениями"""

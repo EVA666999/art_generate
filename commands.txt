@@ -1,2 +1,2 @@
-./webui-user.bat
+./webui-user-clean.bat
 ./start_webui_with_api.bat

@@ -116,6 +116,25 @@ class GenerationService:
             request_params.update(user_params)
             request_params["negative_prompt"] = negative_prompt
             
+            # Обработка VAE настроек
+            if settings.use_vae is not None:
+                # Пользователь хочет контролировать VAE
+                if settings.use_vae:
+                    # Включить VAE
+                    vae_model = settings.vae_model or VAE_SETTINGS["model"]
+                    if "override_settings" not in request_params:
+                        request_params["override_settings"] = {}
+                    request_params["override_settings"]["sd_vae"] = vae_model
+                    request_params["override_settings"]["sd_vae_overrides_per_model_preferences"] = True
+                else:
+                    # Отключить VAE
+                    if "override_settings" not in request_params:
+                        request_params["override_settings"] = {}
+                    request_params["override_settings"]["sd_vae"] = None
+                    request_params["override_settings"]["sd_vae_overrides_per_model_preferences"] = False
+            
+
+            
             if not request_params.get("scheduler") or request_params["scheduler"] == "Automatic":
                 request_params["scheduler"] = "Karras"
             

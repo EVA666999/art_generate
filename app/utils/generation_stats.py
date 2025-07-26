@@ -80,7 +80,29 @@ class GenerationStats:
         :param result: результат генерации (info/result)
         :param detailed: расширенный объект (если есть)
         """
-        logger.info(f"[add_generation] Входные параметры: params={params}, execution_time={execution_time}, result={result}, detailed={detailed}")
+        # Логируем только метаданные без base64 изображений
+        logger.info(
+            f"[add_generation] Входные параметры: params={params}, "
+            f"execution_time={execution_time}"
+        )
+        if result:
+            result_summary = {
+                "images_count": len(result.get("images", [])),
+                "info_keys": (
+                    list(result.keys()) if isinstance(result, dict) 
+                    else "not_dict"
+                )
+            }
+            logger.info(f"[add_generation] Результат: {result_summary}")
+        if detailed:
+            detailed_summary = {
+                "keys": (
+                    list(detailed.keys()) if isinstance(detailed, dict) 
+                    else "not_dict"
+                ),
+                "status": detailed.get("status", "unknown")
+            }
+            logger.info(f"[add_generation] Detailed: {detailed_summary}")
         
         # Фильтруем параметры, убирая изображения и большие данные
         filtered_params = self._filter_params(params)

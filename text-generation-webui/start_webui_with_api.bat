@@ -36,7 +36,8 @@ python server.py ^
     --model Llama-3.1-128k-Dark-Planet-Uncensored-8B-Q4_k_s.gguf ^
     --loader llama.cpp ^
     --model-dir models/main_model ^
-    --extensions api
+    --extensions api ^
+    --nowebui
 
 if %ERRORLEVEL% neq 0 (
     echo.

@@ -108,13 +108,12 @@ async def generate_image_in_chat(
     face_refinement_service: FaceRefinementService = Depends(lambda: FaceRefinementService(settings.SD_API_URL))
 ):
     """
-    Генерация изображения для чата.
-    Пользователь отправляет промпт и получает сгенерированное изображение.
+    ИСПРАВЛЕННАЯ: Генерация изображения для чата без дублирования
     """
     try:
-        logger.info(f"Запрос на генерацию изображения: {request.prompt}")
+        logger.info(f"🎯 CHAT: Запрос на генерацию изображения: {request.prompt}")
         
-        # Создаем настройки генерации
+        # Создаем настройки генерации с принудительными параметрами
         generation_settings = GenerationSettings(
             prompt=request.prompt,
             negative_prompt=request.negative_prompt,
@@ -124,17 +123,33 @@ async def generate_image_in_chat(
             width=request.width,
             height=request.height,
             cfg_scale=request.cfg_scale,
-            sampler_name=request.sampler_name
+            sampler_name=request.sampler_name,
+            # КРИТИЧЕСКИ ВАЖНО: Принудительно устанавливаем параметры для одного изображения
+            batch_size=1,
+            n_iter=1,
+            save_grid=False,
+            # ОТКЛЮЧАЕМ ADetailer
+            use_adetailer=False
         )
+        
+        logger.info("🎯 CHAT: Настройки генерации созданы")
         
         # Генерируем изображение
         result = await face_refinement_service.generate_image(generation_settings)
         
-        if not result.image_data or not result.image_data[0]:
+        # НОВОЕ: Проверяем количество полученных изображений
+        if not result.image_data or len(result.image_data) == 0:
             raise HTTPException(status_code=500, detail="Не удалось сгенерировать изображение")
         
-        # Берем первое изображение
-        image_data = result.image_data[0]
+        if len(result.image_data) > 1:
+            logger.warning(f"🔧 CHAT: Получено {len(result.image_data)} изображений, берем только первое")
+            # Берем только первое изображение
+            image_data = result.image_data[0]
+        else:
+            # Берем единственное изображение
+            image_data = result.image_data[0]
+        
+        logger.info("✅ CHAT: Изображение успешно сгенерировано")
         
         # Получаем информацию о генерации
         info_dict = {}
@@ -155,12 +170,13 @@ async def generate_image_in_chat(
                 "X-CFG-Scale": str(info_dict.get("cfg_scale", request.cfg_scale or 6)),
                 "X-Sampler": info_dict.get("sampler_name", request.sampler_name or "DPM++ SDE Karras"),
                 "X-Width": str(info_dict.get("width", request.width or 768)),
-                "X-Height": str(info_dict.get("height", request.height or 768))
+                "X-Height": str(info_dict.get("height", request.height or 768)),
+                "X-Images-Generated": "1"  # НОВОЕ: Указываем количество сгенерированных изображений
             }
         )
         
     except Exception as e:
-        logger.error(f"Ошибка генерации изображения: {str(e)}")
+        logger.error(f"❌ CHAT: Ошибка генерации изображения: {str(e)}")
         raise HTTPException(
             status_code=500,
             detail=f"Ошибка генерации изображения: {str(e)}"
@@ -172,13 +188,12 @@ async def generate_image_base64_in_chat(
     face_refinement_service: FaceRefinementService = Depends(lambda: FaceRefinementService(settings.SD_API_URL))
 ):
     """
-    Генерация изображения для чата с возвратом в base64 формате.
-    Удобно для встраивания в JSON ответы.
+    ИСПРАВЛЕННАЯ: Генерация изображения для чата с возвратом в base64 без дублирования
     """
     try:
-        logger.info(f"Запрос на генерацию изображения (base64): {request.prompt}")
+        logger.info(f"🎯 CHAT: Запрос на генерацию изображения (base64): {request.prompt}")
         
-        # Создаем настройки генерации
+        # Создаем настройки генерации с ПРИНУДИТЕЛЬНЫМ отключением ADetailer
         generation_settings = GenerationSettings(
             prompt=request.prompt,
             negative_prompt=request.negative_prompt,
@@ -188,17 +203,31 @@ async def generate_image_base64_in_chat(
             width=request.width,
             height=request.height,
             cfg_scale=request.cfg_scale,
-            sampler_name=request.sampler_name
+            sampler_name=request.sampler_name,
+            # КРИТИЧЕСКИ ВАЖНО: Параметры для ОДНОГО изображения
+            batch_size=1,
+            n_iter=1,
+            save_grid=False,
+                                # ОТКЛЮЧАЕМ ADETAILER
+                    use_adetailer=False
         )
         
         # Генерируем изображение
         result = await face_refinement_service.generate_image(generation_settings)
         
-        if not result.images or not result.images[0]:
+        # НОВОЕ: Проверяем количество полученных изображений
+        if not result.images or len(result.images) == 0:
             raise HTTPException(status_code=500, detail="Не удалось сгенерировать изображение")
         
-        # Берем первое изображение в base64
-        image_base64 = result.images[0]
+        if len(result.images) > 1:
+            logger.warning(f"🔧 CHAT: Получено {len(result.images)} изображений, берем только первое")
+            # Берем только первое изображение
+            image_base64 = result.images[0]
+        else:
+            # Берем единственное изображение
+            image_base64 = result.images[0]
+        
+        logger.info("✅ CHAT: Изображение (base64) успешно сгенерировано")
         
         # Получаем информацию о генерации
         info_dict = {}
@@ -219,12 +248,13 @@ async def generate_image_base64_in_chat(
                 "cfg_scale": info_dict.get("cfg_scale", request.cfg_scale or 6),
                 "sampler_name": info_dict.get("sampler_name", request.sampler_name or "DPM++ SDE Karras"),
                 "width": info_dict.get("width", request.width or 768),
-                "height": info_dict.get("height", request.height or 768)
+                "height": info_dict.get("height", request.height or 768),
+                "images_generated": 1  # НОВОЕ: Указываем количество сгенерированных изображений
             }
         }
         
     except Exception as e:
-        logger.error(f"Ошибка генерации изображения (base64): {str(e)}")
+        logger.error(f"❌ CHAT: Ошибка генерации изображения (base64): {str(e)}")
         raise HTTPException(
             status_code=500,
             detail=f"Ошибка генерации изображения: {str(e)}"

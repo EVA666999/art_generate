@@ -74,6 +74,8 @@ async def generate_image(settings: GenerationSettings):
         actual_height = info_dict.get("height", settings.height)
 
         logger.info(f"Returning image response, size: {len(image_data)} bytes")
+        logger.info(f"Generated with seed: {actual_seed}, steps: {actual_steps}, cfg: {actual_cfg_scale}")
+        
         headers = {
             "X-Prompt": settings.prompt,
             "X-Negative-Prompt": settings.get_negative_prompt(),
@@ -82,8 +84,10 @@ async def generate_image(settings: GenerationSettings):
             "X-CFG-Scale": str(actual_cfg_scale),
             "X-Sampler": actual_sampler,
             "X-Width": str(actual_width),
-            "X-Height": str(actual_height)
+            "X-Height": str(actual_height),
+            "X-Images-Generated": "1"  # НОВОЕ: Указываем количество изображений
         }
+        
         return StreamingResponse(
             BytesIO(image_data),
             media_type="image/png",

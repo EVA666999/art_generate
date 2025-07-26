@@ -1,69 +1,135 @@
 {
-  "total_generations": 125,
+  "total_generations": 377,
   "total_time": {
-    "formatted": "2:04:45",
-    "total_seconds": 7485.491951465607
+    "formatted": "3:19:30",
+    "total_seconds": 11970.900909662247
   },
   "average_time": {
-    "formatted": "0:00:59",
-    "total_seconds": 59.88393561172485
+    "formatted": "0:00:31",
+    "total_seconds": 31.75305281077519
   },
   "by_sampler": {
     "DPM++ SDE": {
-      "count": 74,
+      "count": 77,
       "total_time": {
-        "formatted": "1:24:35",
-        "total_seconds": 5075.172750711441
+        "formatted": "1:25:44",
+        "total_seconds": 5144.737370729446
       },
       "avg_time": {
-        "formatted": "0:01:08",
-        "total_seconds": 68.58341555015461
+        "formatted": "0:01:06",
+        "total_seconds": 66.81477104843437
       }
     },
     "DPM++ SDE Karras": {
-      "count": 32,
+      "count": 35,
       "total_time": {
-        "formatted": "0:27:57",
-        "total_seconds": 1677.5849483013153
+        "formatted": "0:29:41",
+        "total_seconds": 1781.509873867035
       },
       "avg_time": {
-        "formatted": "0:00:52",
-        "total_seconds": 52.4245296344161
+        "formatted": "0:00:50",
+        "total_seconds": 50.900282110486714
       }
     },
     "DPM++ 2M Karras": {
-      "count": 6,
+      "count": 69,
       "total_time": {
-        "formatted": "0:02:46",
-        "total_seconds": 166.9630069732666
+        "formatted": "0:17:23",
+        "total_seconds": 1043.9667313098907
       },
       "avg_time": {
-        "formatted": "0:00:27",
-        "total_seconds": 27.827167828877766
+        "formatted": "0:00:15",
+        "total_seconds": 15.129952627679575
       }
     },
     "DPM++ 2M": {
-      "count": 13,
+      "count": 185,
       "total_time": {
-        "formatted": "0:09:25",
-        "total_seconds": 565.7712454795837
+        "formatted": "1:02:20",
+        "total_seconds": 3740.050435781479
       },
       "avg_time": {
-        "formatted": "0:00:43",
-        "total_seconds": 43.52086503689106
+        "formatted": "0:00:20",
+        "total_seconds": 20.21648884206205
+      }
+    },
+    "DPM2 a": {
+      "count": 1,
+      "total_time": {
+        "formatted": "0:00:28",
+        "total_seconds": 28.314871788024902
+      },
+      "avg_time": {
+        "formatted": "0:00:28",
+        "total_seconds": 28.314871788024902
+      }
+    },
+    "LMS": {
+      "count": 3,
+      "total_time": {
+        "formatted": "0:00:51",
+        "total_seconds": 51.837024450302124
+      },
+      "avg_time": {
+        "formatted": "0:00:17",
+        "total_seconds": 17.279008150100708
+      }
+    },
+    "DPM fast": {
+      "count": 1,
+      "total_time": {
+        "formatted": "0:00:19",
+        "total_seconds": 19.18562936782837
+      },
+      "avg_time": {
+        "formatted": "0:00:19",
+        "total_seconds": 19.18562936782837
+      }
+    },
+    "DPM adaptive": {
+      "count": 1,
+      "total_time": {
+        "formatted": "0:01:16",
+        "total_seconds": 76.92527866363525
+      },
+      "avg_time": {
+        "formatted": "0:01:16",
+        "total_seconds": 76.92527866363525
+      }
+    },
+    "DDIM": {
+      "count": 2,
+      "total_time": {
+        "formatted": "0:00:34",
+        "total_seconds": 34.89521098136902
+      },
+      "avg_time": {
+        "formatted": "0:00:17",
+        "total_seconds": 17.44760549068451
+      }
+    },
+    "Euler a": {
+      "count": 3,
+      "total_time": {
+        "formatted": "0:00:49",
+        "total_seconds": 49.478482723236084
+      },
+      "avg_time": {
+        "formatted": "0:00:16",
+        "total_seconds": 16.49282757441203
       }
     }
   },
   "by_steps": {
     "35": {
-      "count": 10,
+      "count": 18,
       "total_time": {
-        "formatted": "0:07:01",
-        "total_seconds": 421.20740938186646
+        "formatted": "0:10:26",
+        "total_seconds": 626.6860346794128
       },
       "avg_time": {
-        "formatted": "0:00:42",
-        "total_seconds": 42.12074093818664
+        "formatted": "0:00:34",
+        "total_seconds": 34.815890815522934
       }
     },
     "100": {
@@ -100,25 +166,25 @@
       }
     },
     "20": {
-      "count": 10,
+      "count": 66,
       "total_time": {
-        "formatted": "0:05:02",
-        "total_seconds": 302.34156703948975
+        "formatted": "0:17:09",
+        "total_seconds": 1029.8055231571198
       },
       "avg_time": {
-        "formatted": "0:00:30",
-        "total_seconds": 30.234156703948976
+        "formatted": "0:00:15",
+        "total_seconds": 15.603113987229086
       }
     },
     "30": {
-      "count": 29,
+      "count": 122,
       "total_time": {
-        "formatted": "0:17:53",
-        "total_seconds": 1073.6028213500977
+        "formatted": "0:47:12",
+        "total_seconds": 2832.37060213089
       },
       "avg_time": {
-        "formatted": "0:00:37",
-        "total_seconds": 37.02078694310681
+        "formatted": "0:00:23",
+        "total_seconds": 23.216152476482705
       }
     },
     "70": {
@@ -133,73 +199,359 @@
       }
     },
     "45": {
-      "count": 1,
+      "count": 2,
       "total_time": {
-        "formatted": "0:02:34",
-        "total_seconds": 154.9150447845459
+        "formatted": "0:02:48",
+        "total_seconds": 168.1873300075531
       },
       "avg_time": {
-        "formatted": "0:02:34",
-        "total_seconds": 154.9150447845459
+        "formatted": "0:01:24",
+        "total_seconds": 84.09366500377655
       }
     },
     "40": {
-      "count": 5,
+      "count": 13,
       "total_time": {
-        "formatted": "0:07:07",
-        "total_seconds": 427.064172744751
+        "formatted": "0:09:39",
+        "total_seconds": 579.4809484481812
       },
       "avg_time": {
-        "formatted": "0:01:25",
-        "total_seconds": 85.4128345489502
+        "formatted": "0:00:44",
+        "total_seconds": 44.57545757293701
+      }
+    },
+    "25": {
+      "count": 8,
+      "total_time": {
+        "formatted": "0:00:44",
+        "total_seconds": 44.99247336387634
+      },
+      "avg_time": {
+        "formatted": "0:00:05",
+        "total_seconds": 5.624059170484543
+      }
+    },
+    "50": {
+      "count": 29,
+      "total_time": {
+        "formatted": "0:13:11",
+        "total_seconds": 791.0763838291168
+      },
+      "avg_time": {
+        "formatted": "0:00:27",
+        "total_seconds": 27.278495994107477
+      }
+    },
+    "44": {
+      "count": 2,
+      "total_time": {
+        "formatted": "0:00:48",
+        "total_seconds": 48.58053660392761
+      },
+      "avg_time": {
+        "formatted": "0:00:24",
+        "total_seconds": 24.290268301963806
+      }
+    },
+    "27": {
+      "count": 3,
+      "total_time": {
+        "formatted": "0:00:28",
+        "total_seconds": 28.84451651573181
+      },
+      "avg_time": {
+        "formatted": "0:00:09",
+        "total_seconds": 9.61483883857727
+      }
+    },
+    "41": {
+      "count": 2,
+      "total_time": {
+        "formatted": "0:00:36",
+        "total_seconds": 36.95893669128418
+      },
+      "avg_time": {
+        "formatted": "0:00:18",
+        "total_seconds": 18.47946834564209
+      }
+    },
+    "36": {
+      "count": 3,
+      "total_time": {
+        "formatted": "0:02:18",
+        "total_seconds": 138.5774929523468
+      },
+      "avg_time": {
+        "formatted": "0:00:46",
+        "total_seconds": 46.192497650782265
+      }
+    },
+    "32": {
+      "count": 1,
+      "total_time": {
+        "formatted": "0:00:15",
+        "total_seconds": 15.995287656784058
+      },
+      "avg_time": {
+        "formatted": "0:00:15",
+        "total_seconds": 15.995287656784058
+      }
+    },
+    "38": {
+      "count": 2,
+      "total_time": {
+        "formatted": "0:00:35",
+        "total_seconds": 35.191877603530884
+      },
+      "avg_time": {
+        "formatted": "0:00:17",
+        "total_seconds": 17.595938801765442
+      }
+    },
+    "24": {
+      "count": 6,
+      "total_time": {
+        "formatted": "0:00:33",
+        "total_seconds": 33.33755922317505
+      },
+      "avg_time": {
+        "formatted": "0:00:05",
+        "total_seconds": 5.556259870529175
+      }
+    },
+    "29": {
+      "count": 5,
+      "total_time": {
+        "formatted": "0:00:30",
+        "total_seconds": 30.08989143371582
+      },
+      "avg_time": {
+        "formatted": "0:00:06",
+        "total_seconds": 6.017978286743164
+      }
+    },
+    "23": {
+      "count": 4,
+      "total_time": {
+        "formatted": "0:00:21",
+        "total_seconds": 21.332322597503662
+      },
+      "avg_time": {
+        "formatted": "0:00:05",
+        "total_seconds": 5.3330806493759155
+      }
+    },
+    "21": {
+      "count": 2,
+      "total_time": {
+        "formatted": "0:00:10",
+        "total_seconds": 10.044708251953125
+      },
+      "avg_time": {
+        "formatted": "0:00:05",
+        "total_seconds": 5.0223541259765625
+      }
+    },
+    "22": {
+      "count": 1,
+      "total_time": {
+        "formatted": "0:00:05",
+        "total_seconds": 5.313648700714111
+      },
+      "avg_time": {
+        "formatted": "0:00:05",
+        "total_seconds": 5.313648700714111
+      }
+    },
+    "28": {
+      "count": 2,
+      "total_time": {
+        "formatted": "0:00:11",
+        "total_seconds": 11.52646279335022
+      },
+      "avg_time": {
+        "formatted": "0:00:05",
+        "total_seconds": 5.76323139667511
+      }
+    },
+    "60": {
+      "count": 12,
+      "total_time": {
+        "formatted": "0:06:00",
+        "total_seconds": 360.775559425354
+      },
+      "avg_time": {
+        "formatted": "0:00:30",
+        "total_seconds": 30.064629952112835
+      }
+    },
+    "15": {
+      "count": 4,
+      "total_time": {
+        "formatted": "0:00:15",
+        "total_seconds": 15.371877431869507
+      },
+      "avg_time": {
+        "formatted": "0:00:03",
+        "total_seconds": 3.8429693579673767
       }
     }
   },
   "by_resolution": {
     "512x512": {
-      "count": 60,
+      "count": 263,
       "total_time": {
-        "formatted": "0:44:37",
-        "total_seconds": 2677.546117067337
+        "formatted": "1:30:49",
+        "total_seconds": 5449.508330106735
       },
       "avg_time": {
-        "formatted": "0:00:44",
-        "total_seconds": 44.62576861778895
+        "formatted": "0:00:20",
+        "total_seconds": 20.720563992801274
       }
     },
     "768x768": {
-      "count": 52,
+      "count": 53,
       "total_time": {
-        "formatted": "1:10:42",
-        "total_seconds": 4242.174588918686
+        "formatted": "1:10:59",
+        "total_seconds": 4259.946351766586
       },
       "avg_time": {
-        "formatted": "0:01:21",
-        "total_seconds": 81.58028055612857
+        "formatted": "0:01:20",
+        "total_seconds": 80.37634625974691
       }
     },
     "1024x1024": {
-      "count": 13,
+      "count": 45,
       "total_time": {
-        "formatted": "0:09:25",
-        "total_seconds": 565.7712454795837
+        "formatted": "0:30:43",
+        "total_seconds": 1843.8011448383331
       },
       "avg_time": {
-        "formatted": "0:00:43",
-        "total_seconds": 43.52086503689106
+        "formatted": "0:00:40",
+        "total_seconds": 40.97335877418518
+      }
+    },
+    "512x640": {
+      "count": 1,
+      "total_time": {
+        "formatted": "0:00:28",
+        "total_seconds": 28.314871788024902
+      },
+      "avg_time": {
+        "formatted": "0:00:28",
+        "total_seconds": 28.314871788024902
+      }
+    },
+    "704x576": {
+      "count": 3,
+      "total_time": {
+        "formatted": "0:00:54",
+        "total_seconds": 54.33092641830444
+      },
+      "avg_time": {
+        "formatted": "0:00:18",
+        "total_seconds": 18.110308806101482
+      }
+    },
+    "640x704": {
+      "count": 1,
+      "total_time": {
+        "formatted": "0:00:19",
+        "total_seconds": 19.18562936782837
+      },
+      "avg_time": {
+        "formatted": "0:00:19",
+        "total_seconds": 19.18562936782837
+      }
+    },
+    "640x768": {
+      "count": 1,
+      "total_time": {
+        "formatted": "0:00:31",
+        "total_seconds": 31.64192843437195
+      },
+      "avg_time": {
+        "formatted": "0:00:31",
+        "total_seconds": 31.64192843437195
+      }
+    },
+    "768x640": {
+      "count": 1,
+      "total_time": {
+        "formatted": "0:01:16",
+        "total_seconds": 76.92527866363525
+      },
+      "avg_time": {
+        "formatted": "0:01:16",
+        "total_seconds": 76.92527866363525
+      }
+    },
+    "704x640": {
+      "count": 2,
+      "total_time": {
+        "formatted": "0:00:48",
+        "total_seconds": 48.95811486244202
+      },
+      "avg_time": {
+        "formatted": "0:00:24",
+        "total_seconds": 24.47905743122101
+      }
+    },
+    "576x640": {
+      "count": 1,
+      "total_time": {
+        "formatted": "0:00:17",
+        "total_seconds": 17.77330732345581
+      },
+      "avg_time": {
+        "formatted": "0:00:17",
+        "total_seconds": 17.77330732345581
+      }
+    },
+    "768x512": {
+      "count": 1,
+      "total_time": {
+        "formatted": "0:00:17",
+        "total_seconds": 17.121903657913208
+      },
+      "avg_time": {
+        "formatted": "0:00:17",
+        "total_seconds": 17.121903657913208
+      }
+    },
+    "576x576": {
+      "count": 3,
+      "total_time": {
+        "formatted": "0:00:49",
+        "total_seconds": 49.478482723236084
+      },
+      "avg_time": {
+        "formatted": "0:00:16",
+        "total_seconds": 16.49282757441203
+      }
+    },
+    "640x640": {
+      "count": 2,
+      "total_time": {
+        "formatted": "0:01:13",
+        "total_seconds": 73.91463971138
+      },
+      "avg_time": {
+        "formatted": "0:00:36",
+        "total_seconds": 36.95731985569
       }
     }
   },
   "by_cfg_scale": {
     "8.0": {
-      "count": 7,
+      "count": 17,
       "total_time": {
-        "formatted": "0:04:57",
-        "total_seconds": 297.85298109054565
+        "formatted": "0:09:33",
+        "total_seconds": 573.8206491470337
       },
       "avg_time": {
-        "formatted": "0:00:42",
-        "total_seconds": 42.55042587007795
+        "formatted": "0:00:33",
+        "total_seconds": 33.754155832178455
       }
     },
     "8": {
@@ -225,328 +577,734 @@
       }
     },
     "7.0": {
-      "count": 75,
+      "count": 256,
       "total_time": {
-        "formatted": "1:16:13",
-        "total_seconds": 4573.221574306488
+        "formatted": "2:14:53",
+        "total_seconds": 8093.104863643646
       },
       "avg_time": {
-        "formatted": "0:01:00",
-        "total_seconds": 60.97628765741984
+        "formatted": "0:00:31",
+        "total_seconds": 31.613690873607993
       }
     },
     "6.0": {
-      "count": 11,
+      "count": 15,
       "total_time": {
-        "formatted": "0:15:36",
-        "total_seconds": 936.8324477672577
+        "formatted": "0:15:52",
+        "total_seconds": 952.2043251991272
       },
       "avg_time": {
-        "formatted": "0:01:25",
-        "total_seconds": 85.16658616065979
+        "formatted": "0:01:03",
+        "total_seconds": 63.48028834660848
+      }
+    },
+    "7.5": {
+      "count": 6,
+      "total_time": {
+        "formatted": "0:01:28",
+        "total_seconds": 88.36839556694031
+      },
+      "avg_time": {
+        "formatted": "0:00:14",
+        "total_seconds": 14.728065927823385
+      }
+    },
+    "8.5": {
+      "count": 1,
+      "total_time": {
+        "formatted": "0:00:13",
+        "total_seconds": 13.272285223007202
+      },
+      "avg_time": {
+        "formatted": "0:00:13",
+        "total_seconds": 13.272285223007202
+      }
+    },
+    "6.5": {
+      "count": 1,
+      "total_time": {
+        "formatted": "0:00:10",
+        "total_seconds": 10.076240539550781
+      },
+      "avg_time": {
+        "formatted": "0:00:10",
+        "total_seconds": 10.076240539550781
+      }
+    },
+    "9.0": {
+      "count": 6,
+      "total_time": {
+        "formatted": "0:01:01",
+        "total_seconds": 61.73630690574646
+      },
+      "avg_time": {
+        "formatted": "0:00:10",
+        "total_seconds": 10.289384484291077
+      }
+    },
+    "8.2": {
+      "count": 1,
+      "total_time": {
+        "formatted": "0:00:28",
+        "total_seconds": 28.314871788024902
+      },
+      "avg_time": {
+        "formatted": "0:00:28",
+        "total_seconds": 28.314871788024902
+      }
+    },
+    "6.7": {
+      "count": 1,
+      "total_time": {
+        "formatted": "0:00:20",
+        "total_seconds": 20.26566481590271
+      },
+      "avg_time": {
+        "formatted": "0:00:20",
+        "total_seconds": 20.26566481590271
+      }
+    },
+    "7.9": {
+      "count": 1,
+      "total_time": {
+        "formatted": "0:00:31",
+        "total_seconds": 31.64192843437195
+      },
+      "avg_time": {
+        "formatted": "0:00:31",
+        "total_seconds": 31.64192843437195
+      }
+    },
+    "8.6": {
+      "count": 1,
+      "total_time": {
+        "formatted": "0:01:16",
+        "total_seconds": 76.92527866363525
+      },
+      "avg_time": {
+        "formatted": "0:01:16",
+        "total_seconds": 76.92527866363525
+      }
+    },
+    "7.1": {
+      "count": 1,
+      "total_time": {
+        "formatted": "0:00:15",
+        "total_seconds": 15.995287656784058
+      },
+      "avg_time": {
+        "formatted": "0:00:15",
+        "total_seconds": 15.995287656784058
+      }
+    },
+    "8.8": {
+      "count": 1,
+      "total_time": {
+        "formatted": "0:00:30",
+        "total_seconds": 30.0102858543396
+      },
+      "avg_time": {
+        "formatted": "0:00:30",
+        "total_seconds": 30.0102858543396
+      }
+    },
+    "8.3": {
+      "count": 1,
+      "total_time": {
+        "formatted": "0:00:17",
+        "total_seconds": 17.77330732345581
+      },
+      "avg_time": {
+        "formatted": "0:00:17",
+        "total_seconds": 17.77330732345581
+      }
+    },
+    "8.4": {
+      "count": 1,
+      "total_time": {
+        "formatted": "0:00:18",
+        "total_seconds": 18.947829008102417
+      },
+      "avg_time": {
+        "formatted": "0:00:18",
+        "total_seconds": 18.947829008102417
+      }
+    },
+    "7.7": {
+      "count": 1,
+      "total_time": {
+        "formatted": "0:00:17",
+        "total_seconds": 17.121903657913208
+      },
+      "avg_time": {
+        "formatted": "0:00:17",
+        "total_seconds": 17.121903657913208
+      }
+    },
+    "7.2": {
+      "count": 1,
+      "total_time": {
+        "formatted": "0:00:18",
+        "total_seconds": 18.069973945617676
+      },
+      "avg_time": {
+        "formatted": "0:00:18",
+        "total_seconds": 18.069973945617676
+      }
+    },
+    "3.5": {
+      "count": 2,
+      "total_time": {
+        "formatted": "0:00:37",
+        "total_seconds": 37.92269158363342
+      },
+      "avg_time": {
+        "formatted": "0:00:18",
+        "total_seconds": 18.96134579181671
+      }
+    },
+    "7.960844696430796": {
+      "count": 1,
+      "total_time": {
+        "formatted": "0:00:05",
+        "total_seconds": 5.387264728546143
+      },
+      "avg_time": {
+        "formatted": "0:00:05",
+        "total_seconds": 5.387264728546143
+      }
+    },
+    "7.856383905133482": {
+      "count": 1,
+      "total_time": {
+        "formatted": "0:00:05",
+        "total_seconds": 5.285999536514282
+      },
+      "avg_time": {
+        "formatted": "0:00:05",
+        "total_seconds": 5.285999536514282
+      }
+    },
+    "7.622866865939586": {
+      "count": 1,
+      "total_time": {
+        "formatted": "0:00:06",
+        "total_seconds": 6.303817987442017
+      },
+      "avg_time": {
+        "formatted": "0:00:06",
+        "total_seconds": 6.303817987442017
+      }
+    },
+    "7.87954563100279": {
+      "count": 1,
+      "total_time": {
+        "formatted": "0:00:05",
+        "total_seconds": 5.3307225704193115
+      },
+      "avg_time": {
+        "formatted": "0:00:05",
+        "total_seconds": 5.3307225704193115
+      }
+    },
+    "7.728755109816599": {
+      "count": 1,
+      "total_time": {
+        "formatted": "0:00:05",
+        "total_seconds": 5.450363636016846
+      },
+      "avg_time": {
+        "formatted": "0:00:05",
+        "total_seconds": 5.450363636016846
+      }
+    },
+    "7.1379727730976565": {
+      "count": 1,
+      "total_time": {
+        "formatted": "0:00:05",
+        "total_seconds": 5.075927972793579
+      },
+      "avg_time": {
+        "formatted": "0:00:05",
+        "total_seconds": 5.075927972793579
+      }
+    },
+    "6.204696831707281": {
+      "count": 1,
+      "total_time": {
+        "formatted": "0:00:05",
+        "total_seconds": 5.996100425720215
+      },
+      "avg_time": {
+        "formatted": "0:00:05",
+        "total_seconds": 5.996100425720215
+      }
+    },
+    "6.186306371565097": {
+      "count": 1,
+      "total_time": {
+        "formatted": "0:00:05",
+        "total_seconds": 5.458527088165283
+      },
+      "avg_time": {
+        "formatted": "0:00:05",
+        "total_seconds": 5.458527088165283
+      }
+    },
+    "6.4862682512818175": {
+      "count": 1,
+      "total_time": {
+        "formatted": "0:00:05",
+        "total_seconds": 5.17122483253479
+      },
+      "avg_time": {
+        "formatted": "0:00:05",
+        "total_seconds": 5.17122483253479
+      }
+    },
+    "7.794752716448082": {
+      "count": 1,
+      "total_time": {
+        "formatted": "0:00:04",
+        "total_seconds": 4.825751066207886
+      },
+      "avg_time": {
+        "formatted": "0:00:04",
+        "total_seconds": 4.825751066207886
+      }
+    },
+    "6.498030147102247": {
+      "count": 1,
+      "total_time": {
+        "formatted": "0:00:05",
+        "total_seconds": 5.681098937988281
+      },
+      "avg_time": {
+        "formatted": "0:00:05",
+        "total_seconds": 5.681098937988281
+      }
+    },
+    "7.568427010338446": {
+      "count": 1,
+      "total_time": {
+        "formatted": "0:00:05",
+        "total_seconds": 5.662469863891602
+      },
+      "avg_time": {
+        "formatted": "0:00:05",
+        "total_seconds": 5.662469863891602
+      }
+    },
+    "6.4347194410153765": {
+      "count": 1,
+      "total_time": {
+        "formatted": "0:00:05",
+        "total_seconds": 5.162944555282593
+      },
+      "avg_time": {
+        "formatted": "0:00:05",
+        "total_seconds": 5.162944555282593
+      }
+    },
+    "6.182409618009315": {
+      "count": 1,
+      "total_time": {
+        "formatted": "0:00:06",
+        "total_seconds": 6.3346381187438965
+      },
+      "avg_time": {
+        "formatted": "0:00:06",
+        "total_seconds": 6.3346381187438965
+      }
+    },
+    "6.837552747993106": {
+      "count": 1,
+      "total_time": {
+        "formatted": "0:00:05",
+        "total_seconds": 5.855515241622925
+      },
+      "avg_time": {
+        "formatted": "0:00:05",
+        "total_seconds": 5.855515241622925
+      }
+    },
+    "7.695122018175914": {
+      "count": 1,
+      "total_time": {
+        "formatted": "0:00:05",
+        "total_seconds": 5.124697208404541
+      },
+      "avg_time": {
+        "formatted": "0:00:05",
+        "total_seconds": 5.124697208404541
+      }
+    },
+    "6.028566310828114": {
+      "count": 1,
+      "total_time": {
+        "formatted": "0:00:05",
+        "total_seconds": 5.685488939285278
+      },
+      "avg_time": {
+        "formatted": "0:00:05",
+        "total_seconds": 5.685488939285278
+      }
+    },
+    "7.436863009784084": {
+      "count": 1,
+      "total_time": {
+        "formatted": "0:00:05",
+        "total_seconds": 5.87195611000061
+      },
+      "avg_time": {
+        "formatted": "0:00:05",
+        "total_seconds": 5.87195611000061
+      }
+    },
+    "7.340822301946662": {
+      "count": 1,
+      "total_time": {
+        "formatted": "0:00:05",
+        "total_seconds": 5.313648700714111
+      },
+      "avg_time": {
+        "formatted": "0:00:05",
+        "total_seconds": 5.313648700714111
+      }
+    },
+    "6.798366574066897": {
+      "count": 1,
+      "total_time": {
+        "formatted": "0:00:06",
+        "total_seconds": 6.676708698272705
+      },
+      "avg_time": {
+        "formatted": "0:00:06",
+        "total_seconds": 6.676708698272705
+      }
+    },
+    "6.208805972490625": {
+      "count": 1,
+      "total_time": {
+        "formatted": "0:00:05",
+        "total_seconds": 5.733859300613403
+      },
+      "avg_time": {
+        "formatted": "0:00:05",
+        "total_seconds": 5.733859300613403
+      }
+    },
+    "7.473833793133221": {
+      "count": 1,
+      "total_time": {
+        "formatted": "0:00:06",
+        "total_seconds": 6.027663707733154
+      },
+      "avg_time": {
+        "formatted": "0:00:06",
+        "total_seconds": 6.027663707733154
+      }
+    },
+    "7.860818982094688": {
+      "count": 1,
+      "total_time": {
+        "formatted": "0:00:06",
+        "total_seconds": 6.000138759613037
+      },
+      "avg_time": {
+        "formatted": "0:00:06",
+        "total_seconds": 6.000138759613037
+      }
+    },
+    "6.232991514704045": {
+      "count": 1,
+      "total_time": {
+        "formatted": "0:00:05",
+        "total_seconds": 5.743791103363037
+      },
+      "avg_time": {
+        "formatted": "0:00:05",
+        "total_seconds": 5.743791103363037
+      }
+    },
+    "7.472108392809289": {
+      "count": 1,
+      "total_time": {
+        "formatted": "0:00:05",
+        "total_seconds": 5.890353202819824
+      },
+      "avg_time": {
+        "formatted": "0:00:05",
+        "total_seconds": 5.890353202819824
+      }
+    },
+    "7.633266026803058": {
+      "count": 1,
+      "total_time": {
+        "formatted": "0:00:04",
+        "total_seconds": 4.719443082809448
+      },
+      "avg_time": {
+        "formatted": "0:00:04",
+        "total_seconds": 4.719443082809448
+      }
+    },
+    "7.22673180372602": {
+      "count": 1,
+      "total_time": {
+        "formatted": "0:00:04",
+        "total_seconds": 4.881763696670532
+      },
+      "avg_time": {
+        "formatted": "0:00:04",
+        "total_seconds": 4.881763696670532
+      }
+    },
+    "7.248790164513595": {
+      "count": 1,
+      "total_time": {
+        "formatted": "0:00:05",
+        "total_seconds": 5.782671689987183
+      },
+      "avg_time": {
+        "formatted": "0:00:05",
+        "total_seconds": 5.782671689987183
+      }
+    },
+    "7.531621236294423": {
+      "count": 1,
+      "total_time": {
+        "formatted": "0:00:05",
+        "total_seconds": 5.135397672653198
+      },
+      "avg_time": {
+        "formatted": "0:00:05",
+        "total_seconds": 5.135397672653198
+      }
+    },
+    "7.0074779148188755": {
+      "count": 1,
+      "total_time": {
+        "formatted": "0:00:05",
+        "total_seconds": 5.340800046920776
+      },
+      "avg_time": {
+        "formatted": "0:00:05",
+        "total_seconds": 5.340800046920776
+      }
+    },
+    "5.0": {
+      "count": 1,
+      "total_time": {
+        "formatted": "0:00:20",
+        "total_seconds": 20.833123922348022
+      },
+      "avg_time": {
+        "formatted": "0:00:20",
+        "total_seconds": 20.833123922348022
       }
     }
   },
   "recent_generations": [
     {
-      "timestamp": "2025-07-13T18:38:04.875086",
-      "time": "67.9s",
-      "prompt": "beautiful woman in red dress, full body, photorealistic, hyperrealistic, masterpiece, best quality, ...",
-      "steps": 10,
-      "sampler": "DPM++ SDE",
-      "resolution": "768x768",
+      "timestamp": "2025-07-25T22:49:49.538390",
+      "time": "27.0s",
+      "prompt": "girl with big tits and big ass in ripped shorts looks at camera and touches her breasts, RAW photo, ...",
+      "steps": 50,
+      "sampler": "DPM++ 2M",
+      "resolution": "512x512",
       "cfg_scale": 7.0,
-      "service": "FaceRefinementService",
-      "adetailer": {
-        "enabled": true,
-        "model": "face_yolov8n.pt",
-        "steps": 101
-      }
+      "service": "FaceRefinementService"
     },
     {
-      "timestamp": "2025-07-13T18:39:08.018521",
-      "time": "126.9s",
+      "timestamp": "2025-07-25T22:51:07.312434",
+      "time": "26.5s",
+      "prompt": "girl with big tits and big ass in ripped shorts looks at camera and touches her breasts, RAW photo, ...",
+      "steps": 50,
+      "sampler": "DPM++ 2M",
+      "resolution": "512x512",
+      "cfg_scale": 7.0,
+      "service": "FaceRefinementService"
+    },
+    {
+      "timestamp": "2025-07-25T22:53:20.822863",
+      "time": "31.6s",
+      "prompt": "girl with big tits and big ass in ripped shorts looks at camera and touches her breasts, RAW photo, ...",
+      "steps": 50,
+      "sampler": "DPM++ 2M",
+      "resolution": "512x512",
+      "cfg_scale": 7.0,
+      "service": "FaceRefinementService"
+    },
+    {
+      "timestamp": "2025-07-25T22:54:25.417885",
+      "time": "33.8s",
+      "prompt": "girl with big tits and big ass in ripped shorts looks at camera and touches her breasts, RAW photo, ...",
+      "steps": 50,
+      "sampler": "DPM++ 2M",
+      "resolution": "512x512",
+      "cfg_scale": 7.0,
+      "service": "FaceRefinementService"
+    },
+    {
+      "timestamp": "2025-07-25T22:55:23.020604",
+      "time": "27.7s",
+      "prompt": "girl with big tits and big ass in ripped shorts looks at camera and touches her breasts, RAW photo, ...",
+      "steps": 50,
+      "sampler": "DPM++ 2M",
+      "resolution": "512x512",
+      "cfg_scale": 7.0,
+      "service": "FaceRefinementService"
+    },
+    {
+      "timestamp": "2025-07-25T22:57:09.150987",
+      "time": "39.4s",
+      "prompt": "girl with big tits and big ass in ripped shorts looks at camera and touches her breasts, RAW photo, ...",
+      "steps": 50,
+      "sampler": "DPM++ 2M",
+      "resolution": "512x512",
+      "cfg_scale": 7.0,
+      "service": "FaceRefinementService"
+    },
+    {
+      "timestamp": "2025-07-25T22:58:26.114906",
+      "time": "27.4s",
+      "prompt": "girl with big tits and big ass in ripped shorts looks at camera and touches her breasts, RAW photo, ...",
+      "steps": 50,
+      "sampler": "DPM++ 2M",
+      "resolution": "512x512",
+      "cfg_scale": 7.0,
+      "service": "FaceRefinementService"
+    },
+    {
+      "timestamp": "2025-07-25T23:02:24.322339",
+      "time": "31.9s",
+      "prompt": "girl with big tits and big ass in ripped shorts looks at camera and touches her breasts, RAW photo, ...",
+      "steps": 50,
+      "sampler": "DPM++ 2M",
+      "resolution": "512x512",
+      "cfg_scale": 7.0,
+      "service": "FaceRefinementService"
+    },
+    {
+      "timestamp": "2025-07-25T23:08:09.744715",
+      "time": "27.0s",
+      "prompt": "girl with big tits and big ass in ripped shorts looks at camera and touches her breasts, RAW photo, ...",
+      "steps": 50,
+      "sampler": "DPM++ 2M",
+      "resolution": "512x512",
+      "cfg_scale": 7.0,
+      "service": "FaceRefinementService"
+    },
+    {
+      "timestamp": "2025-07-25T23:10:24.119189",
+      "time": "32.3s",
+      "prompt": "girl with big tits and big ass in ripped shorts looks at camera and touches her breasts, RAW photo, ...",
+      "steps": 50,
+      "sampler": "DPM++ 2M",
+      "resolution": "512x512",
+      "cfg_scale": 7.0,
+      "service": "FaceRefinementService"
+    },
+    {
+      "timestamp": "2025-07-25T23:13:02.089519",
+      "time": "34.0s",
+      "prompt": "girl with big tits and big ass in ripped shorts looks at camera and touches her breasts, RAW photo, ...",
+      "steps": 50,
+      "sampler": "DPM++ 2M",
+      "resolution": "512x512",
+      "cfg_scale": 7.0,
+      "service": "FaceRefinementService"
+    },
+    {
+      "timestamp": "2025-07-25T23:15:31.167441",
+      "time": "40.2s",
+      "prompt": "beautiful woman portrait, close up face, detailed eyes, high quality, masterpiece, RAW photo, 8k uhd...",
+      "steps": 50,
+      "sampler": "DPM++ 2M",
+      "resolution": "512x512",
+      "cfg_scale": 7.0,
+      "service": "FaceRefinementService"
+    },
+    {
+      "timestamp": "2025-07-25T23:20:13.695895",
+      "time": "38.4s",
+      "prompt": "beautiful woman portrait, close up face, detailed eyes, high quality, RAW photo, 8k uhd, dslr, soft ...",
+      "steps": 50,
+      "sampler": "DPM++ 2M",
+      "resolution": "512x512",
+      "cfg_scale": 7.0,
+      "service": "FaceRefinementService"
+    },
+    {
+      "timestamp": "2025-07-25T23:27:13.558643",
+      "time": "45.1s",
+      "prompt": "girl with big tits and big ass in ripped shorts looks at camera and touches her breasts, RAW photo, ...",
+      "steps": 60,
+      "sampler": "DPM++ 2M",
+      "resolution": "512x512",
+      "cfg_scale": 7.0,
+      "service": "FaceRefinementService"
+    },
+    {
+      "timestamp": "2025-07-25T23:34:39.992974",
+      "time": "44.6s",
+      "prompt": "girl with big tits and big ass in ripped shorts looks at camera and touches her breasts, RAW photo, ...",
+      "steps": 60,
+      "sampler": "DPM++ 2M",
+      "resolution": "512x512",
+      "cfg_scale": 7.0,
+      "service": "FaceRefinementService"
+    },
+    {
+      "timestamp": "2025-07-25T23:35:42.825493",
+      "time": "47.3s",
+      "prompt": "girl with big tits and big ass in ripped shorts looks at camera and touches her breasts, RAW photo, ...",
+      "steps": 60,
+      "sampler": "DPM++ 2M",
+      "resolution": "512x512",
+      "cfg_scale": 7.0,
+      "service": "FaceRefinementService"
+    },
+    {
+      "timestamp": "2025-07-25T23:40:03.526615",
+      "time": "42.5s",
       "prompt": "girl with big tits and big ass in ripped shorts looks at camera and touches her breasts, photorealis...",
-      "steps": 10,
-      "sampler": "DPM++ SDE",
-      "resolution": "768x768",
+      "steps": 60,
+      "sampler": "DPM++ 2M",
+      "resolution": "512x512",
       "cfg_scale": 7.0,
-      "service": "FaceRefinementService",
-      "adetailer": {
-        "enabled": true,
-        "model": "face_yolov8n.pt",
-        "steps": 101
-      }
+      "service": "FaceRefinementService"
     },
     {
-      "timestamp": "2025-07-13T18:44:22.684530",
-      "time": "18.8s",
-      "prompt": "beautiful woman in red dress, full body, photorealistic, hyperrealistic, masterpiece, best quality, ...",
-      "steps": 10,
-      "sampler": "DPM++ SDE",
-      "resolution": "768x768",
-      "cfg_scale": 7.0,
-      "service": "FaceRefinementService",
-      "adetailer": {
-        "enabled": true,
-        "model": "face_yolov8n.pt",
-        "steps": 101
-      }
-    },
-    {
-      "timestamp": "2025-07-13T18:44:45.542987",
-      "time": "26.1s",
+      "timestamp": "2025-07-25T23:41:30.671692",
+      "time": "41.0s",
       "prompt": "girl with big tits and big ass in ripped shorts looks at camera and touches her breasts, photorealis...",
-      "steps": 10,
-      "sampler": "DPM++ SDE",
-      "resolution": "768x768",
+      "steps": 60,
+      "sampler": "DPM++ 2M",
+      "resolution": "512x512",
       "cfg_scale": 7.0,
-      "service": "FaceRefinementService",
-      "adetailer": {
-        "enabled": true,
-        "model": "face_yolov8n.pt",
-        "steps": 101
-      }
+      "service": "FaceRefinementService"
     },
     {
-      "timestamp": "2025-07-13T18:45:16.407882",
-      "time": "15.9s",
+      "timestamp": "2025-07-25T23:43:05.729069",
+      "time": "50.2s",
+      "prompt": "beautiful woman portrait, close up face, detailed eyes, high quality, UltraRealPhoto style, photorea...",
+      "steps": 60,
+      "sampler": "DPM++ 2M",
+      "resolution": "512x512",
+      "cfg_scale": 7.0,
+      "service": "FaceRefinementService"
+    },
+    {
+      "timestamp": "2025-07-25T23:44:42.246752",
+      "time": "42.3s",
       "prompt": "girl with big tits and big ass in ripped shorts looks at camera and touches her breasts, photorealis...",
-      "steps": 10,
-      "sampler": "DPM++ SDE",
-      "resolution": "768x768",
-      "cfg_scale": 7.0,
-      "service": "FaceRefinementService",
-      "adetailer": {
-        "enabled": true,
-        "model": "face_yolov8n.pt",
-        "steps": 101
-      }
-    },
-    {
-      "timestamp": "2025-07-13T18:45:36.386803",
-      "time": "33.5s",
-      "prompt": "beautiful woman in red dress, full body, photorealistic, hyperrealistic, masterpiece, best quality, ...",
-      "steps": 10,
-      "sampler": "DPM++ SDE",
-      "resolution": "768x768",
-      "cfg_scale": 7.0,
-      "service": "FaceRefinementService",
-      "adetailer": {
-        "enabled": true,
-        "model": "face_yolov8n.pt",
-        "steps": 101
-      }
-    },
-    {
-      "timestamp": "2025-07-13T18:45:56.830383",
-      "time": "26.6s",
-      "prompt": "girl with big tits and big ass in ripped shorts looks at camera and touches her breasts, photorealis...",
-      "steps": 10,
-      "sampler": "DPM++ SDE",
-      "resolution": "768x768",
-      "cfg_scale": 7.0,
-      "service": "FaceRefinementService",
-      "adetailer": {
-        "enabled": true,
-        "model": "face_yolov8n.pt",
-        "steps": 101
-      }
-    },
-    {
-      "timestamp": "2025-07-13T18:55:37.081152",
-      "time": "32.6s",
-      "prompt": "beautiful woman in red dress, full body, photorealistic, hyperrealistic, masterpiece, best quality, ...",
-      "steps": 30,
+      "steps": 60,
       "sampler": "DPM++ 2M",
-      "resolution": "1024x1024",
+      "resolution": "512x512",
       "cfg_scale": 7.0,
-      "service": "FaceRefinementService",
-      "adetailer": {
-        "enabled": true,
-        "model": "face_yolov8n.pt",
-        "steps": 101
-      }
-    },
-    {
-      "timestamp": "2025-07-13T19:02:36.088365",
-      "time": "31.4s",
-      "prompt": "beautiful woman in red dress, full body, photorealistic, hyperrealistic, masterpiece, best quality, ...",
-      "steps": 30,
-      "sampler": "DPM++ 2M",
-      "resolution": "1024x1024",
-      "cfg_scale": 7.0,
-      "service": "FaceRefinementService",
-      "adetailer": {
-        "enabled": true,
-        "model": "face_yolov8n.pt",
-        "steps": 101
-      }
-    },
-    {
-      "timestamp": "2025-07-13T19:03:07.452233",
-      "time": "56.7s",
-      "prompt": "girl with big tits and big ass in ripped shorts looks at camera and touches her breasts, photorealis...",
-      "steps": 30,
-      "sampler": "DPM++ 2M",
-      "resolution": "1024x1024",
-      "cfg_scale": 7.0,
-      "service": "FaceRefinementService",
-      "adetailer": {
-        "enabled": true,
-        "model": "face_yolov8n.pt",
-        "steps": 101
-      }
-    },
-    {
-      "timestamp": "2025-07-13T19:10:59.774948",
-      "time": "31.5s",
-      "prompt": "girl with big tits and big ass in ripped shorts looks at camera and touches her breasts, photorealis...",
-      "steps": 30,
-      "sampler": "DPM++ 2M",
-      "resolution": "1024x1024",
-      "cfg_scale": 7.0,
-      "service": "FaceRefinementService",
-      "adetailer": {
-        "enabled": true,
-        "model": "face_yolov8n.pt",
-        "steps": 101
-      }
-    },
-    {
-      "timestamp": "2025-07-13T19:11:30.840717",
-      "time": "57.4s",
-      "prompt": "beautiful woman in red dress, full body, photorealistic, hyperrealistic, masterpiece, best quality, ...",
-      "steps": 30,
-      "sampler": "DPM++ 2M",
-      "resolution": "1024x1024",
-      "cfg_scale": 7.0,
-      "service": "FaceRefinementService",
-      "adetailer": {
-        "enabled": true,
-        "model": "face_yolov8n.pt",
-        "steps": 101
-      }
-    },
-    {
-      "timestamp": "2025-07-13T19:13:51.151915",
-      "time": "31.2s",
-      "prompt": "beautiful woman in red dress, full body, photorealistic, hyperrealistic, masterpiece, best quality, ...",
-      "steps": 30,
-      "sampler": "DPM++ 2M",
-      "resolution": "1024x1024",
-      "cfg_scale": 7.0,
-      "service": "FaceRefinementService",
-      "adetailer": {
-        "enabled": true,
-        "model": "face_yolov8n.pt",
-        "steps": 101
-      }
-    },
-    {
-      "timestamp": "2025-07-13T19:14:25.458414",
-      "time": "63.2s",
-      "prompt": "girl with big tits and big ass in ripped shorts looks at camera and touches her breasts, photorealis...",
-      "steps": 30,
-      "sampler": "DPM++ 2M",
-      "resolution": "1024x1024",
-      "cfg_scale": 7.0,
-      "service": "FaceRefinementService",
-      "adetailer": {
-        "enabled": true,
-        "model": "face_yolov8n.pt",
-        "steps": 101
-      }
-    },
-    {
-      "timestamp": "2025-07-13T19:15:15.654198",
-      "time": "29.9s",
-      "prompt": "girl with big tits and big ass in ripped shorts looks at camera and touches her breasts, photorealis...",
-      "steps": 30,
-      "sampler": "DPM++ 2M",
-      "resolution": "1024x1024",
-      "cfg_scale": 7.0,
-      "service": "FaceRefinementService",
-      "adetailer": {
-        "enabled": true,
-        "model": "face_yolov8n.pt",
-        "steps": 101
-      }
-    },
-    {
-      "timestamp": "2025-07-22T17:59:47.565488",
-      "time": "30.6s",
-      "prompt": "a beautiful babe with a big ass touches her ass with her right hand and slowly sticks her finger in ...",
-      "steps": 30,
-      "sampler": "DPM++ 2M",
-      "resolution": "1024x1024",
-      "cfg_scale": 7.0,
-      "service": "FaceRefinementService",
-      "adetailer": {
-        "enabled": true,
-        "model": "face_yolov8n.pt",
-        "steps": 101
-      }
-    },
-    {
-      "timestamp": "2025-07-22T18:18:42.430224",
-      "time": "30.8s",
-      "prompt": "ф, photorealistic, hyperrealistic, masterpiece, best quality, 8K, high resolution, DSLR photo, full ...",
-      "steps": 30,
-      "sampler": "DPM++ 2M",
-      "resolution": "1024x1024",
-      "cfg_scale": 7.0,
-      "service": "FaceRefinementService",
-      "adetailer": {
-        "enabled": true,
-        "model": "face_yolov8n.pt",
-        "steps": 101
-      }
-    },
-    {
-      "timestamp": "2025-07-22T18:23:40.922193",
-      "time": "35.3s",
-      "prompt": "girl with big tits and big ass in ripped shorts looks at camera and touches her breasts, photorealis...",
-      "steps": 30,
-      "sampler": "DPM++ 2M",
-      "resolution": "1024x1024",
-      "cfg_scale": 7.0,
-      "service": "FaceRefinementService",
-      "adetailer": {
-        "enabled": true,
-        "model": "face_yolov8n.pt",
-        "steps": 101
-      }
-    },
-    {
-      "timestamp": "2025-07-22T18:24:23.061911",
-      "time": "32.7s",
-      "prompt": "girl with big tits and big ass in ripped shorts looks at camera and touches her breasts, photorealis...",
-      "steps": 30,
-      "sampler": "DPM++ 2M",
-      "resolution": "1024x1024",
-      "cfg_scale": 7.0,
-      "service": "FaceRefinementService",
-      "adetailer": {
-        "enabled": true,
-        "model": "face_yolov8n.pt",
-        "steps": 101
-      }
-    },
-    {
-      "timestamp": "2025-07-22T18:24:55.402869",
-      "time": "102.5s",
-      "prompt": "girl with big tits and big ass in ripped shorts looks at camera and touches her breasts, photorealis...",
-      "steps": 30,
-      "sampler": "DPM++ 2M",
-      "resolution": "1024x1024",
-      "cfg_scale": 7.0,
-      "service": "FaceRefinementService",
-      "adetailer": {
-        "enabled": true,
-        "model": "face_yolov8n.pt",
-        "steps": 101
-      }
+      "service": "FaceRefinementService"
     }
   ]
 }
