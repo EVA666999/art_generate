@@ -36,73 +36,26 @@ from fastapi.responses import JSONResponse, FileResponse, RedirectResponse
 from fastapi.exceptions import RequestValidationError
 import uvicorn
 from loguru import logger
-from app.database.db import async_session_maker
-from app.chat_bot.create.character_service import character_service
-
 # Настраиваем логирование
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# text-generation-webui теперь запускается отдельно
+
 
 async def sync_characters_to_db():
-    """Добавляет новых персонажей из character_service в БД, если их нет."""
-    from app.chat_bot.models.models import CharacterDB
-    from sqlalchemy import select
-    
-    logger.info(f"🔄 Начинаем синхронизацию {len(character_service.characters)} персонажей...")
-    
-    async with async_session_maker() as db:
-        logger.info("✅ Подключение к БД установлено")
-        
-        for char_name, char in character_service.characters.items():
-            logger.info(f"🔍 Проверяем персонажа: {char_name}")
-            
-            try:
-                result = await db.execute(select(CharacterDB).where(CharacterDB.name == char.name))
-                db_char = result.scalar_one_or_none()
-                
-                if not db_char:
-                    logger.info(f"➕ Добавляем персонажа в БД: {char.name}")
-                    await character_service.add_to_db(char, db)
-                    logger.info(f"✅ Персонаж {char.name} успешно добавлен в БД")
-                else:
-                    logger.info(f"ℹ️ Персонаж {char.name} уже есть в БД (ID: {db_char.id})")
-                    
-            except Exception as e:
-                logger.error(f"❌ Ошибка при обработке персонажа {char_name}: {e}")
-                logger.error(f"Тип ошибки: {type(e).__name__}")
-                import traceback
-                logger.error(f"Traceback: {traceback.format_exc()}")
-        
-        logger.info("✅ Синхронизация персонажей завершена")
+    """Синхронизация персонажей теперь не нужна - используем character_importer."""
+    logger.info("ℹ️ Синхронизация персонажей отключена - используйте character_importer")
+    logger.info("📝 Для обновления персонажей используйте: python update_character.py")
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Управление жизненным циклом приложения"""
     logger.info("🚀 Запуск приложения...")
-    logger.info("📋 Проверяем доступность character_service...")
     
-    try:
-        logger.info(f"✅ character_service доступен, персонажей: {len(character_service.characters)}")
-        for char_name in character_service.characters.keys():
-            logger.info(f"   - {char_name}")
-    except Exception as e:
-        logger.error(f"❌ Ошибка при проверке character_service: {e}")
+
     
-    # text-generation-webui запускается отдельно
-    logger.info("ℹ️ text-generation-webui должен быть запущен отдельно")
-    
-    # Синхронизируем персонажей
-    logger.info("🔄 Начинаем синхронизацию персонажей...")
-    try:
-        await sync_characters_to_db()
-        logger.info("✅ Синхронизация персонажей завершена успешно")
-    except Exception as e:
-        logger.error(f"❌ Ошибка при синхронизации персонажей: {e}")
-        logger.error(f"Тип ошибки: {type(e).__name__}")
-        import traceback
-        logger.error(f"Traceback: {traceback.format_exc()}")
+    # Синхронизация персонажей отключена - используем character_importer
+    logger.info("ℹ️ Синхронизация персонажей отключена - используйте character_importer")
     
     logger.info("🎉 Приложение готово к работе!")
     yield
@@ -122,17 +75,7 @@ app = FastAPI(
     openapi_url="/openapi.json"
 )
 
-@app.on_event("startup")
-async def startup_event():
-    """Дополнительное событие запуска для синхронизации персонажей."""
-    logger.info("🔄 Событие startup: начинаем синхронизацию персонажей...")
-    try:
-        await sync_characters_to_db()
-        logger.info("✅ Событие startup: синхронизация персонажей завершена")
-    except Exception as e:
-        logger.error(f"❌ Событие startup: ошибка синхронизации персонажей: {e}")
-        import traceback
-        logger.error(f"Traceback: {traceback.format_exc()}")
+# Событие startup удалено - синхронизация персонажей отключена
 
 # Настройка CORS
 app.add_middleware(
@@ -163,9 +106,22 @@ except Exception as e:
     logger.error(f"Traceback: {traceback.format_exc()}")
 
 try:
-    from chat_bot.api import chat_router, character_router
+    logger.info("🔄 Импортируем chat_router...")
+    from app.chat_bot.api.chat_endpoints import router as chat_router
+    logger.info("✅ chat_router импортирован успешно")
+    
+    logger.info("🔄 Импортируем character_router...")
+    from app.chat_bot.api.character_endpoints import router as character_router
+    logger.info("✅ character_router импортирован успешно")
+    
+    logger.info("🔄 Подключаем chat_router...")
     app.include_router(chat_router)
+    logger.info("✅ chat_router подключен")
+    
+    logger.info("🔄 Подключаем character_router...")
     app.include_router(character_router)
+    logger.info("✅ character_router подключен")
+    
     logger.info("✓ Роутеры chat и character подключены")
 except Exception as e:
     logger.error(f"✗ Ошибка подключения роутеров chat/character: {e}")
@@ -228,16 +184,97 @@ async def chat_page():
 
 @app.get("/health")
 async def health():
-    return {"status": "healthy", "timestamp": datetime.now().isoformat()}
+    """Проверка здоровья основного приложения."""
+    try:
+        # Общий статус приложения
+        app_status = {
+            "app": "Stable Diffusion API",
+            "status": "healthy",
+            "timestamp": datetime.now().isoformat(),
+            "version": "1.0.0",
+            "services": {}
+        }
+        
+        return app_status
+        
+    except Exception as e:
+        logger.error(f"Ошибка проверки здоровья приложения: {e}")
+        return {
+            "app": "Stable Diffusion API",
+            "status": "error",
+            "error": str(e),
+            "timestamp": datetime.now().isoformat()
+        }
+
+@app.get("/api/v1/characters/")
+async def fallback_characters():
+    """Fallback endpoint для персонажей если основной API недоступен."""
+    try:
+        from app.chat_bot.utils.character_importer import character_importer
+        from app.database.db import async_session_maker
+        from app.chat_bot.models.models import CharacterDB
+        from sqlalchemy import select
+        
+        async with async_session_maker() as db:
+            result = await db.execute(
+                select(CharacterDB).order_by(CharacterDB.name)
+            )
+            characters = result.scalars().all()
+            
+            # Преобразуем в формат, ожидаемый фронтендом (новая схема Alpaca)
+            character_list = []
+            for char in characters:
+                character_list.append({
+                    "id": char.id,
+                    "name": char.name,
+                    "instructions": char.instructions,
+                    "system_prompt": char.system_prompt,
+                    "response_format": char.response_format,
+                    "character_type": getattr(char, 'character_type', 'general'),
+                    "rating": getattr(char, 'rating', 'general'),
+                    "language": getattr(char, 'language', 'en'),
+                    "version": getattr(char, 'version', '1.0')
+                })
+            
+            logger.info(f"Загружено персонажей: {len(character_list)}")
+            return character_list
+    except Exception as e:
+        logger.error(f"Ошибка загрузки персонажей: {e}")
+        # Возвращаем пустой список вместо ошибки
+        return []
 
 @app.get("/api/characters/")
 async def legacy_characters_redirect(request: Request):
     """Legacy endpoint для совместимости с фронтендом."""
     try:
-        from app.chat_bot.create.character_service import character_service
-        characters = character_service.list_characters()
-        logger.info(f"Загружено персонажей: {len(characters)}")
-        return characters
+        from app.chat_bot.utils.character_importer import character_importer
+        from app.database.db import async_session_maker
+        from app.chat_bot.models.models import CharacterDB
+        from sqlalchemy import select
+        
+        async with async_session_maker() as db:
+            result = await db.execute(
+                select(CharacterDB).order_by(CharacterDB.name)
+            )
+            characters = result.scalars().all()
+            
+            # Преобразуем в формат, ожидаемый фронтендом (новая схема Alpaca)
+            character_list = []
+            for char in characters:
+                character_list.append({
+                    "id": char.id,
+                    "name": char.name,
+                    "instructions": char.instructions,
+                    "system_prompt": char.system_prompt,
+                    "response_format": char.response_format,
+                    "character_type": getattr(char, 'character_type', 'general'),
+                    "rating": getattr(char, 'rating', 'general'),
+                    "language": getattr(char, 'language', 'en'),
+                    "version": getattr(char, 'version', '1.0')
+                })
+            
+            logger.info(f"Загружено персонажей: {len(character_list)}")
+            return character_list
     except Exception as e:
         logger.error(f"Ошибка загрузки персонажей: {e}")
         return []

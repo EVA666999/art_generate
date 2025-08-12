@@ -1,51 +1,56 @@
 @echo off
 chcp 65001 >nul
 echo ========================================
-echo   Text Generation WebUI Launcher (Fixed)
+echo   Text Generation WebUI - MythoMax L2 13B
 echo ========================================
 echo.
 
 cd /D "%~dp0"
 
-echo 📁 Рабочая директория: %CD%
-echo 🤖 Модель: Llama-3.1-128k-Dark-Planet-Uncensored-8B-Q4_k_s.gguf
-echo 🔌 API порт: 5000
-echo 🌐 Web порт: 7861
+echo Working directory: %CD%
+echo Model: Gryphe-MythoMax-L2-13b.Q4_K_S.gguf
+echo API port: 5000
+echo Web port: 7861
+echo GPU: Full model loading (40 layers)
 echo.
 
-REM Проверяем наличие модели
-if not exist "models\main_model\Llama-3.1-128k-Dark-Planet-Uncensored-8B-Q4_k_s.gguf" (
-    echo ❌ Ошибка: Модель не найдена!
-    echo 📍 Ожидаемый путь: models\main_model\Llama-3.1-128k-Dark-Planet-Uncensored-8B-Q4_k_s.gguf
+REM Check if model exists
+if not exist "models\main_models\Gryphe-MythoMax-L2-13b.Q4_K_S.gguf" (
+    echo ERROR: MythoMax model not found!
+    echo Expected path: models\main_models\Gryphe-MythoMax-L2-13b.Q4_K_S.gguf
     pause
     exit /b 1
 )
 
-echo ✅ Модель найдена
+echo MythoMax model found
 echo.
 
-echo 🚀 Запускаем text-generation-webui...
+echo Starting text-generation-webui with MythoMax L2 13B (Full GPU mode)...
 echo.
 
-REM Запускаем с API и веб-интерфейсом
+REM Start with settings from chat_config.py
+REM Только параметры, поддерживаемые text-generation-webui
 python server.py ^
     --api ^
     --api-port 5000 ^
     --listen ^
     --listen-port 7861 ^
-    --model Llama-3.1-128k-Dark-Planet-Uncensored-8B-Q4_k_s.gguf ^
+    --model Gryphe-MythoMax-L2-13b.Q4_K_S.gguf ^
     --loader llama.cpp ^
-    --model-dir models/main_model ^
-    --extensions api ^
-    --nowebui
+    --model-dir models/main_models ^
+    --gpu-layers 40 ^
+    --ctx-size 4096 ^
+    --batch-size 128 ^
+    --threads 16 ^
+    --threads-batch 8
 
 if %ERRORLEVEL% neq 0 (
     echo.
-    echo ❌ Ошибка запуска text-generation-webui
-    echo 🔍 Проверьте логи выше для деталей
+    echo ERROR starting text-generation-webui
+    echo Check logs above for details
 ) else (
     echo.
-    echo ✅ text-generation-webui завершен успешно
+    echo text-generation-webui finished successfully
 )
 
-pause 
+pause

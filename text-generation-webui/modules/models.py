@@ -39,16 +39,25 @@ def load_model(model_name, loader=None):
         sampler_hijack.hijack_samplers()
 
     shared.args.loader = loader
-    output = load_func_map[loader](model_name)
-    if type(output) is tuple:
-        model, tokenizer = output
-    else:
-        model = output
-        if model is None:
+    
+    try:
+        output = load_func_map[loader](model_name)
+        if output is None:
+            logger.error(f"Failed to load model '{model_name}' with loader '{loader}'")
             return None, None
+            
+        if type(output) is tuple:
+            model, tokenizer = output
         else:
-            from modules.transformers_loader import load_tokenizer
-            tokenizer = load_tokenizer(model_name)
+            model = output
+            if model is None:
+                return None, None
+            else:
+                from modules.transformers_loader import load_tokenizer
+                tokenizer = load_tokenizer(model_name)
+    except Exception as e:
+        logger.error(f"Error loading model '{model_name}' with loader '{loader}': {str(e)}")
+        raise
 
     shared.settings.update({k: v for k, v in metadata.items() if k in shared.settings})
     if loader.lower().startswith('exllama') or loader.lower().startswith('tensorrt') or loader == 'llama.cpp':
@@ -64,17 +73,46 @@ def load_model(model_name, loader=None):
 def llama_cpp_server_loader(model_name):
     from modules.llama_cpp_server import LlamaServer
 
-    path = Path(f'{shared.args.model_dir}/{model_name}')
+    # Сначала проверяем, является ли model_name полным путем к файлу
+    path = Path(model_name)
     if path.is_file():
         model_file = path
     else:
-        model_file = sorted(Path(f'{shared.args.model_dir}/{model_name}').glob('*.gguf'))[0]
+        # Ищем модель в различных возможных директориях
+        possible_paths = [
+            Path(f'{shared.args.model_dir}/{model_name}'),
+            Path(f'{shared.args.model_dir}/main_models/{model_name}'),
+            Path(f'{shared.args.model_dir}/main_models/{model_name}/*.gguf'),
+            Path(f'{shared.args.model_dir}/{model_name}/*.gguf')
+        ]
+        
+        model_file = None
+        for search_path in possible_paths:
+            if search_path.is_file():
+                model_file = search_path
+                break
+            elif search_path.is_dir():
+                # Ищем .gguf файлы в директории
+                gguf_files = list(search_path.glob('*.gguf'))
+                if gguf_files:
+                    model_file = sorted(gguf_files)[0]
+                    break
+            elif '*' in str(search_path):
+                # Обрабатываем glob паттерны
+                gguf_files = list(Path(str(search_path).split('*')[0]).glob('*.gguf'))
+                if gguf_files:
+                    model_file = sorted(gguf_files)[0]
+                    break
+        
+        if model_file is None:
+            raise FileNotFoundError(f"Model file not found for '{model_name}'. Searched in: {[str(p) for p in possible_paths]}")
 
     try:
         model = LlamaServer(model_file)
         return model, model
     except Exception as e:
         logger.error(f"Error loading the model with llama.cpp: {str(e)}")
+        raise
 
 
 def transformers_loader(model_name):

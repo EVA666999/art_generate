@@ -78,7 +78,7 @@ if not shared.args.old_colors:
         button_secondary_background_fill="white",
         button_secondary_border_color="var(--border-color-primary)",
         input_shadow="none",
-        button_shadow_hover="none",
+        # button_shadow_hover="none",  # Not supported in this Gradio version
 
         # Dark Mode Colors
         input_background_fill_dark='var(--darker-gray, #1C1C1D)',
@@ -99,7 +99,7 @@ if not shared.args.old_colors:
         checkbox_label_background_fill_hover_dark='var(--selected-item-color-dark, #282930)',
         table_even_background_fill_dark='var(--darker-gray, #1C1C1D)',
         table_odd_background_fill_dark='var(--selected-item-color-dark, #282930)',
-        # code_background_fill_dark='var(--darker-gray, #1C1C1D)',  # Removed - not supported in current Gradio version
+        # code_background_fill_dark='var(--darker-gray, #1C1C1D)',  # Commented out - not supported in this Gradio version
 
         # Shadows and Radius
         checkbox_label_shadow='none',
@@ -142,9 +142,8 @@ def list_model_elements():
         'num_experts_per_token',
         'load_in_8bit',
         'load_in_4bit',
-        'torch_compile',
         'flash_attn',
-        'use_flash_attention_2',
+        'attn_implementation',
         'cpu',
         'disk',
         'row_split',
@@ -153,7 +152,6 @@ def list_model_elements():
         'mlock',
         'numa',
         'use_double_quant',
-        'use_eager_attention',
         'bf16',
         'autosplit',
         'enable_tp',
@@ -217,6 +215,7 @@ def list_interface_input_elements():
         'ban_eos_token',
         'add_bos_token',
         'enable_thinking',
+        'reasoning_effort',
         'skip_special_tokens',
         'stream',
         'static_cache',
@@ -296,7 +295,7 @@ def gather_interface_values(*args):
         shared.persistent_interface_state.pop('textbox')
 
     # Prevent history loss if backend is restarted but UI is not refreshed
-    if output['history'] is None and output['unique_id'] is not None:
+    if (output['history'] is None or (len(output['history'].get('visible', [])) == 0 and len(output['history'].get('internal', [])) == 0)) and output['unique_id'] is not None:
         output['history'] = load_history(output['unique_id'], output['character_menu'], output['mode'])
 
     return output
@@ -484,6 +483,7 @@ def setup_auto_save():
         'ban_eos_token',
         'add_bos_token',
         'enable_thinking',
+        'reasoning_effort',
         'skip_special_tokens',
         'stream',
         'static_cache',

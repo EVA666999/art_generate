@@ -1,95 +1,92 @@
-# Environment and virtual environments
-.env
-.venv
-env/
-venv/
-env_for_you
-venv_py310/
-venv_py310_correct/
-stable-diffusion-webui/venv_py310/
-text-generation-webui/venv/
-telegram_monitor_bot/venv/
-
-# IDE and editor files
-.vscode/
-vscode/
-.cursor/
-*.swp
-*.swo
-*~
-
-# Python cache and compiled files
+# Python
 __pycache__/
-*.pyc
-*.pyo
-*.pyd
-.Python
+*.py[cod]
+*$py.class
 *.so
-*.egg
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
 *.egg-info/
-sd_monitor.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
 
-# Logs and temporary files
+# Virtual environments
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+.venv/
+
+# PyCharm
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs
 logs/
 *.log
-debug_*.log
-temp/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
-# Generated images and outputs
-outputs/
-images/
-*.png
-*.jpg
-*.jpeg
-*.gif
-*.bmp
-*.tiff
-*.webp
-
-# Models and large files (can be downloaded separately)
-models/
-cache/
-data/
-test_outputs/
-temp/
-*.safetensors
-*.ckpt
-*.pt
-*.pth
-*.bin
-*.gguf
-*.ggml
-
-# External repositories (can be added as submodules)
-llama.cpp/
-llama-cpp-python-cuBLAS-wheels/
-
-# Large external projects (can be downloaded separately)
-stable-diffusion-webui/
-telegram_monitor_bot/
-
-# text-generation-webui venv only (keep the project)
-text-generation-webui/venv/
-
-# Python packages and libraries
-**/Lib/site-packages/
-**/Include/
-**/Scripts/
-**/share/
-**/pyvenv.cfg
-
-# Build and distribution files
-build/
-dist/
-*.tar.gz
-*.zip
-
-# Database files
+# Database
 *.db
 *.sqlite
 *.sqlite3
+sql_app.db
 
-# OS generated files
+# Stable Diffusion
+stable-diffusion-webui/models/
+stable-diffusion-webui/outputs/
+stable-diffusion-webui/logs/
+stable-diffusion-webui/extensions/
+stable-diffusion-webui/venv/
+stable-diffusion-webui/__pycache__/
+
+# Text Generation WebUI
+text-generation-webui/models/
+text-generation-webui/logs/
+text-generation-webui/extensions/
+text-generation-webui/venv/
+text-generation-webui/__pycache__/
+
+# Project specific
+outputs/
+temp/
+cache/
+models/
+reports/
+*.egg-info/
+
+# OS
 .DS_Store
 .DS_Store?
 ._*
@@ -98,30 +95,37 @@ dist/
 ehthumbs.db
 Thumbs.db
 
-# Jupyter Notebook
-.ipynb_checkpoints
+# Windows
+*.lnk
 
-# pytest
-.pytest_cache/
-.coverage
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# Coverage reports
 htmlcov/
-venv_py310_correct/
+.coverage
+.coverage.*
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
 
 # mypy
 .mypy_cache/
 .dmypy.json
 dmypy.json
 
-# Rope project settings
-.ropeproject
+# Black
+.black
 
-# mkdocs documentation
-/site
+# Docker
+.dockerignore
 
-# Pyre type checker
-.pyre/
-
-# Temporary files
-=0.2.72
-=0.25.2
-=2.11.3
+# Backup files
+*.bak
+*.backup
+*.old

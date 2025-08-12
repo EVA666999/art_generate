@@ -22,7 +22,7 @@ class NSFWBulkGenerator:
         
         # Статистика
         self.stats = {
-            "total_requested": 30,
+            "total_requested": 5,
             "successful": 0,
             "failed": 0,
             "total_time": 0,
@@ -30,46 +30,18 @@ class NSFWBulkGenerator:
             "end_time": None
         }
         
-        # NSFW промпты (простые и разнообразные)
+        # Базовые промпты (дополняются дефолтными)
         self.nsfw_prompts = [
-            "naked woman, beautiful body, photorealistic",
-            "topless woman, natural breasts, high quality",
-            "nude female, artistic, professional photography",
-            "woman without clothes, elegant pose, studio lighting",
-            "female nude, tasteful, artistic nude",
-            "naked girl, young woman, natural beauty",
-            "topless female, beautiful face, soft lighting",
-            "nude woman, sensual pose, high resolution",
-            "woman undressed, elegant, professional photo",
-            "female without clothes, beautiful body, studio",
-            "naked female, artistic nude, tasteful",
-            "woman topless, natural beauty, soft focus",
-            "nude girl, young, beautiful, high quality",
-            "female nude, elegant pose, professional",
-            "woman naked, beautiful, artistic photography",
-            "topless woman, sensual, studio lighting",
-            "nude female, tasteful art, high resolution",
-            "woman without clothes, beautiful, natural",
-            "female nude, elegant, professional photo",
-            "naked woman, artistic, tasteful nude",
-            "woman topless, beautiful body, soft light",
-            "nude female, young, beautiful, studio",
-            "woman undressed, elegant pose, professional",
-            "female without clothes, artistic, tasteful",
-            "naked girl, beautiful, high quality photo",
-            "woman nude, sensual, elegant, studio",
-            "topless female, natural beauty, soft focus",
-            "nude woman, artistic, professional lighting",
-            "female naked, beautiful, tasteful art",
-            "woman topless, elegant pose, high resolution"
+            "anime girl, beautiful",
+            "anime girl, cute",
+            "anime girl, pretty",
+            "anime girl, lovely",
+            "anime girl, gorgeous"
         ]
         
-        # Негативные промпты
+        # Базовые негативные промпты (дополняются дефолтными)
         self.negative_prompts = [
-            "worst quality, low quality, blurry, ugly, deformed",
-            "bad anatomy, bad proportions, extra limbs, missing limbs",
-            "watermark, text, signature, logo, artist name",
-            "censored, mosaic, pixelated, low resolution"
+            "low quality, blurry"
         ]
     
     def log_progress(self, message: str):
@@ -90,15 +62,11 @@ class NSFWBulkGenerator:
         prompt = self.get_random_prompt()
         negative_prompt = self.get_negative_prompt()
         
-        # Случайные параметры для разнообразия
+        # Используем ваши дефолтные настройки и промпты
         settings = {
             "prompt": prompt,
             "negative_prompt": negative_prompt,
-            "use_default_prompts": False,  # Используем наши промпты
-            "steps": random.randint(20, 30),
-            "cfg_scale": random.uniform(6.0, 8.0),
-            "width": 512,
-            "height": 512,
+            "use_default_prompts": True,  # Включаем ваши промпты из default_prompts.py
             "seed": random.randint(1, 999999999)  # Случайный сид
         }
         
@@ -242,12 +210,17 @@ class NSFWBulkGenerator:
             f.write("ОТЧЕТ О МАССОВОЙ ГЕНЕРАЦИИ NSFW ИЗОБРАЖЕНИЙ\n")
             f.write("=" * 50 + "\n")
             f.write(f"Дата: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
-            f.write(f"Успешно: {self.stats['successful']}/30\n")
+            f.write(f"Успешно: {self.stats['successful']}/10\n")
             f.write(f"Время: {self.stats['total_time']:.1f} сек\n\n")
             
             f.write("СОЗДАННЫЕ ФАЙЛЫ:\n")
             for result in successful_results:
                 f.write(f"- {result['filename']}\n")
+                f.write(f"  Промпт: {result['prompt']}\n")
+                f.write(f"  Сид: {result['seed']}\n")
+                f.write(f"  Шаги: {result['steps']}\n")
+                f.write(f"  CFG: {result['cfg_scale']}\n")
+                f.write(f"  Сэмплер: {result['sampler']}\n\n")
         
         print(f"\n💾 Отчет сохранен: {report_file}")
         print("=" * 60)

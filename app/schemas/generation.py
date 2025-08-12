@@ -167,4 +167,7 @@ class ModelInfo(BaseModel):
     hash: str = Field(..., description="Хеш модели")
     sha256: str = Field(..., description="SHA256 хеш модели")
     filename: str = Field(..., description="Имя файла модели")
-    config: Optional[str] = Field(default=None, description="Конфигурация модели") 
+    config: Optional[str] = Field(default=None, description="Конфигурация модели")
+    
+    class Config:
+        protected_namespaces = () 

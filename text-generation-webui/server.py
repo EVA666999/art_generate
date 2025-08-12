@@ -7,6 +7,13 @@ from modules import shared
 from modules.block_requests import OpenMonkeyPatch, RequestBlocker
 from modules.logging_colors import logger
 
+# ===== ПРОСТАЯ НАСТРОЙКА МОДЕЛИ =====
+# Измените название модели здесь для автоматической загрузки
+# Просто замените название на нужную модель из папки models/
+# Например: "mythomax-l2-13b.Q6_K.gguf", "Gryphe-MythoMax-L2-13b.Q4_K_S.gguf"
+MODEL_NAME = "kunoichi-7b.Q6_K.gguf"
+# =====================================
+
 # Set up Gradio temp directory path
 gradio_temp_path = Path('user_data') / 'cache' / 'gradio'
 shutil.rmtree(gradio_temp_path, ignore_errors=True)
@@ -261,8 +268,28 @@ if __name__ == "__main__":
 
     available_models = utils.get_available_models()
 
+    # ===== АВТОМАТИЧЕСКАЯ ЗАГРУЗКА МОДЕЛИ =====
+    # Если модель не указана в командной строке, используем нашу переменную MODEL_NAME
+    if shared.args.model is None and not shared.args.model_menu:
+        if MODEL_NAME in available_models:
+            shared.model_name = MODEL_NAME
+            logger.info(f"Автоматически загружаем модель: {MODEL_NAME}")
+        else:
+            logger.warning(f"Модель {MODEL_NAME} не найдена в доступных моделях!")
+            logger.info("Доступные модели:")
+            for model in available_models:
+                logger.info(f"  - {model}")
+            # Используем первую доступную модель как fallback
+            if available_models:
+                shared.model_name = available_models[0]
+                logger.info(f"Используем fallback модель: {available_models[0]}")
+            else:
+                logger.error('Нет доступных моделей! Пожалуйста, скачайте хотя бы одну.')
+                sys.exit(0)
+    # =============================================
+
     # Model defined through --model
-    if shared.args.model is not None:
+    elif shared.args.model is not None:
         shared.model_name = shared.args.model
 
     # Select the model from a command-line menu

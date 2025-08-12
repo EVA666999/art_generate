@@ -1,96 +1,79 @@
 """
-Настройки приложения
+Общие настройки приложения.
 """
-import os
-from typing import Dict, Any, Optional
-from pydantic import BaseModel, Field
-from pydantic_settings import BaseSettings
-from functools import lru_cache
-from pathlib import Path
-from dotenv import load_dotenv
 
-# Загружаем переменные окружения
-load_dotenv()
+from pathlib import Path
+from typing import Optional
+from pydantic_settings import BaseSettings
+from pydantic import Field
 
 class Settings(BaseSettings):
-    """Настройки приложения"""
-    # API настройки
-    API_HOST: str = "0.0.0.0"
-    API_PORT: int = 8000
+    """Основные настройки приложения."""
     
-    # Пути к файлам
-    BASE_DIR: Path = Path(__file__).parent.parent.parent
-    OUTPUT_DIR: Path = BASE_DIR / "outputs"
-    LORA_DIR: Path = BASE_DIR / "loras"
+    # --- API настройки ---
+    API_HOST: str = Field(default="0.0.0.0", description="Хост для API")
+    API_PORT: int = Field(default=8000, description="Порт для API")
     
-    # Настройки Stable Diffusion
-    MODEL_NAME: str = "dreamshaper_8.safetensors"
-    VAE_NAME: Optional[str] = None
-    LORA_NAME: Optional[str] = None
+    # --- Пути к файлам ---
+    BASE_DIR: Path = Field(default_factory=lambda: Path(__file__).parent.parent.parent.parent, description="Базовый путь проекта")
+    OUTPUT_DIR: Path = Field(default_factory=lambda: Path(__file__).parent.parent.parent.parent / "outputs", description="Директория для выходных файлов")
+    LORA_DIR: Path = Field(default_factory=lambda: Path(__file__).parent.parent.parent.parent / "loras", description="Директория для LoRA моделей")
+    DATA_DIR: Path = Field(default_factory=lambda: Path(__file__).parent.parent.parent.parent / "app" / "data", description="Директория данных")
+    LOGS_DIR: Path = Field(default_factory=lambda: Path(__file__).parent.parent.parent.parent / "app" / "logs", description="Директория логов")
+    IMAGES_DIR: Path = Field(default_factory=lambda: Path(__file__).parent.parent.parent.parent / "app" / "images", description="Директория изображений")
+    TEMP_DIR: Path = Field(default_factory=lambda: Path(__file__).parent.parent.parent.parent / "temp", description="Директория временных файлов")
     
-    # Параметры генерации по умолчанию
-    DEFAULT_STEPS: int = 20
-    DEFAULT_CFG_SCALE: float = 7.0
-    DEFAULT_WIDTH: int = 512
-    DEFAULT_HEIGHT: int = 512
-    DEFAULT_SAMPLER: str = "DPM++ 2M Karras"
+    # --- Настройки Stable Diffusion ---
+    MODEL_NAME: str = Field(default="dreamshaper_8.safetensors", description="Название модели Stable Diffusion")
+    VAE_NAME: Optional[str] = Field(default=None, description="Название VAE модели")
+    LORA_NAME: Optional[str] = Field(default=None, description="Название LoRA модели")
     
-    # API URLs
-    SD_API_URL: str = "http://127.0.0.1:7860"  # URL для Stable Diffusion WebUI API
-    WEBUI_URL: str = "http://127.0.0.1:7860"  # URL для Stable Diffusion WebUI
-    SD_API_TIMEOUT: float = 600.0  # Таймаут для API запросов в секундах
+    # --- Параметры генерации Stable Diffusion по умолчанию ---
+    DEFAULT_STEPS: int = Field(default=35, description="Количество шагов генерации")
+    DEFAULT_CFG_SCALE: float = Field(default=7.0, description="CFG Scale")
+    DEFAULT_WIDTH: int = Field(default=512, description="Ширина изображения")
+    DEFAULT_HEIGHT: int = Field(default=853, description="Высота изображения")
+    DEFAULT_SAMPLER: str = Field(default="DPM++ 2M Karras", description="Сэмплер по умолчанию")
     
-    # Default Prompts
-    USE_DEFAULT_PROMPTS: bool = True  # Использовать дефолтные промпты
-    DEFAULT_PROMPTS_WEIGHT: float = 1.0  # Вес дефолтных промптов
+    # --- API URLs для Stable Diffusion ---
+    SD_API_URL: str = Field(default="http://127.0.0.1:7860", description="URL для Stable Diffusion WebUI API")
+    WEBUI_URL: str = Field(default="http://127.0.0.1:7860", description="URL для Stable Diffusion WebUI")
+    SD_API_TIMEOUT: float = Field(default=600.0, description="Таймаут для API запросов в секундах")
     
-    # Database
-    DATABASE_URL: str = "sqlite+aiosqlite:///./sql_app.db"
-    POSTGRES_DB: str = "art_generate_db"
-    POSTGRES_USER: str = "postgres"
-    POSTGRES_PASSWORD: str = "Kohkau11999"
-    DB_HOST: str = "localhost"
-    DB_PORT: str = "5432"
+    # --- Default Prompts ---
+    USE_DEFAULT_PROMPTS: bool = Field(default=True, description="Использовать дефолтные промпты")
+    DEFAULT_PROMPTS_WEIGHT: float = Field(default=1.0, description="Вес дефолтных промптов")
     
-    # Security
-    SECRET_KEY: str = "your-super-secret-key-here"
-    ALGORITHM: str = "HS256"
-    ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24  # 24 hours
+    # --- Database ---
+    DATABASE_URL: str = Field(default="sqlite+aiosqlite:///./sql_app.db", description="URL базы данных")
+    POSTGRES_DB: str = Field(default="art_generate_db", description="Название PostgreSQL базы")
+    POSTGRES_USER: str = Field(default="postgres", description="Пользователь PostgreSQL")
+    POSTGRES_PASSWORD: str = Field(default="Kohkau11999", description="Пароль PostgreSQL")
+    DB_HOST: str = Field(default="localhost", description="Хост базы данных")
+    DB_PORT: str = Field(default="5432", description="Порт базы данных")
     
-    # Hugging Face
-    HUGGINGFACE_TOKEN: str = "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"
+    # --- Security ---
+    SECRET_KEY: str = Field(default="your-super-secret-key-here", description="Секретный ключ")
+    ALGORITHM: str = Field(default="HS256", description="Алгоритм шифрования")
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = Field(default=60 * 24, description="Время жизни токена в минутах")
     
-    # Performance
-    MAX_WORKERS: int = 4
+    # --- Hugging Face ---
+    HUGGINGFACE_TOKEN: str = Field(default="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", description="Токен Hugging Face")
     
-    # Text Generation WebUI настройки
-    text_generation_webui_path: str = str(BASE_DIR / "text-generation-webui")
-    text_generation_webui_host: str = "127.0.0.1"
-    text_generation_webui_port: int = 7861
-    text_generation_webui_model: str = "Llama-3.1-128k-Dark-Planet-Uncensored-8B-Q4_k_s.gguf"
-    text_generation_webui_loader: str = "llama.cpp"
-    text_generation_webui_model_dir: str = str(BASE_DIR / "text-generation-webui" / "models" / "main_model")
+    # --- Performance ---
+    MAX_WORKERS: int = Field(default=4, description="Максимальное количество воркеров")
     
-    model_config = {
-        "env_file": ".env",
-        "env_file_encoding": "utf-8",
-        "env_prefix": "",
-        "extra": "ignore",
-        "protected_namespaces": ()
-    }
+    # --- LLAMA API ---
+    LLAMA_API_URL: str = Field(default="http://localhost:8000", description="URL для LLAMA API")
+    
+    class Config:
+        env_prefix = "APP_"
+        case_sensitive = False
+        protected_namespaces = ()
 
-@lru_cache()
-def get_settings():
+def get_settings() -> Settings:
+    """Получить экземпляр настроек."""
     return Settings()
 
+# Создаем глобальный экземпляр настроек
 settings = get_settings()
-
-def generate_bat():
-    """Генерирует start_webui_with_api.bat с актуальным именем модели из настроек."""
-    with open("start_webui_with_api.bat", "w", encoding="utf-8") as f:
-        f.write(f"""@echo off
-cd /D "%~dp0"
-cd text-generation-webui
-python server.py --api --api-port 5000 --listen --listen-port 7861 --model {settings.text_generation_webui_model} --loader llama.cpp --model-dir models/main_model
-pause
-""") 

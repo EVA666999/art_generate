@@ -27,9 +27,7 @@ document.querySelector(".header_bar").addEventListener("click", function(event) 
     this.style.marginBottom = chatVisible ? "0px" : "19px";
 
     if (chatVisible && !showControlsChecked) {
-      document.querySelectorAll(
-        "#chat-tab > div > :nth-child(1), #chat-tab > div > :nth-child(3), #chat-tab > div > :nth-child(4), #extensions"
-      ).forEach(element => {
+      document.querySelectorAll("#extensions").forEach(element => {
         element.style.display = "none";
       });
     }
@@ -149,11 +147,15 @@ window.isScrolled = false;
 let scrollTimeout;
 
 targetElement.addEventListener("scroll", function() {
-  // Add scrolling class to disable hover effects
-  targetElement.classList.add("scrolling");
-
   let diff = targetElement.scrollHeight - targetElement.clientHeight;
-  if(Math.abs(targetElement.scrollTop - diff) <= 10 || diff == 0) {
+  let isAtBottomNow = Math.abs(targetElement.scrollTop - diff) <= 10 || diff == 0;
+
+  // Add scrolling class to disable hover effects
+  if (window.isScrolled || !isAtBottomNow) {
+    targetElement.classList.add("scrolling");
+  }
+
+  if(isAtBottomNow) {
     window.isScrolled = false;
   } else {
     window.isScrolled = true;
@@ -165,7 +167,6 @@ targetElement.addEventListener("scroll", function() {
     targetElement.classList.remove("scrolling");
     doSyntaxHighlighting(); // Only run after scrolling stops
   }, 150);
-
 });
 
 // Create a MutationObserver instance
@@ -189,8 +190,11 @@ const observer = new MutationObserver(function(mutations) {
 
   doSyntaxHighlighting();
 
-  if (!window.isScrolled && !isScrollingClassOnly && targetElement.scrollTop !== targetElement.scrollHeight) {
-    targetElement.scrollTop = targetElement.scrollHeight;
+  if (!window.isScrolled && !isScrollingClassOnly) {
+    const maxScroll = targetElement.scrollHeight - targetElement.clientHeight;
+    if (maxScroll > 0 && targetElement.scrollTop < maxScroll - 1) {
+      targetElement.scrollTop = maxScroll;
+    }
   }
 
   const chatElement = document.getElementById("chat");
@@ -199,10 +203,11 @@ const observer = new MutationObserver(function(mutations) {
     const lastChild = messagesContainer?.lastElementChild;
     const prevSibling = lastChild?.previousElementSibling;
     if (lastChild && prevSibling) {
-      lastChild.style.setProperty("margin-bottom",
-        `max(0px, calc(max(70vh, 100vh - ${prevSibling.offsetHeight}px - 84px) - ${lastChild.offsetHeight}px))`,
-        "important"
-      );
+      // Add padding to the messages container to create room for the last message.
+      // The purpose of this is to avoid constant scrolling during streaming in
+      // instruct mode.
+      const bufferHeight = Math.max(0, Math.max(0.7 * window.innerHeight, window.innerHeight - prevSibling.offsetHeight - 84) - lastChild.offsetHeight);
+      messagesContainer.style.paddingBottom = `${bufferHeight}px`;
     }
   }
 });
@@ -1046,3 +1051,17 @@ new MutationObserver(() => addMiniDeletes()).observe(
   {childList: true, subtree: true}
 );
 addMiniDeletes();
+
+//------------------------------------------------
+// Fix autoscroll after fonts load
+//------------------------------------------------
+document.fonts.addEventListener("loadingdone", (event) => {
+  setTimeout(() => {
+    if (!window.isScrolled) {
+      const maxScroll = targetElement.scrollHeight - targetElement.clientHeight;
+      if (targetElement.scrollTop < maxScroll - 5) {
+        targetElement.scrollTop = maxScroll;
+      }
+    }
+  }, 50);
+});

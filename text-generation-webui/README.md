@@ -18,6 +18,7 @@ Its goal is to become the [AUTOMATIC1111/stable-diffusion-webui](https://github.
 - **File attachments**: Upload text files, PDF documents, and .docx documents to talk about their contents.
 - **Web search**: Optionally search the internet with LLM-generated queries to add context to the conversation.
 - Aesthetic UI with dark and light themes.
+- Syntax highlighting for code blocks and LaTeX rendering for mathematical expressions.
 - `instruct` mode for instruction-following (like ChatGPT), and `chat-instruct`/`chat` modes for talking to custom characters.
 - Automatic prompt formatting using Jinja2 templates. You don't need to ever worry about prompt formats.
 - Edit messages, navigate between message versions, and branch conversations at any point.
@@ -62,7 +63,7 @@ One-click installer details
 
 ### One-click-installer
 
-The script uses Miniconda to set up a Conda environment in the `installer_files` folder.
+The script uses Miniforge to set up a Conda environment in the `installer_files` folder.
 
 If you ever need to install something manually in the `installer_files` environment, you can launch an interactive shell using the cmd script: `cmd_linux.sh`, `cmd_windows.bat`, or `cmd_macos.sh`.
 
@@ -115,14 +116,16 @@ Manual full installation with conda or docker
 
 #### 0. Install Conda
 
-https://docs.conda.io/en/latest/miniconda.html
+https://github.com/conda-forge/miniforge
 
-On Linux or WSL, it can be automatically installed with these two commands ([source](https://educe-ubc.github.io/conda.html)):
+On Linux or WSL, Miniforge can be automatically installed with these two commands:
 
 ```
-curl -sL "https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh" > "Miniconda3.sh"
-bash Miniconda3.sh
+curl -sL "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh" > "Miniforge3.sh"
+bash Miniforge3.sh
 ```
+
+For other platforms, download from: https://github.com/conda-forge/miniforge/releases/latest
 
 #### 1. Create a new conda environment
 
@@ -135,12 +138,12 @@ conda activate textgen
 
 | System | GPU | Command |
 |--------|---------|---------|
-| Linux/WSL | NVIDIA | `pip3 install torch==2.6.0 torchvision==0.21.0 torchaudio==2.6.0 --index-url https://download.pytorch.org/whl/cu124` |
-| Linux/WSL | CPU only | `pip3 install torch==2.6.0 torchvision==0.21.0 torchaudio==2.6.0 --index-url https://download.pytorch.org/whl/cpu` |
-| Linux | AMD | `pip3 install torch==2.6.0 torchvision==0.21.0 torchaudio==2.6.0 --index-url https://download.pytorch.org/whl/rocm6.2.4` |
-| MacOS + MPS | Any | `pip3 install torch==2.6.0 torchvision==0.21.0 torchaudio==2.6.0` |
-| Windows | NVIDIA | `pip3 install torch==2.6.0 torchvision==0.21.0 torchaudio==2.6.0 --index-url https://download.pytorch.org/whl/cu124` |
-| Windows | CPU only | `pip3 install torch==2.6.0 torchvision==0.21.0 torchaudio==2.6.0` |
+| Linux/WSL | NVIDIA | `pip3 install torch==2.6.0 --index-url https://download.pytorch.org/whl/cu124` |
+| Linux/WSL | CPU only | `pip3 install torch==2.6.0 --index-url https://download.pytorch.org/whl/cpu` |
+| Linux | AMD | `pip3 install torch==2.6.0 --index-url https://download.pytorch.org/whl/rocm6.2.4` |
+| MacOS + MPS | Any | `pip3 install torch==2.6.0` |
+| Windows | NVIDIA | `pip3 install torch==2.6.0 --index-url https://download.pytorch.org/whl/cu124` |
+| Windows | CPU only | `pip3 install torch==2.6.0` |
 
 The up-to-date commands can be found here: https://pytorch.org/get-started/locally/.
 
@@ -181,9 +184,9 @@ python server.py
 
 Then browse to
 
-`http://localhost:7860/?__theme=dark`
+`http://127.0.0.1:7860`
 
-##### Manual install
+#### Manual install
 
 The `requirements*.txt` above contain various wheels precompiled through GitHub Actions. If you wish to compile things manually, or if you need to because no suitable wheels are available for your hardware, you can use `requirements_nowheels.txt` and then install your desired loaders manually.
 
@@ -232,9 +235,9 @@ List of command-line flags
 ```txt
 usage: server.py [-h] [--multi-user] [--model MODEL] [--lora LORA [LORA ...]] [--model-dir MODEL_DIR] [--lora-dir LORA_DIR] [--model-menu] [--settings SETTINGS]
                  [--extensions EXTENSIONS [EXTENSIONS ...]] [--verbose] [--idle-timeout IDLE_TIMEOUT] [--loader LOADER] [--cpu] [--cpu-memory CPU_MEMORY] [--disk] [--disk-cache-dir DISK_CACHE_DIR]
-                 [--load-in-8bit] [--bf16] [--no-cache] [--trust-remote-code] [--force-safetensors] [--no_use_fast] [--use_flash_attention_2] [--use_eager_attention] [--torch-compile] [--load-in-4bit]
-                 [--use_double_quant] [--compute_dtype COMPUTE_DTYPE] [--quant_type QUANT_TYPE] [--flash-attn] [--threads THREADS] [--threads-batch THREADS_BATCH] [--batch-size BATCH_SIZE] [--no-mmap]
-                 [--mlock] [--gpu-layers N] [--tensor-split TENSOR_SPLIT] [--numa] [--no-kv-offload] [--row-split] [--extra-flags EXTRA_FLAGS] [--streaming-llm] [--ctx-size N] [--cache-type N]
+                 [--load-in-8bit] [--bf16] [--no-cache] [--trust-remote-code] [--force-safetensors] [--no_use_fast] [--attn-implementation IMPLEMENTATION] [--load-in-4bit] [--use_double_quant]
+                 [--compute_dtype COMPUTE_DTYPE] [--quant_type QUANT_TYPE] [--flash-attn] [--threads THREADS] [--threads-batch THREADS_BATCH] [--batch-size BATCH_SIZE] [--no-mmap] [--mlock]
+                 [--gpu-layers N] [--tensor-split TENSOR_SPLIT] [--numa] [--no-kv-offload] [--row-split] [--extra-flags EXTRA_FLAGS] [--streaming-llm] [--ctx-size N] [--cache-type N]
                  [--model-draft MODEL_DRAFT] [--draft-max DRAFT_MAX] [--gpu-layers-draft GPU_LAYERS_DRAFT] [--device-draft DEVICE_DRAFT] [--ctx-size-draft CTX_SIZE_DRAFT] [--gpu-split GPU_SPLIT]
                  [--autosplit] [--cfg-cache] [--no_flash_attn] [--no_xformers] [--no_sdpa] [--num_experts_per_token N] [--enable_tp] [--cpp-runner] [--deepspeed] [--nvme-offload-dir NVME_OFFLOAD_DIR]
                  [--local_rank LOCAL_RANK] [--alpha_value ALPHA_VALUE] [--rope_freq_base ROPE_FREQ_BASE] [--compress_pos_emb COMPRESS_POS_EMB] [--listen] [--listen-port LISTEN_PORT]
@@ -275,9 +278,7 @@ Transformers/Accelerate:
   --trust-remote-code                       Set trust_remote_code=True while loading the model. Necessary for some models.
   --force-safetensors                       Set use_safetensors=True while loading the model. This prevents arbitrary code execution.
   --no_use_fast                             Set use_fast=False while loading the tokenizer (it's True by default). Use this if you have any problems related to use_fast.
-  --use_flash_attention_2                   Set use_flash_attention_2=True while loading the model.
-  --use_eager_attention                     Set attn_implementation= eager while loading the model.
-  --torch-compile                           Compile the model with torch.compile for improved performance.
+  --attn-implementation IMPLEMENTATION      Attention implementation. Valid options: sdpa, eager, flash_attention_2.
 
 bitsandbytes 4-bit:
   --load-in-4bit                            Load the model with 4-bit precision (using bitsandbytes).

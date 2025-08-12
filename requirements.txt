@@ -1,4 +1,4 @@
- fastapi>=0.104.1
+fastapi>=0.104.1
 uvicorn[standard]>=0.24.0
 pydantic>=2.7.0
 pydantic-settings>=2.0.0
@@ -23,16 +23,16 @@ protobuf>=4.25.3
 # Основные зависимости для работы с изображениями и системами
 Pillow>=11.2.1
 psutil>=5.9.0
-numpy>=2.2.6
+numpy<2.0.0
 
 # Зависимости для машинного обучения и ИИ
 torch>=2.7.1
+xformers>=0.0.23.post1
 
-# aiohttp для работы с text-generation-webui API
+# HTTP клиент для API запросов
 aiohttp>=3.9.0
 
-# Удалены зависимости llama-cpp-python, так как теперь используется text-generation-webui
+# Системные зависимости
 GPUtil
 psycopg2-binary
-aiohttp
 pytest-asyncio

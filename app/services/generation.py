@@ -62,9 +62,9 @@ class GenerationService:
         # Создаем пул потоков для сохранения изображений
         self.save_executor = ThreadPoolExecutor(max_workers=2)
         
-        # Кэш для хранения последних результатов
+        # Кэш отключен для экономии памяти
         self._result_cache = {}
-        self._cache_size = 10  # Максимальное количество кэшированных результатов
+        self._cache_size = 0  # Отключено кэширование
 
     def _process_logs(self):
         """Обработка логов в отдельном потоке"""
@@ -93,11 +93,11 @@ class GenerationService:
         """Генерация изображения с заданными параметрами"""
         start_time = time.time()
         try:
-            # Проверяем кэш
-            cache_key = f"{settings.dict()}"
-            if cache_key in self._result_cache:
-                self._log("INFO", "Используем кэшированный результат")
-                return self._result_cache[cache_key]
+            # Кэш отключен для экономии памяти
+            # cache_key = f"{settings.dict()}"
+            # if cache_key in self._result_cache:
+            #     self._log("INFO", "Используем кэшированный результат")
+            #     return self._result_cache[cache_key]
 
             # Оптимизируем память перед генерацией
             optimize_memory()
@@ -202,8 +202,8 @@ class GenerationService:
                 execution_time = time.time() - start_time
                 await self.update_generation_stats(settings, generation_response, execution_time)
                 
-                # Кэшируем результат
-                self._update_cache(cache_key, generation_response)
+                # Кэш отключен для экономии памяти
+                # self._update_cache(cache_key, generation_response)
                 
                 # Оптимизируем память после генерации
                 optimize_memory()

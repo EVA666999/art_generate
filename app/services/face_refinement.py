@@ -178,12 +178,12 @@ class FaceRefinementService:
         logger.info(f"LoRA модели: {'Да' if 'lora_models' in payload else 'Нет'}")
         if 'lora_models' in payload:
             logger.info("=== ДЕТАЛЬНАЯ ИНФОРМАЦИЯ LoRA ===")
-            for lora_name, lora_config in payload['lora_models'].items():
-                logger.info(f"LoRA: {lora_name}")
-                logger.info(f"  - name: {lora_config.get('name', 'НЕ УСТАНОВЛЕН')}")
-                logger.info(f"  - weight: {lora_config.get('weight', 'НЕ УСТАНОВЛЕН')}")
-                logger.info(f"  - enabled: {lora_config.get('enabled', 'НЕ УСТАНОВЛЕН')}")
-                logger.info(f"  - path: {lora_config.get('path', 'НЕ УСТАНОВЛЕН')}")
+            if isinstance(payload['lora_models'], list):
+                for i, lora_config in enumerate(payload['lora_models']):
+                    logger.info(f"LoRA {i+1}: {lora_config.get('name', 'НЕ УСТАНОВЛЕН')}")
+                    logger.info(f"  - weight: {lora_config.get('weight', 'НЕ УСТАНОВЛЕН')}")
+            else:
+                logger.info(f"LoRA формат неправильный: {type(payload['lora_models'])}")
             logger.info("=================================")
         if 'alwayson_scripts' in payload and 'ADetailer' in payload['alwayson_scripts']:
             adetailer_args = payload['alwayson_scripts']['ADetailer']['args']

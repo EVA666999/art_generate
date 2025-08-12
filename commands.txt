@@ -1,2 +1,2 @@
 ./webui-user-clean.bat
-./start_webui_with_api.bat
+$ ./start_mythomax_working.bat

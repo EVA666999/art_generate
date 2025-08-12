@@ -15,7 +15,6 @@ from modules.logging_colors import logger
 def get_fallback_settings():
     return {
         'bf16': False,
-        'use_eager_attention': False,
         'ctx_size': 2048,
         'rope_freq_base': 0,
         'compress_pos_emb': 1,
@@ -23,7 +22,6 @@ def get_fallback_settings():
         'truncation_length': shared.settings['truncation_length'],
         'truncation_length_info': shared.settings['truncation_length'],
         'skip_special_tokens': shared.settings['skip_special_tokens'],
-        'custom_stopping_strings': shared.settings['custom_stopping_strings'],
     }
 
 
@@ -37,11 +35,22 @@ def get_model_metadata(model):
             for k in settings[pat]:
                 model_settings[k] = settings[pat][k]
 
-    path = Path(f'{shared.args.model_dir}/{model}/config.json')
-    if path.exists():
-        hf_metadata = json.loads(open(path, 'r', encoding='utf-8').read())
-    else:
-        hf_metadata = None
+    # Убираем расширение .gguf если оно есть
+    model_name_clean = model.replace('.gguf', '') if model.endswith('.gguf') else model
+    
+    # Ищем конфигурационный файл в различных возможных директориях
+    config_paths = [
+        Path(f'{shared.args.model_dir}/{model}/config.json'),
+        Path(f'{shared.args.model_dir}/{model_name_clean}/config.json'),
+        Path(f'{shared.args.model_dir}/main_models/{model}/config.json'),
+        Path(f'{shared.args.model_dir}/main_models/{model_name_clean}/config.json')
+    ]
+    
+    hf_metadata = None
+    for config_path in config_paths:
+        if config_path.exists():
+            hf_metadata = json.loads(open(config_path, 'r', encoding='utf-8').read())
+            break
 
     if 'loader' not in model_settings:
         quant_method = None if hf_metadata is None else hf_metadata.get("quantization_config", {}).get("quant_method", None)
@@ -53,17 +62,39 @@ def get_model_metadata(model):
 
     # GGUF metadata
     if model_settings['loader'] == 'llama.cpp':
-        path = Path(f'{shared.args.model_dir}/{model}')
-        if path.is_file():
-            model_file = path
-        else:
-            gguf_files = list(path.glob('*.gguf'))
-            if not gguf_files:
-                error_msg = f"No .gguf models found in directory: {path}"
-                logger.error(error_msg)
-                raise FileNotFoundError(error_msg)
-
-            model_file = gguf_files[0]
+        # Ищем модель в различных возможных директориях
+        possible_paths = [
+            Path(f'{shared.args.model_dir}/{model}'),
+            Path(f'{shared.args.model_dir}/main_models/{model}'),
+            Path(f'{shared.args.model_dir}/main_models/{model.replace(".gguf", "")}/*.gguf'),
+            Path(f'{shared.args.model_dir}/{model.replace(".gguf", "")}/*.gguf')
+        ]
+        
+        model_file = None
+        for search_path in possible_paths:
+            if search_path.is_file():
+                model_file = search_path
+                break
+            elif search_path.is_dir():
+                # Ищем .gguf файлы в директории
+                gguf_files = list(search_path.glob('*.gguf'))
+                if gguf_files:
+                    model_file = sorted(gguf_files)[0]
+                    break
+            elif '*' in str(search_path):
+                # Обрабатываем glob паттерны
+                base_path = str(search_path).split('*')[0]
+                if base_path.endswith('/'):
+                    base_path = base_path[:-1]
+                gguf_files = list(Path(base_path).glob('*.gguf'))
+                if gguf_files:
+                    model_file = sorted(gguf_files)[0]
+                    break
+        
+        if model_file is None:
+            error_msg = f"No .gguf models found for '{model}'. Searched in: {[str(p) for p in possible_paths]}"
+            logger.error(error_msg)
+            raise FileNotFoundError(error_msg)
 
         metadata = load_gguf_metadata_with_cache(model_file)
 
@@ -92,8 +123,10 @@ def get_model_metadata(model):
             template = template.replace('eos_token', "'{}'".format(eos_token))
             template = template.replace('bos_token', "'{}'".format(bos_token))
 
+            template = re.sub(r"\{\{-?\s*raise_exception\(.*?\)\s*-?\}\}", "", template, flags=re.DOTALL)
             template = re.sub(r'raise_exception\([^)]*\)', "''", template)
             template = re.sub(r'{% if add_generation_prompt %}.*', '', template, flags=re.DOTALL)
+            template = re.sub(r'elif loop\.last and not add_generation_prompt', 'elif False', template)  # Handle GPT-OSS
             model_settings['instruction_template'] = 'Custom (obtained from model metadata)'
             model_settings['instruction_template_str'] = template
 
@@ -119,23 +152,46 @@ def get_model_metadata(model):
                 if metadata['rope_scaling']['type'] == 'linear':
                     model_settings['compress_pos_emb'] = metadata['rope_scaling']['factor']
 
-            # For Gemma-2
             if 'torch_dtype' in metadata and metadata['torch_dtype'] == 'bfloat16':
                 model_settings['bf16'] = True
 
-            # For Gemma-2
-            if 'architectures' in metadata and isinstance(metadata['architectures'], list) and 'Gemma2ForCausalLM' in metadata['architectures']:
-                model_settings['use_eager_attention'] = True
-
     # Try to find the Jinja instruct template
-    path = Path(f'{shared.args.model_dir}/{model}') / 'tokenizer_config.json'
-    if path.exists():
-        metadata = json.loads(open(path, 'r', encoding='utf-8').read())
-        if 'chat_template' in metadata:
+    # Ищем файлы в различных возможных директориях
+    possible_base_paths = [
+        Path(f'{shared.args.model_dir}/{model}'),
+        Path(f'{shared.args.model_dir}/main_models/{model}'),
+        Path(f'{shared.args.model_dir}/main_models/{model.replace(".gguf", "")}'),
+        Path(f'{shared.args.model_dir}/{model.replace(".gguf", "")}')
+    ]
+    
+    template = None
+    metadata = {}
+    
+    # 1. Prioritize reading from chat_template.jinja if it exists
+    for base_path in possible_base_paths:
+        if base_path.exists():
+            jinja_path = base_path / 'chat_template.jinja'
+            if jinja_path.exists():
+                with open(jinja_path, 'r', encoding='utf-8') as f:
+                    template = f.read()
+                break
+    
+    # 2. Try to find tokenizer_config.json
+    for base_path in possible_base_paths:
+        if base_path.exists():
+            path = base_path / 'tokenizer_config.json'
+            if path.exists():
+                metadata = json.loads(open(path, 'r', encoding='utf-8').read())
+                break
+
+        # 2. Only read from metadata if we haven't already loaded from .jinja
+        if template is None and 'chat_template' in metadata:
             template = metadata['chat_template']
             if isinstance(template, list):
                 template = template[0]['template']
 
+        # 3. If a template was found from either source, process it
+        if template:
             for k in ['eos_token', 'bos_token']:
                 if k in metadata:
                     value = metadata[k]
@@ -144,8 +200,10 @@ def get_model_metadata(model):
 
                     template = template.replace(k, "'{}'".format(value))
 
+            template = re.sub(r"\{\{-?\s*raise_exception\(.*?\)\s*-?\}\}", "", template, flags=re.DOTALL)
             template = re.sub(r'raise_exception\([^)]*\)', "''", template)
             template = re.sub(r'{% if add_generation_prompt %}.*', '', template, flags=re.DOTALL)
+            template = re.sub(r'elif loop\.last and not add_generation_prompt', 'elif False', template)  # Handle GPT-OSS
             model_settings['instruction_template'] = 'Custom (obtained from model metadata)'
             model_settings['instruction_template_str'] = template
 
@@ -175,8 +233,29 @@ def get_model_metadata(model):
 
 
 def infer_loader(model_name, model_settings, hf_quant_method=None):
-    path_to_model = Path(f'{shared.args.model_dir}/{model_name}')
-    if not path_to_model.exists():
+    # Ищем модель в различных возможных директориях
+    possible_paths = [
+        Path(f'{shared.args.model_dir}/{model_name}'),
+        Path(f'{shared.args.model_dir}/main_models/{model_name}'),
+        Path(f'{shared.args.model_dir}/main_models/{model_name.replace(".gguf", "")}/*.gguf'),
+        Path(f'{shared.args.model_dir}/{model_name.replace(".gguf", "")}/*.gguf')
+    ]
+    
+    path_to_model = None
+    for search_path in possible_paths:
+        if search_path.exists():
+            path_to_model = search_path
+            break
+        elif '*' in str(search_path):
+            # Обрабатываем glob паттерны
+            base_path = str(search_path).split('*')[0]
+            if base_path.endswith('/'):
+                base_path = base_path[:-1]
+            if Path(base_path).exists():
+                path_to_model = Path(base_path)
+                break
+    
+    if path_to_model is None:
         loader = None
     elif shared.args.portable:
         loader = 'llama.cpp'
@@ -270,6 +349,7 @@ def save_model_settings(model, state):
 
     output = yaml.dump(user_config, sort_keys=False)
     p = Path(f'{shared.args.model_dir}/config-user.yaml')
+    p.parent.mkdir(parents=True, exist_ok=True)
     with open(p, 'w') as f:
         f.write(output)
 
@@ -298,6 +378,7 @@ def save_instruction_template(model, template):
 
     output = yaml.dump(user_config, sort_keys=False)
     p = Path(f'{shared.args.model_dir}/config-user.yaml')
+    p.parent.mkdir(parents=True, exist_ok=True)
     with open(p, 'w') as f:
         f.write(output)
 
@@ -331,7 +412,43 @@ def get_model_size_mb(model_file: Path) -> float:
 
 
 def estimate_vram(gguf_file, gpu_layers, ctx_size, cache_type):
-    model_file = Path(f'{shared.args.model_dir}/{gguf_file}')
+    # Убираем расширение .gguf если оно есть
+    model_name_clean = gguf_file.replace('.gguf', '') if gguf_file.endswith('.gguf') else gguf_file
+    
+    # Ищем модель в различных возможных директориях
+    possible_paths = [
+        Path(f'{shared.args.model_dir}/{gguf_file}'),
+        Path(f'{shared.args.model_dir}/{model_name_clean}'),
+        Path(f'{shared.args.model_dir}/main_models/{gguf_file}'),
+        Path(f'{shared.args.model_dir}/main_models/{model_name_clean}'),
+        Path(f'{shared.args.model_dir}/main_models/{model_name_clean}/*.gguf'),
+        Path(f'{shared.args.model_dir}/{model_name_clean}/*.gguf')
+    ]
+    
+    model_file = None
+    for search_path in possible_paths:
+        if search_path.is_file():
+            model_file = search_path
+            break
+        elif search_path.is_dir():
+            # Ищем .gguf файлы в директории
+            gguf_files = list(search_path.glob('*.gguf'))
+            if gguf_files:
+                model_file = sorted(gguf_files)[0]
+                break
+        elif '*' in str(search_path):
+            # Обрабатываем glob паттерны
+            base_path = str(search_path).split('*')[0]
+            if base_path.endswith('/'):
+                base_path = base_path[:-1]
+            gguf_files = list(Path(base_path).glob('*.gguf'))
+            if gguf_files:
+                model_file = sorted(gguf_files)[0]
+                break
+    
+    if model_file is None:
+        raise FileNotFoundError(f"Model file not found for '{gguf_file}'. Searched in: {[str(p) for p in possible_paths]}")
+    
     metadata = load_gguf_metadata_with_cache(model_file)
     size_in_mb = get_model_size_mb(model_file)
 
@@ -460,10 +577,14 @@ def update_gpu_layers_and_vram(loader, model, gpu_layers, ctx_size, cache_type, 
             return (0, gpu_layers) if auto_adjust else 0
 
     # Get model settings including user preferences
-    model_settings = get_model_metadata(model)
-
-    current_layers = gpu_layers
-    max_layers = model_settings.get('max_gpu_layers', 256)
+    try:
+        model_settings = get_model_metadata(model)
+        current_layers = gpu_layers
+        max_layers = model_settings.get('max_gpu_layers', 256)
+    except Exception as e:
+        # Если не удалось загрузить метаданные модели, используем значения по умолчанию
+        current_layers = gpu_layers
+        max_layers = 256
 
     if auto_adjust:
         # Check if this is a user-saved setting

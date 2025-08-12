@@ -59,41 +59,43 @@ def repair(grclass):
 
         self.webui_tooltip = tooltip
 
-        # В Gradio 4.x события обрабатываются по-другому
-        # Просто пропускаем переопределение событий
-        pass
+        for event in self.EVENTS:
+            replaced_event = getattr(self, str(event))
+
+            def fun(*xargs, _js=None, replaced_event=replaced_event, **xkwargs):
+                if _js:
+                    xkwargs['js'] = _js
+
+                return replaced_event(*xargs, **xkwargs)
+
+            setattr(self, str(event), fun)
 
     grclass.__init__ = __repaired_init__
     grclass.update = gr.update
 
 
-# Исправляем для совместимости с Gradio 4.x
+# Исправлено для совместимости с текущей версией Gradio
 try:
-    # Для Gradio 4.x
-    all_components = []
-    if hasattr(gr.components, '__all__'):
-        all_components.extend(gr.components.__all__)
-    if hasattr(gr.layouts, '__all__'):
-        all_components.extend(gr.layouts.__all__)
-    
-    for component in set(all_components):
+    for component in set(gr.components.__all__ + gr.layouts.__all__):
         repair(getattr(gr, component, None))
 except AttributeError:
-    # Fallback для старых версий
-    try:
-        for component in set(gr.components.__all__ + gr.layouts.__all__):
-            repair(getattr(gr, component, None))
-    except AttributeError:
-        # Если ничего не работает, пропускаем
-        pass
+    # Fallback для версий Gradio без layouts.__all__
+    for component in gr.components.__all__:
+        repair(getattr(gr, component, None))
 
 
 class Dependency(gr.events.Dependency):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        # В Gradio 4.x Dependency работает по-другому
-        # Просто используем стандартную реализацию
-        pass
+
+        def then(*xargs, _js=None, **xkwargs):
+            if _js:
+                xkwargs['js'] = _js
+
+            return original_then(*xargs, **xkwargs)
+
+        original_then = self.then
+        self.then = then
 
 
 gr.events.Dependency = Dependency

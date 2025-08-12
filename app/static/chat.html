@@ -38,6 +38,18 @@
             padding: 20px;
             text-align: center;
         }
+        .header-actions { margin-top: 10px; display: flex; gap: 10px; justify-content: center; }
+        .reset-button {
+            padding: 8px 16px;
+            background: #ef4444;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .reset-button:hover { opacity: 0.9; }
 
         .character-selector {
             margin-top: 10px;
@@ -406,6 +418,7 @@
                 this.initializeElements();
                 this.loadCharacters();
                 this.bindEvents();
+                this.ensureSession();
             }
 
             initializeElements() {
@@ -423,12 +436,19 @@
                 this.promptInput = document.getElementById('promptInput');
                 this.generateButton = document.getElementById('generateButton');
                 this.closeModal = document.getElementById('closeModal');
+                // Header actions
+                const header = document.querySelector('.chat-header');
+                const actions = document.createElement('div');
+                actions.className = 'header-actions';
+                actions.innerHTML = '<button id="resetButton" class="reset-button">Начать заново</button>';
+                header.appendChild(actions);
+                this.resetButton = document.getElementById('resetButton');
             }
 
             async loadCharacters() {
                 try {
                     console.log('Загружаем персонажей...');
-                    const response = await fetch('/api/characters/');
+                    const response = await fetch('/api/v1/characters/');
                     if (!response.ok) throw new Error('Ошибка загрузки персонажей');
                     
                     const characters = await response.json();
@@ -496,6 +516,27 @@
                         this.closeImageModal();
                     }
                 });
+
+                // Reset chat session
+                this.resetButton.addEventListener('click', () => {
+                    try {
+                        localStorage.removeItem('chat_session_id');
+                    } catch (e) {}
+                    location.reload();
+                });
+            }
+
+            ensureSession() {
+                try {
+                    let sid = localStorage.getItem('chat_session_id');
+                    if (!sid) {
+                        sid = crypto.randomUUID();
+                        localStorage.setItem('chat_session_id', sid);
+                    }
+                    this.sessionId = sid;
+                } catch (e) {
+                    this.sessionId = null;
+                }
             }
 
             selectCharacter(characterName) {
@@ -599,25 +640,121 @@
                 this.setLoading(true);
 
                 try {
-                    const response = await fetch(`/api/v1/chat/character/${encodeURIComponent(this.currentCharacter)}`, {
+                    // Используем streaming endpoint напрямую с именем персонажа
+                    const response = await fetch(`/api/v1/chat/stream/name/${encodeURIComponent(this.currentCharacter)}`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
                         },
                         body: JSON.stringify({
-                            message: message
+                            message: message,
+                            history: this.messages,
+                            session_id: this.sessionId
                         })
                     });
 
                     if (!response.ok) throw new Error('Ошибка отправки сообщения');
 
-                    const data = await response.json();
-                    if (data.image) {
-                        this.addImageMessage(data.image, { seed: '', steps: '' });
-                        this.addMessage('assistant', data.response);
-                    } else {
-                        this.addMessage('assistant', data.response);
+                    // Создаем элемент для ответа ассистента
+                    const assistantDiv = document.createElement('div');
+                    assistantDiv.className = 'message assistant';
+                    assistantDiv.innerHTML = '<div class="message-content"></div>';
+                    this.chatMessages.appendChild(assistantDiv);
+                    
+                    const messageContent = assistantDiv.querySelector('.message-content');
+                    
+                    // ИСПРАВЛЕННАЯ СИСТЕМА СТРИМИНГА
+                    const reader = response.body.getReader();
+                    const decoder = new TextDecoder();
+                    let buffer = '';
+                    
+                    try {
+                        while (true) {
+                            const { done, value } = await reader.read();
+                            
+                            if (done) {
+                                console.log('Streaming завершен');
+                                break;
+                            }
+                            
+                            // Декодируем и добавляем к буферу
+                            buffer += decoder.decode(value, { stream: true });
+                            
+                            // Обрабатываем полные строки
+                            const lines = buffer.split('\n');
+                            buffer = lines.pop() || ''; // Оставляем неполную строку в буфере
+                            
+                            for (const line of lines) {
+                                if (line.trim() === '') continue;
+                                
+                                if (line.startsWith('data: ')) {
+                                    try {
+                                        const jsonStr = line.slice(6);
+                                        
+                                        if (jsonStr === '[DONE]') {
+                                            console.log('✅ Получен сигнал завершения');
+                                            break;
+                                        }
+                                        
+                                        const data = JSON.parse(jsonStr);
+                                        
+                                        if (data.chunk !== undefined && data.chunk !== '') {
+                                            console.log('📝 Получен чанк:', data.chunk.length, 'символов');
+                                            
+                                            // Добавляем чанк к сообщению
+                                            messageContent.textContent += data.chunk;
+                                            
+                                            // Плавная прокрутка
+                                            this.chatMessages.scrollTop = this.chatMessages.scrollHeight;
+                                            
+                                            // Небольшая задержка для эффекта печати
+                                            await new Promise(resolve => setTimeout(resolve, 10));
+                                        }
+                                        
+                                        if (data.done) {
+                                            console.log('✅ Получен флаг done');
+                                            break;
+                                        }
+                                        
+                                        if (data.error) {
+                                            throw new Error(data.error);
+                                        }
+                                        
+                                    } catch (e) {
+                                        if (e.name === 'SyntaxError') {
+                                            // Игнорируем ошибки парсинга JSON
+                                            continue;
+                                        }
+                                        throw e;
+                                    }
+                                }
+                            }
+                        }
+                    } catch (error) {
+                        console.error('Ошибка стриминга:', error);
+                        messageContent.textContent += '\n\n[Ошибка: ' + error.message + ']';
+                    } finally {
+                        // Убираем индикатор печати если он есть
+                        const typingIndicator = assistantDiv.querySelector('.typing-indicator');
+                        if (typingIndicator) {
+                            typingIndicator.remove();
+                        }
                     }
+                    
+                    // Добавляем время к сообщению
+                    const time = new Date().toLocaleTimeString();
+                    messageContent.innerHTML += `<div class="message-time">${time}</div>`;
+                    
+                    // Сохраняем сообщение в историю
+                    this.messages.push({
+                        role: 'user',
+                        content: message
+                    });
+                    this.messages.push({
+                        role: 'assistant',
+                        content: messageContent.textContent
+                    });
+                    
                 } catch (error) {
                     this.showError('Ошибка отправки сообщения: ' + error.message);
                 } finally {
