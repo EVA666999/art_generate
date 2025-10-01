@@ -1,7 +1,7 @@
 """
-Конфигурация для чат-бота с настраиваемым характером.
-Оптимизирована для модели MythoMax L2 13B GGUF.
-(и совместима с локальными backends: llama.cpp, ctransformers)
+Конфигурация чат-бота для text-generation-webui.
+Оптимизирована для модели L3-DARKEST-PLANET-16.5B-GGUF.
+Использует Llama3 format template. Специализированная NSFW/RP модель.
 """
 from typing import Optional, List, Dict, Any
 from pydantic_settings import BaseSettings
@@ -30,59 +30,59 @@ class ChatConfig(BaseSettings):
     )
     TEXTGEN_WEBUI_MODEL: str = Field(
         default="Gryphe-MythoMax-L2-13b.Q4_K_S.gguf", 
-        description="Название модели для загрузки"
+        description="MythoMax-L2-13B Q4_K_S - Gryphe's модель для ролевых игр и творческого письма (~7.4GB)"
     )
     
-    # --- Параметры генерации для MythoMax L2 13B ---
-    # Используем единые параметры DEFAULT_* вместо дублирования
+    # --- Параметры генерации для L3-DARKEST-PLANET-16.5B ---
+    # Оптимизированы для LLaMA 3 + Brainstorm 40x и креативного письма
     
-    # --- Формат промпта для MythoMax (Alpaca) ---
-    MYTHOMAX_SYSTEM_TEMPLATE: str = Field(
-        default="{system_message}",
-        description="Шаблон системного сообщения для MythoMax"
+    # --- Формат промпта LLaMA 3 для DARKEST PLANET ---
+    LLAMA3_SYSTEM_TEMPLATE: str = Field(
+        default="<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\n{system_message}<|eot_id|>",
+        description="Шаблон системного сообщения LLaMA3 для DARKEST PLANET"
     )
-    MYTHOMAX_INSTRUCTION_TEMPLATE: str = Field(
-        default="### Instruction:\n{prompt}",
-        description="Шаблон инструкции для MythoMax"
+    LLAMA3_USER_TEMPLATE: str = Field(
+        default="<|start_header_id|>user<|end_header_id|>\n\n{prompt}<|eot_id|>",
+        description="Шаблон сообщения пользователя LLaMA3"
     )
-    MYTHOMAX_RESPONSE_TEMPLATE: str = Field(
-        default="### Response:\n",
-        description="Шаблон ответа для MythoMax"
+    LLAMA3_ASSISTANT_TEMPLATE: str = Field(
+        default="<|start_header_id|>assistant<|end_header_id|>\n\n{response}<|eot_id|>",
+        description="Шаблон ответа ассистента LLaMA3"
     )
     
-    # --- аппаратные параметры (оптимизированы для качества) ---
+    # --- аппаратные параметры (ОПТИМИЗИРОВАНЫ ДЛЯ ПОЛНОГО ИСПОЛЬЗОВАНИЯ GPU) ---
     N_CTX: int = Field(
         default=4096, 
-        description="Размер контекста увеличен для лучшего понимания"
+        description="MythoMax-L2-13B оптимизирован для 8192 контекст - лучшая производительность для 13B модели"
     )
     N_GPU_LAYERS: int = Field(
         default=-1, 
-        description="Количество слоев на GPU (-1 = все слои на GPU)"
+        description="ВСЕ слои на GPU для максимальной производительности (-1 = все слои)"
     )
     N_THREADS: int = Field(
-        default=16, 
-        description="Количество потоков CPU (увеличено для качества)"
+        default=1, 
+        description="Минимум CPU потоков - вся работа на GPU"
     )
     N_THREADS_BATCH: int = Field(
-        default=8, 
-        description="Потоки для батчинга (оптимизировано для качества)"
+        default=1, 
+        description="Минимум CPU потоков для батчей - вся работа на GPU"
     )
     N_BATCH: int = Field(
-        default=128, 
-        description="Размер батча увеличен для лучшего качества"
+        default=2048, 
+        description="Максимальный батч для лучшей утилизации GPU"
     )
 
     F16_KV: bool = Field(
         default=True, 
-        description="Использовать float16 для KV cache"
+        description="Использовать float16 для KV cache - экономия памяти GPU"
     )
     MUL_MAT_Q: bool = Field(
         default=True, 
-        description="Матричные операции на GPU"
+        description="Матричные операции на GPU - обязательно для производительности"
     )
     USE_MMAP: bool = Field(
         default=True, 
-        description="Использовать memory mapping"
+        description="Использовать memory mapping - быстрая загрузка модели"
     )
     USE_MLOCK: bool = Field(
         default=False, 
@@ -94,12 +94,25 @@ class ChatConfig(BaseSettings):
     )
     OFFLOAD_KQV: bool = Field(
         default=True, 
-        description="Выгружать KQV на GPU"
+        description="Выгружать KQV на GPU - обязательно для производительности"
+    )
+    # ДОПОЛНИТЕЛЬНЫЕ ПАРАМЕТРЫ ДЛЯ МАКСИМАЛЬНОГО ИСПОЛЬЗОВАНИЯ GPU
+    GPU_SPLIT: str = Field(
+        default="", 
+        description="Автоматическое разделение модели между GPU слоями"
+    )
+    ROPE_SCALING: Optional[str] = Field(
+        default=None, 
+        description="Rope scaling для лучшей производительности"
+    )
+    COMPRESS_POS_EMB: int = Field(
+        default=1, 
+        description="Сжатие позиционных эмбеддингов для экономии памяти"
     )
 
     # --- опции скорости/памяти ---
     N_KEEP: int = Field(
-        default=300, 
+        default=2000, 
         description="Не сохранять токены (экономия памяти)"
     )
     N_DRAFT: int = Field(
@@ -119,30 +132,86 @@ class ChatConfig(BaseSettings):
         description="Загружать полную модель"
     )
 
-    # --- базовые параметры генерации (оптимизированы для понимания контекста) ---
+    # --- базовые параметры генерации (оптимизированы для MythoMax-L2-13B) ---
     DEFAULT_MAX_TOKENS: int = Field(
-        default=300, 
-        description="Макс. токены для генерации (увеличено для лучшего контекста)"
+        default=512, 
+        description="Увеличенный лимит токенов для развернутых ответов (было 300)"
+    )
+    
+    # Дополнительные лимиты для контроля
+    HARD_MAX_TOKENS: int = Field(
+        default=512,
+        description="Жесткий лимит - модель НЕ МОЖЕТ превысить это значение (увеличено с 300)"
+    )
+    
+    WARNING_THRESHOLD: int = Field(
+        default=250,
+        description="Порог предупреждения - начинаем завершать диалог (увеличено с 250)"
     )
     DEFAULT_TEMPERATURE: float = Field(
-        default=0.8, 
-        description="Температура увеличена для лучшего понимания контекста"
+        default=0.7, 
+        description="MythoMax: увеличенная температура для лучшей креативности и сохранения контекста"
     )
     DEFAULT_TOP_P: float = Field(
-        default=0.85, 
-        description="Top-p увеличен для лучшего понимания контекста"
+        default=0.95, 
+        description="MythoMax: увеличенное значение для лучшего разнообразия и контекста"
+    )
+    DEFAULT_MIN_P: float = Field(
+        default=0.05, 
+        description="MythoMax: низкое значение для стабильности генерации"
     )
     DEFAULT_TOP_K: int = Field(
-        default=50, 
-        description="Top-k увеличен для лучшего выбора токенов в контексте"
+        default=40, 
+        description="Увеличено для MythoMax-L2-13B - лучший выбор токенов для контекста"
     )
     DEFAULT_REPEAT_PENALTY: float = Field(
-        default=1.15, 
-        description="Штраф за повторения увеличен для лучшего качества контекста"
+        default=1.05, 
+        description="MythoMax: уменьшенный штраф для лучшего сохранения контекста"
     )
     DEFAULT_PRESENCE_PENALTY: float = Field(
-        default=0.2, 
-        description="Presence penalty увеличен для лучшего разнообразия в контексте"
+        default=0.0, 
+        description="Нейтральный для MythoMax - естественный flow"
+    )
+    
+    # --- Параметры для предотвращения обрывов ---
+    IGNORE_EOS: bool = Field(
+        default=True,
+        description="Игнорировать EOS токен для предотвращения преждевременных остановок"
+    )
+    
+    DRY_MULTIPLIER: float = Field(
+        default=0.0,
+        description="Отключаем dry generation для предотвращения обрывов"
+    )
+    
+    DRY_BASE: float = Field(
+        default=1.0,
+        description="Базовое значение для dry generation (отключено)"
+    )
+    
+    DRY_ALLOWED_LENGTH: int = Field(
+        default=0,
+        description="Длина разрешенных dry последовательностей (отключено)"
+    )
+    
+    DRY_PENALTY_LAST_N: int = Field(
+        default=0,
+        description="Количество последних токенов для dry penalty (отключено)"
+    )
+    
+    DRY_SEQUENCE_BREAKERS: str = Field(
+        default="",
+        description="Пустая строка - убираем все sequence breakers для предотвращения обрывов"
+    )
+    
+    # --- Специальные параметры для Psyonic-Cetacean (рекомендации DavidAU) ---
+    SMOOTHING_FACTOR: float = Field(
+        default=1.5, 
+        description="Smoothing Factor 1.5-2.5 для улучшенного RP (рекомендация DavidAU)"
+    )
+    QUADRATIC_SAMPLING: bool = Field(
+        default=True, 
+        description="Включить Quadratic Sampling если поддерживается"
     )
 
     # --- жесткие ограничения токенов ---
@@ -151,42 +220,54 @@ class ChatConfig(BaseSettings):
     
     DEFAULT_STOP_TOKENS: List[str] = Field(
         default=[
-            "<|im_end|>", "<|endoftext|>", "<|im_start|>", 
-            "###", "Human:", "Assistant:"
-        ], 
-        description="Расширенные токены остановки для MythoMax"
+            # ТОЛЬКО EOS-токен - убираем все агрессивные стоп-токены
+            "</s>",              # EOS-токен, сигнализирует конец последовательности
+            # УБРАЛИ все остальные - они прерывают генерацию на середине предложений
+        ],
+        description="Только EOS-токен для предотвращения прерывания генерации"
+    )
+    
+    # Стоп-токены для завершения диалога при приближении к лимиту
+    COMPLETION_STOP_TOKENS: List[str] = Field(
+        default=[
+            # ИСПРАВЛЕНО: Убрали точку, восклицательный и вопросительный знаки
+            # Они вызывают преждевременную остановку на середине предложений
+            # Оставляем только EOS токен для естественного завершения
+            "</s>"
+        ],
+        description="Только EOS-токен для естественного завершения без прерывания"
     )
 
-    # --- контекст / длина (оптимизировано для понимания контекста) ---
+    # --- контекст / длина (оптимизировано для MythoMax-L2-13B) ---
     MAX_HISTORY_LENGTH: int = Field(
-        default=25, 
-        description="Макс. длина истории диалога (увеличена для лучшего понимания контекста)"
+        default=2000, 
+        description="Увеличено для лучшего сохранения контекста с MythoMax-L2-13B"
     )
     MAX_MESSAGE_LENGTH: int = Field(
-        default=800, 
-        description="Макс. длина сообщения (увеличена для лучшего понимания деталей)"
+        default=3000, 
+        description="Оптимизировано для развернутых ответов MythoMax-L2-13B"
     )
     MAX_CHARACTER_NAME_LENGTH: int = Field(
-        default=25, 
-        description="Макс. длина имени персонажа (увеличена для лучшего понимания)"
+        default=20, 
+        description="Оптимально для MythoMax-L2-13B"
     )
     MAX_RESPONSE_LENGTH: int = Field(
-        default=1000, 
-        description="Макс. длина ответа в символах (увеличена для лучшего понимания контекста)"
+        default=3000, 
+        description="Оптимизировано для детальных ответов MythoMax-L2-13B"
     )
 
-    # --- минимальная длина ответа (оптимизировано для понимания контекста) ---
+    # --- минимальная длина ответа (оптимизировано для NSFW_13B_sft) ---
     ENFORCE_MIN_TOKENS: bool = Field(
-        default=True, 
-        description="Включить принудительную минимальную длину для лучшего понимания контекста"
+        default=False, 
+        description="ОТКЛЮЧЕНО - может вызывать преждевременную остановку"
     )
     MIN_NEW_TOKENS: int = Field(
-        default=80, 
-        description="Мин. число новых токенов в ответе (увеличено для лучшего понимания контекста)"
+        default=150, 
+        description="Увеличено для MythoMax-L2-13B - обеспечивает минимальную развернутость ответов (было 50)"
     )
     BAN_EOS_TOKEN: bool = Field(
         default=False, 
-        description="Разрешить EOS для естественного завершения, но с учетом контекста"
+        description="ОТКЛЮЧЕНО - разрешаем модели естественно завершать предложения"
     )
 
     # --- очистка вывода ---
@@ -197,7 +278,7 @@ class ChatConfig(BaseSettings):
 
     # --- поведение «умность vs случайность» (оптимизировано для понимания контекста) ---
     SMARTNESS: float = Field(
-        default=0.9, 
+        default=0.8, 
         description="Баланс умности (увеличен для лучшего понимания контекста)"
     )
     DYNAMIC_SAMPLING: bool = Field(
@@ -224,14 +305,14 @@ class ChatConfig(BaseSettings):
         default=[
             "Example 1: User: How are you? Anna: I'm doing great, thank you! How about you?",
             "Example 2: User: What's new? Anna: Lots of interesting things! I'd love to tell you more if you're interested.",
-            "Example 3: User: Remember when we talked about that movie? Anna: Yes, absolutely! We were discussing 'The Matrix'. What specifically interests you about it?",
-            "Example 4: User: Let's continue our conversation. Anna: Of course! We stopped when you were telling me about your project. Please go on!",
-            "Example 5: User: You're so beautiful. Anna: Thank you for the compliment! I appreciate your kind words. What would you like to talk about?",
-            "Example 6: User: I want to kiss you. Anna: I understand your feelings, but let's keep our conversation friendly and respectful. What's on your mind?",
-            "Example 7: User: Tell me something sexy. Anna: I'd prefer to keep our conversation appropriate and engaging. What topic would you like to discuss?",
-            "Example 8: User: You're making me hot. Anna: Let's focus on having a meaningful conversation instead. What interests you today?"
+            "Example 3: User: You look beautiful today. Anna: *blushes* Thank you so much! You always know how to make me feel special.",
+            "Example 4: User: I want to be close to you. Anna: *moves closer* I'd like that too... *looks into your eyes*",
+            "Example 5: User: Can I touch you? Anna: *nods softly* Of course... I trust you.",
+            "Example 6: User: You're so sexy. Anna: *smiles playfully* You think so? I like the way you look at me...",
+            "Example 7: User: I'm attracted to you. Anna: *bites lip* I feel the same way about you... *reaches for your hand*",
+            "Example 8: User: Show me more. Anna: *slowly and teasingly* What would you like to see? I'm all yours..."
         ], 
-        description="NSFW-aware few-shot examples in English for better context understanding and appropriate responses"
+        description="Adult-friendly few-shot examples for intimate roleplay scenarios"
     )
 
     # --- safety & nsfw ---
@@ -242,6 +323,18 @@ class ChatConfig(BaseSettings):
     FORBIDDEN_WORDS: List[str] = Field(
         default=[], 
         description="Запрещенные слова"
+    )
+    DISABLE_SAFETY_FILTERS: bool = Field(
+        default=True, 
+        description="Отключить встроенные фильтры безопасности модели"
+    )
+    ALLOW_NSFW_CONTENT: bool = Field(
+        default=True, 
+        description="Разрешить NSFW контент для ролевых игр"
+    )
+    IGNORE_MODEL_SAFETY: bool = Field(
+        default=True, 
+        description="Игнорировать встроенные ограничения безопасности модели"
     )
 
     # --- логирование и кэш ---
@@ -272,6 +365,16 @@ class ChatConfig(BaseSettings):
         description="Задержка между чанками стриминга в мс (0 = без задержки)"
     )
     
+    # --- скрытые сообщения ---
+    HIDDEN_USER_MESSAGE: str = Field(
+        default="don't write time at the end of a sentence",
+        description="Скрытое сообщение, добавляемое к каждому пользовательскому сообщению"
+    )
+    ENABLE_HIDDEN_MESSAGE: bool = Field(
+        default=True,
+        description="Включить добавление скрытого сообщения к пользовательским сообщениям"
+    )
+    
     # --- прочее ---
     SEED: int = Field(
         default=-1, 
@@ -299,23 +402,51 @@ class ChatConfig(BaseSettings):
     
     def sample_generation_params(
         self, 
-        seed: Optional[int] = None
+        seed: Optional[int] = None,
+        force_completion: bool = False
     ) -> Dict[str, Any]:
         """
         Возвращает параметры генерации с ограничением токенов из конфигурации.
         Оптимизировано для стабильности и контроля длины ответов.
+        
+        Args:
+            seed: Seed для генерации
+            force_completion: Принудительно завершать диалог при достижении лимита
         """
         return {
             "max_tokens": self.DEFAULT_MAX_TOKENS,  # Используем значение из конфигурации
             "temperature": self.DEFAULT_TEMPERATURE,
             "top_p": self.DEFAULT_TOP_P,
             "top_k": self.DEFAULT_TOP_K,
+            "min_p": self.DEFAULT_MIN_P,  # ДОБАВЛЕНО: min_p для стабильности
             "repeat_penalty": self.DEFAULT_REPEAT_PENALTY,
             "presence_penalty": self.DEFAULT_PRESENCE_PENALTY,
             "use_beam": False,  # Отключаем для стабильности
             "seed": seed or self.SEED,
-            "stop": self.DEFAULT_STOP_TOKENS,  # Добавляем стоп-токены
+            "stop": [],  # ИСПРАВЛЕНО: Убираем ВСЕ стоп-токены для предотвращения обрывов
+            "ignore_eos": True,  # Игнорируем EOS токен
         }
+    
+    def get_completion_aware_prompt(self, base_prompt: str, estimated_tokens: int = 0) -> str:
+        """
+        Добавляет инструкции о завершении диалога в промпт при приближении к лимиту.
+        
+        Args:
+            base_prompt: Базовый промпт
+            estimated_tokens: Примерное количество уже использованных токенов
+            
+        Returns:
+            Промпт с инструкциями о завершении
+        """
+        # Если приближаемся к лимиту (90% от максимума) - увеличили порог
+        completion_threshold = int(self.DEFAULT_MAX_TOKENS * 0.9)
+        
+        if estimated_tokens >= completion_threshold:
+            # УБРАЛИ проблемную фразу "That's all for now" - она вызывает преждевременную остановку
+            completion_instruction = "\n\nIMPORTANT: You are approaching the token limit. Please conclude your response naturally with a period, exclamation mark, or question mark. Do NOT use phrases like 'That's all for now' or 'Talk to you soon'."
+            return base_prompt + completion_instruction
+        
+        return base_prompt
 
 
 # Создаем глобальный экземпляр конфигурации
@@ -329,7 +460,7 @@ def build_nsfw_character_prompt(
     n_recent: int = 20
 ) -> str:
     """
-    Строит промпт для NSFW персонажа с правильным форматированием.
+    Строит промпт для NSFW персонажа в формате BLING для модели NSFW_13B_sft.
     
     Args:
         character_name: Имя персонажа
@@ -338,7 +469,7 @@ def build_nsfw_character_prompt(
         n_recent: Количество последних сообщений для включения
         
     Returns:
-        Сформированный промпт для NSFW персонажа
+        Сформированный промпт для NSFW персонажа в формате BLING
     """
     # Ограничиваем историю последними n_recent сообщениями
     if len(history) > n_recent:
@@ -346,19 +477,19 @@ def build_nsfw_character_prompt(
     else:
         recent_history = history
     
-    # Начинаем с системного сообщения для NSFW персонажа
-    prompt = f"<|im_start|>system\nТы {character_name}. "
-    prompt += f"{character_description}\n"
+    # Начинаем с системного сообщения в формате BLING
+    prompt = f"System: A chat between a curious human and an artificial intelligence assistant. The assistant gives helpful, detailed, and polite answers to the human's questions.\n"
+    prompt += f"You are {character_name}. {character_description}\n"
     
-    # Добавляем историю диалога
+    # Добавляем историю диалога в формате BLING
     for role, content in recent_history:
         if role == "user":
-            prompt += f"<|im_start|>user\n{content}\n<|im_end|>\n"
+            prompt += f"Human: {content}\n"
         elif role == "assistant":
-            prompt += f"<|im_start|>assistant\n{content}\n<|im_end|>\n"
+            prompt += f"Assistant: {content}\n"
     
-    # Завершаем промпт
-    prompt += "<|im_start|>assistant\n"
+    # Завершаем промпт в формате BLING
+    prompt += "Assistant:"
     
     return prompt
 
@@ -370,7 +501,7 @@ def build_prompt_with_system(
     n_recent: int = 20
 ) -> str:
     """
-    Строит промпт с системным сообщением и историей диалога.
+    Строит промпт с системным сообщением в формате BLING для NSFW_13B_sft.
     
     Args:
         system_text: Системное сообщение
@@ -379,7 +510,7 @@ def build_prompt_with_system(
         n_recent: Количество последних сообщений для включения
         
     Returns:
-        Сформированный промпт
+        Сформированный промпт в формате BLING
     """
     # Ограничиваем историю последними n_recent сообщениями
     if len(history) > n_recent:
@@ -387,21 +518,22 @@ def build_prompt_with_system(
     else:
         recent_history = history
     
-    # Начинаем с системного сообщения
-    prompt = f"<|im_start|>system\n{system_text}\n<|im_end|>\n"
+    # Начинаем с системного сообщения в формате BLING
+    prompt = f"System: A chat between a curious human and an artificial intelligence assistant. The assistant gives helpful, detailed, and polite answers to the human's questions.\n"
+    prompt += f"{system_text}\n"
     
     # Добавляем данные персонажа
     if character_data:
-        prompt += f"<|im_start|>system\n{character_data}\n<|im_end|>\n"
+        prompt += f"{character_data}\n"
     
-    # Добавляем историю диалога
+    # Добавляем историю диалога в формате BLING
     for role, content in recent_history:
         if role == "user":
-            prompt += f"<|im_start|>user\n{content}\n<|im_end|>\n"
+            prompt += f"Human: {content}\n"
         elif role == "assistant":
-            prompt += f"<|im_start|>assistant\n{content}\n<|im_end|>\n"
+            prompt += f"Assistant: {content}\n"
     
-    # Завершаем промпт
-    prompt += "<|im_start|>assistant\n"
+    # Завершаем промпт в формате BLING
+    prompt += "Assistant:"
     
     return prompt

@@ -32,6 +32,17 @@ xformers>=0.0.23.post1
 # HTTP клиент для API запросов
 aiohttp>=3.9.0
 
+# Зависимости для аутентификации
+email-validator>=2.3.0
+dnspython>=2.8.0
+
+# Зависимости для email
+python-dotenv>=1.0.0
+
+# Зависимости для OAuth
+authlib>=1.2.0
+httpx>=0.24.0
+
 # Системные зависимости
 GPUtil
 psycopg2-binary

@@ -28,7 +28,7 @@ async def update_character(character_name: str, overwrite: bool = True):
     file_path = os.path.join(characters_dir, f"{character_name}.py")
     
     if not os.path.exists(file_path):
-        print(f"❌ Файл персонажа не найден: {file_path}")
+        print(f"[ERROR] Файл персонажа не найден: {file_path}")
         return False
     
     print(f"📁 Файл найден: {file_path}")
@@ -41,15 +41,15 @@ async def update_character(character_name: str, overwrite: bool = True):
             )
             
             if db_char:
-                print(f"✅ Персонаж '{db_char.name}' успешно обновлен!")
+                print(f"[OK] Персонаж '{db_char.name}' успешно обновлен!")
                 print(f"   ID: {db_char.id}")
                 return True
             else:
-                print(f"❌ Ошибка обновления персонажа '{character_name}'")
+                print(f"[ERROR] Ошибка обновления персонажа '{character_name}'")
                 return False
                 
         except Exception as e:
-            print(f"❌ Ошибка: {str(e)}")
+            print(f"[ERROR] Ошибка: {str(e)}")
             return False
 
 
@@ -95,7 +95,7 @@ async def main():
         return
     
     if not args.character_name:
-        print("❌ Укажите имя персонажа или используйте --list для просмотра списка")
+        print("[ERROR] Укажите имя персонажа или используйте --list для просмотра списка")
         print("\nПримеры использования:")
         print("  python update_character.py anna")
         print("  python update_character.py --list")

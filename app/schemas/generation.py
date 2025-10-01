@@ -8,6 +8,7 @@ project_root = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(project_root))
 
 from app.config.default_prompts import get_default_negative_prompts
+from app.config.generation_defaults import DEFAULT_GENERATION_PARAMS
 import base64
 from PIL import Image
 from io import BytesIO
@@ -36,26 +37,36 @@ class GenerationSettings(BaseModel):
     prompt: str = Field(..., description="Промпт для генерации")
     negative_prompt: Optional[str] = Field(None, description="Негативный промпт")
     use_default_prompts: bool = Field(True, description="Использовать дефолтные промпты")
+    character: Optional[str] = Field(None, description="Имя персонажа")
     seed: Optional[int] = Field(None, description="Seed для генерации")
-    steps: Optional[int] = Field(None, description="Количество шагов")
-    width: Optional[int] = Field(None, description="Ширина изображения")
-    height: Optional[int] = Field(None, description="Высота изображения")
-    cfg_scale: Optional[float] = Field(None, description="CFG Scale")
-    sampler_name: Optional[str] = Field(None, description="Название сэмплера")
+    steps: int = Field(default=DEFAULT_GENERATION_PARAMS.get("steps"), description="Количество шагов")
+    
+    def __init__(self, **data):
+        super().__init__(**data)
+        # ОТЛАДКА: логируем откуда берется steps
+        import logging
+        logger = logging.getLogger(__name__)
+        logger.info(f"🚨 GenerationSettings создан с steps={self.steps} (default={DEFAULT_GENERATION_PARAMS.get('steps')})")
+    width: int = Field(default=DEFAULT_GENERATION_PARAMS.get("width"), description="Ширина изображения")
+    height: int = Field(default=DEFAULT_GENERATION_PARAMS.get("height"), description="Высота изображения")
+    cfg_scale: float = Field(default=DEFAULT_GENERATION_PARAMS.get("cfg_scale"), description="CFG Scale")
+    sampler_name: str = Field(default=DEFAULT_GENERATION_PARAMS.get("sampler_name"), description="Название сэмплера")
     scheduler: Optional[str] = Field(None, description="Название планировщика")
-    enable_hr: Optional[bool] = Field(None, description="Включить high-res fix")
-    hr_scale: Optional[float] = Field(None, description="Масштаб high-res fix")
-    hr_upscaler: Optional[str] = Field(None, description="Апскейлер для high-res fix")
-    hr_second_pass_steps: Optional[int] = Field(None, description="Количество шагов для второго прохода")
-    denoising_strength: Optional[float] = Field(None, description="Сила денойзинга")
-    restore_faces: Optional[bool] = Field(None, description="Восстановление лиц")
-    batch_size: Optional[int] = Field(None, description="Размер батча")
-    n_iter: Optional[int] = Field(None, description="Количество итераций")
+    enable_hr: bool = Field(default=DEFAULT_GENERATION_PARAMS.get("enable_hr"), description="Включить high-res fix")
+    hr_scale: float = Field(default=DEFAULT_GENERATION_PARAMS.get("hr_scale"), description="Масштаб high-res fix")
+    hr_upscaler: str = Field(default=DEFAULT_GENERATION_PARAMS.get("hr_upscaler"), description="Апскейлер для high-res fix")
+    hr_second_pass_steps: int = Field(default=DEFAULT_GENERATION_PARAMS.get("hr_second_pass_steps"), description="Количество шагов для второго прохода")
+    denoising_strength: float = Field(default=DEFAULT_GENERATION_PARAMS.get("denoising_strength"), description="Сила денойзинга")
+    restore_faces: bool = Field(default=DEFAULT_GENERATION_PARAMS.get("restore_faces"), description="Восстановление лиц")
+    batch_size: int = Field(default=DEFAULT_GENERATION_PARAMS.get("batch_size"), description="Размер батча")
+    n_iter: int = Field(default=DEFAULT_GENERATION_PARAMS.get("n_iter"), description="Количество итераций")
     clip_skip: Optional[int] = Field(None, description="Clip Skip")
     use_adetailer: Optional[bool] = Field(None, description="Использовать ADetailer")
     save_grid: Optional[bool] = Field(None, description="Сохранять сетку изображений")
     use_vae: Optional[bool] = Field(None, description="Использовать VAE")
     vae_model: Optional[str] = Field(None, description="Название VAE модели")
+    
+    # IP-Adapter удален
     
     def get_negative_prompt(self) -> str:
         """Получает негативный промпт с дефолтными значениями"""
@@ -108,8 +119,8 @@ class FaceRefinementSettings(BaseModel):
                 "refinement_strength": 0.7,
                 "controlnet_preset": "default",
                 "override_params": {
-                    "sampling_steps": 30,
-                    "cfg_scale": 7.0
+                    "sampling_steps": None,
+                    "cfg_scale": None
                 }
             }
         }

@@ -8,7 +8,7 @@ from typing import Union, Optional
 import base64
 from PIL import Image
 import io
-from app.config.paths import IMAGES_PATH
+from app.config.paths import IMAGES_DIR
 import logging
 import traceback
 from io import BytesIO
@@ -23,12 +23,12 @@ def ensure_images_dir() -> Path:
         Path: Путь к директории с изображениями
     """
     try:
-        logger.info(f"Создаю директорию для изображений: {IMAGES_PATH}")
-        IMAGES_PATH.mkdir(parents=True, exist_ok=True)
-        logger.info(f"Директория создана/существует: {IMAGES_PATH}")
-        logger.info(f"Абсолютный путь: {IMAGES_PATH.absolute()}")
-        logger.info(f"Права на запись: {os.access(IMAGES_PATH, os.W_OK)}")
-        return IMAGES_PATH
+        logger.info(f"Создаю директорию для изображений: {IMAGES_DIR}")
+        IMAGES_DIR.mkdir(parents=True, exist_ok=True)
+        logger.info(f"Директория создана/существует: {IMAGES_DIR}")
+        logger.info(f"Абсолютный путь: {IMAGES_DIR.absolute()}")
+        logger.info(f"Права на запись: {os.access(IMAGES_DIR, os.W_OK)}")
+        return IMAGES_DIR
     except Exception as e:
         logger.error(f"Ошибка при создании директории: {str(e)}")
         logger.error(f"Traceback: {traceback.format_exc()}")
@@ -52,7 +52,7 @@ def save_image(image_data: Union[str, bytes, Image.Image], prefix: str = "image"
         # Генерируем имя файла
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         filename = f"{prefix}_{timestamp}.png"
-        filepath = IMAGES_PATH / filename
+        filepath = IMAGES_DIR / filename
         
         logger.info(f"Начинаю сохранение изображения в {filepath}")
         logger.info(f"Абсолютный путь: {filepath.absolute()}")

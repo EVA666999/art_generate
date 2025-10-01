@@ -1,3 +1,2 @@
-from .generation import router as generation_router
-
-__all__ = ["generation_router"]
+# Роутеры импортируются напрямую в main.py
+__all__ = []

@@ -1,5 +1,5 @@
 """
-Эндпоинты для анализа логов генерации
+Endpoints for generation logs analysis
 """
 from fastapi import APIRouter, HTTPException
 from typing import List, Dict, Any
@@ -12,13 +12,13 @@ router = APIRouter(tags=["analysis"])
 @router.get("/multiple-images")
 async def get_multiple_images_issues(hours: int = 24) -> List[Dict[str, Any]]:
     """
-    Получить список проблем с множественными изображениями
+    Get list of problems with multiple images
     
     Args:
-        hours: Количество часов для анализа
+        hours: Number of hours for analysis
         
     Returns:
-        List[Dict[str, Any]]: Список найденных проблем
+        List[Dict[str, Any]]: List of found problems
     """
     try:
         analyzer = GenerationAnalyzer(LOGS_PATH)
@@ -34,7 +34,7 @@ async def get_script_usage(hours: int = 24) -> Dict[str, int]:
     Получить статистику использования скриптов
     
     Args:
-        hours: Количество часов для анализа
+        hours: Number of hours for analysis
         
     Returns:
         Dict[str, int]: Словарь с количеством использований каждого скрипта
@@ -53,7 +53,7 @@ async def get_generation_stats(hours: int = 24) -> Dict[str, Any]:
     Получить общую статистику генерации
     
     Args:
-        hours: Количество часов для анализа
+        hours: Number of hours for analysis
         
     Returns:
         Dict[str, Any]: Статистика генерации

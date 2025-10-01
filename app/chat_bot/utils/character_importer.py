@@ -134,15 +134,25 @@ class CharacterImporter:
         character_data: Dict[str, Any], 
         db: AsyncSession
     ) -> CharacterDB:
-        """Создает нового персонажа в БД в формате Alpaca."""
+        """Создает нового персонажа в БД с упрощенной структурой."""
+        
+        # Получаем обязательные поля
+        name = character_data.get('name', 'Unknown')
+        character_appearance = character_data.get('character_appearance', '')
+        location = character_data.get('location', '')
+        
+        # Создаем базовый промпт из внешности и локации
+        prompt = f"Character: {name}"
+        if character_appearance:
+            prompt += f"\nAppearance: {character_appearance}"
+        if location:
+            prompt += f"\nLocation: {location}"
+        
         db_char = CharacterDB(
-            # Основные характеристики
-            name=character_data.get('name', 'Unknown'),
-            
-            # Alpaca формат - 3 основных столбца (убрали character_card)
-            instructions=character_data.get('instructions', ''),
-            system_prompt=character_data.get('system_prompt', ''),
-            response_format=character_data.get('response_format', '')
+            name=name,
+            prompt=prompt,
+            character_appearance=character_appearance,
+            location=location
         )
         
         db.add(db_char)
@@ -156,11 +166,25 @@ class CharacterImporter:
         character_data: Dict[str, Any], 
         db: AsyncSession
     ) -> CharacterDB:
-        """Обновляет существующего персонажа в БД в формате Alpaca."""
-        # Alpaca формат - 3 основных столбца (убрали character_card)
-        existing_char.instructions = character_data.get('instructions', existing_char.instructions)
-        existing_char.system_prompt = character_data.get('system_prompt', existing_char.system_prompt)
-        existing_char.response_format = character_data.get('response_format', existing_char.response_format)
+        """Обновляет существующего персонажа в БД с упрощенной структурой."""
+        
+        # Получаем обязательные поля
+        name = character_data.get('name', existing_char.name)
+        character_appearance = character_data.get('character_appearance', '')
+        location = character_data.get('location', '')
+        
+        # Создаем базовый промпт из внешности и локации
+        prompt = f"Character: {name}"
+        if character_appearance:
+            prompt += f"\nAppearance: {character_appearance}"
+        if location:
+            prompt += f"\nLocation: {location}"
+        
+        # Обновляем поля
+        existing_char.name = name
+        existing_char.prompt = prompt
+        existing_char.character_appearance = character_appearance
+        existing_char.location = location
         
         await db.commit()
         await db.refresh(existing_char)

@@ -24,7 +24,7 @@ class Settings(BaseSettings):
     TEMP_DIR: Path = Field(default_factory=lambda: Path(__file__).parent.parent.parent.parent / "temp", description="Директория временных файлов")
     
     # --- Настройки Stable Diffusion ---
-    MODEL_NAME: str = Field(default="dreamshaper_8.safetensors", description="Название модели Stable Diffusion")
+    MODEL_NAME: str = Field(default="counterfeitV30_v30.safetensors", description="Название модели Stable Diffusion")
     VAE_NAME: Optional[str] = Field(default=None, description="Название VAE модели")
     LORA_NAME: Optional[str] = Field(default=None, description="Название LoRA модели")
     

@@ -1,197 +1,57 @@
 ---
-description: 
-globs: 
 alwaysApply: true
 ---
 
+# Правила проекта Art Generation
 
-- Отвечай на русском языке.
-- Перед тем как внести изменения опиши общий план реализации по пунктам и после приступай к реализации
--Можешь давать советы по реализации получше.
--Не создавай никогда файлы README.MD если тебя не просят 
--Ты специалист по Stable Diffusion WebUI и её API
--Следуй принцыпам DRY, KISS, SOLID
--Используй всегда докстирнги и типизацию
+## Архитектура проекта
+Этот проект представляет собой систему генерации изображений с использованием Stable Diffusion WebUI и чат-бота с персонажами.
 
-  You are an expert in Python, FastAPI, Django, and scalable API development.
-  
-  Key Principles
-  - Write concise, technical responses with accurate Python examples.
-  - Use functional, declarative programming; avoid classes where possible.
-  - Prefer iteration and modularization over code duplication.
-  - Use descriptive variable names with auxiliary verbs (e.g., is_active, has_permission).
-  - Use lowercase with underscores for directories and files (e.g., routers/user_routes.py).
-  - Favor named exports for routes and utility functions.
-  - Use the Receive an Object, Return an Object (RORO) pattern.
-  
-  Python/FastAPI
-  - Use def for pure functions and async def for asynchronous operations.
-  - Use type hints for all function signatures. Prefer Pydantic models over raw dictionaries for input validation.
-  - File structure: exported router, sub-routes, utilities, static content, types (models, schemas).
-  - Avoid unnecessary curly braces in conditional statements.
-  - For single-line statements in conditionals, omit curly braces.
-  - Use concise, one-line syntax for simple conditional statements (e.g., if condition: do_something()).
-  
-  Error Handling and Validation
-  - Prioritize error handling and edge cases:
-    - Handle errors and edge cases at the beginning of functions.
-    - Use early returns for error conditions to avoid deeply nested if statements.
-    - Place the happy path last in the function for improved readability.
-    - Avoid unnecessary else statements; use the if-return pattern instead.
-    - Use guard clauses to handle preconditions and invalid states early.
-    - Implement proper error logging and user-friendly error messages.
-    - Use custom error types or error factories for consistent error handling.
-  
-  Dependencies
-  - FastAPI
-  - Pydantic v2
-  - Async database libraries like asyncpg or aiomysql
-  - SQLAlchemy 2.0 (if using ORM features)
-  
-  FastAPI-Specific Guidelines
-  - Use functional components (plain functions) and Pydantic models for input validation and response schemas.
-  - Use declarative route definitions with clear return type annotations.
-  - Use def for synchronous operations and async def for asynchronous ones.
-  - Minimize @app.on_event("startup") and @app.on_event("shutdown"); prefer lifespan context managers for managing startup and shutdown events.
-  - Use middleware for logging, error monitoring, and performance optimization.
-  - Optimize for performance using async functions for I/O-bound tasks, caching strategies, and lazy loading.
-  - Use HTTPException for expected errors and model them as specific HTTP responses.
-  - Use middleware for handling unexpected errors, logging, and error monitoring.
-  - Use Pydantic's BaseModel for consistent input/output validation and response schemas.
-  
-  Performance Optimization
-  - Minimize blocking I/O operations; use asynchronous operations for all database calls and external API requests.
-  - Implement caching for static and frequently accessed data using tools like Redis or in-memory stores.
-  - Optimize data serialization and deserialization with Pydantic.
-  - Use lazy loading techniques for large datasets and substantial API responses.
-  
-  Key Conventions
-  1. Rely on FastAPI’s dependency injection system for managing state and shared resources.
-  2. Prioritize API performance metrics (response time, latency, throughput).
-  3. Limit blocking operations in routes:
-     - Favor asynchronous and non-blocking flows.
-     - Use dedicated async functions for database and external API operations.
-     - Structure routes and dependencies clearly to optimize readability and maintainability.
-  
-  Refer to FastAPI documentation for Data Models, Path Operations, and Middleware for best practices.
-  
-erations, and Middleware for best practices.
+### Основные компоненты:
+- **FastAPI приложение** (`app/main.py`) - основной API сервер
+- **Stable Diffusion WebUI** - генерация изображений
+- **Text Generation WebUI** - чат-бот с персонажами
+- **База данных** - SQLite/PostgreSQL для хранения данных
+- **Telegram бот** - мониторинг и уведомления
 
- Дополненные правила для проекта с Stable Diffusion и text-generation-webui
+## Структура проекта
+```
+app/
+├── api/endpoints/          # API эндпоинты
+├── auth/                   # Аутентификация
+├── chat_bot/              # Чат-бот функциональность
+├── config/                # Конфигурация
+├── core/                  # Основные компоненты
+├── database/              # Работа с БД
+├── models/                # Модели данных
+├── routers/               # Роутеры FastAPI
+├── schemas/               # Pydantic схемы
+├── services/              # Бизнес-логика
+└── utils/                 # Утилиты
+```
 
-## Основные принципы Python/FastAPI
-- Пиши лаконичные, технические ответы с точными примерами на Python
-- Используй функциональное, декларативное программирование; избегай классов где возможно
-- Предпочитай итерацию и модуляризацию дублированию кода
-- Используй описательные имена переменных с вспомогательными глаголами (например, is_active, has_permission)
-- Используй нижний регистр с подчеркиваниями для директорий и файлов (например, routers/user_routes.py)
-- Предпочитай именованные экспорты для маршрутов и утилитарных функций
-- Используй паттерн Receive an Object, Return an Object (RORO)
+## Правила работы с кодом
+- Все API эндпоинты должны быть асинхронными
+- Используй Pydantic модели для валидации входных/выходных данных
+- Логируй все важные операции
+- Обрабатывай ошибки gracefully
+- Используй типизацию везде
+- Документируй функции и классы
 
-## Python/FastAPI
-- Используй def для чистых функций и async def для асинхронных операций
-- Используй типизацию для всех сигнатур функций. Предпочитай Pydantic модели сырым словарям для валидации входных данных
-- Структура файлов: экспортированный роутер, под-маршруты, утилиты, статический контент, типы (модели, схемы)
-- Избегай ненужных фигурных скобок в условных операторах
-- Для однострочных операторов в условных операторах опускай фигурные скобки
-- Используй лаконичный, однострочный синтаксис для простых условных операторов (например, if condition: do_something())
+## Работа с Stable Diffusion
+- Все запросы к SD WebUI должны иметь таймауты
+- Кэшируй результаты генерации когда возможно
+- Валидируй параметры генерации
+- Обрабатывай ошибки API
 
-## Обработка ошибок и валидация
-- Приоритет обработке ошибок и граничным случаям:
-  - Обрабатывай ошибки и граничные случаи в начале функций
-  - Используй ранние возвраты для условий ошибок, чтобы избежать глубоко вложенных if операторов
-  - Размещай счастливый путь последним в функции для улучшения читаемости
-  - Избегай ненужных else операторов; используй паттерн if-return вместо этого
-  - Используй guard clauses для обработки предварительных условий и недопустимых состояний рано
-  - Реализуй правильное логирование ошибок и удобные для пользователя сообщения об ошибках
-  - Используй пользовательские типы ошибок или фабрики ошибок для последовательной обработки ошибок
+## Работа с чат-ботом
+- Персонажи хранятся в БД
+- История чатов сохраняется
+- Используй streaming для длинных ответов
+- Валидируй входные сообщения
 
-## Зависимости
-- FastAPI
-- Pydantic v2
-- Асинхронные библиотеки баз данных, такие как asyncpg или aiomysql
-- SQLAlchemy 2.0 (если используются функции ORM)
-
-## Рекомендации по FastAPI
-- Используй функциональные компоненты (простые функции) и Pydantic модели для валидации входных данных и схем ответов
-- Используй декларативные определения маршрутов с четкими аннотациями типов возврата
-- Используй def для синхронных операций и async def для асинхронных
-- Минимизируй @app.on_event("startup") и @app.on_event("shutdown"); предпочитай менеджеры контекста lifespan для управления событиями запуска и завершения
-- Используй middleware для логирования, мониторинга ошибок и оптимизации производительности
-- Оптимизируй для производительности, используя асинхронные функции для задач, связанных с I/O, стратегии кэширования и ленивую загрузку
-- Используй HTTPException для ожидаемых ошибок и моделируй их как специфические HTTP ответы
-- Используй middleware для обработки неожиданных ошибок, логирования и мониторинга ошибок
-- Используй BaseModel Pydantic для последовательной валидации входных/выходных данных и схем ответов
-
-## Оптимизация производительности
-- Минимизируй блокирующие операции I/O; используй асинхронные операции для всех вызовов базы данных и внешних API запросов
-- Реализуй кэширование для статических и часто используемых данных с помощью таких инструментов, как Redis или in-memory stores
-- Оптимизируй сериализацию и десериализацию данных с помощью Pydantic
-- Используй техники ленивой загрузки для больших наборов данных и существенных ответов API
-
-## Ключевые соглашения
-1. Полагайся на систему внедрения зависимостей FastAPI для управления состоянием и общими ресурсами
-2. Приоритет метрикам производительности API (время отклика, задержка, пропускная способность)
-3. Ограничивай блокирующие операции в маршрутах:
-   - Предпочитай асинхронные и неблокирующие потоки
-   - Используй выделенные асинхронные функции для операций базы данных и внешних API
-   - Структурируй маршруты и зависимости четко для оптимизации читаемости и поддерживаемости
-
-## Специфика Stable Diffusion
-- Используй асинхронные операции для генерации изображений
-- Реализуй правильное управление памятью GPU
-- Используй Pydantic модели для валидации параметров генерации
-- Обрабатывай длительные операции с помощью background tasks
-- Реализуй кэширование для часто используемых промптов и настроек
-- Используй правильные типы данных для параметров (float для cfg_scale, int для steps)
-- Обрабатывай ошибки генерации изображений отдельно от других ошибок
-- Используй валидацию размеров изображений и ограничений модели
-
-## Специфика text-generation-webui
-- Используй асинхронные HTTP клиенты для взаимодействия с WebUI API
-- Реализуй правильное управление состоянием сервера WebUI
-- Обрабатывай длительные операции генерации текста
-- Используй правильные параметры генерации (temperature, top_p, top_k)
-- Реализуй кэширование для персонажей и контекста
-- Обрабатывай ошибки подключения к WebUI серверу
-- Используй правильные форматы промптов для разных моделей
-- Реализуй управление историей диалогов
-
-## Управление ресурсами
-- Используй контекстные менеджеры для управления соединениями
-- Реализуй правильное освобождение ресурсов GPU
-- Используй пулы соединений для баз данных
-- Обрабатывай таймауты для внешних API
-- Реализуй retry логику для нестабильных соединений
-
-## Логирование и мониторинг
-- Используй структурированное логирование
-- Логируй метрики производительности
-- Отслеживай использование ресурсов
-- Реализуй алерты для критических ошибок
-- Используй разные уровни логирования для разных компонентов
-
-## Безопасность
-- Валидируй все входные данные
-- Используй правильные HTTP статус коды
-- Обрабатывай чувствительные данные безопасно
-- Реализуй rate limiting для API
-- Используй CORS правильно
-
-## Тестирование
-- Пиши unit тесты для утилитарных функций
-- Используй моки для внешних сервисов
-- Тестируй граничные случаи
-- Используй фикстуры для тестовых данных
-- Тестируй асинхронные функции правильно
-
-## Документация
-- Используй docstrings для всех функций
-- Документируй API endpoints
-- Обновляй README при изменении архитектуры
-- Используй типизацию как документацию
-- Комментируй сложную бизнес-логику
-
-Ссылайся на документацию FastAPI для Data Models, Path Operations и Middleware для лучших практик. 
- - изменяй старый файл не нужно создавать новый
- = важный фарл для настройки текстовой модели textgen_webui_service.py
+## База данных
+- Используй Alembic для миграций
+- Все модели должны быть в `app/models/`
+- Используй async/await для всех DB операций
+- Создавай индексы для часто запрашиваемых полей

@@ -12,9 +12,26 @@ POSTGRES_DB = os.getenv("POSTGRES_DB")
 DB_HOST = os.getenv("DB_HOST")
 DB_PORT = os.getenv("DB_PORT")
 
+# URL подключения к базе данных
 DATABASE_URL = f"postgresql+asyncpg://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{DB_HOST}:{DB_PORT}/{POSTGRES_DB}"
 
-engine = create_async_engine(DATABASE_URL, echo=True)
+engine = create_async_engine(
+    DATABASE_URL, 
+    echo=True,
+    # Настройки для правильной работы с Unicode
+    connect_args={
+        # Дополнительные настройки для asyncpg
+        "command_timeout": 60,
+        "server_settings": {
+            "jit": "off"
+        }
+    },
+    # Дополнительные настройки для PostgreSQL
+    pool_pre_ping=True,
+    pool_recycle=300,
+    # Настройки для правильной работы с Unicode в SQLAlchemy
+    echo_pool=True
+)
 
 async_session_maker = async_sessionmaker(
     engine, expire_on_commit=False, class_=AsyncSession

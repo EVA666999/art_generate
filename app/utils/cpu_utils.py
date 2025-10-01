@@ -63,6 +63,6 @@ def print_cpu_optimization_info():
     print(f"  Соотношение ядер: {logical_cores/physical_cores:.1f}:1")
     
     if logical_cores > physical_cores:
-        print("  ⚠️  Обнаружен гипертрединг - используем только физические ядра!")
+        print("  [WARNING]  Обнаружен гипертрединг - используем только физические ядра!")
     
     return optimal_threads, optimal_batch 

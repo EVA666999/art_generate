@@ -8,11 +8,13 @@ import base64
 from io import BytesIO
 from PIL import Image
 import time
+from app.config.generation_defaults import DEFAULT_GENERATION_PARAMS
 from datetime import datetime
 import traceback
 from typing import Dict, Any, Optional
 import logging
 import os
+from app.utils.generation_logger import GenerationLogger
 from tenacity import retry, stop_after_attempt, wait_exponential
 
 from app.schemas.generation import GenerationSettings, GenerationResponse, FaceRefinementSettings
@@ -23,7 +25,7 @@ from pathlib import Path
 project_root = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(project_root))
 
-from app.config.generation_defaults import DEFAULT_GENERATION_PARAMS
+from app.config.generation_defaults import get_generation_params
 from app.config.default_prompts import get_default_positive_prompts, get_default_negative_prompts
 from app.utils.generation_stats import generation_stats
 from app.utils.memory_utils import get_memory_usage, unload_sd_memory, clear_gpu_memory, fix_device_conflict
@@ -45,6 +47,7 @@ class FaceRefinementService:
         self.client = httpx.AsyncClient(timeout=300.0)
         self.last_cleanup = time.time()
         self.cleanup_interval = 300  # 5 минут
+        self.generation_logger = GenerationLogger()
         
         # НОВОЕ: Добавляем счетчик запросов для отладки
         self._request_counter = 0
@@ -87,12 +90,18 @@ class FaceRefinementService:
             if "alwayson_scripts" in payload and "ADetailer" in payload["alwayson_scripts"]:
                 adetailer_config = payload["alwayson_scripts"]["ADetailer"]
                 logger.info(f"[REQUEST-{request_id}] ADETAILER КОНФИГУРАЦИЯ:")
-                logger.info(f"[REQUEST-{request_id}] - Включен: {adetailer_config.get('args', [False])[0] if adetailer_config.get('args') else 'НЕТ ARGS'}")
-                if len(adetailer_config.get('args', [])) > 1:
-                    adetailer_settings = adetailer_config['args'][1]
-                    logger.info(f"[REQUEST-{request_id}] - Модель: {adetailer_settings.get('ad_model', 'НЕ УСТАНОВЛЕНА')}")
-                    logger.info(f"[REQUEST-{request_id}] - Шаги: {adetailer_settings.get('ad_steps', 'НЕ УСТАНОВЛЕНЫ')}")
-                    logger.info(f"[REQUEST-{request_id}] - CFG: {adetailer_settings.get('ad_cfg_scale', 'НЕ УСТАНОВЛЕН')}")
+                adetailer_args = adetailer_config.get('args', [])
+                if len(adetailer_args) > 0:
+                    logger.info(f"[REQUEST-{request_id}] - Включен: {adetailer_args[0]}")
+                    if len(adetailer_args) > 1 and isinstance(adetailer_args[1], dict):
+                        adetailer_settings = adetailer_args[1]
+                        logger.info(f"[REQUEST-{request_id}] - Модель: {adetailer_settings.get('ad_model', 'НЕ УСТАНОВЛЕНА')}")
+                        logger.info(f"[REQUEST-{request_id}] - Шаги: {adetailer_settings.get('ad_steps', 'НЕ УСТАНОВЛЕНЫ')}")
+                        logger.info(f"[REQUEST-{request_id}] - CFG: {adetailer_settings.get('ad_cfg_scale', 'НЕ УСТАНОВЛЕН')}")
+                    else:
+                        logger.warning(f"[REQUEST-{request_id}] - Неправильная структура ADetailer args: {adetailer_args}")
+                else:
+                    logger.warning(f"[REQUEST-{request_id}] - ADetailer args пустой")
             
             # ИСПРАВЛЕНО: Удаляем потенциально проблемные параметры
             problematic_params = ['images', 'init_images', 'mask']
@@ -101,12 +110,53 @@ class FaceRefinementService:
                     logger.warning(f"[REQUEST-{request_id}] Удаляем проблемный параметр: {param}")
                     del payload[param]
             
-            # Отправляем запрос
+            # НОВОЕ: Валидация ADetailer конфигурации
+            if "alwayson_scripts" in payload and "ADetailer" in payload["alwayson_scripts"]:
+                adetailer_config = payload["alwayson_scripts"]["ADetailer"]
+                adetailer_args = adetailer_config.get("args", [])
+                
+                # Проверяем, что первый элемент - boolean (включение/выключение)
+                if len(adetailer_args) == 0:
+                    logger.warning(f"[REQUEST-{request_id}] ADetailer args пустой, отключаем")
+                    del payload["alwayson_scripts"]["ADetailer"]
+                elif not isinstance(adetailer_args[0], bool):
+                    logger.warning(f"[REQUEST-{request_id}] Первый элемент ADetailer args не boolean: {type(adetailer_args[0])}, исправляем")
+                    adetailer_args[0] = True
+                    payload["alwayson_scripts"]["ADetailer"]["args"] = adetailer_args
+                elif not adetailer_args[0]:
+                    logger.info(f"[REQUEST-{request_id}] ADetailer отключен, удаляем из payload")
+                    del payload["alwayson_scripts"]["ADetailer"]
+                else:
+                    logger.info(f"[REQUEST-{request_id}] ADetailer включен, конфигурация валидна")
+            
+            # Отправляем запрос с временными метками
+            import time
+            start_time = time.time()
             logger.info(f"[REQUEST-{request_id}] Отправляем HTTP запрос к {self.api_url}/sdapi/v1/txt2img")
+            logger.info(f"[REQUEST-{request_id}] Время начала: {start_time}")
+            
+            # НОВОЕ: Детальное логирование payload для диагностики 422 ошибки
+            logger.info(f"[REQUEST-{request_id}] ПОЛНЫЙ PAYLOAD:")
+            logger.info(f"[REQUEST-{request_id}] {json.dumps(payload, indent=2, ensure_ascii=False)}")
+            
             response = await self.client.post(
                 f"{self.api_url}/sdapi/v1/txt2img",
                 json=payload
             )
+            
+            request_time = time.time()
+            logger.info(f"[REQUEST-{request_id}] Время завершения запроса: {request_time}")
+            logger.info(f"[REQUEST-{request_id}] Время запроса: {request_time - start_time:.2f} сек")
+            
+            # НОВОЕ: Детальное логирование ошибок 422
+            if response.status_code == 422:
+                logger.error(f"[REQUEST-{request_id}] [ERROR] ОШИБКА 422: Unprocessable Entity")
+                try:
+                    error_response = response.json()
+                    logger.error(f"[REQUEST-{request_id}] Ответ сервера: {json.dumps(error_response, indent=2, ensure_ascii=False)}")
+                except:
+                    logger.error(f"[REQUEST-{request_id}] Не удалось распарсить JSON ответ: {response.text}")
+            
             response.raise_for_status()
             
             # Получаем ответ API
@@ -119,12 +169,12 @@ class FaceRefinementService:
             logger.info(f"[REQUEST-{request_id}] - Ожидалось изображений: 1")
             
             if images_count != 1:
-                logger.error(f"[REQUEST-{request_id}] ❌ ПРОБЛЕМА: Получено {images_count} изображений вместо 1!")
+                logger.error(f"[REQUEST-{request_id}] [ERROR] ПРОБЛЕМА: Получено {images_count} изображений вместо 1!")
                 # Логируем info для анализа
                 info = response_data.get('info', '{}')
                 logger.error(f"[REQUEST-{request_id}] Info из ответа: {info}")
             else:
-                logger.info(f"[REQUEST-{request_id}] ✅ Получено корректное количество изображений")
+                logger.info(f"[REQUEST-{request_id}] [OK] Получено корректное количество изображений")
             
             logger.info(f"[REQUEST-{request_id}] =========================")
             return response_data
@@ -145,7 +195,7 @@ class FaceRefinementService:
         # ИСПРАВЛЕНО: Создаем чистую копию базовых настроек
         payload = {}
         
-        # Добавляем ВСЕ параметры из DEFAULT_GENERATION_PARAMS
+        # Добавляем ВСЕ параметры из настроек по умолчанию
         essential_params = [
             'sampler_name', 'scheduler', 'steps', 'width', 'height', 'cfg_scale',
             'restore_faces', 'enable_hr', 'denoising_strength', 'hr_scale', 
@@ -155,9 +205,12 @@ class FaceRefinementService:
             'lora_models', 'script_args', 'hr_prompt', 'hr_negative_prompt'
         ]
         
+        # Получаем настройки по умолчанию
+        default_params = get_generation_params("default")
+        
         for param in essential_params:
-            if param in DEFAULT_GENERATION_PARAMS:
-                payload[param] = DEFAULT_GENERATION_PARAMS[param]
+            if param in default_params:
+                payload[param] = default_params[param]
         
         logger.info(f"Базовые параметры добавлены: {list(payload.keys())}")
         
@@ -187,23 +240,33 @@ class FaceRefinementService:
             logger.info("=================================")
         if 'alwayson_scripts' in payload and 'ADetailer' in payload['alwayson_scripts']:
             adetailer_args = payload['alwayson_scripts']['ADetailer']['args']
-            if len(adetailer_args) > 0 and isinstance(adetailer_args[0], dict):
-                adetailer_config = adetailer_args[0]
-                logger.info("=== ДЕТАЛЬНАЯ ИНФОРМАЦИЯ ADETAILER ===")
-                logger.info(f"ADetailer model: {adetailer_config.get('ad_model', 'НЕ УСТАНОВЛЕН')}")
-                logger.info(f"ADetailer prompt: {adetailer_config.get('ad_prompt', 'НЕ УСТАНОВЛЕН')}")
-                logger.info(f"ADetailer negative prompt: {adetailer_config.get('ad_negative_prompt', 'НЕ УСТАНОВЛЕН')}")
-                logger.info(f"ADetailer steps: {adetailer_config.get('ad_steps', 'НЕ УСТАНОВЛЕН')}")
-                logger.info(f"ADetailer CFG: {adetailer_config.get('ad_cfg_scale', 'НЕ УСТАНОВЛЕН')}")
-                logger.info(f"ADetailer sampler: {adetailer_config.get('ad_sampler_name', 'НЕ УСТАНОВЛЕН')}")
-                logger.info(f"ADetailer denoising: {adetailer_config.get('ad_denoising_strength', 'НЕ УСТАНОВЛЕН')}")
-                logger.info(f"ADetailer confidence: {adetailer_config.get('ad_confidence', 'НЕ УСТАНОВЛЕН')}")
-                logger.info(f"ADetailer use_steps: {adetailer_config.get('ad_use_steps', 'НЕ УСТАНОВЛЕН')}")
-                logger.info(f"ADetailer use_cfg_scale: {adetailer_config.get('ad_use_cfg_scale', 'НЕ УСТАНОВЛЕН')}")
-                logger.info(f"ADetailer use_sampler: {adetailer_config.get('ad_use_sampler', 'НЕ УСТАНОВЛЕН')}")
-                logger.info("==========================================")
+            logger.info("=== ДЕТАЛЬНАЯ ИНФОРМАЦИЯ ADETAILER ===")
+            logger.info(f"ADetailer args count: {len(adetailer_args)}")
+            logger.info(f"ADetailer args: {adetailer_args}")
+            
+            if len(adetailer_args) > 0:
+                logger.info(f"ADetailer включен: {adetailer_args[0]}")
+                
+                # Проверяем конфигурации лиц и рук
+                for i, arg in enumerate(adetailer_args[1:], 1):
+                    if isinstance(arg, dict):
+                        logger.info(f"ADetailer config {i}:")
+                        logger.info(f"  - model: {arg.get('ad_model', 'НЕ УСТАНОВЛЕН')}")
+                        logger.info(f"  - prompt: {arg.get('ad_prompt', 'НЕ УСТАНОВЛЕН')}")
+                        logger.info(f"  - negative prompt: {arg.get('ad_negative_prompt', 'НЕ УСТАНОВЛЕН')}")
+                        logger.info(f"  - steps: {arg.get('ad_steps', 'НЕ УСТАНОВЛЕН')}")
+                        logger.info(f"  - CFG: {arg.get('ad_cfg_scale', 'НЕ УСТАНОВЛЕН')}")
+                        logger.info(f"  - sampler: {arg.get('ad_sampler_name', 'НЕ УСТАНОВЛЕН')}")
+                        logger.info(f"  - denoising: {arg.get('ad_denoising_strength', 'НЕ УСТАНОВЛЕН')}")
+                        logger.info(f"  - confidence: {arg.get('ad_confidence', 'НЕ УСТАНОВЛЕН')}")
+                        logger.info(f"  - use_steps: {arg.get('ad_use_steps', 'НЕ УСТАНОВЛЕН')}")
+                        logger.info(f"  - use_cfg_scale: {arg.get('ad_use_cfg_scale', 'НЕ УСТАНОВЛЕН')}")
+                        logger.info(f"  - use_sampler: {arg.get('ad_use_sampler', 'НЕ УСТАНОВЛЕН')}")
+                    else:
+                        logger.warning(f"ADetailer config {i} не является словарем: {type(arg)}")
             else:
-                logger.info("ADetailer: неправильная структура args")
+                logger.warning("ADetailer: args пустой")
+            logger.info("==========================================")
         logger.info("=====================================")
         
         # КРИТИЧЕСКИ ВАЖНО: Устанавливаем параметры для одного изображения
@@ -221,17 +284,38 @@ class FaceRefinementService:
         logger.info(f"  save_grid: {payload['save_grid']}")
         
         # Обновляем пользовательскими настройками (НО НЕ КРИТИЧЕСКИМИ)
-        settings_dict = settings.dict(exclude_none=True)
-        safe_settings = {k: v for k, v in settings_dict.items() 
-                        if k not in ['n_samples', 'batch_size', 'n_iter', 'save_grid']}
-        payload.update(safe_settings)
+        # Используем только те значения из settings, которые не None
+        settings_dict = settings.dict()
+        safe_settings = {}
+        for k, v in settings_dict.items():
+            if k not in ['n_samples', 'batch_size', 'n_iter', 'save_grid']:
+                safe_settings[k] = v
+        
+        # ИСПРАВЛЕНО: Обновляем только те параметры, которые есть в settings и не None
+        # НО НЕ ПЕРЕЗАПИСЫВАЕМ КРИТИЧЕСКИЕ ПАРАМЕТРЫ ИЗ КОНФИГУРАЦИИ
+        critical_params = ['steps', 'cfg_scale', 'sampler_name', 'scheduler']  # Критические параметры из конфигурации
+        for k, v in safe_settings.items():
+            if k in critical_params:
+                # ИСПРАВЛЕНО: Не перезаписываем критические параметры из конфигурации
+                logger.info(f"🔒 ИГНОРИРУЕМ перезапись критического параметра {k}={v} (используем значение из конфигурации)")
+                continue
+            elif k in payload:  # Обновляем только существующие параметры
+                payload[k] = v
+            else:
+                payload[k] = v  # Добавляем новые параметры
+        
+        # ДЕТАЛЬНАЯ ОТЛАДКА ПАРАМЕТРОВ
+        logger.info("=== ОТЛАДКА ПАРАМЕТРОВ ===")
+        logger.info(f"🔍 DEFAULT_GENERATION_PARAMS['steps']: {DEFAULT_GENERATION_PARAMS.get('steps')}")
+        logger.info(f"🔍 settings.steps: {getattr(settings, 'steps', 'НЕТ')}")
+        logger.info(f"🔍 payload['steps']: {payload.get('steps')}")
+        logger.info("==========================")
         
         logger.info(f"Пользовательские настройки добавлены: {list(safe_settings.keys())}")
         
         # ADetailer уже включен через essential_params
         logger.info("ADetailer и LoRA модели включены через essential_params")
         
-        # НОВОЕ: Финальная проверка критических параметров
         critical_check = {
             "n_samples": payload.get("n_samples"),
             "batch_size": payload.get("batch_size"), 
@@ -242,79 +326,151 @@ class FaceRefinementService:
         
         # Проверяем на правильность
         if payload.get("n_samples") != 1:
-            logger.error(f"❌ ОШИБКА: n_samples = {payload.get('n_samples')}, должно быть 1!")
+            logger.error(f"[ERROR] ОШИБКА: n_samples = {payload.get('n_samples')}, должно быть 1!")
             payload["n_samples"] = 1
             
         if payload.get("batch_size") != 1:
-            logger.error(f"❌ ОШИБКА: batch_size = {payload.get('batch_size')}, должно быть 1!")
+            logger.error(f"[ERROR] ОШИБКА: batch_size = {payload.get('batch_size')}, должно быть 1!")
             payload["batch_size"] = 1
             
         if payload.get("n_iter") != 1:
-            logger.error(f"❌ ОШИБКА: n_iter = {payload.get('n_iter')}, должно быть 1!")
+            logger.error(f"[ERROR] ОШИБКА: n_iter = {payload.get('n_iter')}, должно быть 1!")
             payload["n_iter"] = 1
+        
+        # IP-Adapter удален - используем только ADetailer
         
         logger.info("ФИНАЛЬНЫЙ PAYLOAD готов")
         logger.info("=====================================")
         
         return payload
 
-    async def generate_image(self, settings: GenerationSettings) -> GenerationResponse:
+    async def generate_image(self, settings: GenerationSettings, full_settings_for_logging: dict = None) -> GenerationResponse:
         """ИСПРАВЛЕННАЯ: Генерация изображения с предотвращением дублирования"""
         start_time = time.time()
         logger.info("🎯 НАЧИНАЕМ ГЕНЕРАЦИЮ ИЗОБРАЖЕНИЯ (ИСПРАВЛЕННАЯ ВЕРСИЯ)")
         
+        # Логируем информацию о модели
         try:
+            import sys
+            from pathlib import Path
+            webui_path = Path(__file__).parent.parent.parent / "stable-diffusion-webui"
+            sys.path.insert(0, str(webui_path))
+            from model_config import get_model_info
+            model_info = get_model_info()
+            if model_info:
+                logger.info(f"🤖 Используемая модель: {model_info['name']} ({model_info['size_mb']} MB)")
+                if model_info["vae_name"]:
+                    logger.info(f"🎨 VAE: {model_info['vae_name']}")
+                else:
+                    logger.info("🎨 VAE: Встроенный")
+            else:
+                logger.warning("[WARNING] Информация о модели недоступна")
+        except Exception as e:
+            logger.warning(f"[WARNING] Не удалось получить информацию о модели: {e}")
+        
+        try:
+            # Сохраняем оригинальные промпты пользователя для логирования
+            original_prompt = settings.prompt
+            original_negative_prompt = settings.negative_prompt
+            
             # Добавляем дефолтные промпты если нужно
             if settings.use_default_prompts:
                 logger.info("Добавляем дефолтные промпты")
-                default_positive = get_default_positive_prompts()
-                default_negative = get_default_negative_prompts()
+                from app.config.default_prompts import get_enhanced_prompts
                 
-                settings.prompt = f"{settings.prompt}, {default_positive}" if settings.prompt else default_positive
-                settings.negative_prompt = f"{settings.negative_prompt}, {default_negative}" if settings.negative_prompt else default_negative
+                enhanced_positive, enhanced_negative = get_enhanced_prompts(
+                    settings.prompt, 
+                    use_defaults=True
+                )
+                settings.prompt = enhanced_positive
+                settings.negative_prompt = enhanced_negative
 
             # ИСПРАВЛЕНО: Подготавливаем payload с проверками
             payload = self._prepare_payload(settings)
-            logger.info("✅ Payload подготовлен")
+            logger.info("[OK] Payload подготовлен")
+            
+            # ИСПРАВЛЕНО: Сохраняем payload для логирования
+            self._last_payload = payload
             
             # НОВОЕ: Дополнительная проверка перед отправкой
             if payload.get("n_samples") != 1:
-                logger.error(f"❌ КРИТИЧЕСКАЯ ОШИБКА: n_samples = {payload.get('n_samples')}")
+                logger.error(f"[ERROR] КРИТИЧЕСКАЯ ОШИБКА: n_samples = {payload.get('n_samples')}")
                 raise ValueError(f"Неправильное значение n_samples: {payload.get('n_samples')}")
             
             # Выполняем запрос к API
             api_response = await self._make_api_request(payload)
-            logger.info("✅ API запрос выполнен")
+            logger.info("[OK] API запрос выполнен")
             
             # НОВОЕ: Проверяем количество изображений в ответе
             received_images = len(api_response.get("images", []))
             if received_images != 1:
-                logger.error(f"❌ ПОЛУЧЕНО {received_images} ИЗОБРАЖЕНИЙ ВМЕСТО 1!")
-                logger.error(f"Info: {api_response.get('info', 'НЕТ INFO')}")
-                
                 # ИСПРАВЛЕНИЕ: Если получили больше одного изображения, берем только первое
                 if received_images > 1:
                     logger.warning("🔧 ИСПРАВЛЯЕМ: Берем только первое изображение")
                     api_response["images"] = [api_response["images"][0]]
-                    logger.info("✅ Оставлено только одно изображение")
+                    logger.info("[OK] Оставлено только одно изображение")
             
             # Создаем ответ
             result = GenerationResponse.from_api_response(api_response)
-            logger.info("✅ GenerationResponse создан")
+            logger.info("[OK] GenerationResponse создан")
             
             # Записываем статистику
             execution_time = time.time() - start_time
             self._save_generation_stats(settings, api_response, execution_time)
-            logger.info(f"✅ Генерация завершена за {execution_time:.2f} секунд")
+            logger.info(f"[OK] Генерация завершена за {execution_time:.2f} секунд")
 
             # Очищаем память
             await unload_sd_memory(self.api_url)
             
+            # Логируем генерацию
+            execution_time = time.time() - start_time
+            # ИСПРАВЛЕНО: Всегда используем payload для логирования, так как он содержит правильные значения
+            settings_for_logging = getattr(self, '_last_payload', {})
+            logger.info(f"🔍 ЛОГИРОВАНИЕ: Используем payload с steps={settings_for_logging.get('steps', 'НЕ НАЙДЕН')}, cfg_scale={settings_for_logging.get('cfg_scale', 'НЕ НАЙДЕН')}")
+            # Получаем улучшенные промпты для логирования
+            enhanced_prompt = settings_for_logging.get('prompt', settings.prompt)
+            enhanced_negative_prompt = settings_for_logging.get('negative_prompt', settings.negative_prompt)
+            
+            self.generation_logger.log_generation(
+                prompt=original_prompt,  # Оригинальный промпт пользователя
+                negative_prompt=original_negative_prompt,  # Оригинальный негативный промпт
+                character=getattr(settings, 'character', 'unknown'),
+                settings=settings_for_logging,
+                generation_time=execution_time,
+                image_url=result.image_urls[0] if hasattr(result, 'image_urls') and result.image_urls else "",
+                success=True,
+                enhanced_prompt=enhanced_prompt,  # Улучшенный промпт с дефолтными
+                enhanced_negative_prompt=enhanced_negative_prompt  # Улучшенный негативный промпт
+            )
+            
             return result
             
         except Exception as e:
-            logger.error(f"❌ Ошибка в generate_image: {str(e)}")
+            logger.error(f"[ERROR] Ошибка в generate_image: {str(e)}")
             logger.error(f"Traceback: {traceback.format_exc()}")
+            
+            # Логируем ошибку генерации
+            execution_time = time.time() - start_time
+            # ИСПРАВЛЕНО: Всегда используем payload для логирования, так как он содержит правильные значения
+            settings_for_logging = getattr(self, '_last_payload', {})
+            logger.info(f"🔍 ЛОГИРОВАНИЕ ОШИБКИ: Используем payload с steps={settings_for_logging.get('steps', 'НЕ НАЙДЕН')}, cfg_scale={settings_for_logging.get('cfg_scale', 'НЕ НАЙДЕН')}")
+            # Получаем улучшенные промпты для логирования ошибки
+            enhanced_prompt = settings_for_logging.get('prompt', settings.prompt)
+            enhanced_negative_prompt = settings_for_logging.get('negative_prompt', settings.negative_prompt)
+            
+            self.generation_logger.log_generation(
+                prompt=original_prompt,  # Оригинальный промпт пользователя
+                negative_prompt=original_negative_prompt,  # Оригинальный негативный промпт
+                character=getattr(settings, 'character', 'unknown'),
+                settings=settings_for_logging,
+                generation_time=execution_time,
+                image_url="",
+                success=False,
+                error=str(e),
+                enhanced_prompt=enhanced_prompt,  # Улучшенный промпт с дефолтными
+                enhanced_negative_prompt=enhanced_negative_prompt  # Улучшенный негативный промпт
+            )
+            
             raise
         finally:
             # Очищаем память в любом случае
@@ -336,7 +492,7 @@ class FaceRefinementService:
             
             # Обеспечиваем наличие ключей для статистики
             settings_dict["sampler_name"] = settings.sampler_name or info.get("sampler_name", "unknown")
-            settings_dict["steps"] = settings.steps or int(info.get("steps", 0))
+            settings_dict["steps"] = settings.steps or DEFAULT_GENERATION_PARAMS.get("steps", 10)
             settings_dict["width"] = settings.width or int(info.get("width", 0))
             settings_dict["height"] = settings.height or int(info.get("height", 0))
             settings_dict["cfg_scale"] = settings.cfg_scale or float(info.get("cfg_scale", 0))
@@ -370,20 +526,25 @@ class FaceRefinementService:
         try:
             logger.info(f"Starting face refinement with settings: {settings.dict()}")
             
+            # Получаем настройки по умолчанию
+            default_params = get_generation_params("default")
+            logger.info(f"🚨 FACE_REFINEMENT: default_params['steps'] = {default_params.get('steps')}")
+            logger.info(f"🚨 FACE_REFINEMENT: settings.override_params = {settings.override_params}")
+            
             generation_settings = GenerationSettings(
                 prompt=settings.prompt,
                 negative_prompt=settings.negative_prompt,
                 use_default_prompts=True,
-                steps=settings.override_params.get("sampling_steps", DEFAULT_GENERATION_PARAMS["steps"]),
-                cfg_scale=settings.override_params.get("cfg_scale", DEFAULT_GENERATION_PARAMS["cfg_scale"]),
-                width=settings.override_params.get("width", DEFAULT_GENERATION_PARAMS["width"]),
-                height=settings.override_params.get("height", DEFAULT_GENERATION_PARAMS["height"]),
+                steps=settings.override_params.get("sampling_steps", default_params["steps"]),
+                cfg_scale=settings.override_params.get("cfg_scale", default_params["cfg_scale"]),
+                width=settings.override_params.get("width", default_params["width"]),
+                height=settings.override_params.get("height", default_params["height"]),
                 restore_faces=True,
-                enable_hr=settings.override_params.get("enable_hr", DEFAULT_GENERATION_PARAMS["enable_hr"]),
+                enable_hr=settings.override_params.get("enable_hr", default_params["enable_hr"]),
                 denoising_strength=settings.refinement_strength,
-                hr_scale=settings.override_params.get("hr_scale", DEFAULT_GENERATION_PARAMS["hr_scale"]),
-                hr_upscaler=settings.override_params.get("hr_upscaler", DEFAULT_GENERATION_PARAMS["hr_upscaler"]),
-                hr_second_pass_steps=settings.override_params.get("hr_second_pass_steps", DEFAULT_GENERATION_PARAMS["hr_second_pass_steps"])
+                hr_scale=settings.override_params.get("hr_scale", default_params["hr_scale"]),
+                hr_upscaler=settings.override_params.get("hr_upscaler", default_params["hr_upscaler"]),
+                hr_second_pass_steps=settings.override_params.get("hr_second_pass_steps", default_params["hr_second_pass_steps"])
             )
             
             result = await self.generate_image(generation_settings)

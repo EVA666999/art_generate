@@ -1,792 +1,341 @@
 {
-  "total_generations": 227,
+  "total_generations": 94,
   "total_time": {
-    "formatted": "2:55:52",
-    "total_seconds": 10552.461847782135
+    "formatted": "1:03:14",
+    "total_seconds": 3794.8973500728607
   },
   "average_time": {
-    "formatted": "0:00:46",
-    "total_seconds": 46.48661606952482
+    "formatted": "0:00:40",
+    "total_seconds": 40.371248405030435
   },
   "by_sampler": {
-    "DPM++ 2M": {
-      "count": 197,
+    "Euler": {
+      "count": 94,
       "total_time": {
-        "formatted": "2:30:59",
-        "total_seconds": 9059.788513183594
+        "formatted": "1:03:14",
+        "total_seconds": 3794.8973500728607
       },
       "avg_time": {
-        "formatted": "0:00:45",
-        "total_seconds": 45.98877417859692
-      }
-    },
-    "DPM++ 2M Karras": {
-      "count": 30,
-      "total_time": {
-        "formatted": "0:24:52",
-        "total_seconds": 1492.6733345985413
-      },
-      "avg_time": {
-        "formatted": "0:00:49",
-        "total_seconds": 49.755777819951376
+        "formatted": "0:00:40",
+        "total_seconds": 40.371248405030435
       }
     }
   },
   "by_steps": {
-    "60": {
-      "count": 4,
+    "20": {
+      "count": 92,
       "total_time": {
-        "formatted": "0:03:04",
-        "total_seconds": 184.807204246521
+        "formatted": "1:01:55",
+        "total_seconds": 3715.9649846553802
       },
       "avg_time": {
-        "formatted": "0:00:46",
-        "total_seconds": 46.20180106163025
-      }
-    },
-    "40": {
-      "count": 17,
-      "total_time": {
-        "formatted": "0:19:04",
-        "total_seconds": 1144.4187772274017
-      },
-      "avg_time": {
-        "formatted": "0:01:07",
-        "total_seconds": 67.31875160161186
-      }
-    },
-    "30": {
-      "count": 57,
-      "total_time": {
-        "formatted": "0:50:46",
-        "total_seconds": 3046.585647583008
-      },
-      "avg_time": {
-        "formatted": "0:00:53",
-        "total_seconds": 53.44887101022821
-      }
-    },
-    "28": {
-      "count": 2,
-      "total_time": {
-        "formatted": "0:01:03",
-        "total_seconds": 63.28155064582825
-      },
-      "avg_time": {
-        "formatted": "0:00:31",
-        "total_seconds": 31.640775322914124
-      }
-    },
-    "22": {
-      "count": 5,
-      "total_time": {
-        "formatted": "0:03:14",
-        "total_seconds": 194.09305572509766
-      },
-      "avg_time": {
-        "formatted": "0:00:38",
-        "total_seconds": 38.81861114501953
-      }
-    },
-    "29": {
-      "count": 1,
-      "total_time": {
-        "formatted": "0:00:31",
-        "total_seconds": 31.599965810775757
-      },
-      "avg_time": {
-        "formatted": "0:00:31",
-        "total_seconds": 31.599965810775757
-      }
-    },
-    "23": {
-      "count": 3,
-      "total_time": {
-        "formatted": "0:01:28",
-        "total_seconds": 88.05893611907959
-      },
-      "avg_time": {
-        "formatted": "0:00:29",
-        "total_seconds": 29.352978706359863
+        "formatted": "0:00:40",
+        "total_seconds": 40.39092374625413
       }
     },
     "25": {
-      "count": 3,
+      "count": 2,
       "total_time": {
-        "formatted": "0:01:32",
-        "total_seconds": 92.33782744407654
+        "formatted": "0:01:18",
+        "total_seconds": 78.93236541748047
       },
       "avg_time": {
-        "formatted": "0:00:30",
-        "total_seconds": 30.77927581469218
-      }
-    },
-    "24": {
-      "count": 1,
-      "total_time": {
-        "formatted": "0:00:28",
-        "total_seconds": 28.323251724243164
-      },
-      "avg_time": {
-        "formatted": "0:00:28",
-        "total_seconds": 28.323251724243164
-      }
-    },
-    "20": {
-      "count": 3,
-      "total_time": {
-        "formatted": "0:01:32",
-        "total_seconds": 92.0060932636261
-      },
-      "avg_time": {
-        "formatted": "0:00:30",
-        "total_seconds": 30.668697754542034
-      }
-    },
-    "27": {
-      "count": 1,
-      "total_time": {
-        "formatted": "0:00:30",
-        "total_seconds": 30.187317609786987
-      },
-      "avg_time": {
-        "formatted": "0:00:30",
-        "total_seconds": 30.187317609786987
-      }
-    },
-    "26": {
-      "count": 1,
-      "total_time": {
-        "formatted": "0:00:29",
-        "total_seconds": 29.879613161087036
-      },
-      "avg_time": {
-        "formatted": "0:00:29",
-        "total_seconds": 29.879613161087036
-      }
-    },
-    "50": {
-      "count": 8,
-      "total_time": {
-        "formatted": "0:09:15",
-        "total_seconds": 555.0171360969543
-      },
-      "avg_time": {
-        "formatted": "0:01:09",
-        "total_seconds": 69.3771420121193
-      }
-    },
-    "45": {
-      "count": 65,
-      "total_time": {
-        "formatted": "0:33:56",
-        "total_seconds": 2036.0958456993103
-      },
-      "avg_time": {
-        "formatted": "0:00:31",
-        "total_seconds": 31.32455147229708
-      }
-    },
-    "80": {
-      "count": 33,
-      "total_time": {
-        "formatted": "0:29:22",
-        "total_seconds": 1762.659316778183
-      },
-      "avg_time": {
-        "formatted": "0:00:53",
-        "total_seconds": 53.41391869024797
-      }
-    },
-    "100": {
-      "count": 10,
-      "total_time": {
-        "formatted": "0:10:11",
-        "total_seconds": 611.4355611801147
-      },
-      "avg_time": {
-        "formatted": "0:01:01",
-        "total_seconds": 61.143556118011475
-      }
-    },
-    "35": {
-      "count": 13,
-      "total_time": {
-        "formatted": "0:09:21",
-        "total_seconds": 561.674747467041
-      },
-      "avg_time": {
-        "formatted": "0:00:43",
-        "total_seconds": 43.205749805157
+        "formatted": "0:00:39",
+        "total_seconds": 39.466182708740234
       }
     }
   },
   "by_resolution": {
-    "512x512": {
-      "count": 19,
+    "512x853": {
+      "count": 9,
       "total_time": {
-        "formatted": "0:10:11",
-        "total_seconds": 611.316977262497
+        "formatted": "0:07:11",
+        "total_seconds": 431.18149733543396
       },
       "avg_time": {
-        "formatted": "0:00:32",
-        "total_seconds": 32.17457775065773
+        "formatted": "0:00:47",
+        "total_seconds": 47.90905525949266
       }
     },
-    "768x768": {
-      "count": 18,
+    "344x432": {
+      "count": 1,
       "total_time": {
-        "formatted": "0:19:48",
-        "total_seconds": 1188.0797226428986
+        "formatted": "0:00:25",
+        "total_seconds": 25.91166353225708
       },
       "avg_time": {
-        "formatted": "0:01:06",
-        "total_seconds": 66.00442903571658
-      }
-    },
-    "768x512": {
-      "count": 7,
-      "total_time": {
-        "formatted": "0:07:06",
-        "total_seconds": 426.93576765060425
-      },
-      "avg_time": {
-        "formatted": "0:01:00",
-        "total_seconds": 60.99082395008632
+        "formatted": "0:00:25",
+        "total_seconds": 25.91166353225708
       }
     },
     "512x768": {
-      "count": 86,
+      "count": 82,
       "total_time": {
-        "formatted": "1:15:55",
-        "total_seconds": 4555.298941612244
+        "formatted": "0:54:24",
+        "total_seconds": 3264.8682160377502
       },
       "avg_time": {
-        "formatted": "0:00:52",
-        "total_seconds": 52.968592344328414
+        "formatted": "0:00:39",
+        "total_seconds": 39.815466049240854
       }
     },
-    "512x853": {
-      "count": 97,
+    "512x512": {
+      "count": 2,
       "total_time": {
-        "formatted": "1:02:50",
-        "total_seconds": 3770.8304386138916
+        "formatted": "0:01:12",
+        "total_seconds": 72.93597316741943
       },
       "avg_time": {
-        "formatted": "0:00:38",
-        "total_seconds": 38.874540604266926
+        "formatted": "0:00:36",
+        "total_seconds": 36.46798658370972
       }
     }
   },
   "by_cfg_scale": {
     "7.0": {
-      "count": 52,
+      "count": 9,
       "total_time": {
-        "formatted": "0:42:22",
-        "total_seconds": 2542.393970489502
+        "formatted": "0:07:11",
+        "total_seconds": 431.18149733543396
       },
       "avg_time": {
-        "formatted": "0:00:48",
-        "total_seconds": 48.89219174018273
-      }
-    },
-    "6.5": {
-      "count": 12,
-      "total_time": {
-        "formatted": "0:14:09",
-        "total_seconds": 849.3680307865143
-      },
-      "avg_time": {
-        "formatted": "0:01:10",
-        "total_seconds": 70.78066923220952
-      }
-    },
-    "7.016460720814828": {
-      "count": 1,
-      "total_time": {
-        "formatted": "0:00:34",
-        "total_seconds": 34.00260615348816
-      },
-      "avg_time": {
-        "formatted": "0:00:34",
-        "total_seconds": 34.00260615348816
-      }
-    },
-    "7.981770959854015": {
-      "count": 1,
-      "total_time": {
-        "formatted": "0:00:28",
-        "total_seconds": 28.706254243850708
-      },
-      "avg_time": {
-        "formatted": "0:00:28",
-        "total_seconds": 28.706254243850708
-      }
-    },
-    "6.678807463888507": {
-      "count": 1,
-      "total_time": {
-        "formatted": "0:00:29",
-        "total_seconds": 29.278944492340088
-      },
-      "avg_time": {
-        "formatted": "0:00:29",
-        "total_seconds": 29.278944492340088
-      }
-    },
-    "6.750454375609764": {
-      "count": 1,
-      "total_time": {
-        "formatted": "0:00:30",
-        "total_seconds": 30.976407289505005
-      },
-      "avg_time": {
-        "formatted": "0:00:30",
-        "total_seconds": 30.976407289505005
-      }
-    },
-    "7.028601207307987": {
-      "count": 1,
-      "total_time": {
-        "formatted": "0:00:31",
-        "total_seconds": 31.599965810775757
-      },
-      "avg_time": {
-        "formatted": "0:00:31",
-        "total_seconds": 31.599965810775757
-      }
-    },
-    "7.669688264641977": {
-      "count": 1,
-      "total_time": {
-        "formatted": "0:00:31",
-        "total_seconds": 31.184086322784424
-      },
-      "avg_time": {
-        "formatted": "0:00:31",
-        "total_seconds": 31.184086322784424
-      }
-    },
-    "7.349678236145543": {
-      "count": 1,
-      "total_time": {
-        "formatted": "0:00:28",
-        "total_seconds": 28.4799382686615
-      },
-      "avg_time": {
-        "formatted": "0:00:28",
-        "total_seconds": 28.4799382686615
-      }
-    },
-    "6.523873090703483": {
-      "count": 1,
-      "total_time": {
-        "formatted": "0:00:28",
-        "total_seconds": 28.676697492599487
-      },
-      "avg_time": {
-        "formatted": "0:00:28",
-        "total_seconds": 28.676697492599487
-      }
-    },
-    "6.311723052822514": {
-      "count": 1,
-      "total_time": {
-        "formatted": "0:00:28",
-        "total_seconds": 28.323251724243164
-      },
-      "avg_time": {
-        "formatted": "0:00:28",
-        "total_seconds": 28.323251724243164
-      }
-    },
-    "7.142081692765642": {
-      "count": 1,
-      "total_time": {
-        "formatted": "0:00:35",
-        "total_seconds": 35.030314922332764
-      },
-      "avg_time": {
-        "formatted": "0:00:35",
-        "total_seconds": 35.030314922332764
-      }
-    },
-    "7.970105121296239": {
-      "count": 1,
-      "total_time": {
-        "formatted": "0:00:28",
-        "total_seconds": 28.630815029144287
-      },
-      "avg_time": {
-        "formatted": "0:00:28",
-        "total_seconds": 28.630815029144287
-      }
-    },
-    "6.614198069337991": {
-      "count": 1,
-      "total_time": {
-        "formatted": "0:00:31",
-        "total_seconds": 31.798762798309326
-      },
-      "avg_time": {
-        "formatted": "0:00:31",
-        "total_seconds": 31.798762798309326
-      }
-    },
-    "7.494055521389434": {
-      "count": 1,
-      "total_time": {
-        "formatted": "0:00:31",
-        "total_seconds": 31.065653800964355
-      },
-      "avg_time": {
-        "formatted": "0:00:31",
-        "total_seconds": 31.065653800964355
-      }
-    },
-    "7.546756626706532": {
-      "count": 1,
-      "total_time": {
-        "formatted": "0:00:30",
-        "total_seconds": 30.187317609786987
-      },
-      "avg_time": {
-        "formatted": "0:00:30",
-        "total_seconds": 30.187317609786987
-      }
-    },
-    "6.985379108595682": {
-      "count": 1,
-      "total_time": {
-        "formatted": "0:00:29",
-        "total_seconds": 29.879613161087036
-      },
-      "avg_time": {
-        "formatted": "0:00:29",
-        "total_seconds": 29.879613161087036
-      }
-    },
-    "6.86023017282708": {
-      "count": 1,
-      "total_time": {
-        "formatted": "0:00:33",
-        "total_seconds": 33.4814670085907
-      },
-      "avg_time": {
-        "formatted": "0:00:33",
-        "total_seconds": 33.4814670085907
-      }
-    },
-    "7.694105225903894": {
-      "count": 1,
-      "total_time": {
-        "formatted": "0:00:28",
-        "total_seconds": 28.394911527633667
-      },
-      "avg_time": {
-        "formatted": "0:00:28",
-        "total_seconds": 28.394911527633667
-      }
-    },
-    "5.0": {
-      "count": 66,
-      "total_time": {
-        "formatted": "0:36:50",
-        "total_seconds": 2210.041172027588
-      },
-      "avg_time": {
-        "formatted": "0:00:33",
-        "total_seconds": 33.485472303448304
-      }
-    },
-    "5.5": {
-      "count": 7,
-      "total_time": {
-        "formatted": "0:06:32",
-        "total_seconds": 392.35426115989685
-      },
-      "avg_time": {
-        "formatted": "0:00:56",
-        "total_seconds": 56.05060873712812
-      }
-    },
-    "8.0": {
-      "count": 31,
-      "total_time": {
-        "formatted": "0:31:26",
-        "total_seconds": 1886.4968411922455
-      },
-      "avg_time": {
-        "formatted": "0:01:00",
-        "total_seconds": 60.85473681265308
+        "formatted": "0:00:47",
+        "total_seconds": 47.90905525949266
       }
     },
     "3.0": {
-      "count": 1,
+      "count": 28,
       "total_time": {
-        "formatted": "0:00:56",
-        "total_seconds": 56.95971369743347
+        "formatted": "0:19:35",
+        "total_seconds": 1175.3540179729462
       },
       "avg_time": {
-        "formatted": "0:00:56",
-        "total_seconds": 56.95971369743347
+        "formatted": "0:00:41",
+        "total_seconds": 41.97692921331951
       }
     },
-    "9.0": {
-      "count": 1,
+    "5.0": {
+      "count": 2,
       "total_time": {
-        "formatted": "0:00:54",
-        "total_seconds": 54.5189995765686
+        "formatted": "0:01:18",
+        "total_seconds": 78.93236541748047
       },
       "avg_time": {
-        "formatted": "0:00:54",
-        "total_seconds": 54.5189995765686
+        "formatted": "0:00:39",
+        "total_seconds": 39.466182708740234
       }
     },
     "4.0": {
-      "count": 16,
+      "count": 55,
       "total_time": {
-        "formatted": "0:15:22",
-        "total_seconds": 922.4023838043213
+        "formatted": "0:35:09",
+        "total_seconds": 2109.429469347
       },
       "avg_time": {
-        "formatted": "0:00:57",
-        "total_seconds": 57.65014898777008
-      }
-    },
-    "6.0": {
-      "count": 6,
-      "total_time": {
-        "formatted": "0:03:45",
-        "total_seconds": 225.63279676437378
-      },
-      "avg_time": {
-        "formatted": "0:00:37",
-        "total_seconds": 37.60546612739563
-      }
-    },
-    "10.0": {
-      "count": 15,
-      "total_time": {
-        "formatted": "0:12:41",
-        "total_seconds": 761.8752675056458
-      },
-      "avg_time": {
-        "formatted": "0:00:50",
-        "total_seconds": 50.791684500376384
-      }
-    },
-    "2.0": {
-      "count": 3,
-      "total_time": {
-        "formatted": "0:02:10",
-        "total_seconds": 130.72140312194824
-      },
-      "avg_time": {
-        "formatted": "0:00:43",
-        "total_seconds": 43.573801040649414
+        "formatted": "0:00:38",
+        "total_seconds": 38.35326307903637
       }
     }
   },
   "recent_generations": [
     {
-      "timestamp": "2025-07-27T01:09:58.263483",
-      "time": "51.4s",
-      "prompt": "anime girl, stunning, anime beauty",
-      "steps": 80,
-      "sampler": "DPM++ 2M Karras",
+      "timestamp": "2025-09-28T22:47:20.115676",
+      "time": "40.2s",
+      "prompt": "fs, fs, masterpiece, best quality, absurdres, amazing quality, 1girl, 1boy, huge breasts, thick thig...",
+      "steps": 20,
+      "sampler": "Euler",
       "resolution": "512x768",
-      "cfg_scale": 7.0,
+      "cfg_scale": 4.0,
       "service": "FaceRefinementService"
     },
     {
-      "timestamp": "2025-07-27T01:10:46.907893",
-      "time": "46.6s",
-      "prompt": "anime girl, stunning, anime beauty",
-      "steps": 80,
-      "sampler": "DPM++ 2M Karras",
-      "resolution": "512x768",
-      "cfg_scale": 7.0,
-      "service": "FaceRefinementService"
-    },
-    {
-      "timestamp": "2025-07-27T01:11:42.505973",
-      "time": "53.5s",
-      "prompt": "anime girl, lovely, anime illustration",
-      "steps": 80,
-      "sampler": "DPM++ 2M Karras",
-      "resolution": "512x768",
-      "cfg_scale": 7.0,
-      "service": "FaceRefinementService"
-    },
-    {
-      "timestamp": "2025-07-27T01:40:12.717223",
-      "time": "61.5s",
-      "prompt": "girl with big tits and big ass in ripped shorts looks at camera and touches her breasts, anime reali...",
-      "steps": 100,
-      "sampler": "DPM++ 2M",
-      "resolution": "512x853",
-      "cfg_scale": 8.0,
-      "service": "FaceRefinementService"
-    },
-    {
-      "timestamp": "2025-07-27T01:41:50.331099",
-      "time": "60.6s",
-      "prompt": "girl with big tits and big ass in ripped shorts looks at camera and touches her breasts, anime reali...",
-      "steps": 100,
-      "sampler": "DPM++ 2M",
-      "resolution": "512x853",
-      "cfg_scale": 8.0,
-      "service": "FaceRefinementService"
-    },
-    {
-      "timestamp": "2025-07-27T01:46:47.985168",
-      "time": "40.7s",
-      "prompt": "girl with big tits and big ass in ripped shorts looks at camera and touches her breasts, anime reali...",
-      "steps": 30,
-      "sampler": "DPM++ 2M",
-      "resolution": "512x853",
-      "cfg_scale": 8.0,
-      "service": "FaceRefinementService"
-    },
-    {
-      "timestamp": "2025-07-27T01:48:42.906769",
-      "time": "57.7s",
-      "prompt": "girl with big tits and big ass in ripped shorts looks at camera and touches her breasts, anime reali...",
-      "steps": 60,
-      "sampler": "DPM++ 2M",
-      "resolution": "512x853",
-      "cfg_scale": 7.0,
-      "service": "FaceRefinementService"
-    },
-    {
-      "timestamp": "2025-07-27T01:52:09.657377",
-      "time": "61.2s",
-      "prompt": "girl with big tits and big ass in ripped shorts looks at camera and touches her breasts, anime reali...",
-      "steps": 35,
-      "sampler": "DPM++ 2M",
-      "resolution": "512x853",
-      "cfg_scale": 7.0,
-      "service": "FaceRefinementService"
-    },
-    {
-      "timestamp": "2025-07-27T01:53:30.705896",
-      "time": "42.2s",
-      "prompt": "girl with big tits and big ass in ripped shorts looks at camera and touches her breasts, 1girl, solo...",
-      "steps": 35,
-      "sampler": "DPM++ 2M",
-      "resolution": "512x853",
-      "cfg_scale": 7.0,
-      "service": "FaceRefinementService"
-    },
-    {
-      "timestamp": "2025-07-27T01:56:10.020535",
-      "time": "40.0s",
-      "prompt": "anime girl, gorgeous, 1girl, solo, anime realism, realistic anime, high quality anime, large express...",
-      "steps": 35,
-      "sampler": "DPM++ 2M",
-      "resolution": "512x853",
-      "cfg_scale": 7.0,
-      "service": "FaceRefinementService"
-    },
-    {
-      "timestamp": "2025-07-27T01:56:58.515409",
+      "timestamp": "2025-09-28T22:52:54.728383",
       "time": "46.4s",
-      "prompt": "anime girl, gorgeous, 1girl, solo, anime realism, realistic anime, high quality anime, large express...",
-      "steps": 35,
-      "sampler": "DPM++ 2M",
-      "resolution": "512x853",
-      "cfg_scale": 7.0,
+      "prompt": "вф, выф, вф выф, 1girl, solo, full body, large expressive eyes, detailed eyes, clean lines, smooth s...",
+      "steps": 20,
+      "sampler": "Euler",
+      "resolution": "512x768",
+      "cfg_scale": 4.0,
       "service": "FaceRefinementService"
     },
     {
-      "timestamp": "2025-07-27T01:57:45.832931",
-      "time": "45.3s",
-      "prompt": "anime girl, cute, 1girl, solo, anime realism, realistic anime, high quality anime, large expressive ...",
-      "steps": 35,
-      "sampler": "DPM++ 2M",
-      "resolution": "512x853",
-      "cfg_scale": 7.0,
+      "timestamp": "2025-09-28T22:54:40.299147",
+      "time": "37.7s",
+      "prompt": "",
+      "steps": 20,
+      "sampler": "Euler",
+      "resolution": "512x768",
+      "cfg_scale": 4.0,
       "service": "FaceRefinementService"
     },
     {
-      "timestamp": "2025-07-27T01:58:32.211571",
-      "time": "44.4s",
-      "prompt": "anime girl, pretty, 1girl, solo, anime realism, realistic anime, high quality anime, large expressiv...",
-      "steps": 35,
-      "sampler": "DPM++ 2M",
-      "resolution": "512x853",
-      "cfg_scale": 7.0,
-      "service": "FaceRefinementService"
-    },
-    {
-      "timestamp": "2025-07-27T01:59:14.944310",
-      "time": "40.5s",
-      "prompt": "anime girl, pretty, 1girl, solo, anime realism, realistic anime, high quality anime, large expressiv...",
-      "steps": 35,
-      "sampler": "DPM++ 2M",
-      "resolution": "512x853",
-      "cfg_scale": 7.0,
-      "service": "FaceRefinementService"
-    },
-    {
-      "timestamp": "2025-07-27T01:59:54.326165",
-      "time": "37.3s",
-      "prompt": "anime girl, cute, 1girl, solo, anime realism, realistic anime, high quality anime, large expressive ...",
-      "steps": 35,
-      "sampler": "DPM++ 2M",
-      "resolution": "512x853",
-      "cfg_scale": 7.0,
-      "service": "FaceRefinementService"
-    },
-    {
-      "timestamp": "2025-07-27T02:00:38.306164",
-      "time": "41.9s",
-      "prompt": "anime girl, beautiful, 1girl, solo, anime realism, realistic anime, high quality anime, large expres...",
-      "steps": 35,
-      "sampler": "DPM++ 2M",
-      "resolution": "512x853",
-      "cfg_scale": 7.0,
-      "service": "FaceRefinementService"
-    },
-    {
-      "timestamp": "2025-07-27T02:01:21.928984",
+      "timestamp": "2025-09-28T22:58:45.630304",
       "time": "41.5s",
-      "prompt": "anime girl, lovely, 1girl, solo, anime realism, realistic anime, high quality anime, large expressiv...",
-      "steps": 35,
-      "sampler": "DPM++ 2M",
-      "resolution": "512x853",
-      "cfg_scale": 7.0,
+      "prompt": "",
+      "steps": 20,
+      "sampler": "Euler",
+      "resolution": "512x768",
+      "cfg_scale": 4.0,
       "service": "FaceRefinementService"
     },
     {
-      "timestamp": "2025-07-27T02:02:05.598386",
-      "time": "41.6s",
-      "prompt": "anime girl, cute, 1girl, solo, anime realism, realistic anime, high quality anime, large expressive ...",
-      "steps": 35,
-      "sampler": "DPM++ 2M",
-      "resolution": "512x853",
-      "cfg_scale": 7.0,
+      "timestamp": "2025-09-28T23:02:45.222387",
+      "time": "30.5s",
+      "prompt": "",
+      "steps": 20,
+      "sampler": "Euler",
+      "resolution": "512x768",
+      "cfg_scale": 4.0,
       "service": "FaceRefinementService"
     },
     {
-      "timestamp": "2025-07-27T02:02:48.933900",
-      "time": "41.3s",
-      "prompt": "anime girl, lovely, 1girl, solo, anime realism, realistic anime, high quality anime, large expressiv...",
-      "steps": 35,
-      "sampler": "DPM++ 2M",
-      "resolution": "512x853",
-      "cfg_scale": 7.0,
+      "timestamp": "2025-09-28T23:04:12.568364",
+      "time": "31.2s",
+      "prompt": "",
+      "steps": 20,
+      "sampler": "Euler",
+      "resolution": "512x768",
+      "cfg_scale": 4.0,
       "service": "FaceRefinementService"
     },
     {
-      "timestamp": "2025-07-27T02:03:29.093538",
-      "time": "38.1s",
-      "prompt": "anime girl, lovely, 1girl, solo, anime realism, realistic anime, high quality anime, large expressiv...",
-      "steps": 35,
-      "sampler": "DPM++ 2M",
-      "resolution": "512x853",
-      "cfg_scale": 7.0,
+      "timestamp": "2025-09-28T23:05:49.548524",
+      "time": "35.8s",
+      "prompt": "",
+      "steps": 20,
+      "sampler": "Euler",
+      "resolution": "512x768",
+      "cfg_scale": 4.0,
+      "service": "FaceRefinementService"
+    },
+    {
+      "timestamp": "2025-09-28T23:06:57.430511",
+      "time": "37.0s",
+      "prompt": "2, 2, 2 2, 1girl, solo, full body, large expressive eyes, detailed eyes, clean lines, smooth skin, p...",
+      "steps": 20,
+      "sampler": "Euler",
+      "resolution": "512x768",
+      "cfg_scale": 4.0,
+      "service": "FaceRefinementService"
+    },
+    {
+      "timestamp": "2025-09-28T23:10:26.952169",
+      "time": "40.2s",
+      "prompt": "2, 2, 2 2, 1girl, solo, full body, large expressive eyes, detailed eyes, clean lines, smooth skin, p...",
+      "steps": 20,
+      "sampler": "Euler",
+      "resolution": "512x768",
+      "cfg_scale": 4.0,
+      "service": "FaceRefinementService"
+    },
+    {
+      "timestamp": "2025-09-28T23:17:57.355403",
+      "time": "44.9s",
+      "prompt": "",
+      "steps": 20,
+      "sampler": "Euler",
+      "resolution": "512x768",
+      "cfg_scale": 4.0,
+      "service": "FaceRefinementService"
+    },
+    {
+      "timestamp": "2025-09-28T23:20:02.746882",
+      "time": "31.9s",
+      "prompt": "",
+      "steps": 20,
+      "sampler": "Euler",
+      "resolution": "512x768",
+      "cfg_scale": 4.0,
+      "service": "FaceRefinementService"
+    },
+    {
+      "timestamp": "2025-09-28T23:21:31.242557",
+      "time": "31.0s",
+      "prompt": "",
+      "steps": 20,
+      "sampler": "Euler",
+      "resolution": "512x768",
+      "cfg_scale": 4.0,
+      "service": "FaceRefinementService"
+    },
+    {
+      "timestamp": "2025-09-28T23:30:40.575529",
+      "time": "38.6s",
+      "prompt": "фывфы, фывыф, фывфы фывыф, 1girl, solo, full body, large expressive eyes, detailed eyes, clean lines...",
+      "steps": 20,
+      "sampler": "Euler",
+      "resolution": "512x768",
+      "cfg_scale": 4.0,
+      "service": "FaceRefinementService"
+    },
+    {
+      "timestamp": "2025-09-28T23:31:34.655414",
+      "time": "20.7s",
+      "prompt": "фывфы, фывыф, фывфы фывыф, 1girl, solo, full body, large expressive eyes, detailed eyes, clean lines...",
+      "steps": 20,
+      "sampler": "Euler",
+      "resolution": "512x768",
+      "cfg_scale": 4.0,
+      "service": "FaceRefinementService"
+    },
+    {
+      "timestamp": "2025-09-28T23:32:17.382050",
+      "time": "38.8s",
+      "prompt": "фывфы, фывыф, фывфы фывыф, 1girl, solo, full body, large expressive eyes, detailed eyes, clean lines...",
+      "steps": 20,
+      "sampler": "Euler",
+      "resolution": "512x768",
+      "cfg_scale": 4.0,
+      "service": "FaceRefinementService"
+    },
+    {
+      "timestamp": "2025-09-28T23:33:33.843578",
+      "time": "34.3s",
+      "prompt": "9, 9, 9 9, 1girl, solo, full body, large expressive eyes, detailed eyes, clean lines, smooth skin, p...",
+      "steps": 20,
+      "sampler": "Euler",
+      "resolution": "512x768",
+      "cfg_scale": 4.0,
+      "service": "FaceRefinementService"
+    },
+    {
+      "timestamp": "2025-09-28T23:34:13.686096",
+      "time": "38.7s",
+      "prompt": "9, 9, 9 9, 1girl, solo, full body, large expressive eyes, detailed eyes, clean lines, smooth skin, p...",
+      "steps": 20,
+      "sampler": "Euler",
+      "resolution": "512x768",
+      "cfg_scale": 4.0,
+      "service": "FaceRefinementService"
+    },
+    {
+      "timestamp": "2025-09-28T23:34:57.069076",
+      "time": "40.9s",
+      "prompt": "9, 9, 9 9, 1girl, solo, full body, large expressive eyes, detailed eyes, clean lines, smooth skin, p...",
+      "steps": 20,
+      "sampler": "Euler",
+      "resolution": "512x768",
+      "cfg_scale": 4.0,
+      "service": "FaceRefinementService"
+    },
+    {
+      "timestamp": "2025-09-28T23:43:48.213430",
+      "time": "44.1s",
+      "prompt": "вфы, фыв, вфы фыв, 1girl, solo, full body, large expressive eyes, detailed eyes, clean lines, smooth...",
+      "steps": 20,
+      "sampler": "Euler",
+      "resolution": "512x768",
+      "cfg_scale": 4.0,
+      "service": "FaceRefinementService"
+    },
+    {
+      "timestamp": "2025-09-28T23:45:51.255031",
+      "time": "41.2s",
+      "prompt": "с, с, с с, 1girl, solo, full body, large expressive eyes, detailed eyes, clean lines, smooth skin, p...",
+      "steps": 20,
+      "sampler": "Euler",
+      "resolution": "512x768",
+      "cfg_scale": 4.0,
       "service": "FaceRefinementService"
     }
   ]

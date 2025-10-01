@@ -129,3 +129,162 @@ dmypy.json
 *.bak
 *.backup
 *.old
+
+# FastAPI specific
+.pytest_cache/
+alembic/versions/*.py
+!alembic/versions/.gitkeep
+
+# Media files (generated images, audio, etc.)
+media/
+uploads/
+downloads/
+generated/
+samples/
+thumbnails/
+
+# Images and photos (18+ content)
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.bmp
+*.tiff
+*.tif
+*.webp
+*.svg
+*.ico
+*.raw
+*.heic
+*.heif
+*.avif
+images/
+photos/
+pictures/
+pics/
+img/
+
+# AI/ML specific
+*.pkl
+*.pickle
+*.joblib
+*.h5
+*.hdf5
+*.onnx
+*.tflite
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+checkpoints/
+wandb/
+mlruns/
+.neptune/
+
+# Large files and datasets
+*.zip
+*.tar.gz
+*.rar
+*.7z
+datasets/
+data/
+raw_data/
+
+# Node.js (if using frontend)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm
+.yarn-integrity
+
+# React/Next.js
+.next/
+out/
+build/
+dist/
+
+# Cache directories
+.cache/
+.npm/
+.eslintcache
+.stylelintcache
+
+# IDE and editor files
+*.sublime-project
+*.sublime-workspace
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# System files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# Security and secrets
+*.pem
+*.key
+*.crt
+*.p12
+secrets/
+.secrets/
+
+# Monitoring and analytics
+*.log
+logs/
+monitoring/
+metrics/
+
+# Documentation builds
+docs/_build/
+site/
+
+# Test artifacts
+test-results/
+coverage/
+.coverage
+.pytest_cache/
+.tox/
+
+# Temporary directories
+tmp/
+temp/
+.tmp/
+.temp/
+
+# Configuration overrides
+config.local.*
+settings.local.*
+
+# Database dumps
+*.sql
+*.dump
+
+# Archive files
+*.zip
+*.tar
+*.gz
+*.bz2
+*.xz
+*.7z
+*.rar
+
+# Large binary files
+*.bin
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Project specific artifacts
+artifacts/
+builds/
+releases/

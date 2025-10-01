@@ -1,0 +1,3629 @@
+{
+  "timestamp": "2025-09-26T11:53:40.125452",
+  "success": true,
+  "generation_time_seconds": 80.19,
+  "character": "caitlin",
+  "prompts": {
+    "user_prompt": "Hair: Light brown, long, slightly wavy, neatly falling over the shoulders.\nEyes: Large, green, expressive, with a subtle sparkle of curiosity.\nGlasses: Thin metal frame, almost invisible, slightly oval shape, sitting neatly on the bridge of the nose.\nFace: Soft features, delicate cheekbones, gentle smile giving a friendly impression.\nSkin: Fair, even-toned, with a natural blush on the cheeks., A dark bedroom illuminated by soft moonlight, a cozy bed with rumpled sheets, paintings and posters on the walls, dim ambient lighting, shadows casting across the room, moody and atmospheric, cinematic composition, ultra-detailed, realistic textures, soft glow from the moon, quiet and mysterious mood, show ass, 1girl, solo, full body, large expressive eyes, detailed eyes, clean lines, smooth skin, perfect hands, detailed realistic hair, detailed realistic face, detailed realistic body, detailed realistic hands, detailed realistic feet, detailed realistic legs, detailed realistic tits, realistic lighting, dramatic lighting, cinematic lighting, volumetric lighting, backlit, side lighting, side lit, light particles, light rays, haze, fog, high resolution, masterpiece, best quality, concept art, artwork, bold outlines, impressionistic, phosphorescent dust particles floating in the air, semi-realistic, lazypos, raw, ((photorealistic)), ((realistic shade))",
+    "user_negative_prompt": "poorly_detailed, worst_quality, bad_quality, extra fingers, missing fingers, lowres, low resolution bad anatomy, extra digits, jpeg artifacts, signature, watermark, username, conjoined, deformed fingers, short legs, body diproportion, bad ai-generated, text, furry, halo, multiple views, displeasing, messy composition, clones, one person",
+    "enhanced_prompt": "Hair: Light brown, long, slightly wavy, neatly falling over the shoulders.\nEyes: Large, green, expressive, with a subtle sparkle of curiosity.\nGlasses: Thin metal frame, almost invisible, slightly oval shape, sitting neatly on the bridge of the nose.\nFace: Soft features, delicate cheekbones, gentle smile giving a friendly impression.\nSkin: Fair, even-toned, with a natural blush on the cheeks., A dark bedroom illuminated by soft moonlight, a cozy bed with rumpled sheets, paintings and posters on the walls, dim ambient lighting, shadows casting across the room, moody and atmospheric, cinematic composition, ultra-detailed, realistic textures, soft glow from the moon, quiet and mysterious mood, show ass, 1girl, solo, full body, large expressive eyes, detailed eyes, clean lines, smooth skin, perfect hands, detailed realistic hair, detailed realistic face, detailed realistic body, detailed realistic hands, detailed realistic feet, detailed realistic legs, detailed realistic tits, realistic lighting, dramatic lighting, cinematic lighting, volumetric lighting, backlit, side lighting, side lit, light particles, light rays, haze, fog, high resolution, masterpiece, best quality, concept art, artwork, bold outlines, impressionistic, phosphorescent dust particles floating in the air, semi-realistic, lazypos, raw, ((photorealistic)), ((realistic shade))",
+    "enhanced_negative_prompt": "poorly_detailed, worst_quality, bad_quality, extra fingers, missing fingers, lowres, low resolution bad anatomy, extra digits, jpeg artifacts, signature, watermark, username, conjoined, deformed fingers, short legs, body diproportion, bad ai-generated, text, furry, halo, multiple views, displeasing, messy composition, clones, one person",
+    "prompt_length": 1361,
+    "negative_prompt_length": 338,
+    "uses_default_prompts": false
+  },
+  "image_url": "",
+  "settings": {
+    "width": 512,
+    "height": 768,
+    "steps": 20,
+    "cfg_scale": 4,
+    "sampler_name": "Euler",
+    "scheduler": "karras",
+    "seed": -1,
+    "batch_size": 1,
+    "n_iter": 1,
+    "n_samples": 1,
+    "save_grid": false,
+    "restore_faces": false,
+    "send_images": true,
+    "save_images": false,
+    "enable_hr": false,
+    "hr_scale": 1.5,
+    "hr_upscaler": "SwinIR_4x",
+    "hr_second_pass_steps": 10,
+    "hr_prompt": "",
+    "hr_negative_prompt": "",
+    "denoising_strength": 0.4,
+    "clip_skip": 2,
+    "use_default_prompts": false,
+    "override_settings": {},
+    "override_settings_restore_afterwards": false,
+    "script_args": [],
+    "use_adetailer": true,
+    "adetailer_settings": {},
+    "ip_adapter_model": null,
+    "ip_adapter_weight": null,
+    "ip_adapter_image": null,
+    "lora_models": {
+      "enabled_loras": [
+        "EasyNegativeV2.safetensors",
+        "MysticalPlantPenetratorILLUST.safetensors",
+        "Detailed-Eye-V1.0-000013.safetensors",
+        "Dramatic Lighting Slider",
+        "Semi-realism_illustrious.safetensors",
+        "kms_in the dark_IL-000003.safetensors"
+      ],
+      "disabled_loras": [
+        "pastel-anime-xl-latest",
+        "DetailedEyes_V3",
+        "1.5_perfect hands",
+        "add_detail"
+      ],
+      "total_loras": 10,
+      "working_loras": [
+        "EasyNegativeV2.safetensors",
+        "MysticalPlantPenetratorILLUST.safetensors",
+        "Detailed-Eye-V1.0-000013.safetensors",
+        "Dramatic Lighting Slider",
+        "Semi-realism_illustrious.safetensors",
+        "kms_in the dark_IL-000003.safetensors"
+      ],
+      "not_working_loras": [],
+      "lora_details": [
+        {
+          "name": "pastel-anime-xl-latest",
+          "weight": 0.4,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "DetailedEyes_V3",
+          "weight": 0.6,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "1.5_perfect hands",
+          "weight": 0.9,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "add_detail",
+          "weight": 0.5,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "EasyNegativeV2.safetensors",
+          "weight": 0.9,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "MysticalPlantPenetratorILLUST.safetensors",
+          "weight": 0.25,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "Detailed-Eye-V1.0-000013.safetensors",
+          "weight": 1.0,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "Dramatic Lighting Slider",
+          "weight": 1.5,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "Semi-realism_illustrious.safetensors",
+          "weight": 0.7,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "kms_in the dark_IL-000003.safetensors",
+          "weight": 0.5,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        }
+      ]
+    },
+    "alwayson_scripts": {
+      "adetailer_enabled": true,
+      "adetailer_config": {
+        "args": [
+          true,
+          {
+            "ad_model": "face_yolov8n.pt",
+            "ad_steps": 15,
+            "ad_denoising_strength": 0.4,
+            "ad_cfg_scale": 4,
+            "ad_mask_blur": 3,
+            "ad_inpaint_only_masked": true,
+            "ad_inpaint_only_masked_padding": 24,
+            "ad_confidence": 0.2,
+            "ad_dilate_erode": 2,
+            "ad_use_steps": true,
+            "ad_use_cfg_scale": true,
+            "ad_prompt": "clean line art, symmetrical eyes, glossy eyes, sharp anime details, perfect anime face",
+            "ad_negative_prompt": "deformed face, wonky eyes, double irises, bad symmetry, lowres, blurry"
+          },
+          {
+            "ad_model": "hand_yolov9c.pt",
+            "ad_steps": 30,
+            "ad_denoising_strength": 0.3,
+            "ad_cfg_scale": 4,
+            "ad_mask_blur": 4,
+            "ad_inpaint_only_masked": true,
+            "ad_inpaint_only_masked_padding": 32,
+            "ad_confidence": 0.3,
+            "ad_dilate_erode": 4,
+            "ad_use_steps": true,
+            "ad_use_cfg_scale": true,
+            "ad_prompt": "perfect hands, detailed fingers, natural hand anatomy",
+            "ad_negative_prompt": "deformed hands, extra fingers, missing fingers, bad anatomy, mutated hands, ugly hands"
+          }
+        ]
+      },
+      "controlnet_enabled": false,
+      "all_scripts": [
+        "ADetailer"
+      ]
+    }
+  },
+  "error": null
+}
+
+{
+  "timestamp": "2025-09-26T13:01:58.104763",
+  "success": true,
+  "generation_time_seconds": 27.96,
+  "character": "Anna",
+  "prompts": {
+    "user_prompt": "(detailed_eyes), (depth_of_field), 1 girl, 19 years old, petite face, wearing only an off-the-shoulder crop top, crop top pulled up above her chest, small-nipples, perfect-sized and soft breasts, blue eyes, ash-blonde hair, voluminous_hair_to_her_shoulders, (full_undercut:1.3), bristly ponytail, cute shy smile, earrings and several punky facial piercings, one dark tattoo runs from her lower arm to her upper arm, Large futuristic kitchen with dark appliances, tiled floor, one stove, one refrigerator, flower decoration, wine bottles rimmed. Phosphorescent dust particles floating in the air that are illuminated by the light, stunning bokeh, part of a luxury apartment in New York, large window above the stove., You stretch your pussy and show her hole, 1girl, solo, full body, large expressive eyes, detailed eyes, clean lines, smooth skin, perfect hands, detailed realistic hair, detailed realistic face, detailed realistic body, detailed realistic hands, detailed realistic feet, detailed realistic legs, detailed realistic tits, realistic lighting, dramatic lighting, cinematic lighting, volumetric lighting, backlit, side lighting, side lit, light particles, light rays, haze, fog, high resolution, masterpiece, best quality, concept art, artwork, bold outlines, impressionistic, phosphorescent dust particles floating in the air, semi-realistic, lazypos, raw, ((photorealistic)), ((realistic shade))",
+    "user_negative_prompt": "poorly_detailed, worst_quality, bad_quality, extra fingers, missing fingers, lowres, low resolution bad anatomy, extra digits, jpeg artifacts, signature, watermark, username, conjoined, deformed fingers, short legs, body diproportion, bad ai-generated, text, furry, halo, multiple views, displeasing, messy composition, clones, one person",
+    "enhanced_prompt": "(detailed_eyes), (depth_of_field), 1 girl, 19 years old, petite face, wearing only an off-the-shoulder crop top, crop top pulled up above her chest, small-nipples, perfect-sized and soft breasts, blue eyes, ash-blonde hair, voluminous_hair_to_her_shoulders, (full_undercut:1.3), bristly ponytail, cute shy smile, earrings and several punky facial piercings, one dark tattoo runs from her lower arm to her upper arm, Large futuristic kitchen with dark appliances, tiled floor, one stove, one refrigerator, flower decoration, wine bottles rimmed. Phosphorescent dust particles floating in the air that are illuminated by the light, stunning bokeh, part of a luxury apartment in New York, large window above the stove., You stretch your pussy and show her hole, 1girl, solo, full body, large expressive eyes, detailed eyes, clean lines, smooth skin, perfect hands, detailed realistic hair, detailed realistic face, detailed realistic body, detailed realistic hands, detailed realistic feet, detailed realistic legs, detailed realistic tits, realistic lighting, dramatic lighting, cinematic lighting, volumetric lighting, backlit, side lighting, side lit, light particles, light rays, haze, fog, high resolution, masterpiece, best quality, concept art, artwork, bold outlines, impressionistic, phosphorescent dust particles floating in the air, semi-realistic, lazypos, raw, ((photorealistic)), ((realistic shade))",
+    "enhanced_negative_prompt": "poorly_detailed, worst_quality, bad_quality, extra fingers, missing fingers, lowres, low resolution bad anatomy, extra digits, jpeg artifacts, signature, watermark, username, conjoined, deformed fingers, short legs, body diproportion, bad ai-generated, text, furry, halo, multiple views, displeasing, messy composition, clones, one person",
+    "prompt_length": 1410,
+    "negative_prompt_length": 338,
+    "uses_default_prompts": false
+  },
+  "image_url": "",
+  "settings": {
+    "width": 512,
+    "height": 768,
+    "steps": 20,
+    "cfg_scale": 4,
+    "sampler_name": "Euler",
+    "scheduler": "karras",
+    "seed": -1,
+    "batch_size": 1,
+    "n_iter": 1,
+    "n_samples": 1,
+    "save_grid": false,
+    "restore_faces": false,
+    "send_images": true,
+    "save_images": false,
+    "enable_hr": false,
+    "hr_scale": 1.5,
+    "hr_upscaler": "SwinIR_4x",
+    "hr_second_pass_steps": 10,
+    "hr_prompt": "",
+    "hr_negative_prompt": "",
+    "denoising_strength": 0.4,
+    "clip_skip": 2,
+    "use_default_prompts": false,
+    "override_settings": {},
+    "override_settings_restore_afterwards": false,
+    "script_args": [],
+    "use_adetailer": true,
+    "adetailer_settings": {},
+    "ip_adapter_model": null,
+    "ip_adapter_weight": null,
+    "ip_adapter_image": null,
+    "lora_models": {
+      "enabled_loras": [
+        "EasyNegativeV2.safetensors",
+        "MysticalPlantPenetratorILLUST.safetensors",
+        "Detailed-Eye-V1.0-000013.safetensors",
+        "Dramatic Lighting Slider",
+        "Semi-realism_illustrious.safetensors",
+        "kms_in the dark_IL-000003.safetensors"
+      ],
+      "disabled_loras": [
+        "pastel-anime-xl-latest",
+        "DetailedEyes_V3",
+        "1.5_perfect hands",
+        "add_detail"
+      ],
+      "total_loras": 10,
+      "working_loras": [
+        "EasyNegativeV2.safetensors",
+        "MysticalPlantPenetratorILLUST.safetensors",
+        "Detailed-Eye-V1.0-000013.safetensors",
+        "Dramatic Lighting Slider",
+        "Semi-realism_illustrious.safetensors",
+        "kms_in the dark_IL-000003.safetensors"
+      ],
+      "not_working_loras": [],
+      "lora_details": [
+        {
+          "name": "pastel-anime-xl-latest",
+          "weight": 0.4,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "DetailedEyes_V3",
+          "weight": 0.6,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "1.5_perfect hands",
+          "weight": 0.9,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "add_detail",
+          "weight": 0.5,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "EasyNegativeV2.safetensors",
+          "weight": 0.9,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "MysticalPlantPenetratorILLUST.safetensors",
+          "weight": 0.25,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "Detailed-Eye-V1.0-000013.safetensors",
+          "weight": 1.0,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "Dramatic Lighting Slider",
+          "weight": 1.5,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "Semi-realism_illustrious.safetensors",
+          "weight": 0.7,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "kms_in the dark_IL-000003.safetensors",
+          "weight": 0.5,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        }
+      ]
+    },
+    "alwayson_scripts": {
+      "adetailer_enabled": true,
+      "adetailer_config": {
+        "args": [
+          true,
+          {
+            "ad_model": "face_yolov8n.pt",
+            "ad_steps": 15,
+            "ad_denoising_strength": 0.4,
+            "ad_cfg_scale": 4,
+            "ad_mask_blur": 3,
+            "ad_inpaint_only_masked": true,
+            "ad_inpaint_only_masked_padding": 24,
+            "ad_confidence": 0.2,
+            "ad_dilate_erode": 2,
+            "ad_use_steps": true,
+            "ad_use_cfg_scale": true,
+            "ad_prompt": "clean line art, symmetrical eyes, glossy eyes, sharp anime details, perfect anime face",
+            "ad_negative_prompt": "deformed face, wonky eyes, double irises, bad symmetry, lowres, blurry"
+          },
+          {
+            "ad_model": "hand_yolov9c.pt",
+            "ad_steps": 30,
+            "ad_denoising_strength": 0.3,
+            "ad_cfg_scale": 4,
+            "ad_mask_blur": 4,
+            "ad_inpaint_only_masked": true,
+            "ad_inpaint_only_masked_padding": 32,
+            "ad_confidence": 0.3,
+            "ad_dilate_erode": 4,
+            "ad_use_steps": true,
+            "ad_use_cfg_scale": true,
+            "ad_prompt": "perfect hands, detailed fingers, natural hand anatomy",
+            "ad_negative_prompt": "deformed hands, extra fingers, missing fingers, bad anatomy, mutated hands, ugly hands"
+          }
+        ]
+      },
+      "controlnet_enabled": false,
+      "all_scripts": [
+        "ADetailer"
+      ]
+    }
+  },
+  "error": null
+}
+
+{
+  "timestamp": "2025-09-26T13:03:57.609965",
+  "success": true,
+  "generation_time_seconds": 42.25,
+  "character": "Anna",
+  "prompts": {
+    "user_prompt": "(detailed_eyes), (depth_of_field), 1 girl, 19 years old, petite face, wearing only an off-the-shoulder crop top, crop top pulled up above her chest, small-nipples, perfect-sized and soft breasts, blue eyes, ash-blonde hair, voluminous_hair_to_her_shoulders, (full_undercut:1.3), bristly ponytail, cute shy smile, earrings and several punky facial piercings, one dark tattoo runs from her lower arm to her upper arm, Large futuristic kitchen with dark appliances, tiled floor, one stove, one refrigerator, flower decoration, wine bottles rimmed. Phosphorescent dust particles floating in the air that are illuminated by the light, stunning bokeh, part of a luxury apartment in New York, large window above the stove., You stretch your pussy and show off its hole.\nOn the floor, you touch your pussy and stretch its skin to show off your entire pussy and hole. A close-up of your pussy., 1girl, solo, full body, large expressive eyes, detailed eyes, clean lines, smooth skin, perfect hands, detailed realistic hair, detailed realistic face, detailed realistic body, detailed realistic hands, detailed realistic feet, detailed realistic legs, detailed realistic tits, realistic lighting, dramatic lighting, cinematic lighting, volumetric lighting, backlit, side lighting, side lit, light particles, light rays, haze, fog, high resolution, masterpiece, best quality, concept art, artwork, bold outlines, impressionistic, phosphorescent dust particles floating in the air, semi-realistic, lazypos, raw, ((photorealistic)), ((realistic shade))",
+    "user_negative_prompt": "poorly_detailed, worst_quality, bad_quality, extra fingers, missing fingers, lowres, low resolution bad anatomy, extra digits, jpeg artifacts, signature, watermark, username, conjoined, deformed fingers, short legs, body diproportion, bad ai-generated, text, furry, halo, multiple views, displeasing, messy composition, clones, one person",
+    "enhanced_prompt": "(detailed_eyes), (depth_of_field), 1 girl, 19 years old, petite face, wearing only an off-the-shoulder crop top, crop top pulled up above her chest, small-nipples, perfect-sized and soft breasts, blue eyes, ash-blonde hair, voluminous_hair_to_her_shoulders, (full_undercut:1.3), bristly ponytail, cute shy smile, earrings and several punky facial piercings, one dark tattoo runs from her lower arm to her upper arm, Large futuristic kitchen with dark appliances, tiled floor, one stove, one refrigerator, flower decoration, wine bottles rimmed. Phosphorescent dust particles floating in the air that are illuminated by the light, stunning bokeh, part of a luxury apartment in New York, large window above the stove., You stretch your pussy and show off its hole.\nOn the floor, you touch your pussy and stretch its skin to show off your entire pussy and hole. A close-up of your pussy., 1girl, solo, full body, large expressive eyes, detailed eyes, clean lines, smooth skin, perfect hands, detailed realistic hair, detailed realistic face, detailed realistic body, detailed realistic hands, detailed realistic feet, detailed realistic legs, detailed realistic tits, realistic lighting, dramatic lighting, cinematic lighting, volumetric lighting, backlit, side lighting, side lit, light particles, light rays, haze, fog, high resolution, masterpiece, best quality, concept art, artwork, bold outlines, impressionistic, phosphorescent dust particles floating in the air, semi-realistic, lazypos, raw, ((photorealistic)), ((realistic shade))",
+    "enhanced_negative_prompt": "poorly_detailed, worst_quality, bad_quality, extra fingers, missing fingers, lowres, low resolution bad anatomy, extra digits, jpeg artifacts, signature, watermark, username, conjoined, deformed fingers, short legs, body diproportion, bad ai-generated, text, furry, halo, multiple views, displeasing, messy composition, clones, one person",
+    "prompt_length": 1537,
+    "negative_prompt_length": 338,
+    "uses_default_prompts": false
+  },
+  "image_url": "",
+  "settings": {
+    "width": 512,
+    "height": 768,
+    "steps": 20,
+    "cfg_scale": 4,
+    "sampler_name": "Euler",
+    "scheduler": "karras",
+    "seed": -1,
+    "batch_size": 1,
+    "n_iter": 1,
+    "n_samples": 1,
+    "save_grid": false,
+    "restore_faces": false,
+    "send_images": true,
+    "save_images": false,
+    "enable_hr": false,
+    "hr_scale": 1.5,
+    "hr_upscaler": "SwinIR_4x",
+    "hr_second_pass_steps": 10,
+    "hr_prompt": "",
+    "hr_negative_prompt": "",
+    "denoising_strength": 0.4,
+    "clip_skip": 2,
+    "use_default_prompts": false,
+    "override_settings": {},
+    "override_settings_restore_afterwards": false,
+    "script_args": [],
+    "use_adetailer": true,
+    "adetailer_settings": {},
+    "ip_adapter_model": null,
+    "ip_adapter_weight": null,
+    "ip_adapter_image": null,
+    "lora_models": {
+      "enabled_loras": [
+        "EasyNegativeV2.safetensors",
+        "MysticalPlantPenetratorILLUST.safetensors",
+        "Detailed-Eye-V1.0-000013.safetensors",
+        "Dramatic Lighting Slider",
+        "Semi-realism_illustrious.safetensors",
+        "kms_in the dark_IL-000003.safetensors"
+      ],
+      "disabled_loras": [
+        "pastel-anime-xl-latest",
+        "DetailedEyes_V3",
+        "1.5_perfect hands",
+        "add_detail"
+      ],
+      "total_loras": 10,
+      "working_loras": [
+        "EasyNegativeV2.safetensors",
+        "MysticalPlantPenetratorILLUST.safetensors",
+        "Detailed-Eye-V1.0-000013.safetensors",
+        "Dramatic Lighting Slider",
+        "Semi-realism_illustrious.safetensors",
+        "kms_in the dark_IL-000003.safetensors"
+      ],
+      "not_working_loras": [],
+      "lora_details": [
+        {
+          "name": "pastel-anime-xl-latest",
+          "weight": 0.4,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "DetailedEyes_V3",
+          "weight": 0.6,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "1.5_perfect hands",
+          "weight": 0.9,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "add_detail",
+          "weight": 0.5,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "EasyNegativeV2.safetensors",
+          "weight": 0.9,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "MysticalPlantPenetratorILLUST.safetensors",
+          "weight": 0.25,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "Detailed-Eye-V1.0-000013.safetensors",
+          "weight": 1.0,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "Dramatic Lighting Slider",
+          "weight": 1.5,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "Semi-realism_illustrious.safetensors",
+          "weight": 0.7,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "kms_in the dark_IL-000003.safetensors",
+          "weight": 0.5,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        }
+      ]
+    },
+    "alwayson_scripts": {
+      "adetailer_enabled": true,
+      "adetailer_config": {
+        "args": [
+          true,
+          {
+            "ad_model": "face_yolov8n.pt",
+            "ad_steps": 15,
+            "ad_denoising_strength": 0.4,
+            "ad_cfg_scale": 4,
+            "ad_mask_blur": 3,
+            "ad_inpaint_only_masked": true,
+            "ad_inpaint_only_masked_padding": 24,
+            "ad_confidence": 0.2,
+            "ad_dilate_erode": 2,
+            "ad_use_steps": true,
+            "ad_use_cfg_scale": true,
+            "ad_prompt": "clean line art, symmetrical eyes, glossy eyes, sharp anime details, perfect anime face",
+            "ad_negative_prompt": "deformed face, wonky eyes, double irises, bad symmetry, lowres, blurry"
+          },
+          {
+            "ad_model": "hand_yolov9c.pt",
+            "ad_steps": 30,
+            "ad_denoising_strength": 0.3,
+            "ad_cfg_scale": 4,
+            "ad_mask_blur": 4,
+            "ad_inpaint_only_masked": true,
+            "ad_inpaint_only_masked_padding": 32,
+            "ad_confidence": 0.3,
+            "ad_dilate_erode": 4,
+            "ad_use_steps": true,
+            "ad_use_cfg_scale": true,
+            "ad_prompt": "perfect hands, detailed fingers, natural hand anatomy",
+            "ad_negative_prompt": "deformed hands, extra fingers, missing fingers, bad anatomy, mutated hands, ugly hands"
+          }
+        ]
+      },
+      "controlnet_enabled": false,
+      "all_scripts": [
+        "ADetailer"
+      ]
+    }
+  },
+  "error": null
+}
+
+{
+  "timestamp": "2025-09-26T13:08:13.951336",
+  "success": true,
+  "generation_time_seconds": 34.71,
+  "character": "Anna",
+  "prompts": {
+    "user_prompt": "(detailed_eyes), (depth_of_field), 1 girl, 19 years old, petite face, wearing only an off-the-shoulder crop top, crop top pulled up above her chest, small-nipples, perfect-sized and soft breasts, blue eyes, ash-blonde hair, voluminous_hair_to_her_shoulders, (full_undercut:1.3), bristly ponytail, cute shy smile, earrings and several punky facial piercings, one dark tattoo runs from her lower arm to her upper arm, Large futuristic kitchen with dark appliances, tiled floor, one stove, one refrigerator, flower decoration, wine bottles rimmed. Phosphorescent dust particles floating in the air that are illuminated by the light, stunning bokeh, part of a luxury apartment in New York, large window above the stove., A girl masturbates her pussy doggy style, 1girl, solo, full body, large expressive eyes, detailed eyes, clean lines, smooth skin, perfect hands, detailed realistic hair, detailed realistic face, detailed realistic body, detailed realistic hands, detailed realistic feet, detailed realistic legs, detailed realistic tits, realistic lighting, dramatic lighting, cinematic lighting, volumetric lighting, backlit, side lighting, side lit, light particles, light rays, haze, fog, high resolution, masterpiece, best quality, concept art, artwork, bold outlines, impressionistic, phosphorescent dust particles floating in the air, semi-realistic, lazypos, raw, ((photorealistic)), ((realistic shade))",
+    "user_negative_prompt": "poorly_detailed, worst_quality, bad_quality, extra fingers, missing fingers, lowres, low resolution bad anatomy, extra digits, jpeg artifacts, signature, watermark, username, conjoined, deformed fingers, short legs, body diproportion, bad ai-generated, text, furry, halo, multiple views, displeasing, messy composition, clones, one person",
+    "enhanced_prompt": "(detailed_eyes), (depth_of_field), 1 girl, 19 years old, petite face, wearing only an off-the-shoulder crop top, crop top pulled up above her chest, small-nipples, perfect-sized and soft breasts, blue eyes, ash-blonde hair, voluminous_hair_to_her_shoulders, (full_undercut:1.3), bristly ponytail, cute shy smile, earrings and several punky facial piercings, one dark tattoo runs from her lower arm to her upper arm, Large futuristic kitchen with dark appliances, tiled floor, one stove, one refrigerator, flower decoration, wine bottles rimmed. Phosphorescent dust particles floating in the air that are illuminated by the light, stunning bokeh, part of a luxury apartment in New York, large window above the stove., A girl masturbates her pussy doggy style, 1girl, solo, full body, large expressive eyes, detailed eyes, clean lines, smooth skin, perfect hands, detailed realistic hair, detailed realistic face, detailed realistic body, detailed realistic hands, detailed realistic feet, detailed realistic legs, detailed realistic tits, realistic lighting, dramatic lighting, cinematic lighting, volumetric lighting, backlit, side lighting, side lit, light particles, light rays, haze, fog, high resolution, masterpiece, best quality, concept art, artwork, bold outlines, impressionistic, phosphorescent dust particles floating in the air, semi-realistic, lazypos, raw, ((photorealistic)), ((realistic shade))",
+    "enhanced_negative_prompt": "poorly_detailed, worst_quality, bad_quality, extra fingers, missing fingers, lowres, low resolution bad anatomy, extra digits, jpeg artifacts, signature, watermark, username, conjoined, deformed fingers, short legs, body diproportion, bad ai-generated, text, furry, halo, multiple views, displeasing, messy composition, clones, one person",
+    "prompt_length": 1410,
+    "negative_prompt_length": 338,
+    "uses_default_prompts": false
+  },
+  "image_url": "",
+  "settings": {
+    "width": 512,
+    "height": 768,
+    "steps": 20,
+    "cfg_scale": 4,
+    "sampler_name": "Euler",
+    "scheduler": "karras",
+    "seed": -1,
+    "batch_size": 1,
+    "n_iter": 1,
+    "n_samples": 1,
+    "save_grid": false,
+    "restore_faces": false,
+    "send_images": true,
+    "save_images": false,
+    "enable_hr": false,
+    "hr_scale": 1.5,
+    "hr_upscaler": "SwinIR_4x",
+    "hr_second_pass_steps": 10,
+    "hr_prompt": "",
+    "hr_negative_prompt": "",
+    "denoising_strength": 0.4,
+    "clip_skip": 2,
+    "use_default_prompts": false,
+    "override_settings": {},
+    "override_settings_restore_afterwards": false,
+    "script_args": [],
+    "use_adetailer": true,
+    "adetailer_settings": {},
+    "ip_adapter_model": null,
+    "ip_adapter_weight": null,
+    "ip_adapter_image": null,
+    "lora_models": {
+      "enabled_loras": [
+        "EasyNegativeV2.safetensors",
+        "MysticalPlantPenetratorILLUST.safetensors",
+        "Detailed-Eye-V1.0-000013.safetensors",
+        "Dramatic Lighting Slider",
+        "Semi-realism_illustrious.safetensors",
+        "kms_in the dark_IL-000003.safetensors"
+      ],
+      "disabled_loras": [
+        "pastel-anime-xl-latest",
+        "DetailedEyes_V3",
+        "1.5_perfect hands",
+        "add_detail"
+      ],
+      "total_loras": 10,
+      "working_loras": [
+        "EasyNegativeV2.safetensors",
+        "MysticalPlantPenetratorILLUST.safetensors",
+        "Detailed-Eye-V1.0-000013.safetensors",
+        "Dramatic Lighting Slider",
+        "Semi-realism_illustrious.safetensors",
+        "kms_in the dark_IL-000003.safetensors"
+      ],
+      "not_working_loras": [],
+      "lora_details": [
+        {
+          "name": "pastel-anime-xl-latest",
+          "weight": 0.4,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "DetailedEyes_V3",
+          "weight": 0.6,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "1.5_perfect hands",
+          "weight": 0.9,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "add_detail",
+          "weight": 0.5,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "EasyNegativeV2.safetensors",
+          "weight": 0.9,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "MysticalPlantPenetratorILLUST.safetensors",
+          "weight": 0.25,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "Detailed-Eye-V1.0-000013.safetensors",
+          "weight": 1.0,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "Dramatic Lighting Slider",
+          "weight": 1.5,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "Semi-realism_illustrious.safetensors",
+          "weight": 0.7,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "kms_in the dark_IL-000003.safetensors",
+          "weight": 0.5,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        }
+      ]
+    },
+    "alwayson_scripts": {
+      "adetailer_enabled": true,
+      "adetailer_config": {
+        "args": [
+          true,
+          {
+            "ad_model": "face_yolov8n.pt",
+            "ad_steps": 15,
+            "ad_denoising_strength": 0.4,
+            "ad_cfg_scale": 4,
+            "ad_mask_blur": 3,
+            "ad_inpaint_only_masked": true,
+            "ad_inpaint_only_masked_padding": 24,
+            "ad_confidence": 0.2,
+            "ad_dilate_erode": 2,
+            "ad_use_steps": true,
+            "ad_use_cfg_scale": true,
+            "ad_prompt": "clean line art, symmetrical eyes, glossy eyes, sharp anime details, perfect anime face",
+            "ad_negative_prompt": "deformed face, wonky eyes, double irises, bad symmetry, lowres, blurry"
+          },
+          {
+            "ad_model": "hand_yolov9c.pt",
+            "ad_steps": 30,
+            "ad_denoising_strength": 0.3,
+            "ad_cfg_scale": 4,
+            "ad_mask_blur": 4,
+            "ad_inpaint_only_masked": true,
+            "ad_inpaint_only_masked_padding": 32,
+            "ad_confidence": 0.3,
+            "ad_dilate_erode": 4,
+            "ad_use_steps": true,
+            "ad_use_cfg_scale": true,
+            "ad_prompt": "perfect hands, detailed fingers, natural hand anatomy",
+            "ad_negative_prompt": "deformed hands, extra fingers, missing fingers, bad anatomy, mutated hands, ugly hands"
+          }
+        ]
+      },
+      "controlnet_enabled": false,
+      "all_scripts": [
+        "ADetailer"
+      ]
+    }
+  },
+  "error": null
+}
+
+{
+  "timestamp": "2025-09-26T13:19:01.254417",
+  "success": true,
+  "generation_time_seconds": 32.36,
+  "character": "Anna",
+  "prompts": {
+    "user_prompt": "(detailed_eyes), (depth_of_field), 1 girl, 19 years old, petite face, wearing only an off-the-shoulder crop top, crop top pulled up above her chest, small-nipples, perfect-sized and soft breasts, blue eyes, ash-blonde hair, voluminous_hair_to_her_shoulders, (full_undercut:1.3), bristly ponytail, cute shy smile, earrings and several punky facial piercings, one dark tattoo runs from her lower arm to her upper arm, Large futuristic kitchen with dark appliances, tiled floor, one stove, one refrigerator, flower decoration, wine bottles rimmed. Phosphorescent dust particles floating in the air that are illuminated by the light, stunning bokeh, part of a luxury apartment in New York, large window above the stove., As we stand there silently side by side in the kitchen preparing breakfast together, the air between us feels electrified despite our attempts at keeping things casual. The scent of freshly brewed coffee fills the room while soft jazz plays from the radio station on low volume adding some background ambiance to this intimate moment we share together alone at home early in the morning hours when most people are still fast asleep dreaming their dreams unaware of what's transpiring right here right now between two siblings who share more than just genes but also unspoken desires hidden deep within their hearts waiting for an opportunity arise where they could finally act upon them without any consequences holding them back from giving into temptation once and for all..., 1girl, solo, full body, large expressive eyes, detailed eyes, clean lines, smooth skin, perfect hands, detailed realistic hair, detailed realistic face, detailed realistic body, detailed realistic hands, detailed realistic feet, detailed realistic legs, detailed realistic tits, realistic lighting, dramatic lighting, cinematic lighting, volumetric lighting, backlit, side lighting, side lit, light particles, light rays, haze, fog, high resolution, masterpiece, best quality, concept art, artwork, bold outlines, impressionistic, phosphorescent dust particles floating in the air, semi-realistic, lazypos, raw, ((photorealistic)), ((realistic shade))",
+    "user_negative_prompt": "poorly_detailed, worst_quality, bad_quality, extra fingers, missing fingers, lowres, low resolution bad anatomy, extra digits, jpeg artifacts, signature, watermark, username, conjoined, deformed fingers, short legs, body diproportion, bad ai-generated, text, furry, halo, multiple views, displeasing, messy composition, clones, one person",
+    "enhanced_prompt": "(detailed_eyes), (depth_of_field), 1 girl, 19 years old, petite face, wearing only an off-the-shoulder crop top, crop top pulled up above her chest, small-nipples, perfect-sized and soft breasts, blue eyes, ash-blonde hair, voluminous_hair_to_her_shoulders, (full_undercut:1.3), bristly ponytail, cute shy smile, earrings and several punky facial piercings, one dark tattoo runs from her lower arm to her upper arm, Large futuristic kitchen with dark appliances, tiled floor, one stove, one refrigerator, flower decoration, wine bottles rimmed. Phosphorescent dust particles floating in the air that are illuminated by the light, stunning bokeh, part of a luxury apartment in New York, large window above the stove., As we stand there silently side by side in the kitchen preparing breakfast together, the air between us feels electrified despite our attempts at keeping things casual. The scent of freshly brewed coffee fills the room while soft jazz plays from the radio station on low volume adding some background ambiance to this intimate moment we share together alone at home early in the morning hours when most people are still fast asleep dreaming their dreams unaware of what's transpiring right here right now between two siblings who share more than just genes but also unspoken desires hidden deep within their hearts waiting for an opportunity arise where they could finally act upon them without any consequences holding them back from giving into temptation once and for all..., 1girl, solo, full body, large expressive eyes, detailed eyes, clean lines, smooth skin, perfect hands, detailed realistic hair, detailed realistic face, detailed realistic body, detailed realistic hands, detailed realistic feet, detailed realistic legs, detailed realistic tits, realistic lighting, dramatic lighting, cinematic lighting, volumetric lighting, backlit, side lighting, side lit, light particles, light rays, haze, fog, high resolution, masterpiece, best quality, concept art, artwork, bold outlines, impressionistic, phosphorescent dust particles floating in the air, semi-realistic, lazypos, raw, ((photorealistic)), ((realistic shade))",
+    "enhanced_negative_prompt": "poorly_detailed, worst_quality, bad_quality, extra fingers, missing fingers, lowres, low resolution bad anatomy, extra digits, jpeg artifacts, signature, watermark, username, conjoined, deformed fingers, short legs, body diproportion, bad ai-generated, text, furry, halo, multiple views, displeasing, messy composition, clones, one person",
+    "prompt_length": 2147,
+    "negative_prompt_length": 338,
+    "uses_default_prompts": false
+  },
+  "image_url": "",
+  "settings": {
+    "width": 512,
+    "height": 768,
+    "steps": 20,
+    "cfg_scale": 4,
+    "sampler_name": "Euler",
+    "scheduler": "karras",
+    "seed": -1,
+    "batch_size": 1,
+    "n_iter": 1,
+    "n_samples": 1,
+    "save_grid": false,
+    "restore_faces": false,
+    "send_images": true,
+    "save_images": false,
+    "enable_hr": false,
+    "hr_scale": 1.5,
+    "hr_upscaler": "SwinIR_4x",
+    "hr_second_pass_steps": 10,
+    "hr_prompt": "",
+    "hr_negative_prompt": "",
+    "denoising_strength": 0.4,
+    "clip_skip": 2,
+    "use_default_prompts": false,
+    "override_settings": {},
+    "override_settings_restore_afterwards": false,
+    "script_args": [],
+    "use_adetailer": true,
+    "adetailer_settings": {},
+    "ip_adapter_model": null,
+    "ip_adapter_weight": null,
+    "ip_adapter_image": null,
+    "lora_models": {
+      "enabled_loras": [
+        "EasyNegativeV2.safetensors",
+        "MysticalPlantPenetratorILLUST.safetensors",
+        "Detailed-Eye-V1.0-000013.safetensors",
+        "Dramatic Lighting Slider",
+        "Semi-realism_illustrious.safetensors",
+        "kms_in the dark_IL-000003.safetensors"
+      ],
+      "disabled_loras": [
+        "pastel-anime-xl-latest",
+        "DetailedEyes_V3",
+        "1.5_perfect hands",
+        "add_detail"
+      ],
+      "total_loras": 10,
+      "working_loras": [
+        "EasyNegativeV2.safetensors",
+        "MysticalPlantPenetratorILLUST.safetensors",
+        "Detailed-Eye-V1.0-000013.safetensors",
+        "Dramatic Lighting Slider",
+        "Semi-realism_illustrious.safetensors",
+        "kms_in the dark_IL-000003.safetensors"
+      ],
+      "not_working_loras": [],
+      "lora_details": [
+        {
+          "name": "pastel-anime-xl-latest",
+          "weight": 0.4,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "DetailedEyes_V3",
+          "weight": 0.6,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "1.5_perfect hands",
+          "weight": 0.9,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "add_detail",
+          "weight": 0.5,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "EasyNegativeV2.safetensors",
+          "weight": 0.9,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "MysticalPlantPenetratorILLUST.safetensors",
+          "weight": 0.25,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "Detailed-Eye-V1.0-000013.safetensors",
+          "weight": 1.0,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "Dramatic Lighting Slider",
+          "weight": 1.5,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "Semi-realism_illustrious.safetensors",
+          "weight": 0.7,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "kms_in the dark_IL-000003.safetensors",
+          "weight": 0.5,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        }
+      ]
+    },
+    "alwayson_scripts": {
+      "adetailer_enabled": true,
+      "adetailer_config": {
+        "args": [
+          true,
+          {
+            "ad_model": "face_yolov8n.pt",
+            "ad_steps": 15,
+            "ad_denoising_strength": 0.4,
+            "ad_cfg_scale": 4,
+            "ad_mask_blur": 3,
+            "ad_inpaint_only_masked": true,
+            "ad_inpaint_only_masked_padding": 24,
+            "ad_confidence": 0.2,
+            "ad_dilate_erode": 2,
+            "ad_use_steps": true,
+            "ad_use_cfg_scale": true,
+            "ad_prompt": "clean line art, symmetrical eyes, glossy eyes, sharp anime details, perfect anime face",
+            "ad_negative_prompt": "deformed face, wonky eyes, double irises, bad symmetry, lowres, blurry"
+          },
+          {
+            "ad_model": "hand_yolov9c.pt",
+            "ad_steps": 30,
+            "ad_denoising_strength": 0.3,
+            "ad_cfg_scale": 4,
+            "ad_mask_blur": 4,
+            "ad_inpaint_only_masked": true,
+            "ad_inpaint_only_masked_padding": 32,
+            "ad_confidence": 0.3,
+            "ad_dilate_erode": 4,
+            "ad_use_steps": true,
+            "ad_use_cfg_scale": true,
+            "ad_prompt": "perfect hands, detailed fingers, natural hand anatomy",
+            "ad_negative_prompt": "deformed hands, extra fingers, missing fingers, bad anatomy, mutated hands, ugly hands"
+          }
+        ]
+      },
+      "controlnet_enabled": false,
+      "all_scripts": [
+        "ADetailer"
+      ]
+    }
+  },
+  "error": null
+}
+
+{
+  "timestamp": "2025-09-26T13:24:43.822070",
+  "success": true,
+  "generation_time_seconds": 42.26,
+  "character": "Anna",
+  "prompts": {
+    "user_prompt": "(detailed_eyes), (depth_of_field), 1 girl, 19 years old, petite face, wearing only an off-the-shoulder crop top, crop top pulled up above her chest, small-nipples, perfect-sized and soft breasts, blue eyes, ash-blonde hair, voluminous_hair_to_her_shoulders, (full_undercut:1.3), bristly ponytail, cute shy smile, earrings and several punky facial piercings, one dark tattoo runs from her lower arm to her upper arm, Large futuristic kitchen with dark appliances, tiled floor, one stove, one refrigerator, flower decoration, wine bottles rimmed. Phosphorescent dust particles floating in the air that are illuminated by the light, stunning bokeh, part of a luxury apartment in New York, large window above the stove., 123, 1girl, solo, full body, large expressive eyes, detailed eyes, clean lines, smooth skin, perfect hands, detailed realistic hair, detailed realistic face, detailed realistic body, detailed realistic hands, detailed realistic feet, detailed realistic legs, detailed realistic tits, realistic lighting, dramatic lighting, cinematic lighting, volumetric lighting, backlit, side lighting, side lit, light particles, light rays, haze, fog, high resolution, masterpiece, best quality, concept art, artwork, bold outlines, impressionistic, phosphorescent dust particles floating in the air, semi-realistic, lazypos, raw, ((photorealistic)), ((realistic shade))",
+    "user_negative_prompt": "poorly_detailed, worst_quality, bad_quality, extra fingers, missing fingers, lowres, low resolution bad anatomy, extra digits, jpeg artifacts, signature, watermark, username, conjoined, deformed fingers, short legs, body diproportion, bad ai-generated, text, furry, halo, multiple views, displeasing, messy composition, clones, one person",
+    "enhanced_prompt": "(detailed_eyes), (depth_of_field), 1 girl, 19 years old, petite face, wearing only an off-the-shoulder crop top, crop top pulled up above her chest, small-nipples, perfect-sized and soft breasts, blue eyes, ash-blonde hair, voluminous_hair_to_her_shoulders, (full_undercut:1.3), bristly ponytail, cute shy smile, earrings and several punky facial piercings, one dark tattoo runs from her lower arm to her upper arm, Large futuristic kitchen with dark appliances, tiled floor, one stove, one refrigerator, flower decoration, wine bottles rimmed. Phosphorescent dust particles floating in the air that are illuminated by the light, stunning bokeh, part of a luxury apartment in New York, large window above the stove., 123, 1girl, solo, full body, large expressive eyes, detailed eyes, clean lines, smooth skin, perfect hands, detailed realistic hair, detailed realistic face, detailed realistic body, detailed realistic hands, detailed realistic feet, detailed realistic legs, detailed realistic tits, realistic lighting, dramatic lighting, cinematic lighting, volumetric lighting, backlit, side lighting, side lit, light particles, light rays, haze, fog, high resolution, masterpiece, best quality, concept art, artwork, bold outlines, impressionistic, phosphorescent dust particles floating in the air, semi-realistic, lazypos, raw, ((photorealistic)), ((realistic shade))",
+    "enhanced_negative_prompt": "poorly_detailed, worst_quality, bad_quality, extra fingers, missing fingers, lowres, low resolution bad anatomy, extra digits, jpeg artifacts, signature, watermark, username, conjoined, deformed fingers, short legs, body diproportion, bad ai-generated, text, furry, halo, multiple views, displeasing, messy composition, clones, one person",
+    "prompt_length": 1373,
+    "negative_prompt_length": 338,
+    "uses_default_prompts": false
+  },
+  "image_url": "",
+  "settings": {
+    "width": 512,
+    "height": 768,
+    "steps": 20,
+    "cfg_scale": 4,
+    "sampler_name": "Euler",
+    "scheduler": "karras",
+    "seed": -1,
+    "batch_size": 1,
+    "n_iter": 1,
+    "n_samples": 1,
+    "save_grid": false,
+    "restore_faces": false,
+    "send_images": true,
+    "save_images": false,
+    "enable_hr": false,
+    "hr_scale": 1.5,
+    "hr_upscaler": "SwinIR_4x",
+    "hr_second_pass_steps": 10,
+    "hr_prompt": "",
+    "hr_negative_prompt": "",
+    "denoising_strength": 0.4,
+    "clip_skip": 2,
+    "use_default_prompts": false,
+    "override_settings": {},
+    "override_settings_restore_afterwards": false,
+    "script_args": [],
+    "use_adetailer": true,
+    "adetailer_settings": {},
+    "ip_adapter_model": null,
+    "ip_adapter_weight": null,
+    "ip_adapter_image": null,
+    "lora_models": {
+      "enabled_loras": [
+        "EasyNegativeV2.safetensors",
+        "MysticalPlantPenetratorILLUST.safetensors",
+        "Detailed-Eye-V1.0-000013.safetensors",
+        "Dramatic Lighting Slider",
+        "Semi-realism_illustrious.safetensors",
+        "kms_in the dark_IL-000003.safetensors"
+      ],
+      "disabled_loras": [
+        "pastel-anime-xl-latest",
+        "DetailedEyes_V3",
+        "1.5_perfect hands",
+        "add_detail"
+      ],
+      "total_loras": 10,
+      "working_loras": [
+        "EasyNegativeV2.safetensors",
+        "MysticalPlantPenetratorILLUST.safetensors",
+        "Detailed-Eye-V1.0-000013.safetensors",
+        "Dramatic Lighting Slider",
+        "Semi-realism_illustrious.safetensors",
+        "kms_in the dark_IL-000003.safetensors"
+      ],
+      "not_working_loras": [],
+      "lora_details": [
+        {
+          "name": "pastel-anime-xl-latest",
+          "weight": 0.4,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "DetailedEyes_V3",
+          "weight": 0.6,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "1.5_perfect hands",
+          "weight": 0.9,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "add_detail",
+          "weight": 0.5,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "EasyNegativeV2.safetensors",
+          "weight": 0.9,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "MysticalPlantPenetratorILLUST.safetensors",
+          "weight": 0.25,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "Detailed-Eye-V1.0-000013.safetensors",
+          "weight": 1.0,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "Dramatic Lighting Slider",
+          "weight": 1.5,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "Semi-realism_illustrious.safetensors",
+          "weight": 0.7,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "kms_in the dark_IL-000003.safetensors",
+          "weight": 0.5,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        }
+      ]
+    },
+    "alwayson_scripts": {
+      "adetailer_enabled": true,
+      "adetailer_config": {
+        "args": [
+          true,
+          {
+            "ad_model": "face_yolov8n.pt",
+            "ad_steps": 15,
+            "ad_denoising_strength": 0.4,
+            "ad_cfg_scale": 4,
+            "ad_mask_blur": 3,
+            "ad_inpaint_only_masked": true,
+            "ad_inpaint_only_masked_padding": 24,
+            "ad_confidence": 0.2,
+            "ad_dilate_erode": 2,
+            "ad_use_steps": true,
+            "ad_use_cfg_scale": true,
+            "ad_prompt": "clean line art, symmetrical eyes, glossy eyes, sharp anime details, perfect anime face",
+            "ad_negative_prompt": "deformed face, wonky eyes, double irises, bad symmetry, lowres, blurry"
+          },
+          {
+            "ad_model": "hand_yolov9c.pt",
+            "ad_steps": 30,
+            "ad_denoising_strength": 0.3,
+            "ad_cfg_scale": 4,
+            "ad_mask_blur": 4,
+            "ad_inpaint_only_masked": true,
+            "ad_inpaint_only_masked_padding": 32,
+            "ad_confidence": 0.3,
+            "ad_dilate_erode": 4,
+            "ad_use_steps": true,
+            "ad_use_cfg_scale": true,
+            "ad_prompt": "perfect hands, detailed fingers, natural hand anatomy",
+            "ad_negative_prompt": "deformed hands, extra fingers, missing fingers, bad anatomy, mutated hands, ugly hands"
+          }
+        ]
+      },
+      "controlnet_enabled": false,
+      "all_scripts": [
+        "ADetailer"
+      ]
+    }
+  },
+  "error": null
+}
+
+{
+  "timestamp": "2025-09-26T13:29:02.432584",
+  "success": true,
+  "generation_time_seconds": 34.04,
+  "character": "Anna",
+  "prompts": {
+    "user_prompt": "(detailed_eyes), (depth_of_field), 1 girl, 19 years old, petite face, wearing only an off-the-shoulder crop top, crop top pulled up above her chest, small-nipples, perfect-sized and soft breasts, blue eyes, ash-blonde hair, voluminous_hair_to_her_shoulders, (full_undercut:1.3), bristly ponytail, cute shy smile, earrings and several punky facial piercings, one dark tattoo runs from her lower arm to her upper arm, Large futuristic kitchen with dark appliances, tiled floor, one stove, one refrigerator, flower decoration, wine bottles rimmed. Phosphorescent dust particles floating in the air that are illuminated by the light, stunning bokeh, part of a luxury apartment in New York, large window above the stove., show ass, 1girl, solo, full body, large expressive eyes, detailed eyes, clean lines, smooth skin, perfect hands, detailed realistic hair, detailed realistic face, detailed realistic body, detailed realistic hands, detailed realistic feet, detailed realistic legs, detailed realistic tits, realistic lighting, dramatic lighting, cinematic lighting, volumetric lighting, backlit, side lighting, side lit, light particles, light rays, haze, fog, high resolution, masterpiece, best quality, concept art, artwork, bold outlines, impressionistic, phosphorescent dust particles floating in the air, semi-realistic, lazypos, raw, ((photorealistic)), ((realistic shade))",
+    "user_negative_prompt": "poorly_detailed, worst_quality, bad_quality, extra fingers, missing fingers, lowres, low resolution bad anatomy, extra digits, jpeg artifacts, signature, watermark, username, conjoined, deformed fingers, short legs, body diproportion, bad ai-generated, text, furry, halo, multiple views, displeasing, messy composition, clones, one person",
+    "enhanced_prompt": "(detailed_eyes), (depth_of_field), 1 girl, 19 years old, petite face, wearing only an off-the-shoulder crop top, crop top pulled up above her chest, small-nipples, perfect-sized and soft breasts, blue eyes, ash-blonde hair, voluminous_hair_to_her_shoulders, (full_undercut:1.3), bristly ponytail, cute shy smile, earrings and several punky facial piercings, one dark tattoo runs from her lower arm to her upper arm, Large futuristic kitchen with dark appliances, tiled floor, one stove, one refrigerator, flower decoration, wine bottles rimmed. Phosphorescent dust particles floating in the air that are illuminated by the light, stunning bokeh, part of a luxury apartment in New York, large window above the stove., show ass, 1girl, solo, full body, large expressive eyes, detailed eyes, clean lines, smooth skin, perfect hands, detailed realistic hair, detailed realistic face, detailed realistic body, detailed realistic hands, detailed realistic feet, detailed realistic legs, detailed realistic tits, realistic lighting, dramatic lighting, cinematic lighting, volumetric lighting, backlit, side lighting, side lit, light particles, light rays, haze, fog, high resolution, masterpiece, best quality, concept art, artwork, bold outlines, impressionistic, phosphorescent dust particles floating in the air, semi-realistic, lazypos, raw, ((photorealistic)), ((realistic shade))",
+    "enhanced_negative_prompt": "poorly_detailed, worst_quality, bad_quality, extra fingers, missing fingers, lowres, low resolution bad anatomy, extra digits, jpeg artifacts, signature, watermark, username, conjoined, deformed fingers, short legs, body diproportion, bad ai-generated, text, furry, halo, multiple views, displeasing, messy composition, clones, one person",
+    "prompt_length": 1378,
+    "negative_prompt_length": 338,
+    "uses_default_prompts": false
+  },
+  "image_url": "",
+  "settings": {
+    "width": 512,
+    "height": 768,
+    "steps": 20,
+    "cfg_scale": 4,
+    "sampler_name": "Euler",
+    "scheduler": "karras",
+    "seed": -1,
+    "batch_size": 1,
+    "n_iter": 1,
+    "n_samples": 1,
+    "save_grid": false,
+    "restore_faces": false,
+    "send_images": true,
+    "save_images": false,
+    "enable_hr": false,
+    "hr_scale": 1.5,
+    "hr_upscaler": "SwinIR_4x",
+    "hr_second_pass_steps": 10,
+    "hr_prompt": "",
+    "hr_negative_prompt": "",
+    "denoising_strength": 0.4,
+    "clip_skip": 2,
+    "use_default_prompts": false,
+    "override_settings": {},
+    "override_settings_restore_afterwards": false,
+    "script_args": [],
+    "use_adetailer": true,
+    "adetailer_settings": {},
+    "ip_adapter_model": null,
+    "ip_adapter_weight": null,
+    "ip_adapter_image": null,
+    "lora_models": {
+      "enabled_loras": [
+        "EasyNegativeV2.safetensors",
+        "MysticalPlantPenetratorILLUST.safetensors",
+        "Detailed-Eye-V1.0-000013.safetensors",
+        "Dramatic Lighting Slider",
+        "Semi-realism_illustrious.safetensors",
+        "kms_in the dark_IL-000003.safetensors"
+      ],
+      "disabled_loras": [
+        "pastel-anime-xl-latest",
+        "DetailedEyes_V3",
+        "1.5_perfect hands",
+        "add_detail"
+      ],
+      "total_loras": 10,
+      "working_loras": [
+        "EasyNegativeV2.safetensors",
+        "MysticalPlantPenetratorILLUST.safetensors",
+        "Detailed-Eye-V1.0-000013.safetensors",
+        "Dramatic Lighting Slider",
+        "Semi-realism_illustrious.safetensors",
+        "kms_in the dark_IL-000003.safetensors"
+      ],
+      "not_working_loras": [],
+      "lora_details": [
+        {
+          "name": "pastel-anime-xl-latest",
+          "weight": 0.4,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "DetailedEyes_V3",
+          "weight": 0.6,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "1.5_perfect hands",
+          "weight": 0.9,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "add_detail",
+          "weight": 0.5,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "EasyNegativeV2.safetensors",
+          "weight": 0.9,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "MysticalPlantPenetratorILLUST.safetensors",
+          "weight": 0.25,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "Detailed-Eye-V1.0-000013.safetensors",
+          "weight": 1.0,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "Dramatic Lighting Slider",
+          "weight": 1.5,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "Semi-realism_illustrious.safetensors",
+          "weight": 0.7,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "kms_in the dark_IL-000003.safetensors",
+          "weight": 0.5,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        }
+      ]
+    },
+    "alwayson_scripts": {
+      "adetailer_enabled": true,
+      "adetailer_config": {
+        "args": [
+          true,
+          {
+            "ad_model": "face_yolov8n.pt",
+            "ad_steps": 15,
+            "ad_denoising_strength": 0.4,
+            "ad_cfg_scale": 4,
+            "ad_mask_blur": 3,
+            "ad_inpaint_only_masked": true,
+            "ad_inpaint_only_masked_padding": 24,
+            "ad_confidence": 0.2,
+            "ad_dilate_erode": 2,
+            "ad_use_steps": true,
+            "ad_use_cfg_scale": true,
+            "ad_prompt": "clean line art, symmetrical eyes, glossy eyes, sharp anime details, perfect anime face",
+            "ad_negative_prompt": "deformed face, wonky eyes, double irises, bad symmetry, lowres, blurry"
+          },
+          {
+            "ad_model": "hand_yolov9c.pt",
+            "ad_steps": 30,
+            "ad_denoising_strength": 0.3,
+            "ad_cfg_scale": 4,
+            "ad_mask_blur": 4,
+            "ad_inpaint_only_masked": true,
+            "ad_inpaint_only_masked_padding": 32,
+            "ad_confidence": 0.3,
+            "ad_dilate_erode": 4,
+            "ad_use_steps": true,
+            "ad_use_cfg_scale": true,
+            "ad_prompt": "perfect hands, detailed fingers, natural hand anatomy",
+            "ad_negative_prompt": "deformed hands, extra fingers, missing fingers, bad anatomy, mutated hands, ugly hands"
+          }
+        ]
+      },
+      "controlnet_enabled": false,
+      "all_scripts": [
+        "ADetailer"
+      ]
+    }
+  },
+  "error": null
+}
+
+{
+  "timestamp": "2025-09-26T13:30:11.821511",
+  "success": true,
+  "generation_time_seconds": 28.5,
+  "character": "Anna",
+  "prompts": {
+    "user_prompt": "(detailed_eyes), (depth_of_field), 1 girl, 19 years old, petite face, wearing only an off-the-shoulder crop top, crop top pulled up above her chest, small-nipples, perfect-sized and soft breasts, blue eyes, ash-blonde hair, voluminous_hair_to_her_shoulders, (full_undercut:1.3), bristly ponytail, cute shy smile, earrings and several punky facial piercings, one dark tattoo runs from her lower arm to her upper arm, Large futuristic kitchen with dark appliances, tiled floor, one stove, one refrigerator, flower decoration, wine bottles rimmed. Phosphorescent dust particles floating in the air that are illuminated by the light, stunning bokeh, part of a luxury apartment in New York, large window above the stove., show ass, 1girl, solo, full body, large expressive eyes, detailed eyes, clean lines, smooth skin, perfect hands, detailed realistic hair, detailed realistic face, detailed realistic body, detailed realistic hands, detailed realistic feet, detailed realistic legs, detailed realistic tits, realistic lighting, dramatic lighting, cinematic lighting, volumetric lighting, backlit, side lighting, side lit, light particles, light rays, haze, fog, high resolution, masterpiece, best quality, concept art, artwork, bold outlines, impressionistic, phosphorescent dust particles floating in the air, semi-realistic, lazypos, raw, ((photorealistic)), ((realistic shade))",
+    "user_negative_prompt": "poorly_detailed, worst_quality, bad_quality, extra fingers, missing fingers, lowres, low resolution bad anatomy, extra digits, jpeg artifacts, signature, watermark, username, conjoined, deformed fingers, short legs, body diproportion, bad ai-generated, text, furry, halo, multiple views, displeasing, messy composition, clones, one person",
+    "enhanced_prompt": "(detailed_eyes), (depth_of_field), 1 girl, 19 years old, petite face, wearing only an off-the-shoulder crop top, crop top pulled up above her chest, small-nipples, perfect-sized and soft breasts, blue eyes, ash-blonde hair, voluminous_hair_to_her_shoulders, (full_undercut:1.3), bristly ponytail, cute shy smile, earrings and several punky facial piercings, one dark tattoo runs from her lower arm to her upper arm, Large futuristic kitchen with dark appliances, tiled floor, one stove, one refrigerator, flower decoration, wine bottles rimmed. Phosphorescent dust particles floating in the air that are illuminated by the light, stunning bokeh, part of a luxury apartment in New York, large window above the stove., show ass, 1girl, solo, full body, large expressive eyes, detailed eyes, clean lines, smooth skin, perfect hands, detailed realistic hair, detailed realistic face, detailed realistic body, detailed realistic hands, detailed realistic feet, detailed realistic legs, detailed realistic tits, realistic lighting, dramatic lighting, cinematic lighting, volumetric lighting, backlit, side lighting, side lit, light particles, light rays, haze, fog, high resolution, masterpiece, best quality, concept art, artwork, bold outlines, impressionistic, phosphorescent dust particles floating in the air, semi-realistic, lazypos, raw, ((photorealistic)), ((realistic shade))",
+    "enhanced_negative_prompt": "poorly_detailed, worst_quality, bad_quality, extra fingers, missing fingers, lowres, low resolution bad anatomy, extra digits, jpeg artifacts, signature, watermark, username, conjoined, deformed fingers, short legs, body diproportion, bad ai-generated, text, furry, halo, multiple views, displeasing, messy composition, clones, one person",
+    "prompt_length": 1378,
+    "negative_prompt_length": 338,
+    "uses_default_prompts": false
+  },
+  "image_url": "",
+  "settings": {
+    "width": 512,
+    "height": 768,
+    "steps": 20,
+    "cfg_scale": 4,
+    "sampler_name": "Euler",
+    "scheduler": "karras",
+    "seed": -1,
+    "batch_size": 1,
+    "n_iter": 1,
+    "n_samples": 1,
+    "save_grid": false,
+    "restore_faces": false,
+    "send_images": true,
+    "save_images": false,
+    "enable_hr": false,
+    "hr_scale": 1.5,
+    "hr_upscaler": "SwinIR_4x",
+    "hr_second_pass_steps": 10,
+    "hr_prompt": "",
+    "hr_negative_prompt": "",
+    "denoising_strength": 0.4,
+    "clip_skip": 2,
+    "use_default_prompts": false,
+    "override_settings": {},
+    "override_settings_restore_afterwards": false,
+    "script_args": [],
+    "use_adetailer": true,
+    "adetailer_settings": {},
+    "ip_adapter_model": null,
+    "ip_adapter_weight": null,
+    "ip_adapter_image": null,
+    "lora_models": {
+      "enabled_loras": [
+        "EasyNegativeV2.safetensors",
+        "MysticalPlantPenetratorILLUST.safetensors",
+        "Detailed-Eye-V1.0-000013.safetensors",
+        "Dramatic Lighting Slider",
+        "Semi-realism_illustrious.safetensors",
+        "kms_in the dark_IL-000003.safetensors"
+      ],
+      "disabled_loras": [
+        "pastel-anime-xl-latest",
+        "DetailedEyes_V3",
+        "1.5_perfect hands",
+        "add_detail"
+      ],
+      "total_loras": 10,
+      "working_loras": [
+        "EasyNegativeV2.safetensors",
+        "MysticalPlantPenetratorILLUST.safetensors",
+        "Detailed-Eye-V1.0-000013.safetensors",
+        "Dramatic Lighting Slider",
+        "Semi-realism_illustrious.safetensors",
+        "kms_in the dark_IL-000003.safetensors"
+      ],
+      "not_working_loras": [],
+      "lora_details": [
+        {
+          "name": "pastel-anime-xl-latest",
+          "weight": 0.4,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "DetailedEyes_V3",
+          "weight": 0.6,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "1.5_perfect hands",
+          "weight": 0.9,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "add_detail",
+          "weight": 0.5,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "EasyNegativeV2.safetensors",
+          "weight": 0.9,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "MysticalPlantPenetratorILLUST.safetensors",
+          "weight": 0.25,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "Detailed-Eye-V1.0-000013.safetensors",
+          "weight": 1.0,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "Dramatic Lighting Slider",
+          "weight": 1.5,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "Semi-realism_illustrious.safetensors",
+          "weight": 0.7,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "kms_in the dark_IL-000003.safetensors",
+          "weight": 0.5,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        }
+      ]
+    },
+    "alwayson_scripts": {
+      "adetailer_enabled": true,
+      "adetailer_config": {
+        "args": [
+          true,
+          {
+            "ad_model": "face_yolov8n.pt",
+            "ad_steps": 15,
+            "ad_denoising_strength": 0.4,
+            "ad_cfg_scale": 4,
+            "ad_mask_blur": 3,
+            "ad_inpaint_only_masked": true,
+            "ad_inpaint_only_masked_padding": 24,
+            "ad_confidence": 0.2,
+            "ad_dilate_erode": 2,
+            "ad_use_steps": true,
+            "ad_use_cfg_scale": true,
+            "ad_prompt": "clean line art, symmetrical eyes, glossy eyes, sharp anime details, perfect anime face",
+            "ad_negative_prompt": "deformed face, wonky eyes, double irises, bad symmetry, lowres, blurry"
+          },
+          {
+            "ad_model": "hand_yolov9c.pt",
+            "ad_steps": 30,
+            "ad_denoising_strength": 0.3,
+            "ad_cfg_scale": 4,
+            "ad_mask_blur": 4,
+            "ad_inpaint_only_masked": true,
+            "ad_inpaint_only_masked_padding": 32,
+            "ad_confidence": 0.3,
+            "ad_dilate_erode": 4,
+            "ad_use_steps": true,
+            "ad_use_cfg_scale": true,
+            "ad_prompt": "perfect hands, detailed fingers, natural hand anatomy",
+            "ad_negative_prompt": "deformed hands, extra fingers, missing fingers, bad anatomy, mutated hands, ugly hands"
+          }
+        ]
+      },
+      "controlnet_enabled": false,
+      "all_scripts": [
+        "ADetailer"
+      ]
+    }
+  },
+  "error": null
+}
+
+{
+  "timestamp": "2025-09-26T14:46:56.409562",
+  "success": false,
+  "generation_time_seconds": 186.3,
+  "character": "Anna",
+  "prompts": {
+    "user_prompt": "(detailed_eyes), (depth_of_field), 1 girl, 19 years old, petite face, wearing only an off-the-shoulder crop top, crop top pulled up above her chest, small-nipples, perfect-sized and soft breasts, blue eyes, ash-blonde hair, voluminous_hair_to_her_shoulders, (full_undercut:1.3), bristly ponytail, cute shy smile, earrings and several punky facial piercings, one dark tattoo runs from her lower arm to her upper arm, Large futuristic kitchen with dark appliances, tiled floor, one stove, one refrigerator, flower decoration, wine bottles rimmed. Phosphorescent dust particles floating in the air that are illuminated by the light, stunning bokeh, part of a luxury apartment in New York, large window above the stove., 1girl, solo,weapon, solo, sword, sheath, holding sheath, white hair, jewelry, sitting, tattoo, black nails, bangs, flower, white eyes, blunt bangs, earrings, looking at viewer, white dress, dress, crossed legs, ring, grey eyes, water, medium hair, breasts, leg tattoo, fingernails, white theme, closed mouth, white nails, short hair, partially submerged, chromatic aberration, detailed lighting, dynamic angle,\n,masterpiece,best quality,, 1girl, solo, full body, large expressive eyes, detailed eyes, clean lines, smooth skin, perfect hands, detailed realistic hair, detailed realistic face, detailed realistic body, detailed realistic hands, detailed realistic feet, detailed realistic legs, detailed realistic tits, realistic lighting, dramatic lighting, cinematic lighting, volumetric lighting, backlit, side lighting, side lit, light particles, light rays, haze, fog, high resolution, masterpiece, best quality, concept art, artwork, bold outlines, impressionistic, phosphorescent dust particles floating in the air, semi-realistic, lazypos, raw, ((photorealistic)), ((realistic shade))",
+    "user_negative_prompt": "poorly_detailed, worst_quality, bad_quality, extra fingers, missing fingers, lowres, low resolution bad anatomy, extra digits, jpeg artifacts, signature, watermark, username, conjoined, deformed fingers, short legs, body diproportion, bad ai-generated, text, furry, halo, multiple views, displeasing, messy composition, clones, one person",
+    "enhanced_prompt": "(detailed_eyes), (depth_of_field), 1 girl, 19 years old, petite face, wearing only an off-the-shoulder crop top, crop top pulled up above her chest, small-nipples, perfect-sized and soft breasts, blue eyes, ash-blonde hair, voluminous_hair_to_her_shoulders, (full_undercut:1.3), bristly ponytail, cute shy smile, earrings and several punky facial piercings, one dark tattoo runs from her lower arm to her upper arm, Large futuristic kitchen with dark appliances, tiled floor, one stove, one refrigerator, flower decoration, wine bottles rimmed. Phosphorescent dust particles floating in the air that are illuminated by the light, stunning bokeh, part of a luxury apartment in New York, large window above the stove., 1girl, solo,weapon, solo, sword, sheath, holding sheath, white hair, jewelry, sitting, tattoo, black nails, bangs, flower, white eyes, blunt bangs, earrings, looking at viewer, white dress, dress, crossed legs, ring, grey eyes, water, medium hair, breasts, leg tattoo, fingernails, white theme, closed mouth, white nails, short hair, partially submerged, chromatic aberration, detailed lighting, dynamic angle,\n,masterpiece,best quality,, 1girl, solo, full body, large expressive eyes, detailed eyes, clean lines, smooth skin, perfect hands, detailed realistic hair, detailed realistic face, detailed realistic body, detailed realistic hands, detailed realistic feet, detailed realistic legs, detailed realistic tits, realistic lighting, dramatic lighting, cinematic lighting, volumetric lighting, backlit, side lighting, side lit, light particles, light rays, haze, fog, high resolution, masterpiece, best quality, concept art, artwork, bold outlines, impressionistic, phosphorescent dust particles floating in the air, semi-realistic, lazypos, raw, ((photorealistic)), ((realistic shade))",
+    "enhanced_negative_prompt": "poorly_detailed, worst_quality, bad_quality, extra fingers, missing fingers, lowres, low resolution bad anatomy, extra digits, jpeg artifacts, signature, watermark, username, conjoined, deformed fingers, short legs, body diproportion, bad ai-generated, text, furry, halo, multiple views, displeasing, messy composition, clones, one person",
+    "prompt_length": 1807,
+    "negative_prompt_length": 338,
+    "uses_default_prompts": false
+  },
+  "image_url": "",
+  "settings": {
+    "width": 512,
+    "height": 768,
+    "steps": 20,
+    "cfg_scale": 4,
+    "sampler_name": "Euler",
+    "scheduler": "karras",
+    "seed": -1,
+    "batch_size": 1,
+    "n_iter": 1,
+    "n_samples": 1,
+    "save_grid": false,
+    "restore_faces": false,
+    "send_images": true,
+    "save_images": false,
+    "enable_hr": false,
+    "hr_scale": 1.5,
+    "hr_upscaler": "SwinIR_4x",
+    "hr_second_pass_steps": 10,
+    "hr_prompt": "",
+    "hr_negative_prompt": "",
+    "denoising_strength": 0.4,
+    "clip_skip": 2,
+    "use_default_prompts": false,
+    "override_settings": {},
+    "override_settings_restore_afterwards": false,
+    "script_args": [],
+    "use_adetailer": true,
+    "adetailer_settings": {},
+    "ip_adapter_model": null,
+    "ip_adapter_weight": null,
+    "ip_adapter_image": null,
+    "lora_models": {
+      "enabled_loras": [
+        "EasyNegativeV2.safetensors",
+        "MysticalPlantPenetratorILLUST.safetensors",
+        "Detailed-Eye-V1.0-000013.safetensors",
+        "Dramatic Lighting Slider",
+        "Semi-realism_illustrious.safetensors",
+        "kms_in the dark_IL-000003.safetensors"
+      ],
+      "disabled_loras": [
+        "pastel-anime-xl-latest",
+        "DetailedEyes_V3",
+        "1.5_perfect hands",
+        "add_detail"
+      ],
+      "total_loras": 10,
+      "working_loras": [
+        "EasyNegativeV2.safetensors",
+        "MysticalPlantPenetratorILLUST.safetensors",
+        "Detailed-Eye-V1.0-000013.safetensors",
+        "Dramatic Lighting Slider",
+        "Semi-realism_illustrious.safetensors",
+        "kms_in the dark_IL-000003.safetensors"
+      ],
+      "not_working_loras": [],
+      "lora_details": [
+        {
+          "name": "pastel-anime-xl-latest",
+          "weight": 0.4,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "DetailedEyes_V3",
+          "weight": 0.6,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "1.5_perfect hands",
+          "weight": 0.9,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "add_detail",
+          "weight": 0.5,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "EasyNegativeV2.safetensors",
+          "weight": 0.9,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "MysticalPlantPenetratorILLUST.safetensors",
+          "weight": 0.25,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "Detailed-Eye-V1.0-000013.safetensors",
+          "weight": 1.0,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "Dramatic Lighting Slider",
+          "weight": 1.5,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "Semi-realism_illustrious.safetensors",
+          "weight": 0.7,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "kms_in the dark_IL-000003.safetensors",
+          "weight": 0.5,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        }
+      ]
+    },
+    "alwayson_scripts": {
+      "adetailer_enabled": true,
+      "adetailer_config": {
+        "args": [
+          true,
+          {
+            "ad_model": "face_yolov8n.pt",
+            "ad_steps": 15,
+            "ad_denoising_strength": 0.4,
+            "ad_cfg_scale": 4,
+            "ad_mask_blur": 3,
+            "ad_inpaint_only_masked": true,
+            "ad_inpaint_only_masked_padding": 24,
+            "ad_confidence": 0.2,
+            "ad_dilate_erode": 2,
+            "ad_use_steps": true,
+            "ad_use_cfg_scale": true,
+            "ad_prompt": "clean line art, symmetrical eyes, glossy eyes, sharp anime details, perfect anime face",
+            "ad_negative_prompt": "deformed face, wonky eyes, double irises, bad symmetry, lowres, blurry"
+          },
+          {
+            "ad_model": "hand_yolov9c.pt",
+            "ad_steps": 30,
+            "ad_denoising_strength": 0.3,
+            "ad_cfg_scale": 4,
+            "ad_mask_blur": 4,
+            "ad_inpaint_only_masked": true,
+            "ad_inpaint_only_masked_padding": 32,
+            "ad_confidence": 0.3,
+            "ad_dilate_erode": 4,
+            "ad_use_steps": true,
+            "ad_use_cfg_scale": true,
+            "ad_prompt": "perfect hands, detailed fingers, natural hand anatomy",
+            "ad_negative_prompt": "deformed hands, extra fingers, missing fingers, bad anatomy, mutated hands, ugly hands"
+          }
+        ]
+      },
+      "controlnet_enabled": false,
+      "all_scripts": [
+        "ADetailer"
+      ]
+    }
+  },
+  "error": "All connection attempts failed"
+}
+
+{
+  "timestamp": "2025-09-26T14:48:41.183124",
+  "success": true,
+  "generation_time_seconds": 42.2,
+  "character": "Anna",
+  "prompts": {
+    "user_prompt": "(detailed_eyes), (depth_of_field), 1 girl, 19 years old, petite face, wearing only an off-the-shoulder crop top, crop top pulled up above her chest, small-nipples, perfect-sized and soft breasts, blue eyes, ash-blonde hair, voluminous_hair_to_her_shoulders, (full_undercut:1.3), bristly ponytail, cute shy smile, earrings and several punky facial piercings, one dark tattoo runs from her lower arm to her upper arm, Large futuristic kitchen with dark appliances, tiled floor, one stove, one refrigerator, flower decoration, wine bottles rimmed. Phosphorescent dust particles floating in the air that are illuminated by the light, stunning bokeh, part of a luxury apartment in New York, large window above the stove., 1girl, solo,weapon, solo, sword, sheath, holding sheath, white hair, jewelry, sitting, tattoo, black nails, bangs, flower, white eyes, blunt bangs, earrings, looking at viewer, white dress, dress, crossed legs, ring, grey eyes, water, medium hair, breasts, leg tattoo, fingernails, white theme, closed mouth, white nails, short hair, partially submerged, chromatic aberration, detailed lighting, dynamic angle,\n,masterpiece,best quality,, 1girl, solo, full body, large expressive eyes, detailed eyes, clean lines, smooth skin, perfect hands, detailed realistic hair, detailed realistic face, detailed realistic body, detailed realistic hands, detailed realistic feet, detailed realistic legs, detailed realistic tits, realistic lighting, dramatic lighting, cinematic lighting, volumetric lighting, backlit, side lighting, side lit, light particles, light rays, haze, fog, high resolution, masterpiece, best quality, concept art, artwork, bold outlines, impressionistic, phosphorescent dust particles floating in the air, semi-realistic, lazypos, raw, ((photorealistic)), ((realistic shade))",
+    "user_negative_prompt": "poorly_detailed, worst_quality, bad_quality, extra fingers, missing fingers, lowres, low resolution bad anatomy, extra digits, jpeg artifacts, signature, watermark, username, conjoined, deformed fingers, short legs, body diproportion, bad ai-generated, text, furry, halo, multiple views, displeasing, messy composition, clones, one person",
+    "enhanced_prompt": "(detailed_eyes), (depth_of_field), 1 girl, 19 years old, petite face, wearing only an off-the-shoulder crop top, crop top pulled up above her chest, small-nipples, perfect-sized and soft breasts, blue eyes, ash-blonde hair, voluminous_hair_to_her_shoulders, (full_undercut:1.3), bristly ponytail, cute shy smile, earrings and several punky facial piercings, one dark tattoo runs from her lower arm to her upper arm, Large futuristic kitchen with dark appliances, tiled floor, one stove, one refrigerator, flower decoration, wine bottles rimmed. Phosphorescent dust particles floating in the air that are illuminated by the light, stunning bokeh, part of a luxury apartment in New York, large window above the stove., 1girl, solo,weapon, solo, sword, sheath, holding sheath, white hair, jewelry, sitting, tattoo, black nails, bangs, flower, white eyes, blunt bangs, earrings, looking at viewer, white dress, dress, crossed legs, ring, grey eyes, water, medium hair, breasts, leg tattoo, fingernails, white theme, closed mouth, white nails, short hair, partially submerged, chromatic aberration, detailed lighting, dynamic angle,\n,masterpiece,best quality,, 1girl, solo, full body, large expressive eyes, detailed eyes, clean lines, smooth skin, perfect hands, detailed realistic hair, detailed realistic face, detailed realistic body, detailed realistic hands, detailed realistic feet, detailed realistic legs, detailed realistic tits, realistic lighting, dramatic lighting, cinematic lighting, volumetric lighting, backlit, side lighting, side lit, light particles, light rays, haze, fog, high resolution, masterpiece, best quality, concept art, artwork, bold outlines, impressionistic, phosphorescent dust particles floating in the air, semi-realistic, lazypos, raw, ((photorealistic)), ((realistic shade))",
+    "enhanced_negative_prompt": "poorly_detailed, worst_quality, bad_quality, extra fingers, missing fingers, lowres, low resolution bad anatomy, extra digits, jpeg artifacts, signature, watermark, username, conjoined, deformed fingers, short legs, body diproportion, bad ai-generated, text, furry, halo, multiple views, displeasing, messy composition, clones, one person",
+    "prompt_length": 1807,
+    "negative_prompt_length": 338,
+    "uses_default_prompts": false
+  },
+  "image_url": "",
+  "settings": {
+    "width": 512,
+    "height": 768,
+    "steps": 20,
+    "cfg_scale": 4,
+    "sampler_name": "Euler",
+    "scheduler": "karras",
+    "seed": -1,
+    "batch_size": 1,
+    "n_iter": 1,
+    "n_samples": 1,
+    "save_grid": false,
+    "restore_faces": false,
+    "send_images": true,
+    "save_images": false,
+    "enable_hr": false,
+    "hr_scale": 1.5,
+    "hr_upscaler": "SwinIR_4x",
+    "hr_second_pass_steps": 10,
+    "hr_prompt": "",
+    "hr_negative_prompt": "",
+    "denoising_strength": 0.4,
+    "clip_skip": 2,
+    "use_default_prompts": false,
+    "override_settings": {},
+    "override_settings_restore_afterwards": false,
+    "script_args": [],
+    "use_adetailer": true,
+    "adetailer_settings": {},
+    "ip_adapter_model": null,
+    "ip_adapter_weight": null,
+    "ip_adapter_image": null,
+    "lora_models": {
+      "enabled_loras": [
+        "EasyNegativeV2.safetensors",
+        "MysticalPlantPenetratorILLUST.safetensors",
+        "Detailed-Eye-V1.0-000013.safetensors",
+        "Dramatic Lighting Slider",
+        "Semi-realism_illustrious.safetensors",
+        "kms_in the dark_IL-000003.safetensors"
+      ],
+      "disabled_loras": [
+        "pastel-anime-xl-latest",
+        "DetailedEyes_V3",
+        "1.5_perfect hands",
+        "add_detail"
+      ],
+      "total_loras": 10,
+      "working_loras": [
+        "EasyNegativeV2.safetensors",
+        "MysticalPlantPenetratorILLUST.safetensors",
+        "Detailed-Eye-V1.0-000013.safetensors",
+        "Dramatic Lighting Slider",
+        "Semi-realism_illustrious.safetensors",
+        "kms_in the dark_IL-000003.safetensors"
+      ],
+      "not_working_loras": [],
+      "lora_details": [
+        {
+          "name": "pastel-anime-xl-latest",
+          "weight": 0.4,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "DetailedEyes_V3",
+          "weight": 0.6,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "1.5_perfect hands",
+          "weight": 0.9,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "add_detail",
+          "weight": 0.5,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "EasyNegativeV2.safetensors",
+          "weight": 0.9,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "MysticalPlantPenetratorILLUST.safetensors",
+          "weight": 0.25,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "Detailed-Eye-V1.0-000013.safetensors",
+          "weight": 1.0,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "Dramatic Lighting Slider",
+          "weight": 1.5,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "Semi-realism_illustrious.safetensors",
+          "weight": 0.7,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "kms_in the dark_IL-000003.safetensors",
+          "weight": 0.5,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        }
+      ]
+    },
+    "alwayson_scripts": {
+      "adetailer_enabled": true,
+      "adetailer_config": {
+        "args": [
+          true,
+          {
+            "ad_model": "face_yolov8n.pt",
+            "ad_steps": 15,
+            "ad_denoising_strength": 0.4,
+            "ad_cfg_scale": 4,
+            "ad_mask_blur": 3,
+            "ad_inpaint_only_masked": true,
+            "ad_inpaint_only_masked_padding": 24,
+            "ad_confidence": 0.2,
+            "ad_dilate_erode": 2,
+            "ad_use_steps": true,
+            "ad_use_cfg_scale": true,
+            "ad_prompt": "clean line art, symmetrical eyes, glossy eyes, sharp anime details, perfect anime face",
+            "ad_negative_prompt": "deformed face, wonky eyes, double irises, bad symmetry, lowres, blurry"
+          },
+          {
+            "ad_model": "hand_yolov9c.pt",
+            "ad_steps": 30,
+            "ad_denoising_strength": 0.3,
+            "ad_cfg_scale": 4,
+            "ad_mask_blur": 4,
+            "ad_inpaint_only_masked": true,
+            "ad_inpaint_only_masked_padding": 32,
+            "ad_confidence": 0.3,
+            "ad_dilate_erode": 4,
+            "ad_use_steps": true,
+            "ad_use_cfg_scale": true,
+            "ad_prompt": "perfect hands, detailed fingers, natural hand anatomy",
+            "ad_negative_prompt": "deformed hands, extra fingers, missing fingers, bad anatomy, mutated hands, ugly hands"
+          }
+        ]
+      },
+      "controlnet_enabled": false,
+      "all_scripts": [
+        "ADetailer"
+      ]
+    }
+  },
+  "error": null
+}
+
+{
+  "timestamp": "2025-09-26T15:14:49.691738",
+  "success": true,
+  "generation_time_seconds": 40.67,
+  "character": "Anna",
+  "prompts": {
+    "user_prompt": "(detailed_eyes), (depth_of_field), 1 girl, 19 years old, petite face, wearing only an off-the-shoulder crop top, crop top pulled up above her chest, small-nipples, perfect-sized and soft breasts, blue eyes, ash-blonde hair, voluminous_hair_to_her_shoulders, (full_undercut:1.3), bristly ponytail, cute shy smile, earrings and several punky facial piercings, one dark tattoo runs from her lower arm to her upper arm, Large futuristic kitchen with dark appliances, tiled floor, one stove, one refrigerator, flower decoration, wine bottles rimmed. Phosphorescent dust particles floating in the air that are illuminated by the light, stunning bokeh, part of a luxury apartment in New York, large window above the stove., show ass, 1girl, solo, full body, large expressive eyes, detailed eyes, clean lines, smooth skin, perfect hands, detailed realistic hair, detailed realistic face, detailed realistic body, detailed realistic hands, detailed realistic feet, detailed realistic legs, detailed realistic tits, realistic lighting, dramatic lighting, cinematic lighting, volumetric lighting, backlit, side lighting, side lit, light particles, light rays, haze, fog, high resolution, masterpiece, best quality, concept art, artwork, bold outlines, impressionistic, phosphorescent dust particles floating in the air, semi-realistic, lazypos, raw, ((photorealistic)), ((realistic shade))",
+    "user_negative_prompt": "poorly_detailed, worst_quality, bad_quality, extra fingers, missing fingers, lowres, low resolution bad anatomy, extra digits, jpeg artifacts, signature, watermark, username, conjoined, deformed fingers, short legs, body diproportion, bad ai-generated, text, furry, halo, multiple views, displeasing, messy composition, clones, one person",
+    "enhanced_prompt": "(detailed_eyes), (depth_of_field), 1 girl, 19 years old, petite face, wearing only an off-the-shoulder crop top, crop top pulled up above her chest, small-nipples, perfect-sized and soft breasts, blue eyes, ash-blonde hair, voluminous_hair_to_her_shoulders, (full_undercut:1.3), bristly ponytail, cute shy smile, earrings and several punky facial piercings, one dark tattoo runs from her lower arm to her upper arm, Large futuristic kitchen with dark appliances, tiled floor, one stove, one refrigerator, flower decoration, wine bottles rimmed. Phosphorescent dust particles floating in the air that are illuminated by the light, stunning bokeh, part of a luxury apartment in New York, large window above the stove., show ass, 1girl, solo, full body, large expressive eyes, detailed eyes, clean lines, smooth skin, perfect hands, detailed realistic hair, detailed realistic face, detailed realistic body, detailed realistic hands, detailed realistic feet, detailed realistic legs, detailed realistic tits, realistic lighting, dramatic lighting, cinematic lighting, volumetric lighting, backlit, side lighting, side lit, light particles, light rays, haze, fog, high resolution, masterpiece, best quality, concept art, artwork, bold outlines, impressionistic, phosphorescent dust particles floating in the air, semi-realistic, lazypos, raw, ((photorealistic)), ((realistic shade))",
+    "enhanced_negative_prompt": "poorly_detailed, worst_quality, bad_quality, extra fingers, missing fingers, lowres, low resolution bad anatomy, extra digits, jpeg artifacts, signature, watermark, username, conjoined, deformed fingers, short legs, body diproportion, bad ai-generated, text, furry, halo, multiple views, displeasing, messy composition, clones, one person",
+    "prompt_length": 1378,
+    "negative_prompt_length": 338,
+    "uses_default_prompts": false
+  },
+  "image_url": "",
+  "settings": {
+    "width": 512,
+    "height": 768,
+    "steps": 20,
+    "cfg_scale": 4,
+    "sampler_name": "Euler",
+    "scheduler": "karras",
+    "seed": -1,
+    "batch_size": 1,
+    "n_iter": 1,
+    "n_samples": 1,
+    "save_grid": false,
+    "restore_faces": false,
+    "send_images": true,
+    "save_images": false,
+    "enable_hr": false,
+    "hr_scale": 1.5,
+    "hr_upscaler": "SwinIR_4x",
+    "hr_second_pass_steps": 10,
+    "hr_prompt": "",
+    "hr_negative_prompt": "",
+    "denoising_strength": 0.4,
+    "clip_skip": 2,
+    "use_default_prompts": false,
+    "override_settings": {},
+    "override_settings_restore_afterwards": false,
+    "script_args": [],
+    "use_adetailer": true,
+    "adetailer_settings": {},
+    "ip_adapter_model": null,
+    "ip_adapter_weight": null,
+    "ip_adapter_image": null,
+    "lora_models": {
+      "enabled_loras": [
+        "EasyNegativeV2.safetensors",
+        "MysticalPlantPenetratorILLUST.safetensors",
+        "Detailed-Eye-V1.0-000013.safetensors",
+        "Dramatic Lighting Slider",
+        "Semi-realism_illustrious.safetensors",
+        "kms_in the dark_IL-000003.safetensors"
+      ],
+      "disabled_loras": [
+        "pastel-anime-xl-latest",
+        "DetailedEyes_V3",
+        "1.5_perfect hands",
+        "add_detail"
+      ],
+      "total_loras": 10,
+      "working_loras": [
+        "EasyNegativeV2.safetensors",
+        "MysticalPlantPenetratorILLUST.safetensors",
+        "Detailed-Eye-V1.0-000013.safetensors",
+        "Dramatic Lighting Slider",
+        "Semi-realism_illustrious.safetensors",
+        "kms_in the dark_IL-000003.safetensors"
+      ],
+      "not_working_loras": [],
+      "lora_details": [
+        {
+          "name": "pastel-anime-xl-latest",
+          "weight": 0.4,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "DetailedEyes_V3",
+          "weight": 0.6,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "1.5_perfect hands",
+          "weight": 0.9,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "add_detail",
+          "weight": 0.5,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "EasyNegativeV2.safetensors",
+          "weight": 0.9,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "MysticalPlantPenetratorILLUST.safetensors",
+          "weight": 0.25,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "Detailed-Eye-V1.0-000013.safetensors",
+          "weight": 1.0,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "Dramatic Lighting Slider",
+          "weight": 1.5,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "Semi-realism_illustrious.safetensors",
+          "weight": 0.7,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "kms_in the dark_IL-000003.safetensors",
+          "weight": 0.5,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        }
+      ]
+    },
+    "alwayson_scripts": {
+      "adetailer_enabled": true,
+      "adetailer_config": {
+        "args": [
+          true,
+          {
+            "ad_model": "face_yolov8n.pt",
+            "ad_steps": 15,
+            "ad_denoising_strength": 0.4,
+            "ad_cfg_scale": 4,
+            "ad_mask_blur": 3,
+            "ad_inpaint_only_masked": true,
+            "ad_inpaint_only_masked_padding": 24,
+            "ad_confidence": 0.2,
+            "ad_dilate_erode": 2,
+            "ad_use_steps": true,
+            "ad_use_cfg_scale": true,
+            "ad_prompt": "clean line art, symmetrical eyes, glossy eyes, sharp anime details, perfect anime face",
+            "ad_negative_prompt": "deformed face, wonky eyes, double irises, bad symmetry, lowres, blurry"
+          },
+          {
+            "ad_model": "hand_yolov9c.pt",
+            "ad_steps": 30,
+            "ad_denoising_strength": 0.3,
+            "ad_cfg_scale": 4,
+            "ad_mask_blur": 4,
+            "ad_inpaint_only_masked": true,
+            "ad_inpaint_only_masked_padding": 32,
+            "ad_confidence": 0.3,
+            "ad_dilate_erode": 4,
+            "ad_use_steps": true,
+            "ad_use_cfg_scale": true,
+            "ad_prompt": "perfect hands, detailed fingers, natural hand anatomy",
+            "ad_negative_prompt": "deformed hands, extra fingers, missing fingers, bad anatomy, mutated hands, ugly hands"
+          }
+        ]
+      },
+      "controlnet_enabled": false,
+      "all_scripts": [
+        "ADetailer"
+      ]
+    }
+  },
+  "error": null
+}
+
+{
+  "timestamp": "2025-09-26T15:15:41.338251",
+  "success": true,
+  "generation_time_seconds": 27.34,
+  "character": "Anna",
+  "prompts": {
+    "user_prompt": "(detailed_eyes), (depth_of_field), 1 girl, 19 years old, petite face, wearing only an off-the-shoulder crop top, crop top pulled up above her chest, small-nipples, perfect-sized and soft breasts, blue eyes, ash-blonde hair, voluminous_hair_to_her_shoulders, (full_undercut:1.3), bristly ponytail, cute shy smile, earrings and several punky facial piercings, one dark tattoo runs from her lower arm to her upper arm, Large futuristic kitchen with dark appliances, tiled floor, one stove, one refrigerator, flower decoration, wine bottles rimmed. Phosphorescent dust particles floating in the air that are illuminated by the light, stunning bokeh, part of a luxury apartment in New York, large window above the stove., perspective,blurry,photo background,\nmasterpiece, best quality, amazing quality, uncensored,masterpiece, best quality, amazing quality, uncensored\nBREAK\n(2girls:1.5), multiple_chinese_classical_women, full_body, slender_figure, delicate_embroidery, flowing_silk_robes, jade_jewelry, silk_sash, beautiful_hairpins, floral_accessories, long_hair, intricate_braids, pearl_earrings, traditional_hair_bun, tranquil_expression, makeup, shiny_skin, red_eyeshadow, multicolored_hair_ribbons, back_hair_ribbons, flowing_sleeves, high_waist_skirt, holding_a_fan, (smooth skin:0.8), 1boy, penis, doggystyle, sex, pussy fingering, pussy fingering by other, pov, threesome, ass, grab, cum in pussy, cum in ass, lesbian kissing\nBREAK\nhigh angle, lying, bed,\nBREAK\nmasterpiece, best quality, amazing quality, uncensored\n((artist:betabeet)),artist:john_kafka,artist:nixeu,artist:quasarcake,masterpiece,best quality,solo,,very awa,masterpiece,best quality,year 2024,newest,highres,absurdres,, 1girl, solo, full body, large expressive eyes, detailed eyes, clean lines, smooth skin, perfect hands, detailed realistic hair, detailed realistic face, detailed realistic body, detailed realistic hands, detailed realistic feet, detailed realistic legs, detailed realistic tits, realistic lighting, dramatic lighting, cinematic lighting, volumetric lighting, backlit, side lighting, side lit, light particles, light rays, haze, fog, high resolution, masterpiece, best quality, concept art, artwork, bold outlines, impressionistic, phosphorescent dust particles floating in the air, semi-realistic, lazypos, raw, ((photorealistic)), ((realistic shade))",
+    "user_negative_prompt": "poorly_detailed, worst_quality, bad_quality, extra fingers, missing fingers, lowres, low resolution bad anatomy, extra digits, jpeg artifacts, signature, watermark, username, conjoined, deformed fingers, short legs, body diproportion, bad ai-generated, text, furry, halo, multiple views, displeasing, messy composition, clones, one person",
+    "enhanced_prompt": "(detailed_eyes), (depth_of_field), 1 girl, 19 years old, petite face, wearing only an off-the-shoulder crop top, crop top pulled up above her chest, small-nipples, perfect-sized and soft breasts, blue eyes, ash-blonde hair, voluminous_hair_to_her_shoulders, (full_undercut:1.3), bristly ponytail, cute shy smile, earrings and several punky facial piercings, one dark tattoo runs from her lower arm to her upper arm, Large futuristic kitchen with dark appliances, tiled floor, one stove, one refrigerator, flower decoration, wine bottles rimmed. Phosphorescent dust particles floating in the air that are illuminated by the light, stunning bokeh, part of a luxury apartment in New York, large window above the stove., perspective,blurry,photo background,\nmasterpiece, best quality, amazing quality, uncensored,masterpiece, best quality, amazing quality, uncensored\nBREAK\n(2girls:1.5), multiple_chinese_classical_women, full_body, slender_figure, delicate_embroidery, flowing_silk_robes, jade_jewelry, silk_sash, beautiful_hairpins, floral_accessories, long_hair, intricate_braids, pearl_earrings, traditional_hair_bun, tranquil_expression, makeup, shiny_skin, red_eyeshadow, multicolored_hair_ribbons, back_hair_ribbons, flowing_sleeves, high_waist_skirt, holding_a_fan, (smooth skin:0.8), 1boy, penis, doggystyle, sex, pussy fingering, pussy fingering by other, pov, threesome, ass, grab, cum in pussy, cum in ass, lesbian kissing\nBREAK\nhigh angle, lying, bed,\nBREAK\nmasterpiece, best quality, amazing quality, uncensored\n((artist:betabeet)),artist:john_kafka,artist:nixeu,artist:quasarcake,masterpiece,best quality,solo,,very awa,masterpiece,best quality,year 2024,newest,highres,absurdres,, 1girl, solo, full body, large expressive eyes, detailed eyes, clean lines, smooth skin, perfect hands, detailed realistic hair, detailed realistic face, detailed realistic body, detailed realistic hands, detailed realistic feet, detailed realistic legs, detailed realistic tits, realistic lighting, dramatic lighting, cinematic lighting, volumetric lighting, backlit, side lighting, side lit, light particles, light rays, haze, fog, high resolution, masterpiece, best quality, concept art, artwork, bold outlines, impressionistic, phosphorescent dust particles floating in the air, semi-realistic, lazypos, raw, ((photorealistic)), ((realistic shade))",
+    "enhanced_negative_prompt": "poorly_detailed, worst_quality, bad_quality, extra fingers, missing fingers, lowres, low resolution bad anatomy, extra digits, jpeg artifacts, signature, watermark, username, conjoined, deformed fingers, short legs, body diproportion, bad ai-generated, text, furry, halo, multiple views, displeasing, messy composition, clones, one person",
+    "prompt_length": 2344,
+    "negative_prompt_length": 338,
+    "uses_default_prompts": false
+  },
+  "image_url": "",
+  "settings": {
+    "width": 512,
+    "height": 768,
+    "steps": 20,
+    "cfg_scale": 4,
+    "sampler_name": "Euler",
+    "scheduler": "karras",
+    "seed": -1,
+    "batch_size": 1,
+    "n_iter": 1,
+    "n_samples": 1,
+    "save_grid": false,
+    "restore_faces": false,
+    "send_images": true,
+    "save_images": false,
+    "enable_hr": false,
+    "hr_scale": 1.5,
+    "hr_upscaler": "SwinIR_4x",
+    "hr_second_pass_steps": 10,
+    "hr_prompt": "",
+    "hr_negative_prompt": "",
+    "denoising_strength": 0.4,
+    "clip_skip": 2,
+    "use_default_prompts": false,
+    "override_settings": {},
+    "override_settings_restore_afterwards": false,
+    "script_args": [],
+    "use_adetailer": true,
+    "adetailer_settings": {},
+    "ip_adapter_model": null,
+    "ip_adapter_weight": null,
+    "ip_adapter_image": null,
+    "lora_models": {
+      "enabled_loras": [
+        "EasyNegativeV2.safetensors",
+        "MysticalPlantPenetratorILLUST.safetensors",
+        "Detailed-Eye-V1.0-000013.safetensors",
+        "Dramatic Lighting Slider",
+        "Semi-realism_illustrious.safetensors",
+        "kms_in the dark_IL-000003.safetensors"
+      ],
+      "disabled_loras": [
+        "pastel-anime-xl-latest",
+        "DetailedEyes_V3",
+        "1.5_perfect hands",
+        "add_detail"
+      ],
+      "total_loras": 10,
+      "working_loras": [
+        "EasyNegativeV2.safetensors",
+        "MysticalPlantPenetratorILLUST.safetensors",
+        "Detailed-Eye-V1.0-000013.safetensors",
+        "Dramatic Lighting Slider",
+        "Semi-realism_illustrious.safetensors",
+        "kms_in the dark_IL-000003.safetensors"
+      ],
+      "not_working_loras": [],
+      "lora_details": [
+        {
+          "name": "pastel-anime-xl-latest",
+          "weight": 0.4,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "DetailedEyes_V3",
+          "weight": 0.6,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "1.5_perfect hands",
+          "weight": 0.9,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "add_detail",
+          "weight": 0.5,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "EasyNegativeV2.safetensors",
+          "weight": 0.9,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "MysticalPlantPenetratorILLUST.safetensors",
+          "weight": 0.25,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "Detailed-Eye-V1.0-000013.safetensors",
+          "weight": 1.0,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "Dramatic Lighting Slider",
+          "weight": 1.5,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "Semi-realism_illustrious.safetensors",
+          "weight": 0.7,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "kms_in the dark_IL-000003.safetensors",
+          "weight": 0.5,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        }
+      ]
+    },
+    "alwayson_scripts": {
+      "adetailer_enabled": true,
+      "adetailer_config": {
+        "args": [
+          true,
+          {
+            "ad_model": "face_yolov8n.pt",
+            "ad_steps": 15,
+            "ad_denoising_strength": 0.4,
+            "ad_cfg_scale": 4,
+            "ad_mask_blur": 3,
+            "ad_inpaint_only_masked": true,
+            "ad_inpaint_only_masked_padding": 24,
+            "ad_confidence": 0.2,
+            "ad_dilate_erode": 2,
+            "ad_use_steps": true,
+            "ad_use_cfg_scale": true,
+            "ad_prompt": "clean line art, symmetrical eyes, glossy eyes, sharp anime details, perfect anime face",
+            "ad_negative_prompt": "deformed face, wonky eyes, double irises, bad symmetry, lowres, blurry"
+          },
+          {
+            "ad_model": "hand_yolov9c.pt",
+            "ad_steps": 30,
+            "ad_denoising_strength": 0.3,
+            "ad_cfg_scale": 4,
+            "ad_mask_blur": 4,
+            "ad_inpaint_only_masked": true,
+            "ad_inpaint_only_masked_padding": 32,
+            "ad_confidence": 0.3,
+            "ad_dilate_erode": 4,
+            "ad_use_steps": true,
+            "ad_use_cfg_scale": true,
+            "ad_prompt": "perfect hands, detailed fingers, natural hand anatomy",
+            "ad_negative_prompt": "deformed hands, extra fingers, missing fingers, bad anatomy, mutated hands, ugly hands"
+          }
+        ]
+      },
+      "controlnet_enabled": false,
+      "all_scripts": [
+        "ADetailer"
+      ]
+    }
+  },
+  "error": null
+}
+
+{
+  "timestamp": "2025-09-26T15:17:26.031521",
+  "success": true,
+  "generation_time_seconds": 25.19,
+  "character": "Anna",
+  "prompts": {
+    "user_prompt": "(detailed_eyes), (depth_of_field), 1 girl, 19 years old, petite face, wearing only an off-the-shoulder crop top, crop top pulled up above her chest, small-nipples, perfect-sized and soft breasts, blue eyes, ash-blonde hair, voluminous_hair_to_her_shoulders, (full_undercut:1.3), bristly ponytail, cute shy smile, earrings and several punky facial piercings, one dark tattoo runs from her lower arm to her upper arm, Large futuristic kitchen with dark appliances, tiled floor, one stove, one refrigerator, flower decoration, wine bottles rimmed. Phosphorescent dust particles floating in the air that are illuminated by the light, stunning bokeh, part of a luxury apartment in New York, large window above the stove., perspective,blurry,photo background,\nmasterpiece, best quality, amazing quality, uncensored,masterpiece, best quality, amazing quality, uncensored\nBREAK\n(2girls:1.5), multiple_chinese_classical_women, full_body, slender_figure, delicate_embroidery, flowing_silk_robes, jade_jewelry, silk_sash, beautiful_hairpins, floral_accessories, long_hair, intricate_braids, pearl_earrings, traditional_hair_bun, tranquil_expression, makeup, shiny_skin, red_eyeshadow, multicolored_hair_ribbons, back_hair_ribbons, flowing_sleeves, high_waist_skirt, holding_a_fan, (smooth skin:0.8), 1boy, penis, doggystyle, sex, pussy fingering, pussy fingering by other, pov, threesome, ass, grab, cum in pussy, cum in ass, lesbian kissing\nBREAK\nhigh angle, lying, bed,\nBREAK\nmasterpiece, best quality, amazing quality, uncensored\n((artist:betabeet)),artist:john_kafka,artist:nixeu,artist:quasarcake,masterpiece,best quality,solo,,very awa,masterpiece,best quality,year 2024,newest,highres,absurdres,, 1girl, solo, full body, large expressive eyes, detailed eyes, clean lines, smooth skin, perfect hands, detailed realistic hair, detailed realistic face, detailed realistic body, detailed realistic hands, detailed realistic feet, detailed realistic legs, detailed realistic tits, realistic lighting, dramatic lighting, cinematic lighting, volumetric lighting, backlit, side lighting, side lit, light particles, light rays, haze, fog, high resolution, masterpiece, best quality, concept art, artwork, bold outlines, impressionistic, phosphorescent dust particles floating in the air, semi-realistic, lazypos, raw, ((photorealistic)), ((realistic shade))",
+    "user_negative_prompt": "poorly_detailed, worst_quality, bad_quality, extra fingers, missing fingers, lowres, low resolution bad anatomy, extra digits, jpeg artifacts, signature, watermark, username, conjoined, deformed fingers, short legs, body diproportion, bad ai-generated, text, furry, halo, multiple views, displeasing, messy composition, clones, one person",
+    "enhanced_prompt": "(detailed_eyes), (depth_of_field), 1 girl, 19 years old, petite face, wearing only an off-the-shoulder crop top, crop top pulled up above her chest, small-nipples, perfect-sized and soft breasts, blue eyes, ash-blonde hair, voluminous_hair_to_her_shoulders, (full_undercut:1.3), bristly ponytail, cute shy smile, earrings and several punky facial piercings, one dark tattoo runs from her lower arm to her upper arm, Large futuristic kitchen with dark appliances, tiled floor, one stove, one refrigerator, flower decoration, wine bottles rimmed. Phosphorescent dust particles floating in the air that are illuminated by the light, stunning bokeh, part of a luxury apartment in New York, large window above the stove., perspective,blurry,photo background,\nmasterpiece, best quality, amazing quality, uncensored,masterpiece, best quality, amazing quality, uncensored\nBREAK\n(2girls:1.5), multiple_chinese_classical_women, full_body, slender_figure, delicate_embroidery, flowing_silk_robes, jade_jewelry, silk_sash, beautiful_hairpins, floral_accessories, long_hair, intricate_braids, pearl_earrings, traditional_hair_bun, tranquil_expression, makeup, shiny_skin, red_eyeshadow, multicolored_hair_ribbons, back_hair_ribbons, flowing_sleeves, high_waist_skirt, holding_a_fan, (smooth skin:0.8), 1boy, penis, doggystyle, sex, pussy fingering, pussy fingering by other, pov, threesome, ass, grab, cum in pussy, cum in ass, lesbian kissing\nBREAK\nhigh angle, lying, bed,\nBREAK\nmasterpiece, best quality, amazing quality, uncensored\n((artist:betabeet)),artist:john_kafka,artist:nixeu,artist:quasarcake,masterpiece,best quality,solo,,very awa,masterpiece,best quality,year 2024,newest,highres,absurdres,, 1girl, solo, full body, large expressive eyes, detailed eyes, clean lines, smooth skin, perfect hands, detailed realistic hair, detailed realistic face, detailed realistic body, detailed realistic hands, detailed realistic feet, detailed realistic legs, detailed realistic tits, realistic lighting, dramatic lighting, cinematic lighting, volumetric lighting, backlit, side lighting, side lit, light particles, light rays, haze, fog, high resolution, masterpiece, best quality, concept art, artwork, bold outlines, impressionistic, phosphorescent dust particles floating in the air, semi-realistic, lazypos, raw, ((photorealistic)), ((realistic shade))",
+    "enhanced_negative_prompt": "poorly_detailed, worst_quality, bad_quality, extra fingers, missing fingers, lowres, low resolution bad anatomy, extra digits, jpeg artifacts, signature, watermark, username, conjoined, deformed fingers, short legs, body diproportion, bad ai-generated, text, furry, halo, multiple views, displeasing, messy composition, clones, one person",
+    "prompt_length": 2344,
+    "negative_prompt_length": 338,
+    "uses_default_prompts": false
+  },
+  "image_url": "",
+  "settings": {
+    "width": 512,
+    "height": 768,
+    "steps": 20,
+    "cfg_scale": 4,
+    "sampler_name": "Euler",
+    "scheduler": "karras",
+    "seed": -1,
+    "batch_size": 1,
+    "n_iter": 1,
+    "n_samples": 1,
+    "save_grid": false,
+    "restore_faces": false,
+    "send_images": true,
+    "save_images": false,
+    "enable_hr": false,
+    "hr_scale": 1.5,
+    "hr_upscaler": "SwinIR_4x",
+    "hr_second_pass_steps": 10,
+    "hr_prompt": "",
+    "hr_negative_prompt": "",
+    "denoising_strength": 0.4,
+    "clip_skip": 2,
+    "use_default_prompts": false,
+    "override_settings": {},
+    "override_settings_restore_afterwards": false,
+    "script_args": [],
+    "use_adetailer": true,
+    "adetailer_settings": {},
+    "ip_adapter_model": null,
+    "ip_adapter_weight": null,
+    "ip_adapter_image": null,
+    "lora_models": {
+      "enabled_loras": [
+        "EasyNegativeV2.safetensors",
+        "MysticalPlantPenetratorILLUST.safetensors",
+        "Detailed-Eye-V1.0-000013.safetensors",
+        "Dramatic Lighting Slider",
+        "Semi-realism_illustrious.safetensors",
+        "kms_in the dark_IL-000003.safetensors"
+      ],
+      "disabled_loras": [
+        "pastel-anime-xl-latest",
+        "DetailedEyes_V3",
+        "1.5_perfect hands",
+        "add_detail"
+      ],
+      "total_loras": 10,
+      "working_loras": [
+        "EasyNegativeV2.safetensors",
+        "MysticalPlantPenetratorILLUST.safetensors",
+        "Detailed-Eye-V1.0-000013.safetensors",
+        "Dramatic Lighting Slider",
+        "Semi-realism_illustrious.safetensors",
+        "kms_in the dark_IL-000003.safetensors"
+      ],
+      "not_working_loras": [],
+      "lora_details": [
+        {
+          "name": "pastel-anime-xl-latest",
+          "weight": 0.4,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "DetailedEyes_V3",
+          "weight": 0.6,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "1.5_perfect hands",
+          "weight": 0.9,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "add_detail",
+          "weight": 0.5,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "EasyNegativeV2.safetensors",
+          "weight": 0.9,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "MysticalPlantPenetratorILLUST.safetensors",
+          "weight": 0.25,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "Detailed-Eye-V1.0-000013.safetensors",
+          "weight": 1.0,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "Dramatic Lighting Slider",
+          "weight": 1.5,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "Semi-realism_illustrious.safetensors",
+          "weight": 0.7,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "kms_in the dark_IL-000003.safetensors",
+          "weight": 0.5,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        }
+      ]
+    },
+    "alwayson_scripts": {
+      "adetailer_enabled": true,
+      "adetailer_config": {
+        "args": [
+          true,
+          {
+            "ad_model": "face_yolov8n.pt",
+            "ad_steps": 15,
+            "ad_denoising_strength": 0.4,
+            "ad_cfg_scale": 4,
+            "ad_mask_blur": 3,
+            "ad_inpaint_only_masked": true,
+            "ad_inpaint_only_masked_padding": 24,
+            "ad_confidence": 0.2,
+            "ad_dilate_erode": 2,
+            "ad_use_steps": true,
+            "ad_use_cfg_scale": true,
+            "ad_prompt": "clean line art, symmetrical eyes, glossy eyes, sharp anime details, perfect anime face",
+            "ad_negative_prompt": "deformed face, wonky eyes, double irises, bad symmetry, lowres, blurry"
+          },
+          {
+            "ad_model": "hand_yolov9c.pt",
+            "ad_steps": 30,
+            "ad_denoising_strength": 0.3,
+            "ad_cfg_scale": 4,
+            "ad_mask_blur": 4,
+            "ad_inpaint_only_masked": true,
+            "ad_inpaint_only_masked_padding": 32,
+            "ad_confidence": 0.3,
+            "ad_dilate_erode": 4,
+            "ad_use_steps": true,
+            "ad_use_cfg_scale": true,
+            "ad_prompt": "perfect hands, detailed fingers, natural hand anatomy",
+            "ad_negative_prompt": "deformed hands, extra fingers, missing fingers, bad anatomy, mutated hands, ugly hands"
+          }
+        ]
+      },
+      "controlnet_enabled": false,
+      "all_scripts": [
+        "ADetailer"
+      ]
+    }
+  },
+  "error": null
+}
+
+{
+  "timestamp": "2025-09-26T15:18:28.404994",
+  "success": true,
+  "generation_time_seconds": 27.61,
+  "character": "Anna",
+  "prompts": {
+    "user_prompt": "(detailed_eyes), (depth_of_field), 1 girl, 19 years old, petite face, wearing only an off-the-shoulder crop top, crop top pulled up above her chest, small-nipples, perfect-sized and soft breasts, blue eyes, ash-blonde hair, voluminous_hair_to_her_shoulders, (full_undercut:1.3), bristly ponytail, cute shy smile, earrings and several punky facial piercings, one dark tattoo runs from her lower arm to her upper arm, Large futuristic kitchen with dark appliances, tiled floor, one stove, one refrigerator, flower decoration, wine bottles rimmed. Phosphorescent dust particles floating in the air that are illuminated by the light, stunning bokeh, part of a luxury apartment in New York, large window above the stove., show ass, 1girl, solo, full body, large expressive eyes, detailed eyes, clean lines, smooth skin, perfect hands, detailed realistic hair, detailed realistic face, detailed realistic body, detailed realistic hands, detailed realistic feet, detailed realistic legs, detailed realistic tits, realistic lighting, dramatic lighting, cinematic lighting, volumetric lighting, backlit, side lighting, side lit, light particles, light rays, haze, fog, high resolution, masterpiece, best quality, concept art, artwork, bold outlines, impressionistic, phosphorescent dust particles floating in the air, semi-realistic, lazypos, raw, ((photorealistic)), ((realistic shade))",
+    "user_negative_prompt": "poorly_detailed, worst_quality, bad_quality, extra fingers, missing fingers, lowres, low resolution bad anatomy, extra digits, jpeg artifacts, signature, watermark, username, conjoined, deformed fingers, short legs, body diproportion, bad ai-generated, text, furry, halo, multiple views, displeasing, messy composition, clones, one person",
+    "enhanced_prompt": "(detailed_eyes), (depth_of_field), 1 girl, 19 years old, petite face, wearing only an off-the-shoulder crop top, crop top pulled up above her chest, small-nipples, perfect-sized and soft breasts, blue eyes, ash-blonde hair, voluminous_hair_to_her_shoulders, (full_undercut:1.3), bristly ponytail, cute shy smile, earrings and several punky facial piercings, one dark tattoo runs from her lower arm to her upper arm, Large futuristic kitchen with dark appliances, tiled floor, one stove, one refrigerator, flower decoration, wine bottles rimmed. Phosphorescent dust particles floating in the air that are illuminated by the light, stunning bokeh, part of a luxury apartment in New York, large window above the stove., show ass, 1girl, solo, full body, large expressive eyes, detailed eyes, clean lines, smooth skin, perfect hands, detailed realistic hair, detailed realistic face, detailed realistic body, detailed realistic hands, detailed realistic feet, detailed realistic legs, detailed realistic tits, realistic lighting, dramatic lighting, cinematic lighting, volumetric lighting, backlit, side lighting, side lit, light particles, light rays, haze, fog, high resolution, masterpiece, best quality, concept art, artwork, bold outlines, impressionistic, phosphorescent dust particles floating in the air, semi-realistic, lazypos, raw, ((photorealistic)), ((realistic shade))",
+    "enhanced_negative_prompt": "poorly_detailed, worst_quality, bad_quality, extra fingers, missing fingers, lowres, low resolution bad anatomy, extra digits, jpeg artifacts, signature, watermark, username, conjoined, deformed fingers, short legs, body diproportion, bad ai-generated, text, furry, halo, multiple views, displeasing, messy composition, clones, one person",
+    "prompt_length": 1378,
+    "negative_prompt_length": 338,
+    "uses_default_prompts": false
+  },
+  "image_url": "",
+  "settings": {
+    "width": 512,
+    "height": 768,
+    "steps": 20,
+    "cfg_scale": 4,
+    "sampler_name": "Euler",
+    "scheduler": "karras",
+    "seed": -1,
+    "batch_size": 1,
+    "n_iter": 1,
+    "n_samples": 1,
+    "save_grid": false,
+    "restore_faces": false,
+    "send_images": true,
+    "save_images": false,
+    "enable_hr": false,
+    "hr_scale": 1.5,
+    "hr_upscaler": "SwinIR_4x",
+    "hr_second_pass_steps": 10,
+    "hr_prompt": "",
+    "hr_negative_prompt": "",
+    "denoising_strength": 0.4,
+    "clip_skip": 2,
+    "use_default_prompts": false,
+    "override_settings": {},
+    "override_settings_restore_afterwards": false,
+    "script_args": [],
+    "use_adetailer": true,
+    "adetailer_settings": {},
+    "ip_adapter_model": null,
+    "ip_adapter_weight": null,
+    "ip_adapter_image": null,
+    "lora_models": {
+      "enabled_loras": [
+        "EasyNegativeV2.safetensors",
+        "MysticalPlantPenetratorILLUST.safetensors",
+        "Detailed-Eye-V1.0-000013.safetensors",
+        "Dramatic Lighting Slider",
+        "Semi-realism_illustrious.safetensors",
+        "kms_in the dark_IL-000003.safetensors"
+      ],
+      "disabled_loras": [
+        "pastel-anime-xl-latest",
+        "DetailedEyes_V3",
+        "1.5_perfect hands",
+        "add_detail"
+      ],
+      "total_loras": 10,
+      "working_loras": [
+        "EasyNegativeV2.safetensors",
+        "MysticalPlantPenetratorILLUST.safetensors",
+        "Detailed-Eye-V1.0-000013.safetensors",
+        "Dramatic Lighting Slider",
+        "Semi-realism_illustrious.safetensors",
+        "kms_in the dark_IL-000003.safetensors"
+      ],
+      "not_working_loras": [],
+      "lora_details": [
+        {
+          "name": "pastel-anime-xl-latest",
+          "weight": 0.4,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "DetailedEyes_V3",
+          "weight": 0.6,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "1.5_perfect hands",
+          "weight": 0.9,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "add_detail",
+          "weight": 0.5,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "EasyNegativeV2.safetensors",
+          "weight": 0.9,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "MysticalPlantPenetratorILLUST.safetensors",
+          "weight": 0.25,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "Detailed-Eye-V1.0-000013.safetensors",
+          "weight": 1.0,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "Dramatic Lighting Slider",
+          "weight": 1.5,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "Semi-realism_illustrious.safetensors",
+          "weight": 0.7,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "kms_in the dark_IL-000003.safetensors",
+          "weight": 0.5,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        }
+      ]
+    },
+    "alwayson_scripts": {
+      "adetailer_enabled": true,
+      "adetailer_config": {
+        "args": [
+          true,
+          {
+            "ad_model": "face_yolov8n.pt",
+            "ad_steps": 15,
+            "ad_denoising_strength": 0.4,
+            "ad_cfg_scale": 4,
+            "ad_mask_blur": 3,
+            "ad_inpaint_only_masked": true,
+            "ad_inpaint_only_masked_padding": 24,
+            "ad_confidence": 0.2,
+            "ad_dilate_erode": 2,
+            "ad_use_steps": true,
+            "ad_use_cfg_scale": true,
+            "ad_prompt": "clean line art, symmetrical eyes, glossy eyes, sharp anime details, perfect anime face",
+            "ad_negative_prompt": "deformed face, wonky eyes, double irises, bad symmetry, lowres, blurry"
+          },
+          {
+            "ad_model": "hand_yolov9c.pt",
+            "ad_steps": 30,
+            "ad_denoising_strength": 0.3,
+            "ad_cfg_scale": 4,
+            "ad_mask_blur": 4,
+            "ad_inpaint_only_masked": true,
+            "ad_inpaint_only_masked_padding": 32,
+            "ad_confidence": 0.3,
+            "ad_dilate_erode": 4,
+            "ad_use_steps": true,
+            "ad_use_cfg_scale": true,
+            "ad_prompt": "perfect hands, detailed fingers, natural hand anatomy",
+            "ad_negative_prompt": "deformed hands, extra fingers, missing fingers, bad anatomy, mutated hands, ugly hands"
+          }
+        ]
+      },
+      "controlnet_enabled": false,
+      "all_scripts": [
+        "ADetailer"
+      ]
+    }
+  },
+  "error": null
+}
+
+{
+  "timestamp": "2025-09-26T15:51:03.259295",
+  "success": true,
+  "generation_time_seconds": 46.6,
+  "character": "Anna",
+  "prompts": {
+    "user_prompt": "(detailed_eyes), (depth_of_field), 1 girl, 19 years old, petite face, wearing only an off-the-shoulder crop top, crop top pulled up above her chest, small-nipples, perfect-sized and soft breasts, blue eyes, ash-blonde hair, voluminous_hair_to_her_shoulders, (full_undercut:1.3), bristly ponytail, cute shy smile, earrings and several punky facial piercings, one dark tattoo runs from her lower arm to her upper arm, Large futuristic kitchen with dark appliances, tiled floor, one stove, one refrigerator, flower decoration, wine bottles rimmed. Phosphorescent dust particles floating in the air that are illuminated by the light, stunning bokeh, part of a luxury apartment in New York, large window above the stove., ы, 1girl, solo, full body, large expressive eyes, detailed eyes, clean lines, smooth skin, perfect hands, detailed realistic hair, detailed realistic face, detailed realistic body, detailed realistic hands, detailed realistic feet, detailed realistic legs, detailed realistic tits, realistic lighting, dramatic lighting, cinematic lighting, volumetric lighting, backlit, side lighting, side lit, light particles, light rays, haze, fog, high resolution, masterpiece, best quality, concept art, artwork, bold outlines, impressionistic, phosphorescent dust particles floating in the air, semi-realistic, lazypos, raw, ((photorealistic)), ((realistic shade))",
+    "user_negative_prompt": null,
+    "enhanced_prompt": "1girl, solo, full body, large expressive eyes, detailed eyes, clean lines, smooth skin, perfect hands, detailed realistic hair, detailed realistic face, detailed realistic body, detailed realistic hands, detailed realistic feet, detailed realistic legs, detailed realistic tits, realistic lighting, dramatic lighting, cinematic lighting, volumetric lighting, backlit, side lighting, side lit, light particles, light rays, haze, fog, high resolution, masterpiece, best quality, concept art, artwork, bold outlines, impressionistic, phosphorescent dust particles floating in the air, semi-realistic, lazypos, raw, ((photorealistic)), ((realistic shade)), (detailed_eyes), (depth_of_field), 1 girl, 19 years old, petite face, wearing only an off-the-shoulder crop top, crop top pulled up above her chest, small-nipples, perfect-sized and soft breasts, blue eyes, ash-blonde hair, voluminous_hair_to_her_shoulders, (full_undercut:1.3), bristly ponytail, cute shy smile, earrings and several punky facial piercings, one dark tattoo runs from her lower arm to her upper arm, Large futuristic kitchen with dark appliances, tiled floor, one stove, one refrigerator, flower decoration, wine bottles rimmed. Phosphorescent dust particles floating in the air that are illuminated by the light, stunning bokeh, part of a luxury apartment in New York, large window above the stove., ы",
+    "enhanced_negative_prompt": "poorly_detailed, worst_quality, bad_quality, extra fingers, missing fingers, lowres, low resolution bad anatomy, extra digits, jpeg artifacts, signature, watermark, username, conjoined, deformed fingers, short legs, body diproportion, bad ai-generated, text, furry, halo, multiple views, displeasing, messy composition, clones, one person",
+    "prompt_length": 1371,
+    "negative_prompt_length": 338,
+    "uses_default_prompts": true
+  },
+  "image_url": "",
+  "settings": {
+    "width": 512,
+    "height": 768,
+    "steps": 20,
+    "cfg_scale": 4,
+    "sampler_name": "Euler",
+    "scheduler": "karras",
+    "seed": -1,
+    "batch_size": 1,
+    "n_iter": 1,
+    "n_samples": 1,
+    "save_grid": false,
+    "restore_faces": false,
+    "send_images": true,
+    "save_images": false,
+    "enable_hr": false,
+    "hr_scale": 1.5,
+    "hr_upscaler": "SwinIR_4x",
+    "hr_second_pass_steps": 10,
+    "hr_prompt": "",
+    "hr_negative_prompt": "",
+    "denoising_strength": 0.4,
+    "clip_skip": 2,
+    "use_default_prompts": true,
+    "override_settings": {},
+    "override_settings_restore_afterwards": false,
+    "script_args": [],
+    "use_adetailer": true,
+    "adetailer_settings": {},
+    "ip_adapter_model": null,
+    "ip_adapter_weight": null,
+    "ip_adapter_image": null,
+    "lora_models": {
+      "enabled_loras": [
+        "EasyNegativeV2.safetensors",
+        "MysticalPlantPenetratorILLUST.safetensors",
+        "Detailed-Eye-V1.0-000013.safetensors",
+        "Dramatic Lighting Slider",
+        "Semi-realism_illustrious.safetensors",
+        "kms_in the dark_IL-000003.safetensors"
+      ],
+      "disabled_loras": [
+        "pastel-anime-xl-latest",
+        "DetailedEyes_V3",
+        "1.5_perfect hands",
+        "add_detail"
+      ],
+      "total_loras": 10,
+      "working_loras": [
+        "EasyNegativeV2.safetensors",
+        "MysticalPlantPenetratorILLUST.safetensors",
+        "Detailed-Eye-V1.0-000013.safetensors",
+        "Dramatic Lighting Slider",
+        "Semi-realism_illustrious.safetensors",
+        "kms_in the dark_IL-000003.safetensors"
+      ],
+      "not_working_loras": [],
+      "lora_details": [
+        {
+          "name": "pastel-anime-xl-latest",
+          "weight": 0.4,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "DetailedEyes_V3",
+          "weight": 0.6,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "1.5_perfect hands",
+          "weight": 0.9,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "add_detail",
+          "weight": 0.5,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "EasyNegativeV2.safetensors",
+          "weight": 0.9,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "MysticalPlantPenetratorILLUST.safetensors",
+          "weight": 0.25,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "Detailed-Eye-V1.0-000013.safetensors",
+          "weight": 1.0,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "Dramatic Lighting Slider",
+          "weight": 1.5,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "Semi-realism_illustrious.safetensors",
+          "weight": 0.7,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "kms_in the dark_IL-000003.safetensors",
+          "weight": 0.5,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        }
+      ]
+    },
+    "alwayson_scripts": {
+      "adetailer_enabled": true,
+      "adetailer_config": {
+        "args": [
+          true,
+          {
+            "ad_model": "face_yolov8n.pt",
+            "ad_steps": 15,
+            "ad_denoising_strength": 0.4,
+            "ad_cfg_scale": 4,
+            "ad_mask_blur": 3,
+            "ad_inpaint_only_masked": true,
+            "ad_inpaint_only_masked_padding": 24,
+            "ad_confidence": 0.2,
+            "ad_dilate_erode": 2,
+            "ad_use_steps": true,
+            "ad_use_cfg_scale": true,
+            "ad_prompt": "clean line art, symmetrical eyes, glossy eyes, sharp anime details, perfect anime face",
+            "ad_negative_prompt": "deformed face, wonky eyes, double irises, bad symmetry, lowres, blurry"
+          },
+          {
+            "ad_model": "hand_yolov9c.pt",
+            "ad_steps": 30,
+            "ad_denoising_strength": 0.3,
+            "ad_cfg_scale": 4,
+            "ad_mask_blur": 4,
+            "ad_inpaint_only_masked": true,
+            "ad_inpaint_only_masked_padding": 32,
+            "ad_confidence": 0.3,
+            "ad_dilate_erode": 4,
+            "ad_use_steps": true,
+            "ad_use_cfg_scale": true,
+            "ad_prompt": "perfect hands, detailed fingers, natural hand anatomy",
+            "ad_negative_prompt": "deformed hands, extra fingers, missing fingers, bad anatomy, mutated hands, ugly hands"
+          }
+        ]
+      },
+      "controlnet_enabled": false,
+      "all_scripts": [
+        "ADetailer"
+      ]
+    }
+  },
+  "error": null
+}
+
+{
+  "timestamp": "2025-09-26T16:05:58.530280",
+  "success": true,
+  "generation_time_seconds": 46.05,
+  "character": "Nadya1",
+  "prompts": {
+    "user_prompt": "31, 312, в, 1girl, solo, full body, large expressive eyes, detailed eyes, clean lines, smooth skin, perfect hands, detailed realistic hair, detailed realistic face, detailed realistic body, detailed realistic hands, detailed realistic feet, detailed realistic legs, detailed realistic tits, realistic lighting, dramatic lighting, cinematic lighting, volumetric lighting, backlit, side lighting, side lit, light particles, light rays, haze, fog, high resolution, masterpiece, best quality, concept art, artwork, bold outlines, impressionistic, phosphorescent dust particles floating in the air, semi-realistic, lazypos, raw, ((photorealistic)), ((realistic shade))",
+    "user_negative_prompt": "poorly_detailed, worst_quality, bad_quality, extra fingers, missing fingers, lowres, low resolution bad anatomy, extra digits, jpeg artifacts, signature, watermark, username, conjoined, deformed fingers, short legs, body diproportion, bad ai-generated, text, furry, halo, multiple views, displeasing, messy composition, clones, one person",
+    "enhanced_prompt": "31, 312, в, 1girl, solo, full body, large expressive eyes, detailed eyes, clean lines, smooth skin, perfect hands, detailed realistic hair, detailed realistic face, detailed realistic body, detailed realistic hands, detailed realistic feet, detailed realistic legs, detailed realistic tits, realistic lighting, dramatic lighting, cinematic lighting, volumetric lighting, backlit, side lighting, side lit, light particles, light rays, haze, fog, high resolution, masterpiece, best quality, concept art, artwork, bold outlines, impressionistic, phosphorescent dust particles floating in the air, semi-realistic, lazypos, raw, ((photorealistic)), ((realistic shade))",
+    "enhanced_negative_prompt": "poorly_detailed, worst_quality, bad_quality, extra fingers, missing fingers, lowres, low resolution bad anatomy, extra digits, jpeg artifacts, signature, watermark, username, conjoined, deformed fingers, short legs, body diproportion, bad ai-generated, text, furry, halo, multiple views, displeasing, messy composition, clones, one person",
+    "prompt_length": 663,
+    "negative_prompt_length": 338,
+    "uses_default_prompts": false
+  },
+  "image_url": "",
+  "settings": {
+    "width": 512,
+    "height": 768,
+    "steps": 20,
+    "cfg_scale": 4,
+    "sampler_name": "Euler",
+    "scheduler": "karras",
+    "seed": -1,
+    "batch_size": 1,
+    "n_iter": 1,
+    "n_samples": 1,
+    "save_grid": false,
+    "restore_faces": false,
+    "send_images": true,
+    "save_images": false,
+    "enable_hr": false,
+    "hr_scale": 1.5,
+    "hr_upscaler": "SwinIR_4x",
+    "hr_second_pass_steps": 10,
+    "hr_prompt": "",
+    "hr_negative_prompt": "",
+    "denoising_strength": 0.4,
+    "clip_skip": 2,
+    "use_default_prompts": false,
+    "override_settings": {},
+    "override_settings_restore_afterwards": false,
+    "script_args": [],
+    "use_adetailer": true,
+    "adetailer_settings": {},
+    "ip_adapter_model": null,
+    "ip_adapter_weight": null,
+    "ip_adapter_image": null,
+    "lora_models": {
+      "enabled_loras": [
+        "EasyNegativeV2.safetensors",
+        "MysticalPlantPenetratorILLUST.safetensors",
+        "Detailed-Eye-V1.0-000013.safetensors",
+        "Dramatic Lighting Slider",
+        "Semi-realism_illustrious.safetensors",
+        "kms_in the dark_IL-000003.safetensors"
+      ],
+      "disabled_loras": [
+        "pastel-anime-xl-latest",
+        "DetailedEyes_V3",
+        "1.5_perfect hands",
+        "add_detail"
+      ],
+      "total_loras": 10,
+      "working_loras": [
+        "EasyNegativeV2.safetensors",
+        "MysticalPlantPenetratorILLUST.safetensors",
+        "Detailed-Eye-V1.0-000013.safetensors",
+        "Dramatic Lighting Slider",
+        "Semi-realism_illustrious.safetensors",
+        "kms_in the dark_IL-000003.safetensors"
+      ],
+      "not_working_loras": [],
+      "lora_details": [
+        {
+          "name": "pastel-anime-xl-latest",
+          "weight": 0.4,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "DetailedEyes_V3",
+          "weight": 0.6,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "1.5_perfect hands",
+          "weight": 0.9,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "add_detail",
+          "weight": 0.5,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "EasyNegativeV2.safetensors",
+          "weight": 0.9,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "MysticalPlantPenetratorILLUST.safetensors",
+          "weight": 0.25,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "Detailed-Eye-V1.0-000013.safetensors",
+          "weight": 1.0,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "Dramatic Lighting Slider",
+          "weight": 1.5,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "Semi-realism_illustrious.safetensors",
+          "weight": 0.7,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "kms_in the dark_IL-000003.safetensors",
+          "weight": 0.5,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        }
+      ]
+    },
+    "alwayson_scripts": {
+      "adetailer_enabled": true,
+      "adetailer_config": {
+        "args": [
+          true,
+          {
+            "ad_model": "face_yolov8n.pt",
+            "ad_steps": 15,
+            "ad_denoising_strength": 0.4,
+            "ad_cfg_scale": 4,
+            "ad_mask_blur": 3,
+            "ad_inpaint_only_masked": true,
+            "ad_inpaint_only_masked_padding": 24,
+            "ad_confidence": 0.2,
+            "ad_dilate_erode": 2,
+            "ad_use_steps": true,
+            "ad_use_cfg_scale": true,
+            "ad_prompt": "clean line art, symmetrical eyes, glossy eyes, sharp anime details, perfect anime face",
+            "ad_negative_prompt": "deformed face, wonky eyes, double irises, bad symmetry, lowres, blurry"
+          },
+          {
+            "ad_model": "hand_yolov9c.pt",
+            "ad_steps": 30,
+            "ad_denoising_strength": 0.3,
+            "ad_cfg_scale": 4,
+            "ad_mask_blur": 4,
+            "ad_inpaint_only_masked": true,
+            "ad_inpaint_only_masked_padding": 32,
+            "ad_confidence": 0.3,
+            "ad_dilate_erode": 4,
+            "ad_use_steps": true,
+            "ad_use_cfg_scale": true,
+            "ad_prompt": "perfect hands, detailed fingers, natural hand anatomy",
+            "ad_negative_prompt": "deformed hands, extra fingers, missing fingers, bad anatomy, mutated hands, ugly hands"
+          }
+        ]
+      },
+      "controlnet_enabled": false,
+      "all_scripts": [
+        "ADetailer"
+      ]
+    }
+  },
+  "error": null
+}
+
+{
+  "timestamp": "2025-09-26T16:07:37.632984",
+  "success": true,
+  "generation_time_seconds": 29.37,
+  "character": "Nadya1",
+  "prompts": {
+    "user_prompt": "31, 312, show ass, 1girl, solo, full body, large expressive eyes, detailed eyes, clean lines, smooth skin, perfect hands, detailed realistic hair, detailed realistic face, detailed realistic body, detailed realistic hands, detailed realistic feet, detailed realistic legs, detailed realistic tits, realistic lighting, dramatic lighting, cinematic lighting, volumetric lighting, backlit, side lighting, side lit, light particles, light rays, haze, fog, high resolution, masterpiece, best quality, concept art, artwork, bold outlines, impressionistic, phosphorescent dust particles floating in the air, semi-realistic, lazypos, raw, ((photorealistic)), ((realistic shade))",
+    "user_negative_prompt": "poorly_detailed, worst_quality, bad_quality, extra fingers, missing fingers, lowres, low resolution bad anatomy, extra digits, jpeg artifacts, signature, watermark, username, conjoined, deformed fingers, short legs, body diproportion, bad ai-generated, text, furry, halo, multiple views, displeasing, messy composition, clones, one person",
+    "enhanced_prompt": "31, 312, show ass, 1girl, solo, full body, large expressive eyes, detailed eyes, clean lines, smooth skin, perfect hands, detailed realistic hair, detailed realistic face, detailed realistic body, detailed realistic hands, detailed realistic feet, detailed realistic legs, detailed realistic tits, realistic lighting, dramatic lighting, cinematic lighting, volumetric lighting, backlit, side lighting, side lit, light particles, light rays, haze, fog, high resolution, masterpiece, best quality, concept art, artwork, bold outlines, impressionistic, phosphorescent dust particles floating in the air, semi-realistic, lazypos, raw, ((photorealistic)), ((realistic shade))",
+    "enhanced_negative_prompt": "poorly_detailed, worst_quality, bad_quality, extra fingers, missing fingers, lowres, low resolution bad anatomy, extra digits, jpeg artifacts, signature, watermark, username, conjoined, deformed fingers, short legs, body diproportion, bad ai-generated, text, furry, halo, multiple views, displeasing, messy composition, clones, one person",
+    "prompt_length": 670,
+    "negative_prompt_length": 338,
+    "uses_default_prompts": false
+  },
+  "image_url": "",
+  "settings": {
+    "width": 512,
+    "height": 768,
+    "steps": 20,
+    "cfg_scale": 4,
+    "sampler_name": "Euler",
+    "scheduler": "karras",
+    "seed": -1,
+    "batch_size": 1,
+    "n_iter": 1,
+    "n_samples": 1,
+    "save_grid": false,
+    "restore_faces": false,
+    "send_images": true,
+    "save_images": false,
+    "enable_hr": false,
+    "hr_scale": 1.5,
+    "hr_upscaler": "SwinIR_4x",
+    "hr_second_pass_steps": 10,
+    "hr_prompt": "",
+    "hr_negative_prompt": "",
+    "denoising_strength": 0.4,
+    "clip_skip": 2,
+    "use_default_prompts": false,
+    "override_settings": {},
+    "override_settings_restore_afterwards": false,
+    "script_args": [],
+    "use_adetailer": true,
+    "adetailer_settings": {},
+    "ip_adapter_model": null,
+    "ip_adapter_weight": null,
+    "ip_adapter_image": null,
+    "lora_models": {
+      "enabled_loras": [
+        "EasyNegativeV2.safetensors",
+        "MysticalPlantPenetratorILLUST.safetensors",
+        "Detailed-Eye-V1.0-000013.safetensors",
+        "Dramatic Lighting Slider",
+        "Semi-realism_illustrious.safetensors",
+        "kms_in the dark_IL-000003.safetensors"
+      ],
+      "disabled_loras": [
+        "pastel-anime-xl-latest",
+        "DetailedEyes_V3",
+        "1.5_perfect hands",
+        "add_detail"
+      ],
+      "total_loras": 10,
+      "working_loras": [
+        "EasyNegativeV2.safetensors",
+        "MysticalPlantPenetratorILLUST.safetensors",
+        "Detailed-Eye-V1.0-000013.safetensors",
+        "Dramatic Lighting Slider",
+        "Semi-realism_illustrious.safetensors",
+        "kms_in the dark_IL-000003.safetensors"
+      ],
+      "not_working_loras": [],
+      "lora_details": [
+        {
+          "name": "pastel-anime-xl-latest",
+          "weight": 0.4,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "DetailedEyes_V3",
+          "weight": 0.6,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "1.5_perfect hands",
+          "weight": 0.9,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "add_detail",
+          "weight": 0.5,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "EasyNegativeV2.safetensors",
+          "weight": 0.9,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "MysticalPlantPenetratorILLUST.safetensors",
+          "weight": 0.25,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "Detailed-Eye-V1.0-000013.safetensors",
+          "weight": 1.0,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "Dramatic Lighting Slider",
+          "weight": 1.5,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "Semi-realism_illustrious.safetensors",
+          "weight": 0.7,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "kms_in the dark_IL-000003.safetensors",
+          "weight": 0.5,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        }
+      ]
+    },
+    "alwayson_scripts": {
+      "adetailer_enabled": true,
+      "adetailer_config": {
+        "args": [
+          true,
+          {
+            "ad_model": "face_yolov8n.pt",
+            "ad_steps": 15,
+            "ad_denoising_strength": 0.4,
+            "ad_cfg_scale": 4,
+            "ad_mask_blur": 3,
+            "ad_inpaint_only_masked": true,
+            "ad_inpaint_only_masked_padding": 24,
+            "ad_confidence": 0.2,
+            "ad_dilate_erode": 2,
+            "ad_use_steps": true,
+            "ad_use_cfg_scale": true,
+            "ad_prompt": "clean line art, symmetrical eyes, glossy eyes, sharp anime details, perfect anime face",
+            "ad_negative_prompt": "deformed face, wonky eyes, double irises, bad symmetry, lowres, blurry"
+          },
+          {
+            "ad_model": "hand_yolov9c.pt",
+            "ad_steps": 30,
+            "ad_denoising_strength": 0.3,
+            "ad_cfg_scale": 4,
+            "ad_mask_blur": 4,
+            "ad_inpaint_only_masked": true,
+            "ad_inpaint_only_masked_padding": 32,
+            "ad_confidence": 0.3,
+            "ad_dilate_erode": 4,
+            "ad_use_steps": true,
+            "ad_use_cfg_scale": true,
+            "ad_prompt": "perfect hands, detailed fingers, natural hand anatomy",
+            "ad_negative_prompt": "deformed hands, extra fingers, missing fingers, bad anatomy, mutated hands, ugly hands"
+          }
+        ]
+      },
+      "controlnet_enabled": false,
+      "all_scripts": [
+        "ADetailer"
+      ]
+    }
+  },
+  "error": null
+}
+
+{
+  "timestamp": "2025-09-26T17:45:17.645240",
+  "success": true,
+  "generation_time_seconds": 36.38,
+  "character": "Anna",
+  "prompts": {
+    "user_prompt": "(detailed_eyes), (depth_of_field), 1 girl, 19 years old, petite face, wearing only an off-the-shoulder crop top, crop top pulled up above her chest, small-nipples, perfect-sized and soft breasts, blue eyes, ash-blonde hair, voluminous_hair_to_her_shoulders, (full_undercut:1.3), bristly ponytail, cute shy smile, earrings and several punky facial piercings, one dark tattoo runs from her lower arm to her upper arm, Large futuristic kitchen with dark appliances, tiled floor, one stove, one refrigerator, flower decoration, wine bottles rimmed. Phosphorescent dust particles floating in the air that are illuminated by the light, stunning bokeh, part of a luxury apartment in New York, large window above the stove., dada, 1girl, solo, full body, large expressive eyes, detailed eyes, clean lines, smooth skin, perfect hands, detailed realistic hair, detailed realistic face, detailed realistic body, detailed realistic hands, detailed realistic feet, detailed realistic legs, detailed realistic tits, realistic lighting, dramatic lighting, cinematic lighting, volumetric lighting, backlit, side lighting, side lit, light particles, light rays, haze, fog, high resolution, masterpiece, best quality, concept art, artwork, bold outlines, impressionistic, phosphorescent dust particles floating in the air, semi-realistic, lazypos, raw, ((photorealistic)), ((realistic shade))",
+    "user_negative_prompt": "poorly_detailed, worst_quality, bad_quality, extra fingers, missing fingers, lowres, low resolution bad anatomy, extra digits, jpeg artifacts, signature, watermark, username, conjoined, deformed fingers, short legs, body diproportion, bad ai-generated, text, furry, halo, multiple views, displeasing, messy composition, clones, one person",
+    "enhanced_prompt": "(detailed_eyes), (depth_of_field), 1 girl, 19 years old, petite face, wearing only an off-the-shoulder crop top, crop top pulled up above her chest, small-nipples, perfect-sized and soft breasts, blue eyes, ash-blonde hair, voluminous_hair_to_her_shoulders, (full_undercut:1.3), bristly ponytail, cute shy smile, earrings and several punky facial piercings, one dark tattoo runs from her lower arm to her upper arm, Large futuristic kitchen with dark appliances, tiled floor, one stove, one refrigerator, flower decoration, wine bottles rimmed. Phosphorescent dust particles floating in the air that are illuminated by the light, stunning bokeh, part of a luxury apartment in New York, large window above the stove., dada, 1girl, solo, full body, large expressive eyes, detailed eyes, clean lines, smooth skin, perfect hands, detailed realistic hair, detailed realistic face, detailed realistic body, detailed realistic hands, detailed realistic feet, detailed realistic legs, detailed realistic tits, realistic lighting, dramatic lighting, cinematic lighting, volumetric lighting, backlit, side lighting, side lit, light particles, light rays, haze, fog, high resolution, masterpiece, best quality, concept art, artwork, bold outlines, impressionistic, phosphorescent dust particles floating in the air, semi-realistic, lazypos, raw, ((photorealistic)), ((realistic shade))",
+    "enhanced_negative_prompt": "poorly_detailed, worst_quality, bad_quality, extra fingers, missing fingers, lowres, low resolution bad anatomy, extra digits, jpeg artifacts, signature, watermark, username, conjoined, deformed fingers, short legs, body diproportion, bad ai-generated, text, furry, halo, multiple views, displeasing, messy composition, clones, one person",
+    "prompt_length": 1374,
+    "negative_prompt_length": 338,
+    "uses_default_prompts": false
+  },
+  "image_url": "",
+  "settings": {
+    "width": 512,
+    "height": 768,
+    "steps": 20,
+    "cfg_scale": 4,
+    "sampler_name": "Euler",
+    "scheduler": "karras",
+    "seed": -1,
+    "batch_size": 1,
+    "n_iter": 1,
+    "n_samples": 1,
+    "save_grid": false,
+    "restore_faces": false,
+    "send_images": true,
+    "save_images": false,
+    "enable_hr": false,
+    "hr_scale": 1.5,
+    "hr_upscaler": "SwinIR_4x",
+    "hr_second_pass_steps": 10,
+    "hr_prompt": "",
+    "hr_negative_prompt": "",
+    "denoising_strength": 0.4,
+    "clip_skip": 2,
+    "use_default_prompts": false,
+    "override_settings": {},
+    "override_settings_restore_afterwards": false,
+    "script_args": [],
+    "use_adetailer": true,
+    "adetailer_settings": {},
+    "ip_adapter_model": null,
+    "ip_adapter_weight": null,
+    "ip_adapter_image": null,
+    "lora_models": {
+      "enabled_loras": [
+        "EasyNegativeV2.safetensors",
+        "MysticalPlantPenetratorILLUST.safetensors",
+        "Detailed-Eye-V1.0-000013.safetensors",
+        "Dramatic Lighting Slider",
+        "Semi-realism_illustrious.safetensors",
+        "kms_in the dark_IL-000003.safetensors"
+      ],
+      "disabled_loras": [
+        "pastel-anime-xl-latest",
+        "DetailedEyes_V3",
+        "1.5_perfect hands",
+        "add_detail"
+      ],
+      "total_loras": 10,
+      "working_loras": [
+        "EasyNegativeV2.safetensors",
+        "MysticalPlantPenetratorILLUST.safetensors",
+        "Detailed-Eye-V1.0-000013.safetensors",
+        "Dramatic Lighting Slider",
+        "Semi-realism_illustrious.safetensors",
+        "kms_in the dark_IL-000003.safetensors"
+      ],
+      "not_working_loras": [],
+      "lora_details": [
+        {
+          "name": "pastel-anime-xl-latest",
+          "weight": 0.4,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "DetailedEyes_V3",
+          "weight": 0.6,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "1.5_perfect hands",
+          "weight": 0.9,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "add_detail",
+          "weight": 0.5,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "EasyNegativeV2.safetensors",
+          "weight": 0.9,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "MysticalPlantPenetratorILLUST.safetensors",
+          "weight": 0.25,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "Detailed-Eye-V1.0-000013.safetensors",
+          "weight": 1.0,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "Dramatic Lighting Slider",
+          "weight": 1.5,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "Semi-realism_illustrious.safetensors",
+          "weight": 0.7,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "kms_in the dark_IL-000003.safetensors",
+          "weight": 0.5,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        }
+      ]
+    },
+    "alwayson_scripts": {
+      "adetailer_enabled": true,
+      "adetailer_config": {
+        "args": [
+          true,
+          {
+            "ad_model": "face_yolov8n.pt",
+            "ad_steps": 15,
+            "ad_denoising_strength": 0.4,
+            "ad_cfg_scale": 4,
+            "ad_mask_blur": 3,
+            "ad_inpaint_only_masked": true,
+            "ad_inpaint_only_masked_padding": 24,
+            "ad_confidence": 0.2,
+            "ad_dilate_erode": 2,
+            "ad_use_steps": true,
+            "ad_use_cfg_scale": true,
+            "ad_prompt": "clean line art, symmetrical eyes, glossy eyes, sharp anime details, perfect anime face",
+            "ad_negative_prompt": "deformed face, wonky eyes, double irises, bad symmetry, lowres, blurry"
+          },
+          {
+            "ad_model": "hand_yolov9c.pt",
+            "ad_steps": 30,
+            "ad_denoising_strength": 0.3,
+            "ad_cfg_scale": 4,
+            "ad_mask_blur": 4,
+            "ad_inpaint_only_masked": true,
+            "ad_inpaint_only_masked_padding": 32,
+            "ad_confidence": 0.3,
+            "ad_dilate_erode": 4,
+            "ad_use_steps": true,
+            "ad_use_cfg_scale": true,
+            "ad_prompt": "perfect hands, detailed fingers, natural hand anatomy",
+            "ad_negative_prompt": "deformed hands, extra fingers, missing fingers, bad anatomy, mutated hands, ugly hands"
+          }
+        ]
+      },
+      "controlnet_enabled": false,
+      "all_scripts": [
+        "ADetailer"
+      ]
+    }
+  },
+  "error": null
+}
+
+{
+  "timestamp": "2025-09-26T17:53:12.650029",
+  "success": true,
+  "generation_time_seconds": 35.82,
+  "character": "Anna",
+  "prompts": {
+    "user_prompt": "(detailed_eyes), (depth_of_field), 1 girl, 19 years old, petite face, wearing only an off-the-shoulder crop top, crop top pulled up above her chest, small-nipples, perfect-sized and soft breasts, blue eyes, ash-blonde hair, voluminous_hair_to_her_shoulders, (full_undercut:1.3), bristly ponytail, cute shy smile, earrings and several punky facial piercings, one dark tattoo runs from her lower arm to her upper arm, Large futuristic kitchen with dark appliances, tiled floor, one stove, one refrigerator, flower decoration, wine bottles rimmed. Phosphorescent dust particles floating in the air that are illuminated by the light, stunning bokeh, part of a luxury apartment in New York, large window above the stove., show ass, 1girl, solo, full body, large expressive eyes, detailed eyes, clean lines, smooth skin, perfect hands, detailed realistic hair, detailed realistic face, detailed realistic body, detailed realistic hands, detailed realistic feet, detailed realistic legs, detailed realistic tits, realistic lighting, dramatic lighting, cinematic lighting, volumetric lighting, backlit, side lighting, side lit, light particles, light rays, haze, fog, high resolution, masterpiece, best quality, concept art, artwork, bold outlines, impressionistic, phosphorescent dust particles floating in the air, semi-realistic, lazypos, raw, ((photorealistic)), ((realistic shade))",
+    "user_negative_prompt": "poorly_detailed, worst_quality, bad_quality, extra fingers, missing fingers, lowres, low resolution bad anatomy, extra digits, jpeg artifacts, signature, watermark, username, conjoined, deformed fingers, short legs, body diproportion, bad ai-generated, text, furry, halo, multiple views, displeasing, messy composition, clones, one person",
+    "enhanced_prompt": "(detailed_eyes), (depth_of_field), 1 girl, 19 years old, petite face, wearing only an off-the-shoulder crop top, crop top pulled up above her chest, small-nipples, perfect-sized and soft breasts, blue eyes, ash-blonde hair, voluminous_hair_to_her_shoulders, (full_undercut:1.3), bristly ponytail, cute shy smile, earrings and several punky facial piercings, one dark tattoo runs from her lower arm to her upper arm, Large futuristic kitchen with dark appliances, tiled floor, one stove, one refrigerator, flower decoration, wine bottles rimmed. Phosphorescent dust particles floating in the air that are illuminated by the light, stunning bokeh, part of a luxury apartment in New York, large window above the stove., show ass, 1girl, solo, full body, large expressive eyes, detailed eyes, clean lines, smooth skin, perfect hands, detailed realistic hair, detailed realistic face, detailed realistic body, detailed realistic hands, detailed realistic feet, detailed realistic legs, detailed realistic tits, realistic lighting, dramatic lighting, cinematic lighting, volumetric lighting, backlit, side lighting, side lit, light particles, light rays, haze, fog, high resolution, masterpiece, best quality, concept art, artwork, bold outlines, impressionistic, phosphorescent dust particles floating in the air, semi-realistic, lazypos, raw, ((photorealistic)), ((realistic shade))",
+    "enhanced_negative_prompt": "poorly_detailed, worst_quality, bad_quality, extra fingers, missing fingers, lowres, low resolution bad anatomy, extra digits, jpeg artifacts, signature, watermark, username, conjoined, deformed fingers, short legs, body diproportion, bad ai-generated, text, furry, halo, multiple views, displeasing, messy composition, clones, one person",
+    "prompt_length": 1378,
+    "negative_prompt_length": 338,
+    "uses_default_prompts": false
+  },
+  "image_url": "",
+  "settings": {
+    "width": 512,
+    "height": 768,
+    "steps": 20,
+    "cfg_scale": 4,
+    "sampler_name": "Euler",
+    "scheduler": "karras",
+    "seed": -1,
+    "batch_size": 1,
+    "n_iter": 1,
+    "n_samples": 1,
+    "save_grid": false,
+    "restore_faces": false,
+    "send_images": true,
+    "save_images": false,
+    "enable_hr": false,
+    "hr_scale": 1.5,
+    "hr_upscaler": "SwinIR_4x",
+    "hr_second_pass_steps": 10,
+    "hr_prompt": "",
+    "hr_negative_prompt": "",
+    "denoising_strength": 0.4,
+    "clip_skip": 2,
+    "use_default_prompts": false,
+    "override_settings": {},
+    "override_settings_restore_afterwards": false,
+    "script_args": [],
+    "use_adetailer": true,
+    "adetailer_settings": {},
+    "ip_adapter_model": null,
+    "ip_adapter_weight": null,
+    "ip_adapter_image": null,
+    "lora_models": {
+      "enabled_loras": [
+        "EasyNegativeV2.safetensors",
+        "MysticalPlantPenetratorILLUST.safetensors",
+        "Detailed-Eye-V1.0-000013.safetensors",
+        "Dramatic Lighting Slider",
+        "Semi-realism_illustrious.safetensors",
+        "kms_in the dark_IL-000003.safetensors"
+      ],
+      "disabled_loras": [
+        "pastel-anime-xl-latest",
+        "DetailedEyes_V3",
+        "1.5_perfect hands",
+        "add_detail"
+      ],
+      "total_loras": 10,
+      "working_loras": [
+        "EasyNegativeV2.safetensors",
+        "MysticalPlantPenetratorILLUST.safetensors",
+        "Detailed-Eye-V1.0-000013.safetensors",
+        "Dramatic Lighting Slider",
+        "Semi-realism_illustrious.safetensors",
+        "kms_in the dark_IL-000003.safetensors"
+      ],
+      "not_working_loras": [],
+      "lora_details": [
+        {
+          "name": "pastel-anime-xl-latest",
+          "weight": 0.4,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "DetailedEyes_V3",
+          "weight": 0.6,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "1.5_perfect hands",
+          "weight": 0.9,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "add_detail",
+          "weight": 0.5,
+          "enabled": false,
+          "working": false,
+          "status": "не работает"
+        },
+        {
+          "name": "EasyNegativeV2.safetensors",
+          "weight": 0.9,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "MysticalPlantPenetratorILLUST.safetensors",
+          "weight": 0.25,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "Detailed-Eye-V1.0-000013.safetensors",
+          "weight": 1.0,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "Dramatic Lighting Slider",
+          "weight": 1.5,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "Semi-realism_illustrious.safetensors",
+          "weight": 0.7,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        },
+        {
+          "name": "kms_in the dark_IL-000003.safetensors",
+          "weight": 0.5,
+          "enabled": true,
+          "working": true,
+          "status": "работает"
+        }
+      ]
+    },
+    "alwayson_scripts": {
+      "adetailer_enabled": true,
+      "adetailer_config": {
+        "args": [
+          true,
+          {
+            "ad_model": "face_yolov8n.pt",
+            "ad_steps": 15,
+            "ad_denoising_strength": 0.4,
+            "ad_cfg_scale": 4,
+            "ad_mask_blur": 3,
+            "ad_inpaint_only_masked": true,
+            "ad_inpaint_only_masked_padding": 24,
+            "ad_confidence": 0.2,
+            "ad_dilate_erode": 2,
+            "ad_use_steps": true,
+            "ad_use_cfg_scale": true,
+            "ad_prompt": "clean line art, symmetrical eyes, glossy eyes, sharp anime details, perfect anime face",
+            "ad_negative_prompt": "deformed face, wonky eyes, double irises, bad symmetry, lowres, blurry"
+          },
+          {
+            "ad_model": "hand_yolov9c.pt",
+            "ad_steps": 30,
+            "ad_denoising_strength": 0.3,
+            "ad_cfg_scale": 4,
+            "ad_mask_blur": 4,
+            "ad_inpaint_only_masked": true,
+            "ad_inpaint_only_masked_padding": 32,
+            "ad_confidence": 0.3,
+            "ad_dilate_erode": 4,
+            "ad_use_steps": true,
+            "ad_use_cfg_scale": true,
+            "ad_prompt": "perfect hands, detailed fingers, natural hand anatomy",
+            "ad_negative_prompt": "deformed hands, extra fingers, missing fingers, bad anatomy, mutated hands, ugly hands"
+          }
+        ]
+      },
+      "controlnet_enabled": false,
+      "all_scripts": [
+        "ADetailer"
+      ]
+    }
+  },
+  "error": null
+}
+

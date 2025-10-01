@@ -2,6 +2,7 @@
 Схемы данных для чат-бота с настраиваемым характером.
 """
 from typing import List, Optional, Dict, Any
+from datetime import datetime
 from pydantic import BaseModel, Field
 from enum import Enum
 
@@ -69,6 +70,32 @@ class SimpleChatRequest(BaseModel):
         default=None, 
         description="Штраф за повторения"
     )
+    
+    # Параметры генерации изображений
+    generate_image: Optional[bool] = Field(
+        default=False, 
+        description="Генерировать изображение вместе с текстовым ответом"
+    )
+    image_prompt: Optional[str] = Field(
+        default=None, 
+        description="Промпт для генерации изображения (если не указан, используется message)"
+    )
+    image_steps: Optional[int] = Field(
+        default=None, 
+        description="Количество шагов для генерации изображения"
+    )
+    image_width: Optional[int] = Field(
+        default=None, 
+        description="Ширина изображения"
+    )
+    image_height: Optional[int] = Field(
+        default=None, 
+        description="Высота изображения"
+    )
+    image_cfg_scale: Optional[float] = Field(
+        default=None, 
+        description="CFG Scale для генерации изображения"
+    )
 
 
 class CharacterConfig(BaseModel):
@@ -76,19 +103,25 @@ class CharacterConfig(BaseModel):
     # Основные характеристики
     name: str = Field(..., description="Уникальное имя персонажа")
     
-    # Alpaca формат - 3 основных поля
-    instructions: str = Field(
+    # Единый промпт в формате Alpaca
+    prompt: str = Field(
         ..., 
-        description="Instructions - правила поведения"
+        description="Полный промпт персонажа в формате Alpaca"
     )
-    system_prompt: Optional[str] = Field(
-        None, 
-        description="System prompt - контекст истории"
+    
+    # Описание внешности для генерации изображений
+    character_appearance: Optional[str] = Field(
+        None,
+        description="Описание внешности персонажа для автоматического добавления в промпт генерации"
     )
-    response_format: Optional[str] = Field(
-        None, 
-        description="Response - правила ответов"
+    
+    # Описание локации для генерации изображений
+    location: Optional[str] = Field(
+        None,
+        description="Описание локации персонажа для автоматического добавления в промпт генерации"
     )
+    
+    # face_image удален (IP-Adapter удален)
 
     class Config:
         from_attributes = True
@@ -99,19 +132,61 @@ class CharacterCreate(CharacterConfig):
     pass
 
 
-class CharacterUpdate(CharacterConfig):
+class UserCharacterCreate(BaseModel):
+    """Схема для создания персонажа пользователем."""
+    name: str = Field(..., description="Имя персонажа")
+    personality: str = Field(..., description="Имя и характер персонажа")
+    situation: str = Field(..., description="Ролевая ситуация")
+    instructions: str = Field(..., description="Инструкции для персонажа")
+    style: Optional[str] = Field(None, description="Стиль ответа (необязательно)")
+    appearance: Optional[str] = Field(None, description="Внешность персонажа для генерации фото")
+    location: Optional[str] = Field(None, description="Локация персонажа для генерации фото")
+    
+    class Config:
+        from_attributes = True
+        # Настройки для правильной работы с Unicode
+        json_encoders = {
+            str: lambda v: v.encode('utf-8').decode('utf-8') if isinstance(v, str) else v
+        }
+    
+    def __init__(self, **data):
+        """Инициализация с правильной обработкой Unicode."""
+        # Обрабатываем все строковые поля
+        for field_name, field_value in data.items():
+            if isinstance(field_value, str):
+                # Убеждаемся, что строка правильно закодирована
+                try:
+                    field_value.encode('utf-8')
+                except UnicodeEncodeError:
+                    # Если не может быть закодирована, заменяем проблемные символы
+                    data[field_name] = field_value.encode('utf-8', errors='replace').decode('utf-8')
+        
+        super().__init__(**data)
+
+
+class CharacterUpdate(BaseModel):
     """Схема для обновления существующего персонажа."""
-    pass
+    name: Optional[str] = Field(None, description="Имя персонажа")
+    prompt: Optional[str] = Field(None, description="Полный промпт персонажа в формате Alpaca")
+    character_appearance: Optional[str] = Field(None, description="Описание внешности персонажа")
+    location: Optional[str] = Field(None, description="Описание локации персонажа")
+    
+    class Config:
+        from_attributes = True
 
 
 class CharacterInDB(CharacterConfig):
     """Схема для персонажа, хранящегося в БД."""
     id: int
+    user_id: Optional[int] = Field(None, description="ID пользователя, создавшего персонажа")
+    created_at: Optional[datetime] = Field(None, description="Время создания персонажа")
+    main_photos: Optional[str] = Field(None, description="JSON строка с ID главных фото")
 
     class Config:
         from_attributes = True
         json_encoders = {
-            str: lambda v: v.encode('utf-8').decode('utf-8')
+            str: lambda v: v.encode('utf-8').decode('utf-8'),
+            datetime: lambda v: v.isoformat() if v else None
         }
 
 
@@ -162,6 +237,19 @@ class ChatResponse(BaseModel):
     model_data: Optional[Dict[str, Any]] = Field(
         None, 
         description="Информация о модели"
+    )
+    # Поля для генерации изображений
+    image_url: Optional[str] = Field(
+        None, 
+        description="URL сгенерированного изображения"
+    )
+    image_filename: Optional[str] = Field(
+        None, 
+        description="Имя файла сгенерированного изображения"
+    )
+    image_generated: Optional[bool] = Field(
+        False, 
+        description="Было ли сгенерировано изображение"
     )
     
     class Config:

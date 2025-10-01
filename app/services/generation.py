@@ -12,6 +12,7 @@ from concurrent.futures import ThreadPoolExecutor
 import httpx
 import torch
 from loguru import logger
+from app.config.generation_defaults import DEFAULT_GENERATION_PARAMS
 
 from app.schemas.generation import GenerationSettings, GenerationResponse
 from app.config.generation_defaults import DEFAULT_GENERATION_PARAMS
@@ -21,7 +22,7 @@ from app.config.default_prompts import (
 )
 from app.utils.generation_stats import generation_stats
 from app.utils.image_saver import save_image
-from app.config.paths import IMAGES_PATH
+from app.config.paths import IMAGES_DIR
 from app.config.cuda_config import optimize_memory, get_gpu_memory_info
 
 
@@ -51,7 +52,7 @@ class GenerationService:
         """
         self.api_url = api_url
         self.client = httpx.AsyncClient(timeout=60.0)
-        self.output_dir = IMAGES_PATH
+        self.output_dir = IMAGES_DIR
         self.output_dir.mkdir(exist_ok=True)
         
         # Создаем очередь для логов
@@ -112,9 +113,18 @@ class GenerationService:
             
             # Формируем параметры запроса
             request_params = get_default_generation_params()
+            self._log("INFO", f"Default params: steps={request_params.get('steps')}, cfg_scale={request_params.get('cfg_scale')}")
+            
+            # Обновляем параметры из настроек пользователя
             user_params = settings.dict()
-            request_params.update(user_params)
+            self._log("INFO", f"User params: steps={user_params.get('steps')}, cfg_scale={user_params.get('cfg_scale')}")
+            
+            for key, value in user_params.items():
+                if key != "negative_prompt":
+                    request_params[key] = value
+            
             request_params["negative_prompt"] = negative_prompt
+            self._log("INFO", f"Final params: steps={request_params.get('steps')}, cfg_scale={request_params.get('cfg_scale')}")
             
             # Обработка VAE настроек
             if settings.use_vae is not None:
@@ -241,7 +251,7 @@ class GenerationService:
             # Используем реальные настройки, которые были отправлены, а не ответ API
             params.update({
                 "sampler_name": settings.sampler_name or info_dict.get("sampler_name", "unknown"),
-                "steps": settings.steps or int(info_dict.get("steps", 0)),
+                "steps": settings.steps or DEFAULT_GENERATION_PARAMS.get("steps", 10),
                 "width": settings.width or int(info_dict.get("width", 0)),
                 "height": settings.height or int(info_dict.get("height", 0)),
                 "cfg_scale": settings.cfg_scale or float(info_dict.get("cfg_scale", 0)),
@@ -270,7 +280,7 @@ class GenerationService:
                 "height": generation_response.height,
                 "sampler_name": info_dict.get("sampler_name", ""),
                 "cfg_scale": info_dict.get("cfg_scale", 0),
-                "steps": info_dict.get("steps", 0),
+                "steps": DEFAULT_GENERATION_PARAMS.get("steps", 10),
                 "batch_size": info_dict.get("batch_size", 0),
                 "restore_faces": info_dict.get("restore_faces", False),
                 "face_restoration_model": info_dict.get("face_restoration_model", ""),
